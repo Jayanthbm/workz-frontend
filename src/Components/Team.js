@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import offline from "../images/offline.jpg";
-import online from "../images/online.jpeg";
+import offline from "../images/offlinepc.png";
+import online from "../images/onlinepc.png";
+import onlineseat from "../images/onlineseat.png";
+import offlineseat from "../images/offlineseat.png";
 import styles from "./Team.module.css";
 import Header from "./Header";
 import Navigation from "./Navigation";
@@ -73,113 +75,145 @@ class Team extends Component {
           selectHandler={this.selectHandler}
         />
         <div className={styles.countryContainer}>
-        <div className={styles.countryHolder}>
-          India
-        {this.props.teamUserDetails &&
-          this.props.teamUserDetails.users &&
-          this.props.teamUserDetails.users.map(val => {
-            return (
-              <div>
-              {val.country==="India" && <div>
-                {val.onlineStatus === "passive" ? (
+          <div className={styles.countryHolder}>
+            India
+            {this.props.teamUserDetails &&
+              this.props.teamUserDetails.users &&
+              this.props.teamUserDetails.users.map(val => {
+                return (
                   <div>
-                  <img src={offline} height="80px" width="80px" />
-                  {val.firstname}
+                    {val.country === "India" && (
+                      <div>
+                        {val.onlineStatus === "offline" && (
+                          <div className={styles.seatHolder}>
+                            <img src={offline} height="80px" width="80px" />
+                            <img src={offlineseat} height="80px" width="80px" />
+                      
+                          </div>
+                        )}
+                        {val.onlineStatus === "active" && (
+                          <div  className={styles.seatHolder}>
+                            <img src={online} height="80px" width="80px" />
+                            <img src={onlineseat} height="80px" width="80px" />
+                          </div>
+                        )}
+                        {val.onlineStatus === "passive" && (
+                          <div  className={styles.seatHolder}>
+                            <img src={online} height="80px" width="80px" />
+                            <img src={onlineseat} height="80px" width="80px" />
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
-                ) : (
-                  <div>
-                  <img src={online} height="80px" width="80px" />
-                  {val.firstname}
-                  </div>
-                )}
-              </div>}
-              </div>
+                );
+              })}
+          </div>
 
-            
-            );
-          })}
-         </div> 
+          <div className={styles.countryHolder}>
+            USA
+            {this.props.teamUserDetails &&
+              this.props.teamUserDetails.users &&
+              this.props.teamUserDetails.users.map(val => {
+                return (
+                  <div>
+                    {val.country === "USA" && (
+                      <div>
+                          {val.onlineStatus === "offline" && (
+                          <div  className={styles.seatHolder}> 
+                            <img src={offline} height="80px" width="80px" />
+                            <img src={offlineseat} height="80px" width="80px" />
+                            {val.firstname}
+                          </div>
+                        )}
+                        {val.onlineStatus === "active" && (
+                          <div  className={styles.seatHolder}>
+                            <img src={online} height="80px" width="80px" />
+                            <img src={onlineseat} height="80px" width="80px" />
+                          </div>
+                        )}
+                        {val.onlineStatus === "passive" && (
+                          <div  className={styles.seatHolder}>
+                            <img src={online} height="80px" width="80px" />
+                            <img src={onlineseat} height="80px" width="80px" />
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+          </div>
 
-         <div className={styles.countryHolder}>
-          USA
-        {this.props.teamUserDetails &&
-          this.props.teamUserDetails.users &&
-          this.props.teamUserDetails.users.map(val => {
-            return (
-              <div>
-              {val.country==="USA" && <div>
-                {val.onlineStatus === "passive" ? (
+          <div className={styles.countryHolder}>
+            Australia
+            {this.props.teamUserDetails &&
+              this.props.teamUserDetails.users &&
+              this.props.teamUserDetails.users.map(val => {
+                return (
                   <div>
-                  <img src={offline} height="80px" width="80px" />
-                  {val.firstname}
+                    {val.country === "Australia" && (
+                      <div>
+                              {val.onlineStatus === "offline" && (
+                          <div  className={styles.seatHolder}> 
+                            <img src={offline} height="80px" width="80px" />
+                            <img src={offlineseat} height="80px" width="80px" />
+                            {val.firstname}
+                          </div>
+                        )}
+                        {val.onlineStatus === "active" && (
+                          <div  className={styles.seatHolder}>
+                            <img src={online} height="80px" width="80px" />
+                            <img src={onlineseat} height="80px" width="80px" />
+                          </div>
+                        )}
+                        {val.onlineStatus === "passive" && (
+                          <div  className={styles.seatHolder}>
+                            <img src={online} height="80px" width="80px" />
+                            <img src={onlineseat} height="80px" width="80px" />
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
-                ) : (
+                );
+              })}
+          </div>
+          <div className={styles.countryHolder}>
+            New Zealand
+            {this.props.teamUserDetails &&
+              this.props.teamUserDetails.users &&
+              this.props.teamUserDetails.users.map(val => {
+                return (
                   <div>
-                  <img src={online} height="80px" width="80px" />
-                  {val.firstname}
+                    {val.country === "New Zealand" && (
+                      <div>
+                               {val.onlineStatus === "offline" && (
+                          <div  className={styles.seatHolder}> 
+                            <img src={offline} height="80px" width="80px" />
+                            <img src={offlineseat} height="80px" width="80px" />
+                            {val.firstname}
+                          </div>
+                        )}
+                        {val.onlineStatus === "active" && (
+                          <div  className={styles.seatHolder}>
+                            <img src={online} height="80px" width="80px" />
+                            <img src={onlineseat} height="80px" width="80px" />
+                          </div>
+                        )}
+                        {val.onlineStatus === "passive" && (
+                          <div  className={styles.seatHolder}>
+                            <img src={online} height="80px" width="80px" />
+                            <img src={onlineseat} height="80px" width="80px" />
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>}
-              </div>
-
-            
-            );
-          })}
-         </div> 
-
-         <div className={styles.countryHolder}>
-          Australia
-        {this.props.teamUserDetails &&
-          this.props.teamUserDetails.users &&
-          this.props.teamUserDetails.users.map(val => {
-            return (
-              <div>
-              {val.country==="Australia" && <div>
-                {val.onlineStatus === "passive" ? (
-                  <div>
-                  <img src={offline} height="80px" width="80px" />
-                  {val.firstname}
-                  </div>
-                ) : (
-                  <div>
-                  <img src={online} height="80px" width="80px" />
-                  {val.firstname}
-                  </div>
-                )}
-              </div>}
-              </div>
-
-            
-            );
-          })}
-         </div> 
-         <div className={styles.countryHolder}>
-         New Zealand
-        {this.props.teamUserDetails &&
-          this.props.teamUserDetails.users &&
-          this.props.teamUserDetails.users.map(val => {
-            return (
-              <div>
-              {val.country==="New Zealand" && <div>
-                {val.onlineStatus === "passive" ? (
-                  <div>
-                  <img src={offline} height="80px" width="80px" />
-                  {val.firstname}
-                  </div>
-                ) : (
-                  <div>
-                  <img src={online} height="80px" width="80px" />
-                  {val.firstname}
-                  </div>
-                )}
-              </div>}
-              </div>
-
-            
-            );
-          })}
-         </div>
-         </div>
+                );
+              })}
+          </div>
+        </div>
       </div>
     );
   }
