@@ -1,0 +1,9 @@
+.base{
+    width: 100%;
+}
+.countryContainer{
+    display: flex;
+}
+.countryHolder{
+    margin-left: 80px;
+}

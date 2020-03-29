@@ -1,0 +1,25 @@
+.base {
+  width: 100%;
+  height: 45px;
+  background-color: #f2f2f2;
+}
+.container {
+  display: flex;
+  padding-top: 15px;
+}
+.dropdownHolder {
+  display: flex;
+  margin-left: 50px;
+}
+.selectContainer {
+  width: 200px;
+}
+.textHolder {
+  padding-left: 20px;
+  font-weight: 500;
+}
+.label {
+  font-size: 13px;
+  padding-top: 2px;
+  margin-right: 10px;
+}

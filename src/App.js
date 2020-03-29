@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from "react";
 import './App.css';
+import { Route, Switch, Redirect } from "react-router-dom";
+import Login from './Container/loginContainer';
+import Header from './Components/Header';
+import Navigation from './Components/Navigation';
+import * as Cookie from "./utils/Cookie";
+import {ACCESS_TOKEN} from "./utils/constant"
+import Team from './Container/teamContainer';
 
-function App() {
+class App extends Component {
+  render(){
+  const isUserLogedIn = Cookie.getCookie(ACCESS_TOKEN) ? true : false;
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <Switch>
+       { isUserLogedIn ?
+        <Route exact path="/" component={Team}  />:
+       <Route exact path="/" component={Login}/> 
+      }
+        <Route exact path="/header" component={Header} />
+        </Switch>
     </div>
   );
+}
 }
 
 export default App;
