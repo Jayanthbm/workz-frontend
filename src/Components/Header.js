@@ -14,7 +14,6 @@ const links = [
 class Header extends Component {
 
     render() {
-       console.log(this.props)
         return (
             <div className={styles.headerBase}>
                 <div className={styles.container}>

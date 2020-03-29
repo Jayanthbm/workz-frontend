@@ -31,7 +31,6 @@ import {
     }
     
     export function getTeamFailure(error) {
-        console.log("fail",error)
       return {
         type: GET_TEAM_FAILURE,
         status: ERROR,
@@ -72,7 +71,6 @@ import {
       }
       
       export function getTeamUserFailure(error) {
-          console.log("fail",error)
         return {
           type: GET_TEAM_USER_FAILURE,
           status: ERROR,

@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import {getLogin,updatePassword} from "../actions/login.action";
-import Login from "../Components/Login";
+import { getLogin, updatePassword } from "../actions/login.action";
+import reset from "../Components/reset";
 const mapDispatchToProps = dispatch => {
   return {
     getLogin: userDetails => {
@@ -14,13 +14,11 @@ const mapDispatchToProps = dispatch => {
 };
 const mapStateToProps = state => {
   return {
-   login: state.loginreducer.loginDetails,
-   loginError: state.loginreducer,
-   updatePassword:state
+    updatePasswordData: state.loginreducer
   };
 };
-const loginContainer = withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(Login)
+const resetContainer = withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(reset)
 );
 
-export default loginContainer;
+export default resetContainer;

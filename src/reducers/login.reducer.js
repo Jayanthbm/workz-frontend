@@ -6,7 +6,7 @@ const login = (
       error: null,
       loginError: null,
       loading: false,
-    
+    updatePassword:null
     },
     action
   ) => {
@@ -30,6 +30,25 @@ const login = (
               loading: false,
               loginError: action.error
             });
+            case loginAction.UPDATE_PASSWORD_REQUEST:
+              return Object.assign({}, state, {
+                status: action.status,
+                passwordError: null,
+                loading: true
+              });
+        
+            case loginAction.UPDATE_PASSWORD_SUCCESS:
+              return Object.assign({}, state, {
+                status: action.status,
+                loading: false,
+                updatePassword: action.updatePassword
+              });
+            case loginAction.UPDATE_PASSWORD_FAILURE:
+              return Object.assign({}, state, {
+                status: action.status,
+                loading: false,
+                passwordError: action.error
+              });
             default:
                 return state;
     }

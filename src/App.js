@@ -7,7 +7,7 @@ import Navigation from './Components/Navigation';
 import * as Cookie from "./utils/Cookie";
 import {ACCESS_TOKEN} from "./utils/constant"
 import Team from './Container/teamContainer';
-
+import Reset from "./Container/resetContainer"
 class App extends Component {
   render(){
   const isUserLogedIn = Cookie.getCookie(ACCESS_TOKEN) ? true : false;
@@ -18,6 +18,7 @@ class App extends Component {
         <Route exact path="/" component={Team}  />:
        <Route exact path="/" component={Login}/> 
       }
+      <Route exact path="/reset" component={Reset}  />
         <Route exact path="/header" component={Header} />
         </Switch>
     </div>

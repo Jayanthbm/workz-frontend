@@ -48,7 +48,6 @@ class Team extends Component {
           this.props.teamDetails.teams &&
           this.props.teamDetails.teams[0].teamId
       );
-    console.log(this.state.id);
   }
   selectHandler = val => {
     this.props.getTeamUser(val);
@@ -64,7 +63,6 @@ class Team extends Component {
     }
   }
   render() {
-    console.log(this.props);
     const userDetails = Cookie.getCookie(USER_DETAILS);
     let parsedData = userDetails && JSON.parse(userDetails);
     return (

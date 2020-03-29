@@ -2,10 +2,9 @@ import React, { Component } from "react";
 import styles from "./Navigation.module.css";
 class Navigation extends Component {
   selectHandler = val => {
-    console.log(val);
+
   };
   render() {
-    console.log(this.props.team);
     return (
       <div className={styles.base}>
         <div className={styles.container}>
