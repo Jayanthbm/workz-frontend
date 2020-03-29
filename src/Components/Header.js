@@ -14,12 +14,12 @@ const links = [
 class Header extends Component {
 
     render() {
-       
+       console.log(this.props)
         return (
             <div className={styles.headerBase}>
                 <div className={styles.container}>
                     <div className={styles.logoHolder}>WorkforceZ</div>
-                    <div className={styles.linkHolder}>
+                   {this.props.pic && <div className={styles.linkHolder}>
                     {links && links.map(val=> {return(
                         <div className={styles.links}>
                             {val.text}
@@ -28,7 +28,7 @@ class Header extends Component {
                     <div className={styles.profileHolder}>
                         <img src={this.props.pic?this.props.pic:image} height="40px" width="40px" style={{borderRadius:"100%"}}/>
                     </div>
-                    </div>
+                    </div>}
                 </div>
             </div>
         );

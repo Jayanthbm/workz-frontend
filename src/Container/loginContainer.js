@@ -11,7 +11,8 @@ const mapDispatchToProps = dispatch => {
 };
 const mapStateToProps = state => {
   return {
-   login: state.loginreducer.loginDetails
+   login: state.loginreducer.loginDetails,
+   loginError: state.loginreducer
   };
 };
 const loginContainer = withRouter(

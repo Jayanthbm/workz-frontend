@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import styles from "./login.module.css"
+import Header from "./Header"
 const data = [
   {
     User: "abcd",
@@ -10,7 +12,8 @@ class Login extends Component {
     super(props);
     this.state = {
       uname: "",
-      password: ""
+      password: "",
+      loginError:""
     };
   }
   handleChange = val => {
@@ -27,17 +30,25 @@ class Login extends Component {
     }
  }
   componentWillReceiveProps(nextProps){
-
+console.log(nextProps)
 if(nextProps && nextProps.login){
 window.location.reload()
 }
+if(nextProps && nextProps.loginError && nextProps.loginError.status==="ERROR"){
+  this.setState({
+    loginError: nextProps.loginError.loginError,
+    uname:"",
+    password:""
+  })
+  }
   }
   render() {
     console.log(this.props)
     return (
-      <div>
-        <div>Login Screen</div>
-        <label>USername:</label>
+      <div className={styles.base}>
+        <Header/>
+        <div className={styles.loginContainer}>
+        <label>Username:</label>
         <input
           type="text"
           value={this.state.uname}
@@ -50,6 +61,10 @@ window.location.reload()
           onChange={val => this.setState({ password: val.target.value })}
         ></input>
         <button onClick={this.handleClick}> Login </button>
+{this.state.loginError && <div className={styles.error}>
+  {this.state.loginError}
+  </div>}
+  </div>
       </div>
     );
   }
