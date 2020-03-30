@@ -63,6 +63,7 @@ class Team extends Component {
     }
   }
   render() {
+
     const userDetails = Cookie.getCookie(USER_DETAILS);
     let parsedData = userDetails && JSON.parse(userDetails);
     return (
@@ -83,19 +84,19 @@ class Team extends Component {
                     {val.country === "India" && (
                       <div>
                         {val.onlineStatus === "offline" && (
-                          <div className={styles.seatHolder}>
+                          <div className={styles.seatHolder} title={"name : " + val.firstname}>
                             <img src={offline} height="135px" width="80px" />
                             <img src={offlineseat} height="80px" width="80px" />
                           </div>
                         )}
                         {val.onlineStatus === "active" && (
-                          <div className={styles.seatHolder}>
+                          <div className={styles.seatHolder} title={"name : " + val.firstname}>
                             <img src={online} height="135px" width="80px" />
                             <img src={onlineseat} height="80px" width="80px" />
                           </div>
                         )}
                         {val.onlineStatus === "passive" && (
-                          <div className={styles.seatHolder}>
+                          <div className={styles.seatHolder} title={"name : " + val.firstname}>
                             <img src={online} height="135px" width="80px" />
                             <img src={onlineseat} height="80px" width="80px" />
                           </div>
@@ -117,19 +118,19 @@ class Team extends Component {
                     {val.country === "USA" && (
                       <div>
                         {val.onlineStatus === "offline" && (
-                          <div className={styles.seatHolder}>
+                          <div className={styles.seatHolder} title={"name : " + val.firstname}>
                             <img src={offline} height="135px" width="80px" />
                             <img src={offlineseat} height="80px" width="80px" />
                           </div>
                         )}
                         {val.onlineStatus === "active" && (
-                          <div className={styles.seatHolder}>
+                          <div className={styles.seatHolder} title={"name : " + val.firstname}>
                             <img src={online} height="135px" width="80px" />
                             <img src={onlineseat} height="80px" width="80px" />
                           </div>
                         )}
                         {val.onlineStatus === "passive" && (
-                          <div className={styles.seatHolder}>
+                          <div className={styles.seatHolder} title={"name : " + val.firstname}>
                             <img src={online} height="135px" width="80px" />
                             <img src={onlineseat} height="80px" width="80px" />
                           </div>
@@ -151,19 +152,19 @@ class Team extends Component {
                     {val.country === "Australia" && (
                       <div>
                         {val.onlineStatus === "offline" && (
-                          <div className={styles.seatHolder}>
+                          <div className={styles.seatHolder} title={"name : " + val.firstname}>
                             <img src={offline} height="135px" width="80px" />
                             <img src={offlineseat} height="80px" width="80px" />
                           </div>
                         )}
                         {val.onlineStatus === "active" && (
-                          <div className={styles.seatHolder}>
+                          <div className={styles.seatHolder} title={"name : " + val.firstname}>
                             <img src={online} height="135px" width="80px" />
                             <img src={onlineseat} height="80px" width="80px" />
                           </div>
                         )}
                         {val.onlineStatus === "passive" && (
-                          <div className={styles.seatHolder}>
+                          <div className={styles.seatHolder} title={"name : " + val.firstname}>
                             <img src={online} height="135px" width="80px" />
                             <img src={onlineseat} height="80px" width="80px" />
                           </div>
@@ -184,19 +185,19 @@ class Team extends Component {
                     {val.country === "New Zealand" && (
                       <div>
                         {val.onlineStatus === "offline" && (
-                          <div className={styles.seatHolder}>
+                          <div className={styles.seatHolder} title={"name : " + val.firstname}>
                             <img src={offline} height="135px" width="80px" />
                             <img src={offlineseat} height="80px" width="80px" />
                           </div>
                         )}
                         {val.onlineStatus === "active" && (
-                          <div className={styles.seatHolder}>
+                          <div className={styles.seatHolder} title={"name : " + val.firstname}>
                             <img src={online} height="135px" width="80px" />
                             <img src={onlineseat} height="80px" width="80px" />
                           </div>
                         )}
                         {val.onlineStatus === "passive" && (
-                          <div className={styles.seatHolder}>
+                          <div className={styles.seatHolder} title={"name : " + val.firstname}>
                             <img src={online} height="135px" width="80px" />
                             <img src={onlineseat} height="80px" width="80px" />
                           </div>
