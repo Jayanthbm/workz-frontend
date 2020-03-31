@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styles from "./Header.module.css"
 import image from "../images/sample.jpg"
 import * as Cookie from "../utils/Cookie";
-import {USER_DETAILS} from "../utils/constant"
+import {USER_DETAILS, ACCESS_TOKEN} from "../utils/constant"
 const links = [
     {
       text:"Virtual Office"
@@ -12,7 +12,11 @@ const links = [
     }
 ]
 class Header extends Component {
-
+    logoutHandler=()=>{
+        Cookie.deleteCookie(USER_DETAILS)
+        Cookie.deleteCookie(ACCESS_TOKEN)
+        window.location.reload()
+    }
     render() {
         return (
             <div className={styles.headerBase}>
@@ -27,6 +31,9 @@ class Header extends Component {
                     <div className={styles.profileHolder}>
                         <img src={this.props.pic?this.props.pic:image} height="40px" width="40px" style={{borderRadius:"100%"}}/>
                     </div>
+                    <div className={styles.links} onClick={this.logoutHandler}>
+                            {"Logout"}
+                        </div>
                     </div>}
                 </div>
             </div>

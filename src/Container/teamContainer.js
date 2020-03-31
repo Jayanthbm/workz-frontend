@@ -15,7 +15,8 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     teamDetails: state.team.teamDetails,
-    teamUserDetails:state.team.teamUserDetails
+    teamUserDetails:state.team.teamUserDetails,
+    teamError: state.team
   };
 };
 const teamContainer = withRouter(

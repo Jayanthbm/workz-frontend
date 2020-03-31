@@ -7,7 +7,7 @@ import styles from "./Team.module.css";
 import Header from "./Header";
 import Navigation from "./Navigation";
 import * as Cookie from "../utils/Cookie";
-import { USER_DETAILS } from "../utils/constant";
+import { USER_DETAILS, ACCESS_TOKEN } from "../utils/constant";
 const data = [
   {
     name: "abc",
@@ -42,18 +42,28 @@ class Team extends Component {
   }
   componentDidMount() {
     if (this.props.getTeam) this.props.getTeam();
-    if (this.props.getTeamUser)
-      this.props.getTeamUser(
-        this.props.teamDetails &&
-          this.props.teamDetails.teams &&
-          this.props.teamDetails.teams[0].teamId
-      );
+    // if (this.props.getTeamUser)
+    //   this.props.getTeamUser(
+    //     this.props.teamDetails &&
+    //       this.props.teamDetails.teams &&
+    //       this.props.teamDetails.teams[0].teamId
+    //   );
   }
   selectHandler = val => {
     this.props.getTeamUser(val);
   };
 
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps.teamError);
+    if (
+      nextProps.teamError &&
+      nextProps.teamError.status === "ERROR" &&
+      nextProps.teamError.teamError === "You must be logged in."
+    ) {
+      Cookie.deleteCookie(ACCESS_TOKEN);
+      Cookie.deleteCookie(USER_DETAILS);
+      this.props.history.push("/");
+    }
     if (nextProps.teamDetails !== this.props.teamDetails) {
       nextProps.getTeamUser(
         nextProps.teamDetails &&
@@ -63,7 +73,6 @@ class Team extends Component {
     }
   }
   render() {
-
     const userDetails = Cookie.getCookie(USER_DETAILS);
     let parsedData = userDetails && JSON.parse(userDetails);
     return (
@@ -78,31 +87,36 @@ class Team extends Component {
             India
             {this.props.teamUserDetails &&
               this.props.teamUserDetails.users &&
-              this.props.teamUserDetails.users.map(val => {
+              this.props.teamUserDetails.users.map((val, i) => {
+                console.log(i);
                 return (
-                  <div>
+                  <div className={styles.counryUsers}>
                     {val.country === "India" && (
-                      <div>
+                      <div
+                        className={styles.seatHolder}
+                        title={"name : " + val.firstname}
+                      >
                         {val.onlineStatus === "offline" && (
-                          <div className={styles.seatHolder} title={"name : " + val.firstname}>
+                          <React.Fragment>
                             <img src={offline} height="135px" width="80px" />
                             <img src={offlineseat} height="80px" width="80px" />
-                          </div>
+                          </React.Fragment>
                         )}
                         {val.onlineStatus === "active" && (
-                          <div className={styles.seatHolder} title={"name : " + val.firstname}>
+                          <React.Fragment>
                             <img src={online} height="135px" width="80px" />
                             <img src={onlineseat} height="80px" width="80px" />
-                          </div>
+                          </React.Fragment>
                         )}
                         {val.onlineStatus === "passive" && (
-                          <div className={styles.seatHolder} title={"name : " + val.firstname}>
+                          <React.Fragment>
                             <img src={online} height="135px" width="80px" />
                             <img src={onlineseat} height="80px" width="80px" />
-                          </div>
+                          </React.Fragment>
                         )}
                       </div>
                     )}
+                    {i % 2 === 1 && <br />}
                   </div>
                 );
               })}
@@ -114,23 +128,32 @@ class Team extends Component {
               this.props.teamUserDetails.users &&
               this.props.teamUserDetails.users.map(val => {
                 return (
-                  <div>
+                  <div className={styles.counryUsers}>
                     {val.country === "USA" && (
                       <div>
                         {val.onlineStatus === "offline" && (
-                          <div className={styles.seatHolder} title={"name : " + val.firstname}>
+                          <div
+                            className={styles.seatHolder}
+                            title={"name : " + val.firstname}
+                          >
                             <img src={offline} height="135px" width="80px" />
                             <img src={offlineseat} height="80px" width="80px" />
                           </div>
                         )}
                         {val.onlineStatus === "active" && (
-                          <div className={styles.seatHolder} title={"name : " + val.firstname}>
+                          <div
+                            className={styles.seatHolder}
+                            title={"name : " + val.firstname}
+                          >
                             <img src={online} height="135px" width="80px" />
                             <img src={onlineseat} height="80px" width="80px" />
                           </div>
                         )}
                         {val.onlineStatus === "passive" && (
-                          <div className={styles.seatHolder} title={"name : " + val.firstname}>
+                          <div
+                            className={styles.seatHolder}
+                            title={"name : " + val.firstname}
+                          >
                             <img src={online} height="135px" width="80px" />
                             <img src={onlineseat} height="80px" width="80px" />
                           </div>
@@ -152,19 +175,28 @@ class Team extends Component {
                     {val.country === "Australia" && (
                       <div>
                         {val.onlineStatus === "offline" && (
-                          <div className={styles.seatHolder} title={"name : " + val.firstname}>
+                          <div
+                            className={styles.seatHolder}
+                            title={"name : " + val.firstname}
+                          >
                             <img src={offline} height="135px" width="80px" />
                             <img src={offlineseat} height="80px" width="80px" />
                           </div>
                         )}
                         {val.onlineStatus === "active" && (
-                          <div className={styles.seatHolder} title={"name : " + val.firstname}>
+                          <div
+                            className={styles.seatHolder}
+                            title={"name : " + val.firstname}
+                          >
                             <img src={online} height="135px" width="80px" />
                             <img src={onlineseat} height="80px" width="80px" />
                           </div>
                         )}
                         {val.onlineStatus === "passive" && (
-                          <div className={styles.seatHolder} title={"name : " + val.firstname}>
+                          <div
+                            className={styles.seatHolder}
+                            title={"name : " + val.firstname}
+                          >
                             <img src={online} height="135px" width="80px" />
                             <img src={onlineseat} height="80px" width="80px" />
                           </div>
@@ -185,19 +217,28 @@ class Team extends Component {
                     {val.country === "New Zealand" && (
                       <div>
                         {val.onlineStatus === "offline" && (
-                          <div className={styles.seatHolder} title={"name : " + val.firstname}>
+                          <div
+                            className={styles.seatHolder}
+                            title={"name : " + val.firstname}
+                          >
                             <img src={offline} height="135px" width="80px" />
                             <img src={offlineseat} height="80px" width="80px" />
                           </div>
                         )}
                         {val.onlineStatus === "active" && (
-                          <div className={styles.seatHolder} title={"name : " + val.firstname}>
+                          <div
+                            className={styles.seatHolder}
+                            title={"name : " + val.firstname}
+                          >
                             <img src={online} height="135px" width="80px" />
                             <img src={onlineseat} height="80px" width="80px" />
                           </div>
                         )}
                         {val.onlineStatus === "passive" && (
-                          <div className={styles.seatHolder} title={"name : " + val.firstname}>
+                          <div
+                            className={styles.seatHolder}
+                            title={"name : " + val.firstname}
+                          >
                             <img src={online} height="135px" width="80px" />
                             <img src={onlineseat} height="80px" width="80px" />
                           </div>

@@ -14,7 +14,6 @@ class App extends Component {
   const userDetails = Cookie.getCookie(USER_DETAILS);
   const parsedData = userDetails && JSON.parse(userDetails);
   const password_updated= parsedData && parsedData.password_updated===0?false:true
-  console.log(password_updated)
   return (
     <div className="App">
      <Switch>
