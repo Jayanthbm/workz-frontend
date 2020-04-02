@@ -3,6 +3,8 @@ import offline from "../images/offlinepc.png";
 import online from "../images/onlinepc.png";
 import onlineseat from "../images/onlineseat.png";
 import offlineseat from "../images/offlineseat.png";
+import leftoffline from '../images/left-offline-cp.png';
+import leftonline from '../images/left-online-cp.png';
 import styles from "./Team.module.css";
 import Header from "./Header";
 import Navigation from "./Navigation";
@@ -67,8 +69,8 @@ class Team extends Component {
     if (nextProps.teamDetails !== this.props.teamDetails) {
       nextProps.getTeamUser(
         nextProps.teamDetails &&
-          nextProps.teamDetails.teams &&
-          nextProps.teamDetails.teams[0].teamId
+        nextProps.teamDetails.teams &&
+        nextProps.teamDetails.teams[0].teamId
       );
     }
   }
@@ -84,83 +86,151 @@ class Team extends Component {
         />
         <div className={styles.countryContainer}>
           <div className={styles.countryHolder}>
-            India
+            India<br />
             {this.props.teamUserDetails &&
               this.props.teamUserDetails.users &&
               this.props.teamUserDetails.users.map((val, i) => {
                 console.log(i);
                 return (
-                  <div className={styles.counryUsers}>
-                    {val.country === "India" && (
-                      <div
-                        className={styles.seatHolder}
-                        title={"name : " + val.firstname}
-                      >
-                        {val.onlineStatus === "offline" && (
-                          <React.Fragment>
-                            <img src={offline} height="135px" width="80px" />
-                            <img src={offlineseat} height="80px" width="80px" />
-                          </React.Fragment>
-                        )}
-                        {val.onlineStatus === "active" && (
-                          <React.Fragment>
-                            <img src={online} height="135px" width="80px" />
-                            <img src={onlineseat} height="80px" width="80px" />
-                          </React.Fragment>
-                        )}
-                        {val.onlineStatus === "passive" && (
-                          <React.Fragment>
-                            <img src={online} height="135px" width="80px" />
-                            <img src={onlineseat} height="80px" width="80px" />
-                          </React.Fragment>
-                        )}
-                      </div>
-                    )}
-                    {i % 2 === 1 && <br />}
-                  </div>
+                  <>
+                    <span className={styles.counryUsers}>
+                      {val.country === "India" && (
+                        <>
+                          {val.onlineStatus === "offline" && (
+                            <span id={i + val.firstname}
+                              className={styles.seatHolder}
+                              title={"name : " + val.firstname}
+                            >
+                              {i % 2 > 0 &&
+                                <span>
+                                  <div className={styles.offlineright}></div>
+                                  <img className="abc" src={offlineseat} height="70px" width="53px" />
+                                </span>
+                              }
+                              {i % 2 < 1 &&
+                                <span>
+                                  <img className="abc" src={leftoffline} />
+                                  <div className={styles.offlineleft}></div>
+                                </span>
+                              }
+                            </span>
+                          )}
+                          {val.onlineStatus === "active" && (
+                            <span
+                              className={styles.seatHolder}
+                              title={"name : " + val.firstname}
+                            >
+                              {i % 2 > 0 &&
+                                <span>
+                                  <div className={styles.onlineright}></div>
+                                  <img className="abc" src={onlineseat} height="70px" width="53px" />
+                                </span>
+                              }
+                              {i % 2 < 1 &&
+                                <span>
+                                  <img className="abc" src={leftonline} height="70px" width="53px" />
+                                  <div className={styles.onlineleft}></div>
+                                </span>
+                              }
+                            </span>
+                          )}
+                          {val.onlineStatus === "passive" && (
+                            <span
+                              className={styles.seatHolder}
+                              title={"name : " + val.firstname}
+                            >
+                              {i % 2 > 0 &&
+                                <span>
+                                  <div className={styles.onlineright}></div>
+                                  <img className="abc" src={onlineseat} height="70px" width="53px" />
+                                </span>
+                              }
+                              {i % 2 < 1 &&
+                                <span>
+                                  <img className="abc" src={leftonline} height="70px" width="53px" />
+                                  <div className={styles.onlineleft}></div>
+                                </span>
+                              }
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </span>{i % 2 > 0 && <br />}</>
                 );
               })}
           </div>
 
           <div className={styles.countryHolder}>
-            USA
+            USA<br />
             {this.props.teamUserDetails &&
               this.props.teamUserDetails.users &&
-              this.props.teamUserDetails.users.map(val => {
+              this.props.teamUserDetails.users.map((val, i) => {
+                console.log(i)
                 return (
-                  <div className={styles.counryUsers}>
-                    {val.country === "USA" && (
-                      <div>
-                        {val.onlineStatus === "offline" && (
-                          <div
-                            className={styles.seatHolder}
-                            title={"name : " + val.firstname}
-                          >
-                            <img src={offline} height="135px" width="80px" />
-                            <img src={offlineseat} height="80px" width="80px" />
-                          </div>
-                        )}
-                        {val.onlineStatus === "active" && (
-                          <div
-                            className={styles.seatHolder}
-                            title={"name : " + val.firstname}
-                          >
-                            <img src={online} height="135px" width="80px" />
-                            <img src={onlineseat} height="80px" width="80px" />
-                          </div>
-                        )}
-                        {val.onlineStatus === "passive" && (
-                          <div
-                            className={styles.seatHolder}
-                            title={"name : " + val.firstname}
-                          >
-                            <img src={online} height="135px" width="80px" />
-                            <img src={onlineseat} height="80px" width="80px" />
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
+                  <>
+                    <span className={styles.counryUsers}>
+                      {val.country === "USA" && (
+                        <>
+                          {val.onlineStatus === "offline" && (
+                            <span id={i + val.firstname}
+                              className={styles.seatHolder}
+                              title={"name : " + i + val.firstname}
+                            >
+                              {i % 2 > 0 &&
+                                <span>
+                                  <div className={styles.offlineright}></div>
+                                  <img className="abc" src={offlineseat} height="70px" width="53px" />
+                                </span>
+                              }
+                              {i % 2 < 1 &&
+                                <span>
+                                  <img className="abc" src={leftoffline} />
+                                  <div className={styles.offlineleft}></div>
+                                </span>
+                              }
+                            </span>
+                          )}
+                          {val.onlineStatus === "active" && (
+                            <span
+                              className={styles.seatHolder}
+                              title={"name : " + i + val.firstname}
+                            >
+                              {i % 2 > 0 &&
+                                <span>
+                                  <div className={styles.onlineright}></div>
+                                  <img className="abc" src={onlineseat} height="70px" width="53px" />
+                                </span>
+                              }
+                              {i % 2 < 1 &&
+                                <span>
+                                  <img className="abc" src={leftonline} height="70px" width="53px" />
+                                  <div className={styles.onlineleft}></div>
+                                </span>
+                              }
+                            </span>
+                          )}
+                          {val.onlineStatus === "passive" && (
+                            <span
+                              className={styles.seatHolder}
+                              title={"name : " + i + val.firstname}
+                            >
+                              {i % 2 > 0 &&
+                                <span>
+                                  <div className={styles.onlineright}></div>
+                                  <img className="abc" src={onlineseat} height="70px" width="53px" />
+                                </span>
+                              }
+                              {i % 2 < 1 &&
+                                <span>
+                                  <img className="abc" src={leftonline} height="70px" width="53px" />
+                                  <div className={styles.onlineleft}></div>
+                                </span>
+                              }
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </span>{i % 2 > 0 && <br />}</>
                 );
               })}
           </div>
@@ -169,41 +239,73 @@ class Team extends Component {
             Australia
             {this.props.teamUserDetails &&
               this.props.teamUserDetails.users &&
-              this.props.teamUserDetails.users.map(val => {
+              this.props.teamUserDetails.users.map((val, i) => {
+                console.log(i)
                 return (
-                  <div>
-                    {val.country === "Australia" && (
-                      <div>
-                        {val.onlineStatus === "offline" && (
-                          <div
-                            className={styles.seatHolder}
-                            title={"name : " + val.firstname}
-                          >
-                            <img src={offline} height="135px" width="80px" />
-                            <img src={offlineseat} height="80px" width="80px" />
-                          </div>
-                        )}
-                        {val.onlineStatus === "active" && (
-                          <div
-                            className={styles.seatHolder}
-                            title={"name : " + val.firstname}
-                          >
-                            <img src={online} height="135px" width="80px" />
-                            <img src={onlineseat} height="80px" width="80px" />
-                          </div>
-                        )}
-                        {val.onlineStatus === "passive" && (
-                          <div
-                            className={styles.seatHolder}
-                            title={"name : " + val.firstname}
-                          >
-                            <img src={online} height="135px" width="80px" />
-                            <img src={onlineseat} height="80px" width="80px" />
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
+                  <>
+                    <span className={styles.counryUsers}>
+                      {val.country === "Australia" && (
+                        <>
+                          {val.onlineStatus === "offline" && (
+                            <span id={i + val.firstname}
+                              className={styles.seatHolder}
+                              title={"name : " + i + val.firstname}
+                            >
+                              {i % 2 > 0 &&
+                                <span>
+                                  <div className={styles.offlineright}></div>
+                                  <img className="abc" src={offlineseat} height="70px" width="53px" />
+                                </span>
+                              }
+                              {i % 2 < 1 &&
+                                <span>
+                                  <img className="abc" src={leftoffline} />
+                                  <div className={styles.offlineleft}></div>
+                                </span>
+                              }
+                            </span>
+                          )}
+                          {val.onlineStatus === "active" && (
+                            <span
+                              className={styles.seatHolder}
+                              title={"name : " + i + val.firstname}
+                            >
+                              {i % 2 > 0 &&
+                                <span>
+                                  <div className={styles.onlineright}></div>
+                                  <img className="abc" src={onlineseat} height="70px" width="53px" />
+                                </span>
+                              }
+                              {i % 2 < 1 &&
+                                <span>
+                                  <img className="abc" src={leftonline} height="70px" width="53px" />
+                                  <div className={styles.onlineleft}></div>
+                                </span>
+                              }
+                            </span>
+                          )}
+                          {val.onlineStatus === "passive" && (
+                            <span
+                              className={styles.seatHolder}
+                              title={"name : " + i + val.firstname}
+                            >
+                              {i % 2 > 0 &&
+                                <span>
+                                  <div className={styles.onlineright}></div>
+                                  <img className="abc" src={onlineseat} height="70px" width="53px" />
+                                </span>
+                              }
+                              {i % 2 < 1 &&
+                                <span>
+                                  <img className="abc" src={leftonline} height="70px" width="53px" />
+                                  <div className={styles.onlineleft}></div>
+                                </span>
+                              }
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </span>{i % 2 > 0 && <br />}</>
                 );
               })}
           </div>
@@ -211,41 +313,73 @@ class Team extends Component {
             New Zealand
             {this.props.teamUserDetails &&
               this.props.teamUserDetails.users &&
-              this.props.teamUserDetails.users.map(val => {
+              this.props.teamUserDetails.users.map((val, i) => {
+                console.log(i)
                 return (
-                  <div>
-                    {val.country === "New Zealand" && (
-                      <div>
-                        {val.onlineStatus === "offline" && (
-                          <div
-                            className={styles.seatHolder}
-                            title={"name : " + val.firstname}
-                          >
-                            <img src={offline} height="135px" width="80px" />
-                            <img src={offlineseat} height="80px" width="80px" />
-                          </div>
-                        )}
-                        {val.onlineStatus === "active" && (
-                          <div
-                            className={styles.seatHolder}
-                            title={"name : " + val.firstname}
-                          >
-                            <img src={online} height="135px" width="80px" />
-                            <img src={onlineseat} height="80px" width="80px" />
-                          </div>
-                        )}
-                        {val.onlineStatus === "passive" && (
-                          <div
-                            className={styles.seatHolder}
-                            title={"name : " + val.firstname}
-                          >
-                            <img src={online} height="135px" width="80px" />
-                            <img src={onlineseat} height="80px" width="80px" />
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
+                  <>
+                    <span className={styles.counryUsers}>
+                      {val.country === "New Zealand" && (
+                        <>
+                          {val.onlineStatus === "offline" && (
+                            <span id={i + val.firstname}
+                              className={styles.seatHolder}
+                              title={"name : " + i + val.firstname}
+                            >
+                              {i % 2 > 0 &&
+                                <span>
+                                  <div className={styles.offlineright}></div>
+                                  <img className="abc" src={offlineseat} height="70px" width="53px" />
+                                </span>
+                              }
+                              {i % 2 < 1 &&
+                                <span>
+                                  <img className="abc" src={leftoffline} />
+                                  <div className={styles.offlineleft}></div>
+                                </span>
+                              }
+                            </span>
+                          )}
+                          {val.onlineStatus === "active" && (
+                            <span
+                              className={styles.seatHolder}
+                              title={"name : " + i + val.firstname}
+                            >
+                              {i % 2 > 0 &&
+                                <span>
+                                  <div className={styles.onlineright}></div>
+                                  <img className="abc" src={onlineseat} height="70px" width="53px" />
+                                </span>
+                              }
+                              {i % 2 < 1 &&
+                                <span>
+                                  <img className="abc" src={leftonline} height="70px" width="53px" />
+                                  <div className={styles.onlineleft}></div>
+                                </span>
+                              }
+                            </span>
+                          )}
+                          {val.onlineStatus === "passive" && (
+                            <span
+                              className={styles.seatHolder}
+                              title={"name : " + i + val.firstname}
+                            >
+                              {i % 2 > 0 &&
+                                <span>
+                                  <div className={styles.onlineright}></div>
+                                  <img className="abc" src={onlineseat} height="70px" width="53px" />
+                                </span>
+                              }
+                              {i % 2 < 1 &&
+                                <span>
+                                  <img className="abc" src={leftonline} height="70px" width="53px" />
+                                  <div className={styles.onlineleft}></div>
+                                </span>
+                              }
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </span>{i % 2 > 0 && <br />}</>
                 );
               })}
           </div>

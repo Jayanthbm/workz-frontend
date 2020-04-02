@@ -1,16 +1,82 @@
-.base{
+.base {
     width: 100%;
 }
-.countryContainer{
+
+.countryContainer {
     display: flex;
 }
-.countryHolder{
+
+.countryHolder {
     margin-left: 80px;
     display: inline-block;
 }
-.seatHolder{
-    display: flex;
+
+.seatHolder {
+    display: inline-block;
     justify-content: center;
     align-items: center;
+
+}
+
+
+.onlineleft {
+    background: url("../images/onlineleft.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    height: 120px;
+    width: 60px;
+    display: inline-block;
+}
+
+.onlineright {
+    background: url("../images/online.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    height: 120px;
+    width: 60px;
+    display: inline-block;
+}
+
+.offlineleft {
+    background: url("../images/offlineleft.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    height: 120px;
+    width: 60px;
+    display: inline-block;
+}
+
+.offlineright {
+    background: url("../images/offlinepc.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    height: 120px;
+    width: 60px;
+    display: inline-block;
+}
+
+.abc {
+    height: 70px;
+    width: 53px;
+}
+
+.pp-left {
+    height: 30px;
+    vertical-align: top;
+    position: absolute;
+    margin-left: 19px;
+    margin-top: 7px;
+}
+
+.pp-right {
+    height: 30px;
+    vertical-align: top;
+    position: absolute;
+    margin-left: -49px;
+    margin-top: 8px;
 
 }
