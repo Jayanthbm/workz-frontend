@@ -104,12 +104,12 @@ class Team extends Component {
                               {i % 2 > 0 &&
                                 <span>
                                   <div className={styles.offlineright}></div>
-                                  <img className="abc" src={offlineseat} height="70px" width="53px" />
+                                  <img className={styles.abc} src={offlineseat} />
                                 </span>
                               }
                               {i % 2 < 1 &&
                                 <span>
-                                  <img className="abc" src={leftoffline} />
+                                  <img className={styles.abc} src={leftoffline} />
                                   <div className={styles.offlineleft}></div>
                                 </span>
                               }
@@ -123,12 +123,12 @@ class Team extends Component {
                               {i % 2 > 0 &&
                                 <span>
                                   <div className={styles.onlineright}></div>
-                                  <img className="abc" src={onlineseat} height="70px" width="53px" />
+                                  <img className={styles.abc} src={onlineseat} />
                                 </span>
                               }
                               {i % 2 < 1 &&
                                 <span>
-                                  <img className="abc" src={leftonline} height="70px" width="53px" />
+                                  <img className={styles.abc} src={leftonline} />
                                   <div className={styles.onlineleft}></div>
                                 </span>
                               }
@@ -142,12 +142,12 @@ class Team extends Component {
                               {i % 2 > 0 &&
                                 <span>
                                   <div className={styles.onlineright}></div>
-                                  <img className="abc" src={onlineseat} height="70px" width="53px" />
+                                  <img className={styles.abc} src={onlineseat} />
                                 </span>
                               }
                               {i % 2 < 1 &&
                                 <span>
-                                  <img className="abc" src={leftonline} height="70px" width="53px" />
+                                  <img className={styles.abc} src={leftonline} />
                                   <div className={styles.onlineleft}></div>
                                 </span>
                               }
@@ -164,27 +164,27 @@ class Team extends Component {
             USA<br />
             {this.props.teamUserDetails &&
               this.props.teamUserDetails.users &&
-              this.props.teamUserDetails.users.map((val, i) => {
-                console.log(i)
+              this.props.teamUserDetails.users.map((val, j) => {
+                console.log(`j-${j}`)
                 return (
                   <>
                     <span className={styles.counryUsers}>
                       {val.country === "USA" && (
                         <>
                           {val.onlineStatus === "offline" && (
-                            <span id={i + val.firstname}
+                            <span id={j + val.firstname}
                               className={styles.seatHolder}
-                              title={"name : " + i + val.firstname}
+                              title={"name : " + j + val.firstname}
                             >
-                              {i % 2 > 0 &&
+                              {j % 2 > 0 &&
                                 <span>
                                   <div className={styles.offlineright}></div>
-                                  <img className="abc" src={offlineseat} height="70px" width="53px" />
+                                  <img className={styles.abc} src={offlineseat} />
                                 </span>
                               }
-                              {i % 2 < 1 &&
+                              {j % 2 < 1 &&
                                 <span>
-                                  <img className="abc" src={leftoffline} />
+                                  <img className={styles.abc} src={leftoffline} />
                                   <div className={styles.offlineleft}></div>
                                 </span>
                               }
@@ -193,17 +193,17 @@ class Team extends Component {
                           {val.onlineStatus === "active" && (
                             <span
                               className={styles.seatHolder}
-                              title={"name : " + i + val.firstname}
+                              title={"name : " + j + val.firstname}
                             >
-                              {i % 2 > 0 &&
+                              {j % 2 > 0 &&
                                 <span>
                                   <div className={styles.onlineright}></div>
-                                  <img className="abc" src={onlineseat} height="70px" width="53px" />
+                                  <img className={styles.abc} src={onlineseat} />
                                 </span>
                               }
-                              {i % 2 < 1 &&
+                              {j % 2 < 1 &&
                                 <span>
-                                  <img className="abc" src={leftonline} height="70px" width="53px" />
+                                  <img className={styles.abc} src={leftonline} />
                                   <div className={styles.onlineleft}></div>
                                 </span>
                               }
@@ -212,17 +212,17 @@ class Team extends Component {
                           {val.onlineStatus === "passive" && (
                             <span
                               className={styles.seatHolder}
-                              title={"name : " + i + val.firstname}
+                              title={"name : " + j + val.firstname}
                             >
-                              {i % 2 > 0 &&
+                              {j % 2 > 0 &&
                                 <span>
                                   <div className={styles.onlineright}></div>
-                                  <img className="abc" src={onlineseat} height="70px" width="53px" />
+                                  <img className={styles.abc} src={onlineseat} />
                                 </span>
                               }
-                              {i % 2 < 1 &&
+                              {j % 2 < 1 &&
                                 <span>
-                                  <img className="abc" src={leftonline} height="70px" width="53px" />
+                                  <img className={styles.abc} src={leftonline} />
                                   <div className={styles.onlineleft}></div>
                                 </span>
                               }
@@ -230,9 +230,11 @@ class Team extends Component {
                           )}
                         </>
                       )}
-                    </span>{i % 2 > 0 && <br />}</>
+                    </span>{j % 2 > 0 && <br />}</>
                 );
-              })}
+              }
+              )
+            }
           </div>
 
           <div className={styles.countryHolder}>
@@ -254,12 +256,12 @@ class Team extends Component {
                               {i % 2 > 0 &&
                                 <span>
                                   <div className={styles.offlineright}></div>
-                                  <img className="abc" src={offlineseat} height="70px" width="53px" />
+                                  <img className={styles.abc} src={offlineseat} />
                                 </span>
                               }
                               {i % 2 < 1 &&
                                 <span>
-                                  <img className="abc" src={leftoffline} />
+                                  <img className={styles.abc} src={leftoffline} />
                                   <div className={styles.offlineleft}></div>
                                 </span>
                               }
@@ -273,12 +275,12 @@ class Team extends Component {
                               {i % 2 > 0 &&
                                 <span>
                                   <div className={styles.onlineright}></div>
-                                  <img className="abc" src={onlineseat} height="70px" width="53px" />
+                                  <img className={styles.abc} src={onlineseat} />
                                 </span>
                               }
                               {i % 2 < 1 &&
                                 <span>
-                                  <img className="abc" src={leftonline} height="70px" width="53px" />
+                                  <img className={styles.abc} src={leftonline} />
                                   <div className={styles.onlineleft}></div>
                                 </span>
                               }
@@ -292,12 +294,12 @@ class Team extends Component {
                               {i % 2 > 0 &&
                                 <span>
                                   <div className={styles.onlineright}></div>
-                                  <img className="abc" src={onlineseat} height="70px" width="53px" />
+                                  <img className={styles.abc} src={onlineseat} />
                                 </span>
                               }
                               {i % 2 < 1 &&
                                 <span>
-                                  <img className="abc" src={leftonline} height="70px" width="53px" />
+                                  <img className={styles.abc} src={leftonline} />
                                   <div className={styles.onlineleft}></div>
                                 </span>
                               }
@@ -328,12 +330,12 @@ class Team extends Component {
                               {i % 2 > 0 &&
                                 <span>
                                   <div className={styles.offlineright}></div>
-                                  <img className="abc" src={offlineseat} height="70px" width="53px" />
+                                  <img className={styles.abc} src={offlineseat} />
                                 </span>
                               }
                               {i % 2 < 1 &&
                                 <span>
-                                  <img className="abc" src={leftoffline} />
+                                  <img className={styles.abc} src={leftoffline} />
                                   <div className={styles.offlineleft}></div>
                                 </span>
                               }
@@ -347,12 +349,12 @@ class Team extends Component {
                               {i % 2 > 0 &&
                                 <span>
                                   <div className={styles.onlineright}></div>
-                                  <img className="abc" src={onlineseat} height="70px" width="53px" />
+                                  <img className={styles.abc} src={onlineseat} />
                                 </span>
                               }
                               {i % 2 < 1 &&
                                 <span>
-                                  <img className="abc" src={leftonline} height="70px" width="53px" />
+                                  <img className={styles.abc} src={leftonline} />
                                   <div className={styles.onlineleft}></div>
                                 </span>
                               }
@@ -366,12 +368,12 @@ class Team extends Component {
                               {i % 2 > 0 &&
                                 <span>
                                   <div className={styles.onlineright}></div>
-                                  <img className="abc" src={onlineseat} height="70px" width="53px" />
+                                  <img className={styles.abc} src={onlineseat} />
                                 </span>
                               }
                               {i % 2 < 1 &&
                                 <span>
-                                  <img className="abc" src={leftonline} height="70px" width="53px" />
+                                  <img className={styles.abc} src={leftonline} />
                                   <div className={styles.onlineleft}></div>
                                 </span>
                               }

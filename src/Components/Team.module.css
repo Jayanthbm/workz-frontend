@@ -4,6 +4,7 @@
 
 .countryContainer {
     display: flex;
+    position: absolute;
 }
 
 .countryHolder {
@@ -18,51 +19,155 @@
 
 }
 
+@media only screen and (min-width: 1236px) {
+    .onlineleft {
+        background: url("../images/onlineleft.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-position: center;
+        height: 120px;
+        width: 60px;
+        display: inline-block;
+    }
 
-.onlineleft {
-    background: url("../images/onlineleft.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-position: center;
-    height: 120px;
-    width: 60px;
-    display: inline-block;
+    .onlineright {
+        background: url("../images/online.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-position: center;
+        height: 120px;
+        width: 60px;
+
+        display: inline-block;
+    }
+
+    .offlineleft {
+        background: url("../images/offlineleft.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-position: center;
+        height: 120px;
+        width: 60px;
+
+        display: inline-block;
+    }
+
+    .offlineright {
+        background: url("../images/offlinepc.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-position: center;
+        height: 120px;
+        width: 60px;
+        display: inline-block;
+    }
+
+    .abc {
+        height: 70px;
+        width: 53px;
+        margin-bottom: 15%;
+    }
+
 }
 
-.onlineright {
-    background: url("../images/online.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-position: center;
-    height: 120px;
-    width: 60px;
-    display: inline-block;
+@media only screen and (max-width: 1235px) and (min-width: 1152px) {
+    .onlineleft {
+        background: url("../images/onlineleft.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-position: center;
+        height: 110px;
+        width: 50px;
+        display: inline-block;
+    }
+
+    .onlineright {
+        background: url("../images/online.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-position: center;
+        height: 110px;
+        width: 50px;
+        display: inline-block;
+    }
+
+    .offlineleft {
+        background: url("../images/offlineleft.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-position: center;
+        height: 110px;
+        width: 50px;
+        display: inline-block;
+    }
+
+    .offlineright {
+        background: url("../images/offlinepc.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-position: center;
+        height: 110px;
+        width: 50px;
+        display: inline-block;
+    }
+
+    .abc {
+        height: 50px;
+        width: 47px;
+        margin-bottom: 15%;
+    }
+
+
 }
 
-.offlineleft {
-    background: url("../images/offlineleft.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-position: center;
-    height: 120px;
-    width: 60px;
-    display: inline-block;
+@media only screen and (max-width: 1151px) {
+    .onlineleft {
+        background: url("../images/onlineleft.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-position: center;
+        height: 100px;
+        width: 40px;
+        display: inline-block;
+    }
+
+    .onlineright {
+        background: url("../images/online.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-position: center;
+        height: 100px;
+        width: 40px;
+        display: inline-block;
+    }
+
+    .offlineleft {
+        background: url("../images/offlineleft.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-position: center;
+        height: 100px;
+        width: 40px;
+        display: inline-block;
+    }
+
+    .offlineright {
+        background: url("../images/offlinepc.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-position: center;
+        height: 100px;
+        width: 40px;
+        display: inline-block;
+    }
+
+    .abc {
+        height: 45px;
+        width: 40px;
+        margin-bottom: 15%;
+    }
 }
 
-.offlineright {
-    background: url("../images/offlinepc.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-position: center;
-    height: 120px;
-    width: 60px;
-    display: inline-block;
-}
-
-.abc {
-    height: 70px;
-    width: 53px;
-}
 
 .pp-left {
     height: 30px;
