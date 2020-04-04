@@ -44,20 +44,33 @@ class Login extends Component {
       this.setState({
         loginError: nextProps.loginError.loginError,
         uname: "",
-        password: ""
+        password: "",
+        employeeId:""
       });
     }
   }
   render() {
+    console.log(this.state.employeeId)
     return (
       <div className={styles.base}>
         <Header />
         <div className={styles.loginContainer}>
-          <label>Username:</label>
+        <div className={styles.loginHeader}>
+            Sign In
+          </div>
+        <div className={styles.fieldContainer}>
+        
+          <label>Company Name:</label>
           <input
             type="text"
             value={this.state.uname}
             onChange={event => this.handleChange(event)}
+          ></input>
+            <label>Employee ID:</label>
+          <input
+            type="text"
+            value={this.state.employeeId}
+            onChange={val => this.setState({ employeeId: val.target.value })}
           ></input>
           <label>Password:</label>
           <input
@@ -69,6 +82,7 @@ class Login extends Component {
           {this.state.loginError && (
             <div className={styles.error}>{this.state.loginError}</div>
           )}
+        </div>
         </div>
       </div>
     );
