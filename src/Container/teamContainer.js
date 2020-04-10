@@ -14,7 +14,7 @@ const mapDispatchToProps = dispatch => {
 };
 const mapStateToProps = state => {
   return {
-    teamDetails: state.team.teamDetails && state.team.teamDetails.results,
+    teamDetails: state.team.teamDetails && state.team.teamDetails,
     // teamUserDetails:state.team.teamUserDetails,
      teamError: state.team
   };

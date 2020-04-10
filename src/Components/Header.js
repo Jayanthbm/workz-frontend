@@ -4,6 +4,7 @@ import Popup from "reactjs-popup";
 import image from "../images/Profile-Fill-grey2.svg";
 import * as Cookie from "../utils/Cookie";
 import { USER_DETAILS, ACCESS_TOKEN } from "../utils/constant";
+
 const links = [
   {
     text: "Virtual Office",
@@ -19,6 +20,7 @@ class Header extends Component {
     window.location.reload();
   };
   render() {
+    console.log(this.props)
     const isLoggedin = Cookie.getCookie(USER_DETAILS) ? true : false;
     return (
       <div className={styles.headerBase}>
@@ -35,6 +37,7 @@ class Header extends Component {
                   src={this.props.pic ? this.props.pic : image}
                   height="40px"
                   width="40px"
+                  alt=""
                   style={{ borderRadius: "100%" }}
                 />
               </div>
@@ -45,23 +48,28 @@ class Header extends Component {
           )}
           {!isLoggedin && (
             <div className={styles.linkHolder}>
-
-<Popup modal trigger={   <div className={styles.links}>Request a demo</div>}>
-       <div style={{color:"#000"}}>
-       Modal Content
-         </div> 
-      </Popup>
-           
+              {/* <Popup
+                modal
+                trigger={<div className={styles.links}>Request a demo</div>}
+              >
+                <Request />
+              </Popup> */}
+<div className={styles.links} onClick={()=>{this.props.history.push({pathname:"/form",
+state:{type:"Demo"}})}}> Request a demo</div>
               <div className={styles.links}>
-                <a
+                {/* <a
                   href="tel:9999999999"
                   style={{ textDecoration: "none", color: " #fff" }}
-                >
-                  {" "}
+                > */}
                   Call 99999 99999
-                </a>
+                {/* </a> */}
               </div>
-              <div className={styles.links}>Support</div>
+              <div className={styles.links} onClick={()=>{this.props.history.push({
+  pathname:"/form",
+  state:{
+    type:"Support"
+  }
+})}}>Support</div>
             </div>
           )}
         </div>

@@ -15,6 +15,51 @@ import {
   export const GET_TEAM_USER_SUCCESS = "GET_TEAM_USER_SUCCESS";
   export const GET_TEAM_USER_FAILURE = "GET_TEAM_USER_FAILURE";
 
+  export const POST_FORM_REQUEST = "POST_FORM_REQUEST";
+  export const POST_FORM_SUCCESS = "POST_FORM_SUCCESS";
+  export const POST_FORM_FAILURE = "POST_FORM_FAILURE";
+
+  export function postFormRequest() {
+    return {
+      type: POST_FORM_REQUEST,
+      status: REQUESTING
+    };
+  }
+  
+  export function postFormSuccess(formData) {
+  return {
+    type: POST_FORM_SUCCESS,
+    status: SUCCESS,
+    formData
+  };
+}
+
+export function postFormFailure(error) {
+  return {
+    type: POST_FORM_FAILURE,
+    status: ERROR,
+    error
+  };
+}
+
+export function postForm(formData) {
+  return async dispatch => {
+    dispatch(postFormRequest());
+    try {
+      let url = `submitform`;
+      const result = await post(url, formData);
+      const resultJson = await result.data;
+      if (resultJson.message) {
+        throw new Error(resultJson.message);
+      }
+      return dispatch(postFormSuccess(resultJson));
+    } catch (e) {
+      return dispatch(postFormFailure(e.message));
+    }
+  };
+}
+
+
   export function getTeamRequest() {
       return {
         type: GET_TEAM_REQUEST,
@@ -26,7 +71,7 @@ import {
       return {
         type: GET_TEAM_SUCCESS,
         status: SUCCESS,
-        teamDetails
+        teamDetails: teamDetails.results ? teamDetails.results: teamDetails
       };
     }
     
@@ -46,6 +91,7 @@ import {
           let url = `manager/${userId}`;
           const result = await get(url);
           const resultJson = await result.data;
+          console.log(resultJson)
           if (resultJson.message) {
             throw new Error(resultJson.message);
           }

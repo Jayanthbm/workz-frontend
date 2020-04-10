@@ -11,6 +11,27 @@ const team = (
     action
   ) => {
     switch (action.type) {
+      case teamAction.POST_FORM_REQUEST:
+        return Object.assign({}, state, {
+          status: action.status,
+          error: null,
+          loading: true
+        });
+  
+      case teamAction.POST_FORM_SUCCESS:
+        return Object.assign({}, state, {
+          status: action.status,
+          loading: false,
+          formData: action.formData
+        });
+      case teamAction.POST_FORM_FAILURE:
+        return Object.assign({}, state, {
+          status: action.status,
+          loading: false,
+          error: action.error
+        });
+
+
         case teamAction.GET_TEAM_REQUEST:
             return Object.assign({}, state, {
               status: action.status,
@@ -26,6 +47,7 @@ const team = (
               teamDetails: action.teamDetails
             });
           case teamAction.GET_TEAM_FAILURE:
+            console.log(action.error)
             return Object.assign({}, state, {
               status: action.status,
               loading: false,

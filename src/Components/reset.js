@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import styles from "./login.module.css";
+import styles from "./reset.module.css";
+import * as Cookie from "../utils/Cookie";
+import { USER_DETAILS, ACCESS_TOKEN } from "../utils/constant";
 class reset extends Component {
   constructor(props) {
     super(props);
     this.state = {
       password: "",
-      loginError: ""
+      resetError: ""
     };
   }
   handleChange = val => {
@@ -16,20 +18,29 @@ class reset extends Component {
     const reqBody = {
       password: this.state.password
     };
-    if (this.props.getLogin) {
+    if (this.props.updatePassword) {
       this.props.updatePassword(reqBody);
+      
     }
  }
  componentWillReceiveProps(nextProps){
+   console.log(nextProps)
     if(nextProps.updatePasswordData &&nextProps.updatePasswordData.passwordError==="Password Updated Succesfully"){
-        nextProps.history.push("/")
-        window.location.reload()
+      Cookie.deleteCookie(USER_DETAILS);
+      Cookie.deleteCookie(ACCESS_TOKEN);
+      nextProps.history.push("/")
+     window.location.reload()
+    }else{
+      this.setState({
+        resetError: nextProps.updatePasswordData &&nextProps.updatePasswordData.passwordError
+      })
     }
  }
   render() {
     return (
       <div>
         <div className={styles.loginContainer}>
+        <div className={styles.fieldContainer}>
           <label>Reset Password:</label>
           <input
             type="text"
@@ -38,9 +49,10 @@ class reset extends Component {
           ></input>
 
           <button onClick={this.handleClick}> Reset Password </button>
-          {this.state.loginError && (
-            <div className={styles.error}>{this.state.loginError}</div>
+          {this.state.resetError && (
+            <div className={styles.error}>{this.state.resetError}</div>
           )}
+          </div>
         </div>
       </div>
     );

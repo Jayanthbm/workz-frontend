@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "./login.module.css";
-import Header from "./Header";
+import Header from "../Container/HeaderContainer";
 const data = [
   {
     User: "abcd",
@@ -31,8 +31,9 @@ class Login extends Component {
     }
   };
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps)
     if (nextProps && nextProps.login) {
-      if (nextProps.login.password_updated === 0) {
+      if (nextProps.login.previousPassword === null) {
         this.props.history.push("/reset");
       }else{
         window.location.reload()
@@ -80,7 +81,7 @@ class Login extends Component {
             value={this.state.password}
             onChange={val => this.setState({ password: val.target.value })}
           ></input>
-          <button onClick={this.handleClick}> Login </button>
+          <button onClick={this.handleClick}> Sign in </button>
           {this.state.loginError && (
             <div className={styles.error}>{this.state.loginError}</div>
           )}
