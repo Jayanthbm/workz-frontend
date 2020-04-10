@@ -4,8 +4,8 @@ import { getTeam,getTeamUser } from "../actions/team.action";
 import Team from "../Components/Team";
 const mapDispatchToProps = dispatch => {
   return {
-    getTeam: () => {
-      dispatch(getTeam());
+    getTeam: (userId) => {
+      dispatch(getTeam(userId));
     },
     getTeamUser:teamId=>{
         dispatch(getTeamUser(teamId));
@@ -14,9 +14,9 @@ const mapDispatchToProps = dispatch => {
 };
 const mapStateToProps = state => {
   return {
-    teamDetails: state.team.teamDetails,
-    teamUserDetails:state.team.teamUserDetails,
-    teamError: state.team
+    teamDetails: state.team.teamDetails && state.team.teamDetails.results,
+    // teamUserDetails:state.team.teamUserDetails,
+     teamError: state.team
   };
 };
 const teamContainer = withRouter(

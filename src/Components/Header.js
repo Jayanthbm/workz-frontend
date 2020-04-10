@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styles from "./Header.module.css";
-import image from "../images/sample.jpg";
+import Popup from "reactjs-popup";
+import image from "../images/Profile-Fill-grey2.svg";
 import * as Cookie from "../utils/Cookie";
 import { USER_DETAILS, ACCESS_TOKEN } from "../utils/constant";
 const links = [
@@ -44,7 +45,13 @@ class Header extends Component {
           )}
           {!isLoggedin && (
             <div className={styles.linkHolder}>
-              <div className={styles.links}>Request a demo</div>
+
+<Popup modal trigger={   <div className={styles.links}>Request a demo</div>}>
+       <div style={{color:"#000"}}>
+       Modal Content
+         </div> 
+      </Popup>
+           
               <div className={styles.links}>
                 <a
                   href="tel:9999999999"

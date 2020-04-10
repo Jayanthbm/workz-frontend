@@ -38,12 +38,12 @@ import {
       };
     }
     
-    export function getTeam() {
+    export function getTeam(userId) {
    
       return async dispatch => {
         dispatch(getTeamRequest());
         try {
-          let url = `teams`;
+          let url = `manager/${userId}`;
           const result = await get(url);
           const resultJson = await result.data;
           if (resultJson.message) {

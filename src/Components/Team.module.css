@@ -23,7 +23,33 @@ position: relative;
 .counryUsers:last-child{
     padding-right: calc(100% - 110px);
 }
+.usersContainer{
+    display: flex;
+}
+.break{
+    content: "";
+    display: block;
+    margin-bottom: -4px;
+}
+.Holder{
+    display: flex;
 
+}
+.summaryBase{
+    border:1px solid #000;
+    height:125px;
+    margin-top: 15px;
+}
+.summaryHeader{
+    height: 30px;
+    background-color: #ffe4c4;
+}
+.summaryContainer{
+    padding: 10px;
+}
+.valCont{
+    display: flex;
+}
 @media only screen and (min-width: 1236px) {
     .onlineleft {
         background: url("../images/onlineleft.png");

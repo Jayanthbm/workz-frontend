@@ -5,6 +5,7 @@ class Navigation extends Component {
 
   };
   render() {
+    console.log(this.props)
     return (
       <div className={styles.base}>
         <div className={styles.container}>
@@ -21,9 +22,9 @@ class Navigation extends Component {
                   this.props.selectHandler(val.target.value);
                 }}
               >
-                {this.props.team &&
-                  this.props.team.teams.map(val => {
-                    return <option value={val.teamId}>{val.name}</option>;
+                {this.props && this.props.team &&
+                  this.props.team.map(val => {
+                    return <option value={val.id}>{val.name}</option>;
                   })}
               </select>
             </div>

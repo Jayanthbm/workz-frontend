@@ -13,14 +13,16 @@ class Login extends Component {
     this.state = {
       uname: "",
       password: "",
-      loginError: ""
+      loginError: "",
+      companyname:""
     };
   }
   handleChange = val => {
-    this.setState({ uname: val.target.value });
+    this.setState({ companyname: val.target.value });
   };
   handleClick = () => {
     const reqBody = {
+      companyname:this.state.companyname,
       username: this.state.uname,
       password: this.state.password
     };
@@ -63,14 +65,14 @@ class Login extends Component {
           <label>Company Name:</label>
           <input
             type="text"
-            value={this.state.uname}
+            value={this.state.companyname}
             onChange={event => this.handleChange(event)}
           ></input>
             <label>Employee ID:</label>
           <input
             type="text"
-            value={this.state.employeeId}
-            onChange={val => this.setState({ employeeId: val.target.value })}
+            value={this.state.uname}
+            onChange={val => this.setState({ uname: val.target.value })}
           ></input>
           <label>Password:</label>
           <input

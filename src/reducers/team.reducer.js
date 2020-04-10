@@ -19,6 +19,7 @@ const team = (
             });
       
           case teamAction.GET_TEAM_SUCCESS:
+            console.log(action.teamDetails)
             return Object.assign({}, state, {
               status: action.status,
               loading: false,
