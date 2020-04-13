@@ -12,19 +12,19 @@ class Form extends Component {
       desc: "",
     };
   }
-  componentDidMount(){
-    if(this.props.location.state===undefined){
+  componentDidMount() {
+    if (this.props.location.state === undefined) {
       this.props.history.push("/");
     }
   }
-  handleClick=()=>{
+  handleClick = () => {
     const reqBody = {
-      name:this.state.name,
-      companyName:this.state.cname,
+      name: this.state.name,
+      companyName: this.state.cname,
       phone: this.state.phone,
       email: this.state.email,
-      description:this.state.desc,
-      typeRequest: this.props.location.state.type
+      description: this.state.desc,
+      typeRequest: this.props.location.state.type,
     };
     if (this.props.postForm) {
       this.props.postForm(reqBody);
@@ -33,20 +33,26 @@ class Form extends Component {
         cname: "",
         phone: "",
         email: "",
-        desc: ""
-      })
+        desc: "",
+      });
     }
-  }
+  };
   render() {
     console.log(this.props);
     return (
       <div className={styles.base}>
         <HeaderContainer></HeaderContainer>
         <div className={styles.formContainer}>
-    <div className={styles.formHeader}>{this.props.location.state && this.props.location.state.type==="Demo"? "Request a Demo" : "Support" }</div>
+          <div className={styles.formHeader}>
+            {this.props.location.state &&
+            this.props.location.state.type === "Demo"
+              ? "Request a Demo"
+              : "Support"}
+          </div>
           <div className={styles.fieldContainer}>
             <label>Name:</label>
             <input
+              className={styles.formInput}
               type="text"
               value={this.state.name}
               onChange={(val) => {
@@ -56,6 +62,7 @@ class Form extends Component {
             <label>Company Name:</label>
             <input
               type="text"
+              className={styles.formInput}
               value={this.state.cname}
               onChange={(val) => {
                 this.setState({ cname: val.target.value });
@@ -64,6 +71,7 @@ class Form extends Component {
             <label>Phone:</label>
             <input
               type="text"
+              className={styles.formInput}
               value={this.state.phone}
               onChange={(val) => {
                 this.setState({ phone: val.target.value });
@@ -72,29 +80,49 @@ class Form extends Component {
             <label>Email:</label>
             <input
               type="email"
+              className={styles.formInput}
               value={this.state.email}
               onChange={(val) => {
                 this.setState({ email: val.target.value });
               }}
             ></input>
-               { this.props.location.state && this.props.location.state.type==="Demo" && <><label>Requirement Description:</label>
-            <textarea
-              value={this.state.desc}
-              onChange={(val) => {
-                this.setState({ desc: val.target.value });
-              }}
-            ></textarea></>}
-            
-          { this.props.location.state && this.props.location.state.type==="Support" && <><label>Issue Description:</label>
-            <textarea
-              value={this.state.desc}
-              onChange={(val) => {
-                this.setState({ desc: val.target.value });
-              }}
-            ></textarea></>}
+            {this.props.location.state &&
+              this.props.location.state.type === "Demo" && (
+                <>
+                  <label>Requirement Description:</label>
+                  <textarea
+                    className={styles.formInput}
+                    value={this.state.desc}
+                    onChange={(val) => {
+                      this.setState({ desc: val.target.value });
+                    }}
+                  ></textarea>
+                </>
+              )}
+
+            {this.props.location.state &&
+              this.props.location.state.type === "Support" && (
+                <>
+                  <label>Issue Description:</label>
+                  <textarea
+                    className={styles.formInput}
+                    value={this.state.desc}
+                    onChange={(val) => {
+                      this.setState({ desc: val.target.value });
+                    }}
+                  ></textarea>
+                </>
+              )}
 
             <button onClick={this.handleClick}> Submit </button>
-            <button onClick={()=>{this.props.history.push("/")}}> Back to login </button>
+            <button
+              onClick={() => {
+                this.props.history.push("/");
+              }}
+            >
+              {" "}
+              Back to login{" "}
+            </button>
             {/* {this.state.loginError && (
             <div className={styles.error}>{this.state.loginError}</div>
           )} */}
