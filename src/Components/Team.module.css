@@ -10,7 +10,7 @@
   justify-content: center;
   position: relative;
   flex-wrap: wrap;
-  padding-top: 60px;
+  /* padding-top: 60px; */
 }
 .countryContainer {
   width: 100%;
@@ -142,88 +142,93 @@
 }
 .usrContainer {
   padding: 20px;
+  width: 250px;
+  margin: auto;
+  margin-top: 0;
+}
+/* 
+@media only screen and (min-width: 1236px) { */
+.onlineleft {
+  background: url("../images/Work_Stations_Left-Active.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  height: 120px;
+  width: 100px;
+  display: inline-block;
 }
 
-@media only screen and (min-width: 1236px) {
-  .onlineleft {
-    background: url("../images/Work_Stations_Left-Active.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-position: center;
-    height: 120px;
-    width: 100px;
-    display: inline-block;
-  }
+.onlineright {
+  background: url("../images/Work_Stations_Right-Active.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  height: 120px;
+  width: 100px;
 
-  .onlineright {
-    background: url("../images/Work_Stations_Right-Active.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-position: center;
-    height: 120px;
-    width: 100px;
-
-    display: inline-block;
-  }
-
-  .offlineleft {
-    background: url("../images/Work_Stations_Left-Absent.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-position: center;
-    height: 120px;
-    width: 100px;
-    display: inline-block;
-  }
-  .onlineBottom {
-    composes: onlineleft;
-    transform: rotate(90deg);
-    width: 120px;
-    height: 160px;
-  }
-  .offlineBottom {
-    composes: offlineleft;
-    transform: rotate(90deg);
-    width: 120px;
-    height: 160px;
-  }
-  .offlineright {
-    background: url("../images/Work_Stations_Right-Absent.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-position: center;
-    height: 120px;
-    width: 100px;
-    display: inline-block;
-  }
-  .inactiveLeft {
-    background: url("../images/Work_Stations_Left-Inactive.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-position: center;
-    height: 120px;
-    width: 100px;
-    display: inline-block;
-  }
-
-  .inactiveRight {
-    background: url("../images/Work_Stations_Right-Inactive.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-position: center;
-    height: 120px;
-    width: 100px;
-    display: inline-block;
-  }
-
-  .abc {
-    height: 70px;
-    width: 53px;
-    margin-bottom: 15%;
-  }
+  display: inline-block;
 }
 
-@media only screen and (max-width: 1235px) and (min-width: 1152px) {
+.offlineleft {
+  background: url("../images/Work_Stations_Left-Absent.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  height: 120px;
+  width: 100px;
+  display: inline-block;
+}
+.onlineBottom {
+  composes: onlineleft;
+  transform: rotate(90deg);
+  width: 120px;
+  height: 160px;
+}
+.offlineBottom {
+  composes: offlineleft;
+  transform: rotate(90deg);
+  width: 120px;
+  height: 160px;
+}
+.offlineright {
+  background: url("../images/Work_Stations_Right-Absent.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  height: 120px;
+  width: 100px;
+  display: inline-block;
+}
+.inactiveLeft {
+  background: url("../images/Work_Stations_Left-Inactive.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  height: 120px;
+  width: 100px;
+  display: inline-block;
+}
+
+.inactiveRight {
+  background: url("../images/Work_Stations_Right-Inactive.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  height: 120px;
+  width: 100px;
+  display: inline-block;
+}
+.manUserContainer {
+  display: flex;
+}
+.abc {
+  height: 70px;
+  width: 53px;
+  margin-bottom: 15%;
+}
+/* } */
+
+/* @media only screen and (max-width: 1235px) and (min-width: 1152px) {
   .onlineleft {
     background: url("../images/onlineleft.png");
     background-repeat: no-repeat;
@@ -281,9 +286,9 @@
     width: 47px;
     margin-bottom: 15%;
   }
-}
+} */
 
-@media only screen and (max-width: 1151px) {
+/* @media only screen and (max-width: 1151px) {
   .onlineleft {
     background: url("../images/onlineleft.png");
     background-repeat: no-repeat;
@@ -329,7 +334,7 @@
     width: 40px;
     margin-bottom: 15%;
   }
-}
+} */
 
 .pp-left {
   height: 30px;
