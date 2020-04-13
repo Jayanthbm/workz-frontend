@@ -15,7 +15,7 @@ class Navigation extends Component {
                 <select
                   style={{
                     width: " 250px",
-                    borderRadius: "7px",
+                    height: "22px",
                   }}
                   onChange={(val) => {
                     this.props.selectHandler(val.target.value);
