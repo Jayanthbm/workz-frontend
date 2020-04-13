@@ -33,6 +33,7 @@
   border-radius: 8px;
   border: 1px solid #ebecec;
 }
+
 .seatHolder {
   display: inline-block;
   justify-content: center;
@@ -87,7 +88,6 @@
 .break {
   content: "";
   display: block;
-  margin-bottom: -4px;
 }
 .Holder {
   display: flex;
@@ -131,7 +131,7 @@
 .header16 {
   font-size: 18px;
   font-weight: bold;
-  color: #555;
+  color: #797979;
   padding-bottom: 10px;
 }
 .managerContainer {
