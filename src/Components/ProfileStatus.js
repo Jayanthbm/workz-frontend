@@ -7,16 +7,16 @@ class ProfileStatus extends Component {
       <div style={{ position: "relative" }}>
         <img
           src={profileImage}
-          height="35px"
-          width="35px"
+          height={"40px"}
+          width={"40px"}
           style={{
             position: "absolute",
             left: this.props.left,
             right: this.props.right,
-            top: this.props.top
+            top: this.props.top,
           }}
         />
-{this.props.offline && this.props.leftSide && (
+        {this.props.offline && this.props.leftSide && (
           <div className={styles.offlineStatus}> </div>
         )}
         {this.props.offline && this.props.rightSide && (

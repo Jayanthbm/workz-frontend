@@ -4,7 +4,7 @@
   left: 25px;
   height: 10px;
   width: 10px;
-  background-color: grey;
+  background-color: #cecece;
   border-radius: 100%;
 }
 .offlineStatusright {
@@ -13,7 +13,7 @@
   right: 0;
   height: 10px;
   width: 10px;
-  background-color: grey;
+  background-color: #cecece;
   border-radius: 100%;
 }
 
@@ -23,7 +23,7 @@
   left: 25px;
   height: 10px;
   width: 10px;
-  background-color: green;
+  background-color: #8bc646;
   border-radius: 100%;
 }
 .onlineStatusright {
@@ -32,7 +32,7 @@
   right: 0;
   height: 10px;
   width: 10px;
-  background-color: green;
+  background-color: #8bc646;
   border-radius: 100%;
 }
 .passiveStatus {
@@ -41,7 +41,7 @@
   left: 25px;
   height: 10px;
   width: 10px;
-  background-color: yellow;
+  background-color: #efc165;
   border-radius: 100%;
 }
 .passiveStatusright {
@@ -50,6 +50,6 @@
   right: 0;
   height: 10px;
   width: 10px;
-  background-color: yellow;
+  background-color: #efc165;
   border-radius: 100%;
 }
