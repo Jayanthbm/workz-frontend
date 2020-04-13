@@ -51,7 +51,7 @@ class Team extends Component {
       this.props.history.push("/reset");
     } else {
       if (this.props.getTeam) {
-        if (parsedData.isManager === 0) {
+        if (parsedData.isManager && parsedData.isManager === 0) {
           this.props.getTeam(parsedData.userId);
         } else this.props.getTeam(parsedData.dropdown[0].id);
       }

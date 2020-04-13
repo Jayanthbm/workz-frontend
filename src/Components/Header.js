@@ -3,6 +3,10 @@ import styles from "./Header.module.css";
 import Popup from "reactjs-popup";
 import image from "../images/Profile-Fill-grey2.svg";
 import * as Cookie from "../utils/Cookie";
+import Demo from "../images/Icon_Request-a-Demo.png";
+import settings from "../images/Icon_Support.png";
+import call from "../images/Icon_Call.png";
+import wf from "../images/wf.png";
 import { USER_DETAILS, ACCESS_TOKEN } from "../utils/constant";
 
 const links = [
@@ -20,12 +24,14 @@ class Header extends Component {
     window.location.reload();
   };
   render() {
-    console.log(this.props)
+    console.log(this.props);
     const isLoggedin = Cookie.getCookie(USER_DETAILS) ? true : false;
     return (
       <div className={styles.headerBase}>
         <div className={styles.container}>
-          <div className={styles.logoHolder}>WorkforceZ</div>
+          <div className={styles.logoHolder}>
+            <img src={wf} height="35px" />
+          </div>
           {isLoggedin && (
             <div className={styles.linkHolder}>
               {links &&
@@ -54,22 +60,48 @@ class Header extends Component {
               >
                 <Request />
               </Popup> */}
-<div className={styles.links} onClick={()=>{this.props.history.push({pathname:"/form",
-state:{type:"Demo"}})}}> Request a demo</div>
+
+              <div
+                className={styles.links}
+                onClick={() => {
+                  this.props.history.push({
+                    pathname: "/form",
+                    state: { type: "Demo" },
+                  });
+                }}
+              >
+                <div className={styles.icon}>
+                  <img src={Demo} height="20px" width="25px" />
+                </div>{" "}
+                <div> Request a demo</div>
+              </div>
               <div className={styles.links}>
                 {/* <a
                   href="tel:9999999999"
                   style={{ textDecoration: "none", color: " #fff" }}
                 > */}
-                  Call 99999 99999
+                <div className={styles.icon}>
+                  <img src={call} height="20px" width="25px" />
+                </div>
+                <div> Call 99999 99999</div>
                 {/* </a> */}
               </div>
-              <div className={styles.links} onClick={()=>{this.props.history.push({
-  pathname:"/form",
-  state:{
-    type:"Support"
-  }
-})}}>Support</div>
+              <div
+                className={styles.links}
+                onClick={() => {
+                  this.props.history.push({
+                    pathname: "/form",
+                    state: {
+                      type: "Support",
+                    },
+                  });
+                }}
+              >
+                <div className={styles.icon}>
+                  <img src={settings} height="20px" width="25px" />
+                </div>
+                <div>Support</div>
+              </div>
             </div>
           )}
         </div>
