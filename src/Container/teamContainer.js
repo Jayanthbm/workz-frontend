@@ -1,22 +1,23 @@
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { getTeam,getTeamUser } from "../actions/team.action";
+import { getTeam, getTeamUser } from "../actions/team.action";
 import Team from "../Components/Team";
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     getTeam: (userId) => {
       dispatch(getTeam(userId));
     },
-    getTeamUser:teamId=>{
-        dispatch(getTeamUser(teamId));
-    }
+    getTeamUser: (teamId) => {
+      dispatch(getTeamUser(teamId));
+    },
   };
 };
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     teamDetails: state.team.teamDetails && state.team.teamDetails,
     // teamUserDetails:state.team.teamUserDetails,
-     teamError: state.team
+    teamError: state.team,
+    teamUserDetails: state.team.teamUserDetails,
   };
 };
 const teamContainer = withRouter(

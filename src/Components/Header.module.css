@@ -11,6 +11,7 @@
 .logoHolder {
   padding-top: 10px;
   color: #fff;
+  cursor: pointer;
   padding-left: 20px;
   font-size: larger;
   font-weight: bold;

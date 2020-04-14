@@ -6,7 +6,7 @@ import offlineseat from "../images/offlineseat.png";
 import leftoffline from "../images/left-offline-cp.png";
 import leftonline from "../images/left-online-cp.png";
 import styles from "./Team.module.css";
-import Header from "./Header";
+import Header from "../Container/HeaderContainer";
 import Navigation from "./Navigation";
 import ProfileStatus from "./ProfileStatus";
 import * as Cookie from "../utils/Cookie";
@@ -51,14 +51,25 @@ class Team extends Component {
       this.props.history.push("/reset");
     } else {
       if (this.props.getTeam) {
-        if (parsedData.isManager && parsedData.isManager === 0) {
+        if (parsedData && parsedData.isManager === 0) {
+          console.log("ssjd");
           this.props.getTeam(parsedData.userId);
-        } else this.props.getTeam(parsedData.dropdown[0].id);
+        } else {
+          this.props.getTeam(
+            parsedData.dropdown && parsedData.dropdown[0].id === 0
+              ? parsedData.userId
+              : parsedData.dropdown[0].id
+          );
+        }
       }
     }
   }
   selectHandler = (val) => {
-    this.props.getTeam(val);
+    if (val === "0") {
+      this.props.getTeam(parsedData.userId);
+    } else {
+      this.props.getTeamUser(val);
+    }
   };
 
   componentWillReceiveProps(nextProps) {
@@ -96,7 +107,6 @@ class Team extends Component {
             <div className={styles.usersContainer}>
               {this.props &&
                 this.props.teamDetails &&
-                !this.props.teamDetails.teamusers &&
                 this.props.teamDetails.map((val, i) => {
                   return (
                     <div className={styles.countryHolder}>
@@ -112,7 +122,11 @@ class Team extends Component {
                                       {man.onlineStatus === "offline" && (
                                         <span className={styles.seatHolder}>
                                           <span className={styles.tooltiptext}>
-                                            {man.firstname}
+                                            {"Name:" +
+                                              man.name +
+                                              "\n" +
+                                              "email:" +
+                                              man.emailId}
                                           </span>
 
                                           <span>
@@ -133,7 +147,11 @@ class Team extends Component {
                                       {man.onlineStatus === "active" && (
                                         <span className={styles.seatHolder}>
                                           <span className={styles.tooltiptext}>
-                                            {man.firstname}
+                                            {"Name:" +
+                                              man.name +
+                                              "\n" +
+                                              "email:" +
+                                              man.emailId}
                                           </span>
 
                                           <span>
@@ -157,18 +175,25 @@ class Team extends Component {
                                             <span
                                               className={styles.tooltiptext}
                                             >
-                                              {man.firstname}
+                                              {"Name:" +
+                                                man.name +
+                                                "\n" +
+                                                "email:" +
+                                                man.emailId}
                                             </span>
                                             {i % 2 > 0 && (
                                               <span>
                                                 <ProfileStatus
                                                   right={0}
+                                                  top={27}
+                                                  height={50}
+                                                  width={50}
                                                   passive={true}
                                                   rightSide={true}
                                                 />
                                                 <div
                                                   className={
-                                                    styles.inactiveRight
+                                                    styles.inactiveBottom
                                                   }
                                                 ></div>
                                               </span>
@@ -176,13 +201,16 @@ class Team extends Component {
                                             {i % 2 < 1 && (
                                               <span>
                                                 <ProfileStatus
-                                                  left={0}
+                                                  right={0}
+                                                  top={27}
+                                                  height={50}
+                                                  width={50}
                                                   passive={true}
-                                                  leftSide={true}
+                                                  rightSide={true}
                                                 />
                                                 <div
                                                   className={
-                                                    styles.inactiveLeft
+                                                    styles.inactiveBottom
                                                   }
                                                 ></div>
                                               </span>
@@ -198,173 +226,192 @@ class Team extends Component {
                                 );
                               })}
                             </div>
-                            {val.summary.map((sum) => {
+                            {val.summary &&
+                              val.summary.map((sum) => {
+                                return (
+                                  <div className={styles.summaryBase}>
+                                    <div
+                                      className={styles.summaryHeader}
+                                      style={{
+                                        backgroundColor:
+                                          sum.active > sum.offline &&
+                                          sum.active > sum.inactive
+                                            ? "#8BC646"
+                                            : sum.inactive > sum.offline &&
+                                              sum.inactive > sum.active
+                                            ? "EFC165"
+                                            : sum.offline > sum.active &&
+                                              sum.offline > sum.inactive &&
+                                              "#CECECE",
+                                      }}
+                                    >
+                                      {sum.team}
+                                    </div>
+                                    <div className={styles.summaryContainer}>
+                                      <div className={styles.valCont}>
+                                        <div className={styles.lable}>
+                                          Total Employees
+                                        </div>
+                                        <div className={styles.value}>
+                                          {sum.total_employees}
+                                        </div>
+                                      </div>
+                                      <div className={styles.valCont}>
+                                        <div className={styles.lable}>
+                                          Active
+                                        </div>
+                                        <div className={styles.value}>
+                                          {sum.active}
+                                        </div>
+                                      </div>
+                                      <div className={styles.valCont}>
+                                        <div className={styles.lable}>
+                                          InActive
+                                        </div>
+                                        <div className={styles.value}>
+                                          {sum.inactive}
+                                        </div>
+                                      </div>
+                                      <div className={styles.valCont}>
+                                        <div className={styles.lable}>
+                                          Offline
+                                        </div>
+                                        <div className={styles.value}>
+                                          {sum.offline}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                          </div>
+                        )}
+                        {val.users && val.users.length > 0 && (
+                          <div className={styles.usrContainer}>
+                            {/* {val.users && val.users.length > 0 && (
+                            <div>Users</div>
+                          )} */}
+                            {val.users.map((val, i) => {
                               return (
-                                <div className={styles.summaryBase}>
-                                  <div
-                                    className={styles.summaryHeader}
-                                    style={{
-                                      backgroundColor:
-                                        sum.active > sum.offline &&
-                                        sum.active > sum.inactive
-                                          ? "#8BC646"
-                                          : sum.inactive > sum.offline &&
-                                            sum.inactive > sum.active
-                                          ? "EFC165"
-                                          : sum.offline > sum.active &&
-                                            sum.offline > sum.inactive &&
-                                            "#CECECE",
-                                    }}
-                                  >
-                                    {sum.team}
-                                  </div>
-                                  <div className={styles.summaryContainer}>
-                                    <div className={styles.valCont}>
-                                      <div className={styles.lable}>
-                                        Total Employees
-                                      </div>
-                                      <div className={styles.value}>
-                                        {sum.total_employees}
-                                      </div>
-                                    </div>
-                                    <div className={styles.valCont}>
-                                      <div className={styles.lable}>Active</div>
-                                      <div className={styles.value}>
-                                        {sum.active}
-                                      </div>
-                                    </div>
-                                    <div className={styles.valCont}>
-                                      <div className={styles.lable}>
-                                        InActive
-                                      </div>
-                                      <div className={styles.value}>
-                                        {sum.inactive}
-                                      </div>
-                                    </div>
-                                    <div className={styles.valCont}>
-                                      <div className={styles.lable}>
-                                        Offline
-                                      </div>
-                                      <div className={styles.value}>
-                                        {sum.offline}
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
+                                <>
+                                  <span className={styles.countrUsers}>
+                                    {val.onlineStatus === "offline" && (
+                                      <span className={styles.seatHolder}>
+                                        <span className={styles.tooltiptext}>
+                                          {"Name:" +
+                                            val.name +
+                                            "\n" +
+                                            "email:" +
+                                            val.emailId}
+                                        </span>
+                                        {i % 2 > 0 && (
+                                          <span>
+                                            <ProfileStatus
+                                              right={0}
+                                              rightSide={true}
+                                              offline={true}
+                                            />
+                                            <div
+                                              className={styles.offlineright}
+                                            ></div>
+                                          </span>
+                                        )}
+                                        {i % 2 < 1 && (
+                                          <span>
+                                            <ProfileStatus
+                                              left={0}
+                                              leftSide={true}
+                                              offline={true}
+                                            />
+
+                                            <div
+                                              className={styles.offlineleft}
+                                            ></div>
+                                          </span>
+                                        )}
+                                      </span>
+                                    )}
+                                    {val.onlineStatus === "active" && (
+                                      <span className={styles.seatHolder}>
+                                        <span className={styles.tooltiptext}>
+                                          {"Name:" +
+                                            val.name +
+                                            "\n" +
+                                            "email:" +
+                                            val.emailId}
+                                        </span>
+                                        {i % 2 > 0 && (
+                                          <span>
+                                            <ProfileStatus
+                                              right={0}
+                                              active={true}
+                                              rightSide={true}
+                                            />
+                                            <div
+                                              className={styles.onlineright}
+                                            ></div>
+                                          </span>
+                                        )}
+                                        {i % 2 < 1 && (
+                                          <span>
+                                            <ProfileStatus
+                                              left={0}
+                                              active={true}
+                                              leftSide={true}
+                                            />
+
+                                            <div
+                                              className={styles.onlineleft}
+                                            ></div>
+                                          </span>
+                                        )}
+                                      </span>
+                                    )}
+                                    {val.onlineStatus === "passive" && (
+                                      <span className={styles.seatHolder}>
+                                        <span className={styles.tooltiptext}>
+                                          {"Name:" +
+                                            val.name +
+                                            "\n" +
+                                            "email:" +
+                                            val.emailId}
+                                        </span>
+                                        {i % 2 > 0 && (
+                                          <span>
+                                            <ProfileStatus
+                                              right={0}
+                                              passive={true}
+                                              rightSide={true}
+                                            />
+                                            <div
+                                              className={styles.inactiveRight}
+                                            ></div>
+                                          </span>
+                                        )}
+                                        {i % 2 < 1 && (
+                                          <span>
+                                            <ProfileStatus
+                                              left={0}
+                                              passive={true}
+                                              leftSide={true}
+                                            />
+
+                                            <div
+                                              className={styles.inactiveLeft}
+                                            ></div>
+                                          </span>
+                                        )}
+                                      </span>
+                                    )}
+                                  </span>
+                                  {i % 2 > 0 && (
+                                    <div className={styles.break} />
+                                  )}
+                                </>
                               );
                             })}
                           </div>
                         )}
-                        <div className={styles.usrContainer}>
-                          {/* {val.users && val.users.length > 0 && (
-                            <div>Users</div>
-                          )} */}
-                          {val.users.map((val, i) => {
-                            return (
-                              <>
-                                <span className={styles.countrUsers}>
-                                  {val.onlineStatus === "offline" && (
-                                    <span className={styles.seatHolder}>
-                                      <span className={styles.tooltiptext}>
-                                        {val.firstname}
-                                      </span>
-                                      {i % 2 > 0 && (
-                                        <span>
-                                          <ProfileStatus
-                                            right={0}
-                                            rightSide={true}
-                                            offline={true}
-                                          />
-                                          <div
-                                            className={styles.offlineright}
-                                          ></div>
-                                        </span>
-                                      )}
-                                      {i % 2 < 1 && (
-                                        <span>
-                                          <ProfileStatus
-                                            left={0}
-                                            leftSide={true}
-                                            offline={true}
-                                          />
-
-                                          <div
-                                            className={styles.offlineleft}
-                                          ></div>
-                                        </span>
-                                      )}
-                                    </span>
-                                  )}
-                                  {val.onlineStatus === "active" && (
-                                    <span className={styles.seatHolder}>
-                                      <span className={styles.tooltiptext}>
-                                        {val.firstname}
-                                      </span>
-                                      {i % 2 > 0 && (
-                                        <span>
-                                          <ProfileStatus
-                                            right={0}
-                                            active={true}
-                                            rightSide={true}
-                                          />
-                                          <div
-                                            className={styles.onlineright}
-                                          ></div>
-                                        </span>
-                                      )}
-                                      {i % 2 < 1 && (
-                                        <span>
-                                          <ProfileStatus
-                                            left={0}
-                                            active={true}
-                                            leftSide={true}
-                                          />
-
-                                          <div
-                                            className={styles.onlineleft}
-                                          ></div>
-                                        </span>
-                                      )}
-                                    </span>
-                                  )}
-                                  {val.onlineStatus === "passive" && (
-                                    <span className={styles.seatHolder}>
-                                      <span className={styles.tooltiptext}>
-                                        {val.firstname}
-                                      </span>
-                                      {i % 2 > 0 && (
-                                        <span>
-                                          <ProfileStatus
-                                            right={0}
-                                            passive={true}
-                                            rightSide={true}
-                                          />
-                                          <div
-                                            className={styles.inactiveRight}
-                                          ></div>
-                                        </span>
-                                      )}
-                                      {i % 2 < 1 && (
-                                        <span>
-                                          <ProfileStatus
-                                            left={0}
-                                            passive={true}
-                                            leftSide={true}
-                                          />
-
-                                          <div
-                                            className={styles.inactiveLeft}
-                                          ></div>
-                                        </span>
-                                      )}
-                                    </span>
-                                  )}
-                                </span>
-                                {i % 2 > 0 && <div className={styles.break} />}
-                              </>
-                            );
-                          })}
-                        </div>
                       </div>
                     </div>
                   );

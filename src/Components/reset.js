@@ -42,18 +42,21 @@ class reset extends Component {
   }
   render() {
     return (
-      <div>
+      <div className={styles.base}>
         <div className={styles.loginContainer}>
           <div className={styles.fieldContainer}>
-            <label>Reset Password:</label>
             <input
               className={styles.resetInput}
               type="text"
+              placeholder="Reset Password"
               value={this.state.password}
               onChange={(event) => this.handleChange(event)}
             ></input>
 
-            <button onClick={this.handleClick}> Reset Password </button>
+            <button className={styles.resetButton} onClick={this.handleClick}>
+              {" "}
+              Reset Password{" "}
+            </button>
             {this.state.resetError && (
               <div className={styles.error}>{this.state.resetError}</div>
             )}

@@ -50,36 +50,40 @@ class Form extends Component {
               : "Support"}
           </div>
           <div className={styles.fieldContainer}>
-            <label>Name:</label>
+            {/* <label>Name:</label> */}
             <input
               className={styles.formInput}
               type="text"
+              placeholder="Name"
               value={this.state.name}
               onChange={(val) => {
                 this.setState({ name: val.target.value });
               }}
             ></input>
-            <label>Company Name:</label>
+            {/* <label>Company Name:</label> */}
             <input
               type="text"
+              placeholder="Company Name"
               className={styles.formInput}
               value={this.state.cname}
               onChange={(val) => {
                 this.setState({ cname: val.target.value });
               }}
             ></input>
-            <label>Phone:</label>
+            {/* <label>Phone:</label> */}
             <input
               type="text"
+              placeholder="Phone"
               className={styles.formInput}
               value={this.state.phone}
               onChange={(val) => {
                 this.setState({ phone: val.target.value });
               }}
             ></input>
-            <label>Email:</label>
+            {/* <label>Email:</label> */}
             <input
               type="email"
+              placeholder="Email"
               className={styles.formInput}
               value={this.state.email}
               onChange={(val) => {
@@ -89,9 +93,10 @@ class Form extends Component {
             {this.props.location.state &&
               this.props.location.state.type === "Demo" && (
                 <>
-                  <label>Requirement Description:</label>
+                  {/* <label>Requirement Description:</label> */}
                   <textarea
                     className={styles.formInput}
+                    placeholder="Requirement Description"
                     value={this.state.desc}
                     onChange={(val) => {
                       this.setState({ desc: val.target.value });
@@ -103,9 +108,10 @@ class Form extends Component {
             {this.props.location.state &&
               this.props.location.state.type === "Support" && (
                 <>
-                  <label>Issue Description:</label>
+                  {/* <label>Issue Description:</label> */}
                   <textarea
                     className={styles.formInput}
+                    placeholder="Issue Description"
                     value={this.state.desc}
                     onChange={(val) => {
                       this.setState({ desc: val.target.value });
@@ -114,8 +120,12 @@ class Form extends Component {
                 </>
               )}
 
-            <button onClick={this.handleClick}> Submit </button>
+            <button onClick={this.handleClick} className={styles.formButton}>
+              {" "}
+              Submit{" "}
+            </button>
             <button
+              className={styles.formButton}
               onClick={() => {
                 this.props.history.push("/");
               }}

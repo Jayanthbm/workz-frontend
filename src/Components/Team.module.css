@@ -1,5 +1,7 @@
 .base {
   width: 100%;
+  height: auto;
+  min-height: 100vh;
   background-color: #bcbcbc;
 }
 .detailsHolder {
@@ -17,7 +19,9 @@
   max-width: 1200px;
   padding: 20px 10px;
 }
-
+.countrUsers:last-child {
+  margin-right: 110px;
+}
 .countryHolder {
   width: 65%;
   background: #fff;
@@ -44,7 +48,9 @@
 }
 .seatHolder .tooltiptext {
   visibility: hidden;
-  width: 120px;
+  width: auto;
+  padding-left: 10px;
+  padding-right: 10px;
   background-color: #555;
   color: #fff;
   text-align: center;
@@ -53,8 +59,8 @@
   position: absolute;
   z-index: 1;
   /* bottom: 125%; */
-  left: 50%;
-  margin-left: -60px;
+  left: 15%;
+  margin-left: -0px;
   opacity: 0;
   transition: opacity 0.3s;
 }
@@ -72,6 +78,8 @@
 
 .seatHolder:hover .tooltiptext {
   visibility: visible;
+  padding-left: 10px;
+  padding-right: 10px;
   opacity: 1;
 }
 .countryUsers {
@@ -190,6 +198,7 @@
   width: 120px;
   height: 160px;
 }
+
 .offlineright {
   background: url("../images/Work_Stations_Right-Absent.png");
   background-repeat: no-repeat;
@@ -208,7 +217,12 @@
   width: 100px;
   display: inline-block;
 }
-
+.inactiveBottom {
+  composes: inactiveLeft;
+  transform: rotate(90deg);
+  width: 120px;
+  height: 160px;
+}
 .inactiveRight {
   background: url("../images/Work_Stations_Right-Inactive.png");
   background-repeat: no-repeat;

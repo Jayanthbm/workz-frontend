@@ -22,6 +22,7 @@
   padding: 12px 20px;
   font-size: 13px;
   font-weight: 500;
+  color: #fff;
   margin: 8px 0;
   background-color: #377c83;
   display: inline-block;
@@ -51,9 +52,11 @@
   outline: none;
   cursor: pointer;
 }
-
-input[type="submit"]:hover {
-  background-color: #45a049;
+.forgotPassword {
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: bold;
 }
 .error {
   color: #ff6347;

@@ -94,6 +94,14 @@ class Login extends Component {
               <div className={styles.error}>{this.state.loginError}</div>
             )}
           </div>
+          <div
+            className={styles.forgotPassword}
+            onClick={() => {
+              this.props.history.push("/");
+            }}
+          >
+            Forgot Password ?
+          </div>
         </div>
       </div>
     );

@@ -1,3 +1,9 @@
+.base {
+  width: 100%;
+  height: auto;
+  min-height: 100vh;
+  background-image: linear-gradient(#49adf6, #83f9ce);
+}
 .fieldContainer {
   border-radius: 5px;
   /* background-color: #f2f2f2; */
@@ -9,30 +15,41 @@
 .resetInput {
   width: 100%;
   padding: 12px 20px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
   margin: 8px 0;
-  background-color: #f2f2f2;
+  background-color: #377c83;
   display: inline-block;
-  border: 1px solid #000;
-  border-radius: 4px;
+  outline: none;
+  border: 1px solid #377c83;
+  border-radius: 10px;
   box-sizing: border-box;
+}
+.resetInput::placeholder {
+  color: #fff;
+  list-style: height 20em;
+  opacity: 1; /* Firefox */
 }
 .loginContainer {
   width: 100%;
-  margin-top: 25vh;
+  padding-top: 25vh;
 }
 .loginHeader {
   text-align: center;
   font-weight: 900;
 }
-button {
+.resetButton {
   width: 100%;
-  background-color: #282c34;
-  color: white;
+  background-color: #fff;
+  color: #459345;
+  font-weight: bold;
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   font-size: 15px;
+  outline: none;
   cursor: pointer;
 }
 
