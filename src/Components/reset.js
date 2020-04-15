@@ -2,23 +2,33 @@ import React, { Component } from "react";
 import styles from "./reset.module.css";
 import * as Cookie from "../utils/Cookie";
 import { USER_DETAILS, ACCESS_TOKEN } from "../utils/constant";
+import HeaderContainer from "../Container/HeaderContainer";
 class reset extends Component {
   constructor(props) {
     super(props);
     this.state = {
       password: "",
       resetError: "",
+      cpass: "",
     };
   }
   handleChange = (val) => {
     this.setState({ password: val.target.value });
   };
   handleClick = () => {
-    const reqBody = {
-      password: this.state.password,
-    };
-    if (this.props.updatePassword) {
-      this.props.updatePassword(reqBody);
+    if (this.state.password === this.state.cpass) {
+      const reqBody = {
+        password: this.state.password,
+      };
+      if (this.props.updatePassword) {
+        this.props.updatePassword(reqBody);
+      }
+    } else {
+      this.setState({
+        resetError: "Passwords do not match",
+        password: "",
+        cpass: "",
+      });
     }
   };
   componentWillReceiveProps(nextProps) {
@@ -43,16 +53,25 @@ class reset extends Component {
   render() {
     return (
       <div className={styles.base}>
+        <HeaderContainer />
         <div className={styles.loginContainer}>
           <div className={styles.fieldContainer}>
             <input
               className={styles.resetInput}
-              type="text"
+              type="password"
               placeholder="Reset Password"
               value={this.state.password}
               onChange={(event) => this.handleChange(event)}
             ></input>
-
+            <input
+              className={styles.resetInput}
+              type="password"
+              placeholder="Confirm Password"
+              value={this.state.cpass}
+              onChange={(event) => {
+                this.setState({ cpass: event.target.value });
+              }}
+            ></input>
             <button className={styles.resetButton} onClick={this.handleClick}>
               {" "}
               Reset Password{" "}

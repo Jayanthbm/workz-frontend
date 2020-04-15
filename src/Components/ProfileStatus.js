@@ -6,7 +6,7 @@ class ProfileStatus extends Component {
     return (
       <div style={{ position: "relative" }}>
         <img
-          src={profileImage}
+          src={this.props.pic ? this.props.pic : profileImage}
           height={"40px"}
           width={"40px"}
           style={{

@@ -97,7 +97,7 @@ class Team extends Component {
     let parsedData = userDetails && JSON.parse(userDetails);
     return (
       <div className={styles.base}>
-        <Header pic={parsedData && parsedData.pic} />
+        <Header pic={parsedData && parsedData.profilePic} />
         <Navigation
           team={parsedData && parsedData.dropdown}
           selectHandler={this.selectHandler}
@@ -135,6 +135,7 @@ class Team extends Component {
 
                                             <span>
                                               <ProfileStatus
+                                                pic={man[0].profilePic}
                                                 right={0}
                                                 top={27}
                                                 height={50}
@@ -262,6 +263,7 @@ class Team extends Component {
 
                                             <span>
                                               <ProfileStatus
+                                                pic={man[0].profilePic}
                                                 right={0}
                                                 top={27}
                                                 height={50}
@@ -389,6 +391,7 @@ class Team extends Component {
                                             {i % 2 > 0 && (
                                               <span>
                                                 <ProfileStatus
+                                                  pic={man[0].profilePic}
                                                   right={0}
                                                   top={27}
                                                   height={50}
@@ -406,6 +409,7 @@ class Team extends Component {
                                             {i % 2 < 1 && (
                                               <span>
                                                 <ProfileStatus
+                                                  pic={man[0].profilePic}
                                                   right={0}
                                                   top={27}
                                                   height={50}
@@ -611,6 +615,7 @@ class Team extends Component {
                                         {i % 2 > 0 && (
                                           <span>
                                             <ProfileStatus
+                                              pic={val.profilePic}
                                               right={0}
                                               rightSide={true}
                                               offline={true}
@@ -623,6 +628,7 @@ class Team extends Component {
                                         {i % 2 < 1 && (
                                           <span>
                                             <ProfileStatus
+                                              pic={val.profilePic}
                                               left={0}
                                               leftSide={true}
                                               offline={true}
@@ -647,6 +653,7 @@ class Team extends Component {
                                         {i % 2 > 0 && (
                                           <span>
                                             <ProfileStatus
+                                              pic={val.profilePic}
                                               right={0}
                                               active={true}
                                               rightSide={true}
@@ -659,6 +666,7 @@ class Team extends Component {
                                         {i % 2 < 1 && (
                                           <span>
                                             <ProfileStatus
+                                              pic={val.profilePic}
                                               left={0}
                                               active={true}
                                               leftSide={true}
@@ -683,6 +691,7 @@ class Team extends Component {
                                         {i % 2 > 0 && (
                                           <span>
                                             <ProfileStatus
+                                              pic={val.profilePic}
                                               right={0}
                                               passive={true}
                                               rightSide={true}
@@ -695,6 +704,7 @@ class Team extends Component {
                                         {i % 2 < 1 && (
                                           <span>
                                             <ProfileStatus
+                                              pic={val.profilePic}
                                               left={0}
                                               passive={true}
                                               leftSide={true}
