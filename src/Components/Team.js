@@ -56,7 +56,7 @@ class Team extends Component {
           this.props.getTeam(parsedData.userId);
         } else {
           this.props.getTeam(
-            parsedData.dropdown && parsedData.dropdown[0].id === 0
+            parsedData && parsedData.dropdown && parsedData.dropdown[0].id === 0
               ? parsedData.userId
               : parsedData.dropdown[0].id
           );
@@ -116,70 +116,275 @@ class Team extends Component {
                           <div className={styles.managerContainer}>
                             <div className={styles.manUserContainer}>
                               {val.managers.map((man, i) => {
+                                console.log(man);
                                 return (
                                   <div>
                                     <div className={styles.countryUsers}>
-                                      {man.onlineStatus === "offline" && (
-                                        <span className={styles.seatHolder}>
-                                          <span className={styles.tooltiptext}>
-                                            {"Name:" +
-                                              man.name +
-                                              "\n" +
-                                              "email:" +
-                                              man.emailId}
-                                          </span>
+                                      {man[0].onlineStatus === "offline" && (
+                                        <>
+                                          <span className={styles.seatHolder}>
+                                            <span
+                                              className={styles.tooltiptext}
+                                            >
+                                              {"Name:" +
+                                                man[0].name +
+                                                "\n" +
+                                                "email:" +
+                                                man[0].emailId}
+                                            </span>
 
-                                          <span>
-                                            <ProfileStatus
-                                              right={0}
-                                              top={27}
-                                              height={50}
-                                              width={50}
-                                              offline={true}
-                                              rightSide={true}
-                                            />
-                                            <div
-                                              className={styles.offlineBottom}
-                                            ></div>
+                                            <span>
+                                              <ProfileStatus
+                                                right={0}
+                                                top={27}
+                                                height={50}
+                                                width={50}
+                                                offline={true}
+                                                rightSide={true}
+                                              />
+                                              <div
+                                                className={styles.offlineBottom}
+                                              ></div>
+                                            </span>
                                           </span>
-                                        </span>
+                                          {man.length > 1 &&
+                                            man &&
+                                            man[1] &&
+                                            man[1].map((sum) => {
+                                              return (
+                                                <div
+                                                  className={styles.summaryBase}
+                                                >
+                                                  <div
+                                                    className={
+                                                      styles.summaryHeader
+                                                    }
+                                                    style={{
+                                                      backgroundColor:
+                                                        sum.active >
+                                                          sum.offline &&
+                                                        sum.active >
+                                                          sum.inactive
+                                                          ? "#8BC646"
+                                                          : sum.inactive >
+                                                              sum.offline &&
+                                                            sum.inactive >
+                                                              sum.active
+                                                          ? "EFC165"
+                                                          : sum.offline >
+                                                              sum.active &&
+                                                            sum.offline >
+                                                              sum.inactive &&
+                                                            "#CECECE",
+                                                    }}
+                                                  >
+                                                    {sum.team}
+                                                  </div>
+                                                  <div
+                                                    className={
+                                                      styles.summaryContainer
+                                                    }
+                                                  >
+                                                    <div
+                                                      className={styles.valCont}
+                                                    >
+                                                      <div
+                                                        className={styles.lable}
+                                                      >
+                                                        Total Employees
+                                                      </div>
+                                                      <div
+                                                        className={styles.value}
+                                                      >
+                                                        {sum.total_employees}
+                                                      </div>
+                                                    </div>
+                                                    <div
+                                                      className={styles.valCont}
+                                                    >
+                                                      <div
+                                                        className={styles.lable}
+                                                      >
+                                                        Active
+                                                      </div>
+                                                      <div
+                                                        className={styles.value}
+                                                      >
+                                                        {sum.active}
+                                                      </div>
+                                                    </div>
+                                                    <div
+                                                      className={styles.valCont}
+                                                    >
+                                                      <div
+                                                        className={styles.lable}
+                                                      >
+                                                        InActive
+                                                      </div>
+                                                      <div
+                                                        className={styles.value}
+                                                      >
+                                                        {sum.inactive}
+                                                      </div>
+                                                    </div>
+                                                    <div
+                                                      className={styles.valCont}
+                                                    >
+                                                      <div
+                                                        className={styles.lable}
+                                                      >
+                                                        Offline
+                                                      </div>
+                                                      <div
+                                                        className={styles.value}
+                                                      >
+                                                        {sum.offline}
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              );
+                                            })}
+                                        </>
                                       )}
-                                      {man.onlineStatus === "active" && (
-                                        <span className={styles.seatHolder}>
-                                          <span className={styles.tooltiptext}>
-                                            {"Name:" +
-                                              man.name +
-                                              "\n" +
-                                              "email:" +
-                                              man.emailId}
-                                          </span>
+                                      {man[0].onlineStatus === "active" && (
+                                        <>
+                                          <span className={styles.seatHolder}>
+                                            <span
+                                              className={styles.tooltiptext}
+                                            >
+                                              {"Name:" +
+                                                man[0].name +
+                                                "\n" +
+                                                "email:" +
+                                                man[0].emailId}
+                                            </span>
 
-                                          <span>
-                                            <ProfileStatus
-                                              right={0}
-                                              top={27}
-                                              height={50}
-                                              width={50}
-                                              active={true}
-                                              rightSide={true}
-                                            />
-                                            <div
-                                              className={styles.onlineBottom}
-                                            ></div>
+                                            <span>
+                                              <ProfileStatus
+                                                right={0}
+                                                top={27}
+                                                height={50}
+                                                width={50}
+                                                active={true}
+                                                rightSide={true}
+                                              />
+                                              <div
+                                                className={styles.onlineBottom}
+                                              ></div>
+                                            </span>
                                           </span>
-                                        </span>
+                                          {man.length > 1 &&
+                                            man &&
+                                            man[1] &&
+                                            man[1].map((sum) => {
+                                              return (
+                                                <div
+                                                  className={styles.summaryBase}
+                                                >
+                                                  <div
+                                                    className={
+                                                      styles.summaryHeader
+                                                    }
+                                                    style={{
+                                                      backgroundColor:
+                                                        sum.active >
+                                                          sum.offline &&
+                                                        sum.active >
+                                                          sum.inactive
+                                                          ? "#8BC646"
+                                                          : sum.inactive >
+                                                              sum.offline &&
+                                                            sum.inactive >
+                                                              sum.active
+                                                          ? "EFC165"
+                                                          : sum.offline >
+                                                              sum.active &&
+                                                            sum.offline >
+                                                              sum.inactive &&
+                                                            "#CECECE",
+                                                    }}
+                                                  >
+                                                    {sum.team}
+                                                  </div>
+                                                  <div
+                                                    className={
+                                                      styles.summaryContainer
+                                                    }
+                                                  >
+                                                    <div
+                                                      className={styles.valCont}
+                                                    >
+                                                      <div
+                                                        className={styles.lable}
+                                                      >
+                                                        Total Employees
+                                                      </div>
+                                                      <div
+                                                        className={styles.value}
+                                                      >
+                                                        {sum.total_employees}
+                                                      </div>
+                                                    </div>
+                                                    <div
+                                                      className={styles.valCont}
+                                                    >
+                                                      <div
+                                                        className={styles.lable}
+                                                      >
+                                                        Active
+                                                      </div>
+                                                      <div
+                                                        className={styles.value}
+                                                      >
+                                                        {sum.active}
+                                                      </div>
+                                                    </div>
+                                                    <div
+                                                      className={styles.valCont}
+                                                    >
+                                                      <div
+                                                        className={styles.lable}
+                                                      >
+                                                        InActive
+                                                      </div>
+                                                      <div
+                                                        className={styles.value}
+                                                      >
+                                                        {sum.inactive}
+                                                      </div>
+                                                    </div>
+                                                    <div
+                                                      className={styles.valCont}
+                                                    >
+                                                      <div
+                                                        className={styles.lable}
+                                                      >
+                                                        Offline
+                                                      </div>
+                                                      <div
+                                                        className={styles.value}
+                                                      >
+                                                        {sum.offline}
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              );
+                                            })}
+                                        </>
                                       )}
-                                      {man.onlineStatus === "passive" && (
+                                      {man[0].onlineStatus === "passive" && (
                                         <div>
                                           <span className={styles.seatHolder}>
                                             <span
                                               className={styles.tooltiptext}
                                             >
                                               {"Name:" +
-                                                man.name +
+                                                man[0].name +
                                                 "\n" +
                                                 "email:" +
-                                                man.emailId}
+                                                man[0].emailId}
                                             </span>
                                             {i % 2 > 0 && (
                                               <span>
@@ -216,6 +421,105 @@ class Team extends Component {
                                               </span>
                                             )}
                                           </span>
+                                          {man &&
+                                            man.length > 0 &&
+                                            man[1] &&
+                                            man[1].length &&
+                                            man[1].map((sum) => {
+                                              return (
+                                                <div
+                                                  className={styles.summaryBase}
+                                                >
+                                                  <div
+                                                    className={
+                                                      styles.summaryHeader
+                                                    }
+                                                    style={{
+                                                      backgroundColor:
+                                                        sum.active >
+                                                          sum.offline &&
+                                                        sum.active >
+                                                          sum.inactive
+                                                          ? "#8BC646"
+                                                          : sum.inactive >
+                                                              sum.offline &&
+                                                            sum.inactive >
+                                                              sum.active
+                                                          ? "EFC165"
+                                                          : sum.offline >
+                                                              sum.active &&
+                                                            sum.offline >
+                                                              sum.inactive &&
+                                                            "#CECECE",
+                                                    }}
+                                                  >
+                                                    {sum.team}
+                                                  </div>
+                                                  <div
+                                                    className={
+                                                      styles.summaryContainer
+                                                    }
+                                                  >
+                                                    <div
+                                                      className={styles.valCont}
+                                                    >
+                                                      <div
+                                                        className={styles.lable}
+                                                      >
+                                                        Total Employees
+                                                      </div>
+                                                      <div
+                                                        className={styles.value}
+                                                      >
+                                                        {sum.total_employees}
+                                                      </div>
+                                                    </div>
+                                                    <div
+                                                      className={styles.valCont}
+                                                    >
+                                                      <div
+                                                        className={styles.lable}
+                                                      >
+                                                        Active
+                                                      </div>
+                                                      <div
+                                                        className={styles.value}
+                                                      >
+                                                        {sum.active}
+                                                      </div>
+                                                    </div>
+                                                    <div
+                                                      className={styles.valCont}
+                                                    >
+                                                      <div
+                                                        className={styles.lable}
+                                                      >
+                                                        InActive
+                                                      </div>
+                                                      <div
+                                                        className={styles.value}
+                                                      >
+                                                        {sum.inactive}
+                                                      </div>
+                                                    </div>
+                                                    <div
+                                                      className={styles.valCont}
+                                                    >
+                                                      <div
+                                                        className={styles.lable}
+                                                      >
+                                                        Offline
+                                                      </div>
+                                                      <div
+                                                        className={styles.value}
+                                                      >
+                                                        {sum.offline}
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              );
+                                            })}
                                         </div>
                                       )}
                                     </div>
