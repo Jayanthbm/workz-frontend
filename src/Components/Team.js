@@ -93,6 +93,16 @@ class Team extends Component {
   }
   render() {
     console.log(this.props);
+    const users =
+      this.props.teamDetails &&
+      this.props.teamDetails.length === 1 &&
+      this.props.teamDetails[0] &&
+      this.props.teamDetails[0].users &&
+      this.props.teamDetails[0].users.length > 20 &&
+      this.props.teamDetails[0].users.splice(
+        this.props.teamDetails[0].users.length / 2
+      );
+    console.log(users);
     const userDetails = Cookie.getCookie(USER_DETAILS);
     let parsedData = userDetails && JSON.parse(userDetails);
     return (
@@ -594,138 +604,450 @@ class Team extends Component {
                               })}
                           </div>
                         )}
-                        {val.users && val.users.length > 0 && (
-                          <div className={styles.usrContainer}>
-                            {/* {val.users && val.users.length > 0 && (
+                        {console.log(val)}
+
+                        {val.users &&
+                          val.users.length > 0 &&
+                          this.props.teamDetails.length === 1 && (
+                            <>
+                              {users && (
+                                <div className={styles.usrContainer}>
+                                  {/* {val.users && val.users.length > 0 && (
                             <div>Users</div>
                           )} */}
-                            {val.users.map((val, i) => {
-                              return (
-                                <>
-                                  <span className={styles.countrUsers}>
-                                    {val.onlineStatus === "offline" && (
-                                      <span className={styles.seatHolder}>
-                                        <span className={styles.tooltiptext}>
-                                          {"Name:" +
-                                            val.name +
-                                            "\n" +
-                                            "email:" +
-                                            val.emailId}
-                                        </span>
-                                        {i % 2 > 0 && (
-                                          <span>
-                                            <ProfileStatus
-                                              pic={val.profilePic}
-                                              right={0}
-                                              rightSide={true}
-                                              offline={true}
-                                            />
-                                            <div
-                                              className={styles.offlineright}
-                                            ></div>
+
+                                  {users &&
+                                    users.map((val, i) => {
+                                      return (
+                                        <>
+                                          <span className={styles.countrUsers}>
+                                            {val.onlineStatus === "offline" && (
+                                              <span
+                                                className={styles.seatHolder}
+                                              >
+                                                <span
+                                                  className={styles.tooltiptext}
+                                                >
+                                                  {"Name:" +
+                                                    val.name +
+                                                    "\n" +
+                                                    "email:" +
+                                                    val.emailId}
+                                                </span>
+                                                {i % 2 > 0 && (
+                                                  <span>
+                                                    <ProfileStatus
+                                                      pic={val.profilePic}
+                                                      right={0}
+                                                      rightSide={true}
+                                                      offline={true}
+                                                    />
+                                                    <div
+                                                      className={
+                                                        styles.offlineright
+                                                      }
+                                                    ></div>
+                                                  </span>
+                                                )}
+                                                {i % 2 < 1 && (
+                                                  <span>
+                                                    <ProfileStatus
+                                                      pic={val.profilePic}
+                                                      left={0}
+                                                      leftSide={true}
+                                                      offline={true}
+                                                    />
+
+                                                    <div
+                                                      className={
+                                                        styles.offlineleft
+                                                      }
+                                                    ></div>
+                                                  </span>
+                                                )}
+                                              </span>
+                                            )}
+                                            {val.onlineStatus === "active" && (
+                                              <span
+                                                className={styles.seatHolder}
+                                              >
+                                                <span
+                                                  className={styles.tooltiptext}
+                                                >
+                                                  {"Name:" +
+                                                    val.name +
+                                                    "\n" +
+                                                    "email:" +
+                                                    val.emailId}
+                                                </span>
+                                                {i % 2 > 0 && (
+                                                  <span>
+                                                    <ProfileStatus
+                                                      pic={val.profilePic}
+                                                      right={0}
+                                                      active={true}
+                                                      rightSide={true}
+                                                    />
+                                                    <div
+                                                      className={
+                                                        styles.onlineright
+                                                      }
+                                                    ></div>
+                                                  </span>
+                                                )}
+                                                {i % 2 < 1 && (
+                                                  <span>
+                                                    <ProfileStatus
+                                                      pic={val.profilePic}
+                                                      left={0}
+                                                      active={true}
+                                                      leftSide={true}
+                                                    />
+
+                                                    <div
+                                                      className={
+                                                        styles.onlineleft
+                                                      }
+                                                    ></div>
+                                                  </span>
+                                                )}
+                                              </span>
+                                            )}
+                                            {val.onlineStatus === "passive" && (
+                                              <span
+                                                className={styles.seatHolder}
+                                              >
+                                                <span
+                                                  className={styles.tooltiptext}
+                                                >
+                                                  {"Name:" +
+                                                    val.name +
+                                                    "\n" +
+                                                    "email:" +
+                                                    val.emailId}
+                                                </span>
+                                                {i % 2 > 0 && (
+                                                  <span>
+                                                    <ProfileStatus
+                                                      pic={val.profilePic}
+                                                      right={0}
+                                                      passive={true}
+                                                      rightSide={true}
+                                                    />
+                                                    <div
+                                                      className={
+                                                        styles.inactiveRight
+                                                      }
+                                                    ></div>
+                                                  </span>
+                                                )}
+                                                {i % 2 < 1 && (
+                                                  <span>
+                                                    <ProfileStatus
+                                                      pic={val.profilePic}
+                                                      left={0}
+                                                      passive={true}
+                                                      leftSide={true}
+                                                    />
+
+                                                    <div
+                                                      className={
+                                                        styles.inactiveLeft
+                                                      }
+                                                    ></div>
+                                                  </span>
+                                                )}
+                                              </span>
+                                            )}
+                                          </span>
+                                          {i % 2 > 0 && (
+                                            <div className={styles.break} />
+                                          )}
+                                        </>
+                                      );
+                                    })}
+                                </div>
+                              )}
+                              <div className={styles.usrContainer}>
+                                {/* {val.users && val.users.length > 0 && (
+                            <div>Users</div>
+                          )} */}
+
+                                {val.users.map((val, i) => {
+                                  return (
+                                    <>
+                                      <span className={styles.countrUsers}>
+                                        {val.onlineStatus === "offline" && (
+                                          <span className={styles.seatHolder}>
+                                            <span
+                                              className={styles.tooltiptext}
+                                            >
+                                              {"Name:" +
+                                                val.name +
+                                                "\n" +
+                                                "email:" +
+                                                val.emailId}
+                                            </span>
+                                            {i % 2 > 0 && (
+                                              <span>
+                                                <ProfileStatus
+                                                  pic={val.profilePic}
+                                                  right={0}
+                                                  rightSide={true}
+                                                  offline={true}
+                                                />
+                                                <div
+                                                  className={
+                                                    styles.offlineright
+                                                  }
+                                                ></div>
+                                              </span>
+                                            )}
+                                            {i % 2 < 1 && (
+                                              <span>
+                                                <ProfileStatus
+                                                  pic={val.profilePic}
+                                                  left={0}
+                                                  leftSide={true}
+                                                  offline={true}
+                                                />
+
+                                                <div
+                                                  className={styles.offlineleft}
+                                                ></div>
+                                              </span>
+                                            )}
                                           </span>
                                         )}
-                                        {i % 2 < 1 && (
-                                          <span>
-                                            <ProfileStatus
-                                              pic={val.profilePic}
-                                              left={0}
-                                              leftSide={true}
-                                              offline={true}
-                                            />
+                                        {val.onlineStatus === "active" && (
+                                          <span className={styles.seatHolder}>
+                                            <span
+                                              className={styles.tooltiptext}
+                                            >
+                                              {"Name:" +
+                                                val.name +
+                                                "\n" +
+                                                "email:" +
+                                                val.emailId}
+                                            </span>
+                                            {i % 2 > 0 && (
+                                              <span>
+                                                <ProfileStatus
+                                                  pic={val.profilePic}
+                                                  right={0}
+                                                  active={true}
+                                                  rightSide={true}
+                                                />
+                                                <div
+                                                  className={styles.onlineright}
+                                                ></div>
+                                              </span>
+                                            )}
+                                            {i % 2 < 1 && (
+                                              <span>
+                                                <ProfileStatus
+                                                  pic={val.profilePic}
+                                                  left={0}
+                                                  active={true}
+                                                  leftSide={true}
+                                                />
 
-                                            <div
-                                              className={styles.offlineleft}
-                                            ></div>
+                                                <div
+                                                  className={styles.onlineleft}
+                                                ></div>
+                                              </span>
+                                            )}
+                                          </span>
+                                        )}
+                                        {val.onlineStatus === "passive" && (
+                                          <span className={styles.seatHolder}>
+                                            <span
+                                              className={styles.tooltiptext}
+                                            >
+                                              {"Name:" +
+                                                val.name +
+                                                "\n" +
+                                                "email:" +
+                                                val.emailId}
+                                            </span>
+                                            {i % 2 > 0 && (
+                                              <span>
+                                                <ProfileStatus
+                                                  pic={val.profilePic}
+                                                  right={0}
+                                                  passive={true}
+                                                  rightSide={true}
+                                                />
+                                                <div
+                                                  className={
+                                                    styles.inactiveRight
+                                                  }
+                                                ></div>
+                                              </span>
+                                            )}
+                                            {i % 2 < 1 && (
+                                              <span>
+                                                <ProfileStatus
+                                                  pic={val.profilePic}
+                                                  left={0}
+                                                  passive={true}
+                                                  leftSide={true}
+                                                />
+
+                                                <div
+                                                  className={
+                                                    styles.inactiveLeft
+                                                  }
+                                                ></div>
+                                              </span>
+                                            )}
                                           </span>
                                         )}
                                       </span>
-                                    )}
-                                    {val.onlineStatus === "active" && (
-                                      <span className={styles.seatHolder}>
-                                        <span className={styles.tooltiptext}>
-                                          {"Name:" +
-                                            val.name +
-                                            "\n" +
-                                            "email:" +
-                                            val.emailId}
-                                        </span>
-                                        {i % 2 > 0 && (
-                                          <span>
-                                            <ProfileStatus
-                                              pic={val.profilePic}
-                                              right={0}
-                                              active={true}
-                                              rightSide={true}
-                                            />
-                                            <div
-                                              className={styles.onlineright}
-                                            ></div>
-                                          </span>
-                                        )}
-                                        {i % 2 < 1 && (
-                                          <span>
-                                            <ProfileStatus
-                                              pic={val.profilePic}
-                                              left={0}
-                                              active={true}
-                                              leftSide={true}
-                                            />
+                                      {i % 2 > 0 && (
+                                        <div className={styles.break} />
+                                      )}
+                                    </>
+                                  );
+                                })}
+                              </div>
+                            </>
+                          )}
 
-                                            <div
-                                              className={styles.onlineleft}
-                                            ></div>
+                        {val.users &&
+                          val.users.length > 0 &&
+                          this.props.teamDetails.length > 1 && (
+                            <div className={styles.usrContainer}>
+                              {/* {val.users && val.users.length > 0 && (
+                            <div>Users</div>
+                          )} */}
+                              {val.users.map((val, i) => {
+                                return (
+                                  <>
+                                    <span className={styles.countrUsers}>
+                                      {val.onlineStatus === "offline" && (
+                                        <span className={styles.seatHolder}>
+                                          <span className={styles.tooltiptext}>
+                                            {"Name:" +
+                                              val.name +
+                                              "\n" +
+                                              "email:" +
+                                              val.emailId}
                                           </span>
-                                        )}
-                                      </span>
-                                    )}
-                                    {val.onlineStatus === "passive" && (
-                                      <span className={styles.seatHolder}>
-                                        <span className={styles.tooltiptext}>
-                                          {"Name:" +
-                                            val.name +
-                                            "\n" +
-                                            "email:" +
-                                            val.emailId}
-                                        </span>
-                                        {i % 2 > 0 && (
-                                          <span>
-                                            <ProfileStatus
-                                              pic={val.profilePic}
-                                              right={0}
-                                              passive={true}
-                                              rightSide={true}
-                                            />
-                                            <div
-                                              className={styles.inactiveRight}
-                                            ></div>
-                                          </span>
-                                        )}
-                                        {i % 2 < 1 && (
-                                          <span>
-                                            <ProfileStatus
-                                              pic={val.profilePic}
-                                              left={0}
-                                              passive={true}
-                                              leftSide={true}
-                                            />
+                                          {i % 2 > 0 && (
+                                            <span>
+                                              <ProfileStatus
+                                                pic={val.profilePic}
+                                                right={0}
+                                                rightSide={true}
+                                                offline={true}
+                                              />
+                                              <div
+                                                className={styles.offlineright}
+                                              ></div>
+                                            </span>
+                                          )}
+                                          {i % 2 < 1 && (
+                                            <span>
+                                              <ProfileStatus
+                                                pic={val.profilePic}
+                                                left={0}
+                                                leftSide={true}
+                                                offline={true}
+                                              />
 
-                                            <div
-                                              className={styles.inactiveLeft}
-                                            ></div>
+                                              <div
+                                                className={styles.offlineleft}
+                                              ></div>
+                                            </span>
+                                          )}
+                                        </span>
+                                      )}
+                                      {val.onlineStatus === "active" && (
+                                        <span className={styles.seatHolder}>
+                                          <span className={styles.tooltiptext}>
+                                            {"Name:" +
+                                              val.name +
+                                              "\n" +
+                                              "email:" +
+                                              val.emailId}
                                           </span>
-                                        )}
-                                      </span>
+                                          {i % 2 > 0 && (
+                                            <span>
+                                              <ProfileStatus
+                                                pic={val.profilePic}
+                                                right={0}
+                                                active={true}
+                                                rightSide={true}
+                                              />
+                                              <div
+                                                className={styles.onlineright}
+                                              ></div>
+                                            </span>
+                                          )}
+                                          {i % 2 < 1 && (
+                                            <span>
+                                              <ProfileStatus
+                                                pic={val.profilePic}
+                                                left={0}
+                                                active={true}
+                                                leftSide={true}
+                                              />
+
+                                              <div
+                                                className={styles.onlineleft}
+                                              ></div>
+                                            </span>
+                                          )}
+                                        </span>
+                                      )}
+                                      {val.onlineStatus === "passive" && (
+                                        <span className={styles.seatHolder}>
+                                          <span className={styles.tooltiptext}>
+                                            {"Name:" +
+                                              val.name +
+                                              "\n" +
+                                              "email:" +
+                                              val.emailId}
+                                          </span>
+                                          {i % 2 > 0 && (
+                                            <span>
+                                              <ProfileStatus
+                                                pic={val.profilePic}
+                                                right={0}
+                                                passive={true}
+                                                rightSide={true}
+                                              />
+                                              <div
+                                                className={styles.inactiveRight}
+                                              ></div>
+                                            </span>
+                                          )}
+                                          {i % 2 < 1 && (
+                                            <span>
+                                              <ProfileStatus
+                                                pic={val.profilePic}
+                                                left={0}
+                                                passive={true}
+                                                leftSide={true}
+                                              />
+
+                                              <div
+                                                className={styles.inactiveLeft}
+                                              ></div>
+                                            </span>
+                                          )}
+                                        </span>
+                                      )}
+                                    </span>
+                                    {i % 2 > 0 && (
+                                      <div className={styles.break} />
                                     )}
-                                  </span>
-                                  {i % 2 > 0 && (
-                                    <div className={styles.break} />
-                                  )}
-                                </>
-                              );
-                            })}
-                          </div>
-                        )}
+                                  </>
+                                );
+                              })}
+                            </div>
+                          )}
                       </div>
                     </div>
                   );
