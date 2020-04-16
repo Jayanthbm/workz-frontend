@@ -9,6 +9,8 @@ import { ACCESS_TOKEN, USER_DETAILS } from "./utils/constant";
 import Team from "./Container/teamContainer";
 import Reset from "./Container/resetContainer";
 import Form from "./Container/formContainer";
+import forgotContainer from "./Container/forgotContainer";
+import forgotPassContainer from "./Container/forgotPassContainer";
 class App extends Component {
   render() {
     const isUserLogedIn = Cookie.getCookie(ACCESS_TOKEN) ? true : false;
@@ -26,6 +28,8 @@ class App extends Component {
             </React.Fragment>
           ) : (
             <React.Fragment>
+              <Route exact path="/forgot" component={forgotPassContainer} />
+              <Route exact path="/forgot/:token" component={forgotContainer} />
               <Route exact path="/reset" component={Reset} />
               <Route exact path="/" component={Login} />
               <Route exact path="/form" component={Form} />

@@ -5,13 +5,21 @@ import * as Cookie from "./Cookie";
 export async function post(path, postData) {
   let config = {
     headers: {
-      Authorization: "Bearer " + Cookie.getCookie(ACCESS_TOKEN)
-    }
+      Authorization: "Bearer " + Cookie.getCookie(ACCESS_TOKEN),
+    },
   };
   const url = `${API_URL_ROOT}/${path}`;
   return await axios.post(url, postData, config);
 }
-
+export async function postToken(path, token, postData) {
+  let config = {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  };
+  const url = `${API_URL_ROOT}/${path}`;
+  return await axios.post(url, postData, config);
+}
 export async function postFormData(path, postData) {
   const url = `${API_URL_ROOT}/${path} `;
   return await axios({
@@ -22,8 +30,8 @@ export async function postFormData(path, postData) {
       Accept: "application/json",
       "Content-Type": "multipart/form-data",
       "Cache-Control": "no-cache",
-      Authorization: "Bearer " + Cookie.getCookie(ACCESS_TOKEN)
-    }
+      Authorization: "Bearer " + Cookie.getCookie(ACCESS_TOKEN),
+    },
   });
 }
 
@@ -32,8 +40,8 @@ export async function get(path) {
     let config = {
       headers: {
         "Cache-Control": "no-cache",
-        Authorization: "Bearer " + Cookie.getCookie(ACCESS_TOKEN)
-      }
+        Authorization: "Bearer " + Cookie.getCookie(ACCESS_TOKEN),
+      },
     };
     const url = `${API_URL_ROOT}/${path}`;
     return await axios.get(url, config);
@@ -46,8 +54,8 @@ export async function get(path) {
 export async function put(path, postData) {
   let config = {
     headers: {
-      Authorization: "Bearer " + Cookie.getCookie(ACCESS_TOKEN)
-    }
+      Authorization: "Bearer " + Cookie.getCookie(ACCESS_TOKEN),
+    },
   };
   const url = `${API_URL_ROOT}/${path}`;
   return await axios.put(url, postData, config);
@@ -62,8 +70,8 @@ export async function deleteData(path, postData) {
     headers: {
       Accept: "application/json",
       "Content-Type": "multipart/form-data",
-      Authorization: "Bearer " + Cookie.getCookie(ACCESS_TOKEN)
-    }
+      Authorization: "Bearer " + Cookie.getCookie(ACCESS_TOKEN),
+    },
   });
 }
 
@@ -81,7 +89,7 @@ export async function blob(path) {
     headers: {
       Accept: "application/json",
       "Cache-Control": "no-cache",
-      Authorization: "Bearer " + Cookie.getCookie(ACCESS_TOKEN)
-    }
+      Authorization: "Bearer " + Cookie.getCookie(ACCESS_TOKEN),
+    },
   });
 }

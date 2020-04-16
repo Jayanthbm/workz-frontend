@@ -10,6 +10,7 @@ class Form extends Component {
       phone: "",
       email: "",
       desc: "",
+      error: "",
     };
   }
   componentDidMount() {
@@ -18,23 +19,49 @@ class Form extends Component {
     }
   }
   handleClick = () => {
+    let name = this.state.name.trim();
+    let cname = this.state.cname.trim();
+    let phone = this.state.phone.trim();
+    let email = this.state.email.trim();
+    let desc = this.state.desc.trim();
     const reqBody = {
-      name: this.state.name,
-      companyName: this.state.cname,
-      phone: this.state.phone,
-      email: this.state.email,
-      description: this.state.desc,
+      name: name,
+      companyName: cname,
+      phone: phone,
+      email: email,
+      description: desc,
       typeRequest: this.props.location.state.type,
     };
     if (this.props.postForm) {
-      this.props.postForm(reqBody);
-      this.setState({
-        name: "",
-        cname: "",
-        phone: "",
-        email: "",
-        desc: "",
-      });
+      if (
+        name.length === 0 &&
+        cname.length === 0 &&
+        phone.length === 0 &&
+        email.length === 0 &&
+        desc.length === 0
+      ) {
+        this.setState({ error: "Form Fields cannot be empty" });
+      } else if (name.length === 0) {
+        this.setState({ error: "Name cannot be empty" });
+      } else if (cname.length === 0) {
+        this.setState({ error: "Company Name cannot be empty" });
+      } else if (phone.length === 0) {
+        this.setState({ error: "Phone cannot be empty" });
+      } else if (email.length === 0) {
+        this.setState({ error: "Email cannot be empty" });
+      } else if (desc.length === 0) {
+        this.setState({ error: "Description cannot be empty" });
+      } else {
+        this.props.postForm(reqBody);
+        this.setState({
+          name: "",
+          cname: "",
+          phone: "",
+          email: "",
+          desc: "",
+          error: "",
+        });
+      }
     }
   };
   render() {
@@ -119,7 +146,6 @@ class Form extends Component {
                   ></textarea>
                 </>
               )}
-
             <button onClick={this.handleClick} className={styles.formButton}>
               {" "}
               Submit{" "}
@@ -133,9 +159,9 @@ class Form extends Component {
               {" "}
               Back to login{" "}
             </button>
-            {/* {this.state.loginError && (
-            <div className={styles.error}>{this.state.loginError}</div>
-          )} */}
+            {this.state.error && (
+              <div className={styles.error}>{this.state.error}</div>
+            )}
           </div>
         </div>
       </div>

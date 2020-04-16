@@ -58,7 +58,7 @@ class Team extends Component {
           this.props.getTeam(
             parsedData && parsedData.dropdown && parsedData.dropdown[0].id === 0
               ? parsedData.userId
-              : parsedData.dropdown[0].id
+              : parsedData.dropdown && parsedData.dropdown[0].id
           );
         }
       }

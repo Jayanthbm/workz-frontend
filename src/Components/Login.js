@@ -22,6 +22,7 @@ class Login extends Component {
     this.setState({ companyname: val.target.value });
   };
   handleClick = () => {
+    this.props.history.push({ state: { forgotMessage: "" } });
     const reqBody = {
       companyname: this.state.companyname,
       username: this.state.uname,
@@ -54,11 +55,17 @@ class Login extends Component {
     }
   }
   render() {
-    console.log(this.state.employeeId);
+    console.log(this.props);
     return (
       <div className={styles.base}>
         <Header />
         <div className={styles.loginContainer}>
+          {this.props.location.state &&
+            this.props.location.state.forgotMessage && (
+              <div style={{ color: "green" }}>
+                {this.props.location.state.forgotMessage + "!"}
+              </div>
+            )}
           <div className={styles.loginHeader}>
             <img src={logo} />
           </div>
@@ -97,7 +104,7 @@ class Login extends Component {
           <div
             className={styles.forgotPassword}
             onClick={() => {
-              this.props.history.push("/");
+              this.props.history.push("/forgot");
             }}
           >
             Forgot Password ?

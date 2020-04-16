@@ -60,3 +60,7 @@ input[type="submit"]:hover {
   color: #ff6347;
   padding-top: 10px;
 }
+.success {
+  color: #fff;
+  padding-top: 10px;
+}
