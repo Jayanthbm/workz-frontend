@@ -8,12 +8,15 @@ class ProfileStatus extends Component {
         <img
           src={this.props.pic ? this.props.pic : profileImage}
           height={"40px"}
+          alt=""
           width={"40px"}
           style={{
             position: "absolute",
             left: this.props.left,
             right: this.props.right,
             top: this.props.top,
+            border: "2px solid #cecece",
+            borderRadius: "100%",
           }}
         />
         {this.props.offline && this.props.leftSide && (
