@@ -71,7 +71,10 @@ class Team extends Component {
       this.props.getTeamUser(val);
     }
   };
-
+  handleManager = (val) => {
+    console.log(val);
+    this.props.getTeam(val);
+  };
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
     if (
@@ -132,6 +135,7 @@ class Team extends Component {
                                     <div className={styles.countryUsers}>
                                       {man[0].onlineStatus === "offline" && (
                                         <>
+                                          {console.log(man[0])}
                                           <span className={styles.seatHolder}>
                                             <span
                                               className={styles.tooltiptext}
@@ -155,6 +159,11 @@ class Team extends Component {
                                               />
                                               <div
                                                 className={styles.offlineBottom}
+                                                onClick={() =>
+                                                  this.handleManager(
+                                                    man[0].userId
+                                                  )
+                                                }
                                               ></div>
                                             </span>
                                           </span>
@@ -283,6 +292,11 @@ class Team extends Component {
                                               />
                                               <div
                                                 className={styles.onlineBottom}
+                                                onClick={() =>
+                                                  this.handleManager(
+                                                    man[0].userId
+                                                  )
+                                                }
                                               ></div>
                                             </span>
                                           </span>
@@ -413,6 +427,11 @@ class Team extends Component {
                                                   className={
                                                     styles.inactiveBottom
                                                   }
+                                                  onClick={() =>
+                                                    this.handleManager(
+                                                      man[0].userId
+                                                    )
+                                                  }
                                                 ></div>
                                               </span>
                                             )}
@@ -430,6 +449,11 @@ class Team extends Component {
                                                 <div
                                                   className={
                                                     styles.inactiveBottom
+                                                  }
+                                                  onClick={() =>
+                                                    this.handleManager(
+                                                      man[0].userId
+                                                    )
                                                   }
                                                 ></div>
                                               </span>
@@ -604,7 +628,6 @@ class Team extends Component {
                               })}
                           </div>
                         )}
-                        {console.log(val)}
 
                         {val.users &&
                           val.users.length > 0 &&
@@ -620,6 +643,7 @@ class Team extends Component {
                                     users.map((val, i) => {
                                       return (
                                         <>
+                                          {console.log(val)}
                                           <span className={styles.countrUsers}>
                                             {val.onlineStatus === "offline" && (
                                               <span
@@ -776,6 +800,7 @@ class Team extends Component {
                                 {val.users.map((val, i) => {
                                   return (
                                     <>
+                                      {console.log(val)}
                                       <span className={styles.countrUsers}>
                                         {val.onlineStatus === "offline" && (
                                           <span className={styles.seatHolder}>
