@@ -228,6 +228,26 @@ class Team extends Component {
                                                         Active
                                                       </div>
                                                       <div
+                                                        className={
+                                                          styles.completedBar
+                                                        }
+                                                      >
+                                                        <div
+                                                          className={
+                                                            styles.completedLevel
+                                                          }
+                                                          style={{
+                                                            width: sum.active
+                                                              ? (sum.active /
+                                                                  sum.total_employees) *
+                                                                100
+                                                              : "0%",
+                                                            background:
+                                                              "#8bc646",
+                                                          }}
+                                                        ></div>
+                                                      </div>
+                                                      <div
                                                         className={styles.value}
                                                       >
                                                         {sum.active}
@@ -242,6 +262,26 @@ class Team extends Component {
                                                         InActive
                                                       </div>
                                                       <div
+                                                        className={
+                                                          styles.completedBar
+                                                        }
+                                                      >
+                                                        <div
+                                                          className={
+                                                            styles.completedLevel
+                                                          }
+                                                          style={{
+                                                            width: sum.inactive
+                                                              ? (sum.inactive /
+                                                                  sum.total_employees) *
+                                                                100
+                                                              : "0%",
+                                                            background:
+                                                              "#efc165",
+                                                          }}
+                                                        ></div>
+                                                      </div>
+                                                      <div
                                                         className={styles.value}
                                                       >
                                                         {sum.inactive}
@@ -254,6 +294,26 @@ class Team extends Component {
                                                         className={styles.lable}
                                                       >
                                                         Offline
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.completedBar
+                                                        }
+                                                      >
+                                                        <div
+                                                          className={
+                                                            styles.completedLevel
+                                                          }
+                                                          style={{
+                                                            width: sum.offline
+                                                              ? (sum.offline /
+                                                                  sum.total_employees) *
+                                                                100
+                                                              : "0%",
+                                                            background:
+                                                              "#cececf",
+                                                          }}
+                                                        ></div>
                                                       </div>
                                                       <div
                                                         className={styles.value}
@@ -361,6 +421,26 @@ class Team extends Component {
                                                         Active
                                                       </div>
                                                       <div
+                                                        className={
+                                                          styles.completedBar
+                                                        }
+                                                      >
+                                                        <div
+                                                          className={
+                                                            styles.completedLevel
+                                                          }
+                                                          style={{
+                                                            width: sum.active
+                                                              ? (sum.active /
+                                                                  sum.total_employees) *
+                                                                100
+                                                              : "0%",
+                                                            background:
+                                                              "#8bc646",
+                                                          }}
+                                                        ></div>
+                                                      </div>
+                                                      <div
                                                         className={styles.value}
                                                       >
                                                         {sum.active}
@@ -375,6 +455,26 @@ class Team extends Component {
                                                         InActive
                                                       </div>
                                                       <div
+                                                        className={
+                                                          styles.completedBar
+                                                        }
+                                                      >
+                                                        <div
+                                                          className={
+                                                            styles.completedLevel
+                                                          }
+                                                          style={{
+                                                            width: sum.inactive
+                                                              ? (sum.inactive /
+                                                                  sum.total_employees) *
+                                                                100
+                                                              : "0%",
+                                                            background:
+                                                              "#efc165",
+                                                          }}
+                                                        ></div>
+                                                      </div>
+                                                      <div
                                                         className={styles.value}
                                                       >
                                                         {sum.inactive}
@@ -387,6 +487,26 @@ class Team extends Component {
                                                         className={styles.lable}
                                                       >
                                                         Offline
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.completedBar
+                                                        }
+                                                      >
+                                                        <div
+                                                          className={
+                                                            styles.completedLevel
+                                                          }
+                                                          style={{
+                                                            width: sum.offline
+                                                              ? (sum.offline /
+                                                                  sum.total_employees) *
+                                                                100
+                                                              : "0%",
+                                                            background:
+                                                              "#cececf",
+                                                          }}
+                                                        ></div>
                                                       </div>
                                                       <div
                                                         className={styles.value}
@@ -521,6 +641,26 @@ class Team extends Component {
                                                         Active
                                                       </div>
                                                       <div
+                                                        className={
+                                                          styles.completedBar
+                                                        }
+                                                      >
+                                                        <div
+                                                          className={
+                                                            styles.completedLevel
+                                                          }
+                                                          style={{
+                                                            width: sum.active
+                                                              ? (sum.active /
+                                                                  sum.total_employees) *
+                                                                100
+                                                              : "0%",
+                                                            background:
+                                                              "#8bc646",
+                                                          }}
+                                                        ></div>
+                                                      </div>
+                                                      <div
                                                         className={styles.value}
                                                       >
                                                         {sum.active}
@@ -535,6 +675,26 @@ class Team extends Component {
                                                         InActive
                                                       </div>
                                                       <div
+                                                        className={
+                                                          styles.completedBar
+                                                        }
+                                                      >
+                                                        <div
+                                                          className={
+                                                            styles.completedLevel
+                                                          }
+                                                          style={{
+                                                            width: sum.inactive
+                                                              ? (sum.inactive /
+                                                                  sum.total_employees) *
+                                                                100
+                                                              : "0%",
+                                                            background:
+                                                              "#efc165",
+                                                          }}
+                                                        ></div>
+                                                      </div>
+                                                      <div
                                                         className={styles.value}
                                                       >
                                                         {sum.inactive}
@@ -547,6 +707,26 @@ class Team extends Component {
                                                         className={styles.lable}
                                                       >
                                                         Offline
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.completedBar
+                                                        }
+                                                      >
+                                                        <div
+                                                          className={
+                                                            styles.completedLevel
+                                                          }
+                                                          style={{
+                                                            width: sum.offline
+                                                              ? (sum.offline /
+                                                                  sum.total_employees) *
+                                                                100
+                                                              : "0%",
+                                                            background:
+                                                              "#cececf",
+                                                          }}
+                                                        ></div>
                                                       </div>
                                                       <div
                                                         className={styles.value}
@@ -602,6 +782,19 @@ class Team extends Component {
                                         <div className={styles.lable}>
                                           Active
                                         </div>
+                                        <div className={styles.completedBar}>
+                                          <div
+                                            className={styles.completedLevel}
+                                            style={{
+                                              width: sum.active
+                                                ? (sum.active /
+                                                    sum.total_employees) *
+                                                  100
+                                                : "0%",
+                                              background: "#8bc646",
+                                            }}
+                                          ></div>
+                                        </div>
                                         <div className={styles.value}>
                                           {sum.active}
                                         </div>
@@ -610,6 +803,19 @@ class Team extends Component {
                                         <div className={styles.lable}>
                                           InActive
                                         </div>
+                                        <div className={styles.completedBar}>
+                                          <div
+                                            className={styles.completedLevel}
+                                            style={{
+                                              width: sum.inactive
+                                                ? (sum.inactive /
+                                                    sum.total_employees) *
+                                                  100
+                                                : "0%",
+                                              background: "#efc165",
+                                            }}
+                                          ></div>
+                                        </div>
                                         <div className={styles.value}>
                                           {sum.inactive}
                                         </div>
@@ -617,6 +823,19 @@ class Team extends Component {
                                       <div className={styles.valCont}>
                                         <div className={styles.lable}>
                                           Offline
+                                        </div>
+                                        <div className={styles.completedBar}>
+                                          <div
+                                            className={styles.completedLevel}
+                                            style={{
+                                              width: sum.offline
+                                                ? (sum.offline /
+                                                    sum.total_employees) *
+                                                  100
+                                                : "0%",
+                                              background: "#cececf",
+                                            }}
+                                          ></div>
                                         </div>
                                         <div className={styles.value}>
                                           {sum.offline}
