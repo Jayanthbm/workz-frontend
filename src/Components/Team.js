@@ -78,20 +78,14 @@ class Team extends Component {
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
     if (
+      nextProps &&
       nextProps.teamError &&
       nextProps.teamError.status === "ERROR" &&
       nextProps.teamError.teamError === "You must be logged in."
     ) {
       Cookie.deleteCookie(ACCESS_TOKEN);
       Cookie.deleteCookie(USER_DETAILS);
-      this.props.history.push("/");
-    }
-    if (nextProps.teamDetails !== this.props.teamDetails) {
-      // nextProps.getTeamUser(
-      //   nextProps.teamDetails &&
-      //     nextProps.teamDetails.teams &&
-      //     nextProps.teamDetails.teams[0].teamId
-      // );
+      window.location.reload();
     }
   }
   render() {
