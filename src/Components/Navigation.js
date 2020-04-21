@@ -24,7 +24,18 @@ class Navigation extends Component {
                   {this.props &&
                     this.props.team &&
                     this.props.team.map((val) => {
-                      return <option value={val.id}>{val.name}</option>;
+                      return (
+                        <option
+                          value={val.id}
+                          selected={
+                            this.props.team_id && val.id === this.props.team_id
+                              ? true
+                              : false
+                          }
+                        >
+                          {val.name}
+                        </option>
+                      );
                     })}
                 </select>
               </div>

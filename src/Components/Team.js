@@ -44,6 +44,8 @@ class Team extends Component {
         this.props.teamDetails &&
         this.props.teamDetails.teams &&
         this.props.teamDetails.teams[0].teamId,
+      team_id: "",
+      man_id: "",
     };
   }
   componentDidMount() {
@@ -67,6 +69,7 @@ class Team extends Component {
   summaryHandler = (val) => {
     console.log(val);
     this.props.getTeamUser(val);
+    this.setState({ team_id: val });
   };
   selectHandler = (val) => {
     if (val === "0") {
@@ -78,6 +81,7 @@ class Team extends Component {
   handleManager = (val) => {
     console.log(val);
     this.props.getTeam(val);
+    this.setState({ man_id: val });
   };
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
@@ -112,6 +116,8 @@ class Team extends Component {
         <Navigation
           team={parsedData && parsedData.dropdown}
           selectHandler={this.selectHandler}
+          team_id={this.state.team_id}
+          man_id={this.state.man_id}
         />
         <div className={styles.detailsHolder}>
           <div className={styles.countryContainer}>
@@ -348,13 +354,23 @@ class Team extends Component {
                                             <span
                                               className={styles.tooltiptext}
                                             >
-                                              {"Name:" +
-                                                man[0].name +
-                                                "\n" +
-                                                "email:" +
-                                                man[0].emailId}
+                                              {
+                                                <>
+                                                  <div
+                                                    style={{ color: "#5dbcb3" }}
+                                                  >
+                                                    {man[0].name}
+                                                  </div>
+                                                  <div
+                                                    style={{
+                                                      whiteSpace: "nowrap",
+                                                    }}
+                                                  >
+                                                    email : {man[0].emailId}
+                                                  </div>
+                                                </>
+                                              }
                                             </span>
-
                                             <span>
                                               <ProfileStatus
                                                 pic={man[0].profilePic}
@@ -547,11 +563,22 @@ class Team extends Component {
                                             <span
                                               className={styles.tooltiptext}
                                             >
-                                              {"Name:" +
-                                                man[0].name +
-                                                "\n" +
-                                                "email:" +
-                                                man[0].emailId}
+                                              {
+                                                <>
+                                                  <div
+                                                    style={{ color: "#5dbcb3" }}
+                                                  >
+                                                    {man[0].name}
+                                                  </div>
+                                                  <div
+                                                    style={{
+                                                      whiteSpace: "nowrap",
+                                                    }}
+                                                  >
+                                                    email : {man[0].emailId}
+                                                  </div>
+                                                </>
+                                              }
                                             </span>
                                             {i % 2 > 0 && (
                                               <span>
@@ -904,11 +931,24 @@ class Team extends Component {
                                                 <span
                                                   className={styles.tooltiptext}
                                                 >
-                                                  {"Name:" +
-                                                    val.name +
-                                                    "\n" +
-                                                    "email:" +
-                                                    val.emailId}
+                                                  {
+                                                    <>
+                                                      <div
+                                                        style={{
+                                                          color: "#5dbcb3",
+                                                        }}
+                                                      >
+                                                        {val.name}
+                                                      </div>
+                                                      <div
+                                                        style={{
+                                                          whiteSpace: "nowrap",
+                                                        }}
+                                                      >
+                                                        email : {val.emailId}
+                                                      </div>
+                                                    </>
+                                                  }
                                                 </span>
                                                 {i % 2 > 0 && (
                                                   <span>
@@ -950,11 +990,24 @@ class Team extends Component {
                                                 <span
                                                   className={styles.tooltiptext}
                                                 >
-                                                  {"Name:" +
-                                                    val.name +
-                                                    "\n" +
-                                                    "email:" +
-                                                    val.emailId}
+                                                  {
+                                                    <>
+                                                      <div
+                                                        style={{
+                                                          color: "#5dbcb3",
+                                                        }}
+                                                      >
+                                                        {val.name}
+                                                      </div>
+                                                      <div
+                                                        style={{
+                                                          whiteSpace: "nowrap",
+                                                        }}
+                                                      >
+                                                        email : {val.emailId}
+                                                      </div>
+                                                    </>
+                                                  }
                                                 </span>
                                                 {i % 2 > 0 && (
                                                   <span>
@@ -993,14 +1046,28 @@ class Team extends Component {
                                               <span
                                                 className={styles.seatHolder}
                                               >
+                                                {" "}
                                                 <span
                                                   className={styles.tooltiptext}
                                                 >
-                                                  {"Name:" +
-                                                    val.name +
-                                                    "\n" +
-                                                    "email:" +
-                                                    val.emailId}
+                                                  {
+                                                    <>
+                                                      <div
+                                                        style={{
+                                                          color: "#5dbcb3",
+                                                        }}
+                                                      >
+                                                        {val.name}
+                                                      </div>
+                                                      <div
+                                                        style={{
+                                                          whiteSpace: "nowrap",
+                                                        }}
+                                                      >
+                                                        email : {val.emailId}
+                                                      </div>
+                                                    </>
+                                                  }
                                                 </span>
                                                 {i % 2 > 0 && (
                                                   <span>
@@ -1059,11 +1126,24 @@ class Team extends Component {
                                             <span
                                               className={styles.tooltiptext}
                                             >
-                                              {"Name:" +
-                                                val.name +
-                                                "\n" +
-                                                "email:" +
-                                                val.emailId}
+                                              {
+                                                <>
+                                                  <div
+                                                    style={{
+                                                      color: "#5dbcb3",
+                                                    }}
+                                                  >
+                                                    {val.name}
+                                                  </div>
+                                                  <div
+                                                    style={{
+                                                      whiteSpace: "nowrap",
+                                                    }}
+                                                  >
+                                                    email : {val.emailId}
+                                                  </div>
+                                                </>
+                                              }
                                             </span>
                                             {i % 2 > 0 && (
                                               <span>
@@ -1101,11 +1181,24 @@ class Team extends Component {
                                             <span
                                               className={styles.tooltiptext}
                                             >
-                                              {"Name:" +
-                                                val.name +
-                                                "\n" +
-                                                "email:" +
-                                                val.emailId}
+                                              {
+                                                <>
+                                                  <div
+                                                    style={{
+                                                      color: "#5dbcb3",
+                                                    }}
+                                                  >
+                                                    {val.name}
+                                                  </div>
+                                                  <div
+                                                    style={{
+                                                      whiteSpace: "nowrap",
+                                                    }}
+                                                  >
+                                                    email : {val.emailId}
+                                                  </div>
+                                                </>
+                                              }
                                             </span>
                                             {i % 2 > 0 && (
                                               <span>
@@ -1141,11 +1234,24 @@ class Team extends Component {
                                             <span
                                               className={styles.tooltiptext}
                                             >
-                                              {"Name:" +
-                                                val.name +
-                                                "\n" +
-                                                "email:" +
-                                                val.emailId}
+                                              {
+                                                <>
+                                                  <div
+                                                    style={{
+                                                      color: "#5dbcb3",
+                                                    }}
+                                                  >
+                                                    {val.name}
+                                                  </div>
+                                                  <div
+                                                    style={{
+                                                      whiteSpace: "nowrap",
+                                                    }}
+                                                  >
+                                                    email : {val.emailId}
+                                                  </div>
+                                                </>
+                                              }
                                             </span>
                                             {i % 2 > 0 && (
                                               <span>
@@ -1205,11 +1311,24 @@ class Team extends Component {
                                       {val.onlineStatus === "offline" && (
                                         <span className={styles.seatHolder}>
                                           <span className={styles.tooltiptext}>
-                                            {"Name:" +
-                                              val.name +
-                                              "\n" +
-                                              "email:" +
-                                              val.emailId}
+                                            {
+                                              <>
+                                                <div
+                                                  style={{
+                                                    color: "#5dbcb3",
+                                                  }}
+                                                >
+                                                  {val.name}
+                                                </div>
+                                                <div
+                                                  style={{
+                                                    whiteSpace: "nowrap",
+                                                  }}
+                                                >
+                                                  email : {val.emailId}
+                                                </div>
+                                              </>
+                                            }
                                           </span>
                                           {i % 2 > 0 && (
                                             <span>
@@ -1243,11 +1362,24 @@ class Team extends Component {
                                       {val.onlineStatus === "active" && (
                                         <span className={styles.seatHolder}>
                                           <span className={styles.tooltiptext}>
-                                            {"Name:" +
-                                              val.name +
-                                              "\n" +
-                                              "email:" +
-                                              val.emailId}
+                                            {
+                                              <>
+                                                <div
+                                                  style={{
+                                                    color: "#5dbcb3",
+                                                  }}
+                                                >
+                                                  {val.name}
+                                                </div>
+                                                <div
+                                                  style={{
+                                                    whiteSpace: "nowrap",
+                                                  }}
+                                                >
+                                                  email : {val.emailId}
+                                                </div>
+                                              </>
+                                            }
                                           </span>
                                           {i % 2 > 0 && (
                                             <span>
@@ -1281,11 +1413,24 @@ class Team extends Component {
                                       {val.onlineStatus === "passive" && (
                                         <span className={styles.seatHolder}>
                                           <span className={styles.tooltiptext}>
-                                            {"Name:" +
-                                              val.name +
-                                              "\n" +
-                                              "email:" +
-                                              val.emailId}
+                                            {
+                                              <>
+                                                <div
+                                                  style={{
+                                                    color: "#5dbcb3",
+                                                  }}
+                                                >
+                                                  {val.name}
+                                                </div>
+                                                <div
+                                                  style={{
+                                                    whiteSpace: "nowrap",
+                                                  }}
+                                                >
+                                                  email : {val.emailId}
+                                                </div>
+                                              </>
+                                            }
                                           </span>
                                           {i % 2 > 0 && (
                                             <span>
