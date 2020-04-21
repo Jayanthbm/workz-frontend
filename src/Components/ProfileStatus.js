@@ -23,16 +23,32 @@ class ProfileStatus extends Component {
           <div className={styles.offlineStatus}> </div>
         )}
         {this.props.offline && this.props.rightSide && (
-          <div className={styles.offlineStatusright}> </div>
+          <div
+            className={
+              this.props.man
+                ? styles.offlineStatusman
+                : styles.offlineStatusright
+            }
+          ></div>
         )}
         {this.props.active && this.props.leftSide && (
           <div className={styles.onlineStatus}> </div>
         )}
         {this.props.active && this.props.rightSide && (
-          <div className={styles.onlineStatusright}> </div>
+          <div
+            className={
+              this.props.man ? styles.onlineStatusman : styles.onlineStatusright
+            }
+          ></div>
         )}
         {this.props.passive && this.props.rightSide && (
-          <div className={styles.passiveStatusright}> </div>
+          <div
+            className={
+              this.props.man
+                ? styles.passiveStatusman
+                : styles.passiveStatusright
+            }
+          ></div>
         )}
         {this.props.passive && this.props.leftSide && (
           <div className={styles.passiveStatus}> </div>

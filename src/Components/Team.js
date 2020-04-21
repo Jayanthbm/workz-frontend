@@ -140,22 +140,34 @@ class Team extends Component {
                                             <span
                                               className={styles.tooltiptext}
                                             >
-                                              {"Name:" +
-                                                man[0].name +
-                                                "\n" +
-                                                "email:" +
-                                                man[0].emailId}
+                                              {
+                                                <>
+                                                  <div
+                                                    style={{ color: "#5dbcb3" }}
+                                                  >
+                                                    {man[0].name}
+                                                  </div>
+                                                  <div
+                                                    style={{
+                                                      whiteSpace: "nowrap",
+                                                    }}
+                                                  >
+                                                    email : {man[0].emailId}
+                                                  </div>
+                                                </>
+                                              }
                                             </span>
 
                                             <span>
                                               <ProfileStatus
                                                 pic={man[0].profilePic}
-                                                right={0}
+                                                right={-15}
                                                 top={27}
                                                 height={50}
                                                 width={50}
                                                 offline={true}
                                                 rightSide={true}
+                                                man={true}
                                               />
                                               <div
                                                 className={styles.offlineBottom}
@@ -343,12 +355,13 @@ class Team extends Component {
                                             <span>
                                               <ProfileStatus
                                                 pic={man[0].profilePic}
-                                                right={0}
+                                                right={-15}
                                                 top={27}
                                                 height={50}
                                                 width={50}
                                                 active={true}
                                                 rightSide={true}
+                                                man={true}
                                               />
                                               <div
                                                 className={styles.onlineBottom}
@@ -541,6 +554,7 @@ class Team extends Component {
                                                   height={50}
                                                   width={50}
                                                   passive={true}
+                                                  man={true}
                                                   rightSide={true}
                                                 />
                                                 <div
@@ -559,11 +573,12 @@ class Team extends Component {
                                               <span>
                                                 <ProfileStatus
                                                   pic={man[0].profilePic}
-                                                  right={0}
+                                                  right={-15}
                                                   top={27}
                                                   height={50}
                                                   width={50}
                                                   passive={true}
+                                                  man={true}
                                                   rightSide={true}
                                                 />
                                                 <div
