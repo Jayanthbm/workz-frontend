@@ -8,7 +8,7 @@ class Navigation extends Component {
       <div className={styles.base}>
         <div className={styles.container}>
           <div className={styles.textHolder}>Virtual office</div>
-          {this.props.team && (
+          {this.props && this.props.team && (
             <div className={styles.dropdownHolder}>
               <div className={styles.label}>Team</div>
               <div className={styles.selectContainer}>

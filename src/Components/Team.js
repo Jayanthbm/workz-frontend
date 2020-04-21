@@ -64,6 +64,10 @@ class Team extends Component {
       }
     }
   }
+  summaryHandler = (val) => {
+    console.log(val);
+    this.props.getTeamUser(val);
+  };
   selectHandler = (val) => {
     if (val === "0") {
       this.props.getTeam(parsedData.userId);
@@ -179,6 +183,11 @@ class Team extends Component {
                                             man[1].map((sum) => {
                                               return (
                                                 <div
+                                                  onClick={() =>
+                                                    this.summaryHandler(
+                                                      sum.teamId
+                                                    )
+                                                  }
                                                   className={styles.summaryBase}
                                                 >
                                                   <div
@@ -373,6 +382,11 @@ class Team extends Component {
                                             man[1].map((sum) => {
                                               return (
                                                 <div
+                                                  onClick={() =>
+                                                    this.summaryHandler(
+                                                      sum.teamId
+                                                    )
+                                                  }
                                                   className={styles.summaryBase}
                                                 >
                                                   <div
@@ -595,6 +609,11 @@ class Team extends Component {
                                             man[1].map((sum) => {
                                               return (
                                                 <div
+                                                  onClick={() =>
+                                                    this.summaryHandler(
+                                                      sum.teamId
+                                                    )
+                                                  }
                                                   className={styles.summaryBase}
                                                 >
                                                   <div
@@ -760,7 +779,12 @@ class Team extends Component {
                             {val.summary &&
                               val.summary.map((sum) => {
                                 return (
-                                  <div className={styles.summaryBase}>
+                                  <div
+                                    onClick={() =>
+                                      this.summaryHandler(sum.teamId)
+                                    }
+                                    className={styles.summaryBase}
+                                  >
                                     <div
                                       className={styles.summaryHeader}
                                       style={{
