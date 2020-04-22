@@ -106,6 +106,7 @@
 .summaryBase {
   border: 1px solid #fff;
   height: 125px;
+  width: 170px;
   margin-top: 15px;
   border-radius: 6px;
   cursor: pointer;
@@ -170,11 +171,20 @@
   border-right: 2px solid #ebebeb;
   min-width: 200px;
 }
+.managerContainer:last-child {
+  border-right: none;
+  margin: auto;
+}
+
 .usrContainer {
-  padding: 20px;
+  padding: 50px;
   width: 250px;
   margin: auto;
+  border-right: 2px solid #ebebeb;
   margin-top: 0;
+}
+.usrContainer:last-child {
+  border-right: none;
 }
 /* 
 @media only screen and (min-width: 1236px) { */
@@ -213,12 +223,14 @@
   transform: rotate(90deg);
   width: 120px;
   height: 160px;
+  margin-left: 10px;
 }
 .offlineBottom {
   composes: offlineleft;
   transform: rotate(90deg);
   width: 120px;
   height: 160px;
+  margin-left: 10px;
 }
 
 .offlineright {
@@ -244,6 +256,7 @@
   transform: rotate(90deg);
   width: 120px;
   height: 160px;
+  margin-left: 10px;
 }
 .inactiveRight {
   background: url("../images/Work_Stations_Right-Inactive.png");

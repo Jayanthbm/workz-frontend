@@ -53,29 +53,23 @@ class Team extends Component {
       this.props.history.push("/reset");
     } else {
       if (this.props.getTeam) {
-        if (parsedData && parsedData.isManager === 0) {
-          console.log("ssjd");
-          this.props.getTeam(parsedData.userId);
-        } else {
-          this.props.getTeam(
-            parsedData && parsedData.dropdown && parsedData.dropdown[0].id === 0
-              ? parsedData.userId
-              : parsedData.dropdown && parsedData.dropdown[0].id
-          );
+        this.props.getTeam(parsedData.userId);
+        if (parsedData.isManager === 1) {
+          this.setState({ man_id: parsedData.userId });
         }
       }
     }
   }
   summaryHandler = (val) => {
-    console.log(val);
     this.props.getTeamUser(val);
     this.setState({ team_id: val });
   };
   selectHandler = (val) => {
-    if (val === "0") {
-      this.props.getTeam(parsedData.userId);
+    let data = JSON.parse(val);
+    if (data.type === "manager") {
+      this.props.getTeam(data.id);
     } else {
-      this.props.getTeamUser(val);
+      this.props.getTeamUser(data.id);
     }
   };
   handleManager = (val) => {
@@ -96,8 +90,16 @@ class Team extends Component {
       window.location.reload();
     }
   }
+  handleArray = (arr) => {};
   render() {
     console.log(this.props);
+    const users1 =
+      this.props.teamDetails &&
+      this.props.teamDetails.length === 1 &&
+      this.props.teamDetails[0] &&
+      this.props.teamDetails[0].users &&
+      this.props.teamDetails[0].users.length > 6 &&
+      this.handleArray(this.props.teamDetails[0].users);
     const users =
       this.props.teamDetails &&
       this.props.teamDetails.length === 1 &&
@@ -166,7 +168,7 @@ class Team extends Component {
                                               <ProfileStatus
                                                 pic={man[0].profilePic}
                                                 right={-15}
-                                                top={27}
+                                                top={25}
                                                 height={50}
                                                 width={50}
                                                 offline={true}
@@ -202,21 +204,17 @@ class Team extends Component {
                                                     }
                                                     style={{
                                                       backgroundColor:
-                                                        sum.active >
-                                                          sum.offline &&
-                                                        sum.active >
-                                                          sum.inactive
+                                                        (sum.active /
+                                                          sum.total_employees) *
+                                                          100 >
+                                                        80
                                                           ? "#8BC646"
-                                                          : sum.inactive >
-                                                              sum.offline &&
-                                                            sum.inactive >
-                                                              sum.active
-                                                          ? "EFC165"
-                                                          : sum.offline >
-                                                              sum.active &&
-                                                            sum.offline >
-                                                              sum.inactive &&
-                                                            "#CECECE",
+                                                          : (sum.active /
+                                                              sum.total_employees) *
+                                                              100 >
+                                                            50
+                                                          ? "#efc165"
+                                                          : "#D1BD94",
                                                     }}
                                                   >
                                                     {sum.team}
@@ -375,7 +373,7 @@ class Team extends Component {
                                               <ProfileStatus
                                                 pic={man[0].profilePic}
                                                 right={-15}
-                                                top={27}
+                                                top={25}
                                                 height={50}
                                                 width={50}
                                                 active={true}
@@ -411,21 +409,17 @@ class Team extends Component {
                                                     }
                                                     style={{
                                                       backgroundColor:
-                                                        sum.active >
-                                                          sum.offline &&
-                                                        sum.active >
-                                                          sum.inactive
+                                                        (sum.active /
+                                                          sum.total_employees) *
+                                                          100 >
+                                                        80
                                                           ? "#8BC646"
-                                                          : sum.inactive >
-                                                              sum.offline &&
-                                                            sum.inactive >
-                                                              sum.active
-                                                          ? "EFC165"
-                                                          : sum.offline >
-                                                              sum.active &&
-                                                            sum.offline >
-                                                              sum.inactive &&
-                                                            "#CECECE",
+                                                          : (sum.active /
+                                                              sum.total_employees) *
+                                                              100 >
+                                                            50
+                                                          ? "#efc165"
+                                                          : "#D1BD94",
                                                     }}
                                                   >
                                                     {sum.team}
@@ -585,7 +579,7 @@ class Team extends Component {
                                                 <ProfileStatus
                                                   pic={man[0].profilePic}
                                                   right={0}
-                                                  top={27}
+                                                  top={25}
                                                   height={50}
                                                   width={50}
                                                   passive={true}
@@ -609,7 +603,7 @@ class Team extends Component {
                                                 <ProfileStatus
                                                   pic={man[0].profilePic}
                                                   right={-15}
-                                                  top={27}
+                                                  top={25}
                                                   height={50}
                                                   width={50}
                                                   passive={true}
@@ -649,21 +643,17 @@ class Team extends Component {
                                                     }
                                                     style={{
                                                       backgroundColor:
-                                                        sum.active >
-                                                          sum.offline &&
-                                                        sum.active >
-                                                          sum.inactive
+                                                        (sum.active /
+                                                          sum.total_employees) *
+                                                          100 >
+                                                        80
                                                           ? "#8BC646"
-                                                          : sum.inactive >
-                                                              sum.offline &&
-                                                            sum.inactive >
-                                                              sum.active
-                                                          ? "EFC165"
-                                                          : sum.offline >
-                                                              sum.active &&
-                                                            sum.offline >
-                                                              sum.inactive &&
-                                                            "#CECECE",
+                                                          : (sum.active /
+                                                              sum.total_employees) *
+                                                              100 >
+                                                            50
+                                                          ? "#efc165"
+                                                          : "#D1BD94",
                                                     }}
                                                   >
                                                     {sum.team}
@@ -816,16 +806,29 @@ class Team extends Component {
                                       className={styles.summaryHeader}
                                       style={{
                                         backgroundColor:
-                                          sum.active > sum.offline &&
-                                          sum.active > sum.inactive
+                                          (sum.active / sum.total_employees) *
+                                            100 >
+                                          80
                                             ? "#8BC646"
-                                            : sum.inactive > sum.offline &&
-                                              sum.inactive > sum.active
-                                            ? "EFC165"
-                                            : sum.offline > sum.active &&
-                                              sum.offline > sum.inactive &&
-                                              "#CECECE",
+                                            : (sum.active /
+                                                sum.total_employees) *
+                                                100 >
+                                              50
+                                            ? "#efc165"
+                                            : "#D1BD94",
                                       }}
+                                      // style={{
+                                      //   backgroundColor:
+                                      //     sum.active > sum.offline &&
+                                      //     sum.active > sum.inactive
+                                      //       ? "#8BC646"
+                                      //       : sum.inactive > sum.offline &&
+                                      //         sum.inactive > sum.active
+                                      //       ? "EFC165"
+                                      //       : sum.offline > sum.active &&
+                                      //         sum.offline > sum.inactive &&
+                                      //         "#CECECE",
+                                      // }}
                                     >
                                       {sum.team}
                                     </div>
@@ -954,7 +957,7 @@ class Team extends Component {
                                                   <span>
                                                     <ProfileStatus
                                                       pic={val.profilePic}
-                                                      right={0}
+                                                      right={-3}
                                                       rightSide={true}
                                                       offline={true}
                                                     />
@@ -969,7 +972,7 @@ class Team extends Component {
                                                   <span>
                                                     <ProfileStatus
                                                       pic={val.profilePic}
-                                                      left={0}
+                                                      left={-3}
                                                       leftSide={true}
                                                       offline={true}
                                                     />
@@ -1013,7 +1016,7 @@ class Team extends Component {
                                                   <span>
                                                     <ProfileStatus
                                                       pic={val.profilePic}
-                                                      right={0}
+                                                      right={-3}
                                                       active={true}
                                                       rightSide={true}
                                                     />
@@ -1028,7 +1031,7 @@ class Team extends Component {
                                                   <span>
                                                     <ProfileStatus
                                                       pic={val.profilePic}
-                                                      left={0}
+                                                      left={-3}
                                                       active={true}
                                                       leftSide={true}
                                                     />
@@ -1073,7 +1076,7 @@ class Team extends Component {
                                                   <span>
                                                     <ProfileStatus
                                                       pic={val.profilePic}
-                                                      right={0}
+                                                      right={-3}
                                                       passive={true}
                                                       rightSide={true}
                                                     />
@@ -1088,7 +1091,7 @@ class Team extends Component {
                                                   <span>
                                                     <ProfileStatus
                                                       pic={val.profilePic}
-                                                      left={0}
+                                                      left={-3}
                                                       passive={true}
                                                       leftSide={true}
                                                     />
@@ -1149,7 +1152,7 @@ class Team extends Component {
                                               <span>
                                                 <ProfileStatus
                                                   pic={val.profilePic}
-                                                  right={0}
+                                                  right={-3}
                                                   rightSide={true}
                                                   offline={true}
                                                 />
@@ -1164,7 +1167,7 @@ class Team extends Component {
                                               <span>
                                                 <ProfileStatus
                                                   pic={val.profilePic}
-                                                  left={0}
+                                                  left={-3}
                                                   leftSide={true}
                                                   offline={true}
                                                 />
@@ -1204,7 +1207,7 @@ class Team extends Component {
                                               <span>
                                                 <ProfileStatus
                                                   pic={val.profilePic}
-                                                  right={0}
+                                                  right={-3}
                                                   active={true}
                                                   rightSide={true}
                                                 />
@@ -1217,7 +1220,7 @@ class Team extends Component {
                                               <span>
                                                 <ProfileStatus
                                                   pic={val.profilePic}
-                                                  left={0}
+                                                  left={-3}
                                                   active={true}
                                                   leftSide={true}
                                                 />
@@ -1257,7 +1260,7 @@ class Team extends Component {
                                               <span>
                                                 <ProfileStatus
                                                   pic={val.profilePic}
-                                                  right={0}
+                                                  right={-3}
                                                   passive={true}
                                                   rightSide={true}
                                                 />
@@ -1272,7 +1275,7 @@ class Team extends Component {
                                               <span>
                                                 <ProfileStatus
                                                   pic={val.profilePic}
-                                                  left={0}
+                                                  left={-3}
                                                   passive={true}
                                                   leftSide={true}
                                                 />
@@ -1334,7 +1337,7 @@ class Team extends Component {
                                             <span>
                                               <ProfileStatus
                                                 pic={val.profilePic}
-                                                right={0}
+                                                right={-3}
                                                 rightSide={true}
                                                 offline={true}
                                               />
@@ -1347,7 +1350,7 @@ class Team extends Component {
                                             <span>
                                               <ProfileStatus
                                                 pic={val.profilePic}
-                                                left={0}
+                                                left={-3}
                                                 leftSide={true}
                                                 offline={true}
                                               />
@@ -1385,7 +1388,7 @@ class Team extends Component {
                                             <span>
                                               <ProfileStatus
                                                 pic={val.profilePic}
-                                                right={0}
+                                                right={-3}
                                                 active={true}
                                                 rightSide={true}
                                               />
@@ -1398,7 +1401,7 @@ class Team extends Component {
                                             <span>
                                               <ProfileStatus
                                                 pic={val.profilePic}
-                                                left={0}
+                                                left={-3}
                                                 active={true}
                                                 leftSide={true}
                                               />
@@ -1436,7 +1439,7 @@ class Team extends Component {
                                             <span>
                                               <ProfileStatus
                                                 pic={val.profilePic}
-                                                right={0}
+                                                right={-3}
                                                 passive={true}
                                                 rightSide={true}
                                               />
@@ -1449,7 +1452,7 @@ class Team extends Component {
                                             <span>
                                               <ProfileStatus
                                                 pic={val.profilePic}
-                                                left={0}
+                                                left={-3}
                                                 passive={true}
                                                 leftSide={true}
                                               />

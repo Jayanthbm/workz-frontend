@@ -15,7 +15,7 @@ class ProfileStatus extends Component {
             left: this.props.left,
             right: this.props.right,
             top: this.props.top,
-            border: "2px solid #cecece",
+            border: "1px solid #cecece",
             borderRadius: "100%",
           }}
         />

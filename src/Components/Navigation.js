@@ -25,16 +25,56 @@ class Navigation extends Component {
                     this.props.team &&
                     this.props.team.map((val) => {
                       return (
-                        <option
-                          value={val.id}
-                          selected={
-                            this.props.team_id && val.id === this.props.team_id
-                              ? true
-                              : false
-                          }
-                        >
-                          {val.name}
-                        </option>
+                        <>
+                          <option
+                            value={
+                              val.teamId
+                                ? JSON.stringify({
+                                    type: "team",
+                                    id: val.teamId,
+                                  })
+                                : JSON.stringify({
+                                    type: "manager",
+                                    id: val.userId,
+                                  })
+                            }
+                            selected={
+                              this.props.man_id
+                                ? this.props.man_id === val.userId
+                                  ? true
+                                  : false
+                                : this.props.team_id &&
+                                  this.props.team_id === val.teamId
+                                ? true
+                                : false
+                            }
+                            // this.props.man_id ?  this.props.man_id === val.userId ? true : false
+                            // : this.props.team_id ? this.props.team_id===val.teamId?true:false
+                          >
+                            {val.name}
+                          </option>
+                          ;
+                          {val.userId &&
+                            val.teams &&
+                            val.teams.map((team) => {
+                              return (
+                                <option
+                                  value={JSON.stringify({
+                                    type: "team",
+                                    id: team.teamId,
+                                  })}
+                                  selected={
+                                    this.props.team_id &&
+                                    this.props.team_id === team.teamId
+                                      ? true
+                                      : false
+                                  }
+                                >
+                                  {team.name}
+                                </option>
+                              );
+                            })}
+                        </>
                       );
                     })}
                 </select>
