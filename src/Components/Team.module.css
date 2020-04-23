@@ -23,7 +23,7 @@
   margin-right: 110px;
 }
 .countryHolder {
-  width: 65%;
+  width: 75%;
   background: #fff;
   padding: 10px 20px;
   border-radius: 8px;
@@ -60,7 +60,7 @@
   position: absolute;
   text-align: left;
   z-index: 1;
-  bottom: 70px;
+  bottom: 50px;
   box-shadow: 1px 0px 5px 1px rgba(0, 0, 0, 0.2);
   left: -50px;
   margin-left: -0px;
@@ -192,7 +192,7 @@
 }
 
 .usrContainer {
-  padding: 50px;
+  padding: 30px;
   width: 250px;
   margin: auto;
   border-right: 2px solid #ebebeb;
