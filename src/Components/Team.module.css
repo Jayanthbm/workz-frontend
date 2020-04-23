@@ -60,9 +60,9 @@
   position: absolute;
   text-align: left;
   z-index: 1;
-  bottom: 50px;
+  bottom: 40px;
   box-shadow: 1px 0px 5px 1px rgba(0, 0, 0, 0.2);
-  left: -50px;
+  left: -60px;
   margin-left: -0px;
   opacity: 0;
   transition: opacity 0.3s;
@@ -94,6 +94,12 @@
   white-space: nowrap;
   padding-top: 5px;
   font-size: 14px;
+}
+.lastActiveHolder {
+  font-size: 9px;
+  padding-top: 10px;
+  font-weight: 700;
+  color: #cececf;
 }
 .titleCityHolder {
   font-size: 13px;

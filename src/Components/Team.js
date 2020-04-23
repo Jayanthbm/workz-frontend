@@ -78,6 +78,23 @@ class Team extends Component {
     this.props.getTeam(val);
     this.setState({ man_id: val });
   };
+  activeHandler = (timeStamp) => {
+    var today = new Date();
+    var onlineDate = new Date(timeStamp);
+    var diffMs = today - onlineDate;
+    var diffDays = Math.floor(diffMs / 86400000); // days
+    var diffHrs = Math.floor((diffMs % 86400000) / 3600000); // hours
+    var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
+    return (
+      diffDays +
+      " days, " +
+      diffHrs +
+      " hours, " +
+      diffMins +
+      " minutes " +
+      "ago"
+    );
+  };
   componentWillReceiveProps(nextProps) {
     if (
       nextProps &&
@@ -222,6 +239,20 @@ class Team extends Component {
                                                     }
                                                   >
                                                     Email : {man[0].emailId}
+                                                  </div>
+                                                  <div
+                                                    className={
+                                                      styles.lastActiveHolder
+                                                    }
+                                                  >
+                                                    Last Active:{" "}
+                                                    {man[0].onlineStatus ===
+                                                    "active"
+                                                      ? "Active Now"
+                                                      : this.activeHandler(
+                                                          man[0]
+                                                            .onlineStatusTimestamp
+                                                        )}
                                                   </div>
                                                 </>
                                               }
@@ -465,6 +496,20 @@ class Team extends Component {
                                                   >
                                                     Email : {man[0].emailId}
                                                   </div>
+                                                  <div
+                                                    className={
+                                                      styles.lastActiveHolder
+                                                    }
+                                                  >
+                                                    Last Active:{" "}
+                                                    {man[0].onlineStatus ===
+                                                    "active"
+                                                      ? "Active Now"
+                                                      : this.activeHandler(
+                                                          man[0]
+                                                            .onlineStatusTimestamp
+                                                        )}
+                                                  </div>
                                                 </>
                                               }
                                             </span>
@@ -705,6 +750,20 @@ class Team extends Component {
                                                     }
                                                   >
                                                     Email : {man[0].emailId}
+                                                  </div>
+                                                  <div
+                                                    className={
+                                                      styles.lastActiveHolder
+                                                    }
+                                                  >
+                                                    Last Active:{" "}
+                                                    {man[0].onlineStatus ===
+                                                    "active"
+                                                      ? "Active Now"
+                                                      : this.activeHandler(
+                                                          man[0]
+                                                            .onlineStatusTimestamp
+                                                        )}
                                                   </div>
                                                 </>
                                               }
@@ -1125,6 +1184,19 @@ class Team extends Component {
                                                         >
                                                           Email : {val.emailId}
                                                         </div>
+                                                        <div
+                                                          className={
+                                                            styles.lastActiveHolder
+                                                          }
+                                                        >
+                                                          Last Active:{" "}
+                                                          {val.onlineStatus ===
+                                                          "active"
+                                                            ? "Active Now"
+                                                            : this.activeHandler(
+                                                                val.onlineStatusTimestamp
+                                                              )}
+                                                        </div>
                                                       </>
                                                     }
                                                   </span>
@@ -1222,6 +1294,19 @@ class Team extends Component {
                                                         >
                                                           Email : {val.emailId}
                                                         </div>
+                                                        <div
+                                                          className={
+                                                            styles.lastActiveHolder
+                                                          }
+                                                        >
+                                                          Last Active:{" "}
+                                                          {val.onlineStatus ===
+                                                          "active"
+                                                            ? "Active Now"
+                                                            : this.activeHandler(
+                                                                val.onlineStatusTimestamp
+                                                              )}
+                                                        </div>
                                                       </>
                                                     }
                                                   </span>
@@ -1318,6 +1403,19 @@ class Team extends Component {
                                                           }
                                                         >
                                                           Email : {val.emailId}
+                                                        </div>
+                                                        <div
+                                                          className={
+                                                            styles.lastActiveHolder
+                                                          }
+                                                        >
+                                                          Last Active:{" "}
+                                                          {val.onlineStatus ===
+                                                          "active"
+                                                            ? "Active Now"
+                                                            : this.activeHandler(
+                                                                val.onlineStatusTimestamp
+                                                              )}
                                                         </div>
                                                       </>
                                                     }
@@ -1436,6 +1534,19 @@ class Team extends Component {
                                                         >
                                                           Email : {val.emailId}
                                                         </div>
+                                                        <div
+                                                          className={
+                                                            styles.lastActiveHolder
+                                                          }
+                                                        >
+                                                          Last Active:{" "}
+                                                          {val.onlineStatus ===
+                                                          "active"
+                                                            ? "Active Now"
+                                                            : this.activeHandler(
+                                                                val.onlineStatusTimestamp
+                                                              )}
+                                                        </div>
                                                       </>
                                                     }
                                                   </span>
@@ -1533,6 +1644,19 @@ class Team extends Component {
                                                         >
                                                           Email : {val.emailId}
                                                         </div>
+                                                        <div
+                                                          className={
+                                                            styles.lastActiveHolder
+                                                          }
+                                                        >
+                                                          Last Active:{" "}
+                                                          {val.onlineStatus ===
+                                                          "active"
+                                                            ? "Active Now"
+                                                            : this.activeHandler(
+                                                                val.onlineStatusTimestamp
+                                                              )}
+                                                        </div>
                                                       </>
                                                     }
                                                   </span>
@@ -1629,6 +1753,19 @@ class Team extends Component {
                                                           }
                                                         >
                                                           Email : {val.emailId}
+                                                        </div>
+                                                        <div
+                                                          className={
+                                                            styles.lastActiveHolder
+                                                          }
+                                                        >
+                                                          Last Active:{" "}
+                                                          {val.onlineStatus ===
+                                                          "active"
+                                                            ? "Active Now"
+                                                            : this.activeHandler(
+                                                                val.onlineStatusTimestamp
+                                                              )}
                                                         </div>
                                                       </>
                                                     }
@@ -1747,6 +1884,19 @@ class Team extends Component {
                                                         >
                                                           Email : {val.emailId}
                                                         </div>
+                                                        <div
+                                                          className={
+                                                            styles.lastActiveHolder
+                                                          }
+                                                        >
+                                                          Last Active:{" "}
+                                                          {val.onlineStatus ===
+                                                          "active"
+                                                            ? "Active Now"
+                                                            : this.activeHandler(
+                                                                val.onlineStatusTimestamp
+                                                              )}
+                                                        </div>
                                                       </>
                                                     }
                                                   </span>
@@ -1844,6 +1994,19 @@ class Team extends Component {
                                                         >
                                                           Email : {val.emailId}
                                                         </div>
+                                                        <div
+                                                          className={
+                                                            styles.lastActiveHolder
+                                                          }
+                                                        >
+                                                          Last Active:{" "}
+                                                          {val.onlineStatus ===
+                                                          "active"
+                                                            ? "Active Now"
+                                                            : this.activeHandler(
+                                                                val.onlineStatusTimestamp
+                                                              )}
+                                                        </div>
                                                       </>
                                                     }
                                                   </span>
@@ -1940,6 +2103,19 @@ class Team extends Component {
                                                           }
                                                         >
                                                           Email : {val.emailId}
+                                                        </div>
+                                                        <div
+                                                          className={
+                                                            styles.lastActiveHolder
+                                                          }
+                                                        >
+                                                          Last Active:{" "}
+                                                          {val.onlineStatus ===
+                                                          "active"
+                                                            ? "Active Now"
+                                                            : this.activeHandler(
+                                                                val.onlineStatusTimestamp
+                                                              )}
                                                         </div>
                                                       </>
                                                     }
@@ -2059,6 +2235,19 @@ class Team extends Component {
                                                       >
                                                         Email : {val.emailId}
                                                       </div>
+                                                      <div
+                                                        className={
+                                                          styles.lastActiveHolder
+                                                        }
+                                                      >
+                                                        Last Active:{" "}
+                                                        {val.onlineStatus ===
+                                                        "active"
+                                                          ? "Active Now"
+                                                          : this.activeHandler(
+                                                              val.onlineStatusTimestamp
+                                                            )}
+                                                      </div>
                                                     </>
                                                   }
                                                 </span>
@@ -2152,6 +2341,19 @@ class Team extends Component {
                                                       >
                                                         Email : {val.emailId}
                                                       </div>
+                                                      <div
+                                                        className={
+                                                          styles.lastActiveHolder
+                                                        }
+                                                      >
+                                                        Last Active:{" "}
+                                                        {val.onlineStatus ===
+                                                        "active"
+                                                          ? "Active Now"
+                                                          : this.activeHandler(
+                                                              val.onlineStatusTimestamp
+                                                            )}
+                                                      </div>
                                                     </>
                                                   }
                                                 </span>
@@ -2244,6 +2446,19 @@ class Team extends Component {
                                                         }
                                                       >
                                                         Email : {val.emailId}
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.lastActiveHolder
+                                                        }
+                                                      >
+                                                        Last Active:{" "}
+                                                        {val.onlineStatus ===
+                                                        "active"
+                                                          ? "Active Now"
+                                                          : this.activeHandler(
+                                                              val.onlineStatusTimestamp
+                                                            )}
                                                       </div>
                                                     </>
                                                   }
@@ -2357,6 +2572,18 @@ class Team extends Component {
                                                 >
                                                   Email : {val.emailId}
                                                 </div>
+                                                <div
+                                                  className={
+                                                    styles.lastActiveHolder
+                                                  }
+                                                >
+                                                  Last Active:{" "}
+                                                  {val.onlineStatus === "active"
+                                                    ? "Active Now"
+                                                    : this.activeHandler(
+                                                        val.onlineStatusTimestamp
+                                                      )}
+                                                </div>
                                               </>
                                             }
                                           </span>
@@ -2442,6 +2669,18 @@ class Team extends Component {
                                                 >
                                                   Email : {val.emailId}
                                                 </div>
+                                                <div
+                                                  className={
+                                                    styles.lastActiveHolder
+                                                  }
+                                                >
+                                                  Last Active:{" "}
+                                                  {val.onlineStatus === "active"
+                                                    ? "Active Now"
+                                                    : this.activeHandler(
+                                                        val.onlineStatusTimestamp
+                                                      )}
+                                                </div>
                                               </>
                                             }
                                           </span>
@@ -2526,6 +2765,18 @@ class Team extends Component {
                                                   }
                                                 >
                                                   Email : {val.emailId}
+                                                </div>
+                                                <div
+                                                  className={
+                                                    styles.lastActiveHolder
+                                                  }
+                                                >
+                                                  Last Active:{" "}
+                                                  {val.onlineStatus === "active"
+                                                    ? "Active Now"
+                                                    : this.activeHandler(
+                                                        val.onlineStatusTimestamp
+                                                      )}
                                                 </div>
                                               </>
                                             }
