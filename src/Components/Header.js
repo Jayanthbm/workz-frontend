@@ -34,7 +34,6 @@ class Header extends Component {
     window.location.reload();
   };
   render() {
-    console.log(this.props);
     const isLoggedin = Cookie.getCookie(USER_DETAILS) ? true : false;
     return (
       <div className={styles.headerBase}>

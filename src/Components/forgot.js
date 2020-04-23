@@ -17,7 +17,6 @@ class reset extends Component {
   };
   handleClick = () => {
     let pass = this.state.forgotpassword.trim();
-    console.log(pass);
     if (this.state.forgotpassword === this.state.cpass) {
       const reqBody = {
         password: pass,
@@ -43,13 +42,11 @@ class reset extends Component {
   };
   componentDidMount() {
     if (this.props.forgotValidate) {
-      console.log(this.props.match.params.token);
       this.props.forgotValidate({ token: this.props.match.params.token });
     }
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.passwordError !== this.props.passwordError) {
-      console.log(nextProps.passwordError);
       this.setState({
         forgotError: nextProps.passwordError,
         forgotpassword: "",
@@ -57,7 +54,6 @@ class reset extends Component {
       });
     }
     if (nextProps.password !== this.props.password) {
-      console.log(nextProps.password);
       this.setState({
         forgotSuccess: nextProps.password.message,
         forgotpassword: "",
@@ -70,7 +66,6 @@ class reset extends Component {
     }
   }
   render() {
-    console.log(this.props);
     return (
       <div className={styles.base}>
         <HeaderContainer />

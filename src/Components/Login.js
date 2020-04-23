@@ -33,7 +33,6 @@ class Login extends Component {
     }
   };
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
     if (nextProps && nextProps.login) {
       if (nextProps.login.previousPassword === null) {
         this.props.history.push("/reset");
@@ -55,7 +54,6 @@ class Login extends Component {
     }
   }
   render() {
-    console.log(this.props);
     return (
       <div className={styles.base}>
         <Header />

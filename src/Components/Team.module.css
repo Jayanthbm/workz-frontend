@@ -55,14 +55,14 @@
   color: #000;
   box-shadow: 1px salmon;
   text-align: center;
-  border-radius: 6px;
+  border-radius: 15px;
   padding: 5px 0;
   position: absolute;
   text-align: left;
   z-index: 1;
-  /* bottom: 125%; */
+  bottom: 70px;
   box-shadow: 1px 0px 5px 1px rgba(0, 0, 0, 0.2);
-  left: 15%;
+  left: -50px;
   margin-left: -0px;
   opacity: 0;
   transition: opacity 0.3s;
@@ -72,21 +72,36 @@
   content: "";
   position: absolute;
   top: 100%;
-  left: 50%;
+  left: 35%;
   margin-left: -5px;
-  border-width: 5px;
+
   border-style: solid;
+  border-width: 25px 20px 0 20px;
   border-color: #fff transparent transparent transparent;
 }
 
 .seatHolder:hover .tooltiptext {
   visibility: visible;
-  padding-left: 10px;
-  padding-right: 10px;
+  /* padding-left: 10px;
+  padding-right: 10px; */
   opacity: 1;
+  padding: 20px;
+}
+.titleNameContainer {
+  display: flex;
+}
+.titleDataHolder {
+  white-space: nowrap;
+  padding-top: 5px;
+  font-size: 14px;
+}
+.titleCityHolder {
+  font-size: 13px;
+  margin-left: 10px;
 }
 .countryUsers {
   padding: 10px 20px;
+  position: relative;
 }
 .counryUsers:last-child {
   padding-right: calc(100% - 110px);

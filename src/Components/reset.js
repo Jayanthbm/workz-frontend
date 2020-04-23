@@ -32,7 +32,6 @@ class reset extends Component {
     }
   };
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
     if (
       nextProps.updatePasswordData &&
       nextProps.updatePasswordData.passwordError ===

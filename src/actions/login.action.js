@@ -36,7 +36,6 @@ export function forgotPostRequest() {
 }
 
 export function forgotPostSuccess(postDetails) {
-  console.log(postDetails);
   return {
     type: FORGOT_POST_SUCCESS,
     postStatus: SUCCESS,
@@ -76,7 +75,6 @@ export function forgotValidateRequest() {
   };
 }
 export function forgotValidateSuccess(forgotDetails) {
-  console.log(forgotDetails);
   return {
     type: FORGOT_VALIDATE_SUCCESS,
     status: SUCCESS,
@@ -116,7 +114,6 @@ export function forgotPassRequest() {
   };
 }
 export function forgotPassSuccess(forgotPassDetails) {
-  console.log(forgotPassDetails);
   return {
     type: FORGOT_PASSWORD_SUCCESS,
     status: SUCCESS,
@@ -125,7 +122,6 @@ export function forgotPassSuccess(forgotPassDetails) {
 }
 
 export function forgotPassFailure(error) {
-  console.log("sy=");
   return {
     type: FORGOT_PASSWORD_FAILURE,
     status: ERROR,

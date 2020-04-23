@@ -38,14 +38,12 @@ const team = (
       });
 
     case teamAction.GET_TEAM_SUCCESS:
-      console.log(action.teamDetails);
       return Object.assign({}, state, {
         status: action.status,
         loading: false,
         teamDetails: action.teamDetails,
       });
     case teamAction.GET_TEAM_FAILURE:
-      console.log(action.error);
       return Object.assign({}, state, {
         status: action.status,
         loading: false,

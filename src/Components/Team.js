@@ -35,7 +35,6 @@ const data = [
 ];
 const userDetails = Cookie.getCookie(USER_DETAILS);
 let parsedData = userDetails && JSON.parse(userDetails);
-console.log(parsedData);
 class Team extends Component {
   constructor(props) {
     super(props);
@@ -46,6 +45,9 @@ class Team extends Component {
         this.props.teamDetails.teams[0].teamId,
       team_id: "",
       man_id: "",
+      a: [],
+      b: [],
+      c: [],
     };
   }
   componentDidMount() {
@@ -73,12 +75,10 @@ class Team extends Component {
     }
   };
   handleManager = (val) => {
-    console.log(val);
     this.props.getTeam(val);
     this.setState({ man_id: val });
   };
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
     if (
       nextProps &&
       nextProps.teamError &&
@@ -90,16 +90,16 @@ class Team extends Component {
       window.location.reload();
     }
   }
-  handleArray = (arr) => {};
+  // handleArray = (arr) => {};
   render() {
     console.log(this.props);
-    const users1 =
-      this.props.teamDetails &&
-      this.props.teamDetails.length === 1 &&
-      this.props.teamDetails[0] &&
-      this.props.teamDetails[0].users &&
-      this.props.teamDetails[0].users.length > 6 &&
-      this.handleArray(this.props.teamDetails[0].users);
+    // const users1 =
+    //   this.props.teamDetails &&
+    //   this.props.teamDetails.length === 1 &&
+    //   this.props.teamDetails[0] &&
+    //   this.props.teamDetails[0].users &&
+    //   this.props.teamDetails[0].users.length > 6 &&
+    //   this.handleArray(this.props.teamDetails[0].users);
     const users =
       this.props.teamDetails &&
       this.props.teamDetails.length === 1 &&
@@ -109,9 +109,10 @@ class Team extends Component {
       this.props.teamDetails[0].users.splice(
         this.props.teamDetails[0].users.length / 2
       );
-    console.log(users);
+
     const userDetails = Cookie.getCookie(USER_DETAILS);
     let parsedData = userDetails && JSON.parse(userDetails);
+    console.log(parsedData);
     return (
       <div className={styles.base}>
         <Header pic={parsedData && parsedData.profilePic} />
@@ -135,13 +136,11 @@ class Team extends Component {
                           <div className={styles.managerContainer}>
                             <div className={styles.manUserContainer}>
                               {val.managers.map((man, i) => {
-                                console.log(man);
                                 return (
                                   <div>
                                     <div className={styles.countryUsers}>
                                       {man[0].onlineStatus === "offline" && (
                                         <>
-                                          {console.log(man[0])}
                                           <span className={styles.seatHolder}>
                                             <span
                                               className={styles.tooltiptext}
@@ -149,16 +148,52 @@ class Team extends Component {
                                               {
                                                 <>
                                                   <div
-                                                    style={{ color: "#5dbcb3" }}
+                                                    className={
+                                                      styles.titleNameContainer
+                                                    }
                                                   >
-                                                    {man[0].name}
+                                                    <div
+                                                      style={{
+                                                        color: "#5BB5F7",
+                                                      }}
+                                                    >
+                                                      {man[0].name}
+                                                    </div>
+                                                    <div
+                                                      className={
+                                                        styles.titleCityHolder
+                                                      }
+                                                    >
+                                                      {man[0].city}
+                                                    </div>
                                                   </div>
                                                   <div
-                                                    style={{
-                                                      whiteSpace: "nowrap",
-                                                    }}
+                                                    className={
+                                                      styles.titleDataHolder
+                                                    }
                                                   >
-                                                    email : {man[0].emailId}
+                                                    Message : {man[0].message}
+                                                  </div>
+                                                  <div
+                                                    className={
+                                                      styles.titleDataHolder
+                                                    }
+                                                  >
+                                                    Skype : {man[0].skype}
+                                                  </div>
+                                                  <div
+                                                    className={
+                                                      styles.titleDataHolder
+                                                    }
+                                                  >
+                                                    Mobile : {man[0].mobile}
+                                                  </div>
+                                                  <div
+                                                    className={
+                                                      styles.titleDataHolder
+                                                    }
+                                                  >
+                                                    Email : {man[0].emailId}
                                                   </div>
                                                 </>
                                               }
@@ -355,16 +390,52 @@ class Team extends Component {
                                               {
                                                 <>
                                                   <div
-                                                    style={{ color: "#5dbcb3" }}
+                                                    className={
+                                                      styles.titleNameContainer
+                                                    }
                                                   >
-                                                    {man[0].name}
+                                                    <div
+                                                      style={{
+                                                        color: "#5BB5F7",
+                                                      }}
+                                                    >
+                                                      {man[0].name}
+                                                    </div>
+                                                    <div
+                                                      className={
+                                                        styles.titleCityHolder
+                                                      }
+                                                    >
+                                                      {man[0].city}
+                                                    </div>
                                                   </div>
                                                   <div
-                                                    style={{
-                                                      whiteSpace: "nowrap",
-                                                    }}
+                                                    className={
+                                                      styles.titleDataHolder
+                                                    }
                                                   >
-                                                    email : {man[0].emailId}
+                                                    Message : {man[0].message}
+                                                  </div>
+                                                  <div
+                                                    className={
+                                                      styles.titleDataHolder
+                                                    }
+                                                  >
+                                                    Skype : {man[0].skype}
+                                                  </div>
+                                                  <div
+                                                    className={
+                                                      styles.titleDataHolder
+                                                    }
+                                                  >
+                                                    Mobile : {man[0].mobile}
+                                                  </div>
+                                                  <div
+                                                    className={
+                                                      styles.titleDataHolder
+                                                    }
+                                                  >
+                                                    Email : {man[0].emailId}
                                                   </div>
                                                 </>
                                               }
@@ -560,16 +631,52 @@ class Team extends Component {
                                               {
                                                 <>
                                                   <div
-                                                    style={{ color: "#5dbcb3" }}
+                                                    className={
+                                                      styles.titleNameContainer
+                                                    }
                                                   >
-                                                    {man[0].name}
+                                                    <div
+                                                      style={{
+                                                        color: "#5BB5F7",
+                                                      }}
+                                                    >
+                                                      {man[0].name}
+                                                    </div>
+                                                    <div
+                                                      className={
+                                                        styles.titleCityHolder
+                                                      }
+                                                    >
+                                                      {man[0].city}
+                                                    </div>
                                                   </div>
                                                   <div
-                                                    style={{
-                                                      whiteSpace: "nowrap",
-                                                    }}
+                                                    className={
+                                                      styles.titleDataHolder
+                                                    }
                                                   >
-                                                    email : {man[0].emailId}
+                                                    Message : {man[0].message}
+                                                  </div>
+                                                  <div
+                                                    className={
+                                                      styles.titleDataHolder
+                                                    }
+                                                  >
+                                                    Skype : {man[0].skype}
+                                                  </div>
+                                                  <div
+                                                    className={
+                                                      styles.titleDataHolder
+                                                    }
+                                                  >
+                                                    Mobile : {man[0].mobile}
+                                                  </div>
+                                                  <div
+                                                    className={
+                                                      styles.titleDataHolder
+                                                    }
+                                                  >
+                                                    Email : {man[0].emailId}
                                                   </div>
                                                 </>
                                               }
@@ -925,7 +1032,6 @@ class Team extends Component {
                                     users.map((val, i) => {
                                       return (
                                         <>
-                                          {console.log(val)}
                                           <span className={styles.countrUsers}>
                                             {val.onlineStatus === "offline" && (
                                               <span
@@ -937,18 +1043,52 @@ class Team extends Component {
                                                   {
                                                     <>
                                                       <div
-                                                        style={{
-                                                          color: "#5dbcb3",
-                                                        }}
+                                                        className={
+                                                          styles.titleNameContainer
+                                                        }
                                                       >
-                                                        {val.name}
+                                                        <div
+                                                          style={{
+                                                            color: "#5BB5F7",
+                                                          }}
+                                                        >
+                                                          {val.name}
+                                                        </div>
+                                                        <div
+                                                          className={
+                                                            styles.titleCityHolder
+                                                          }
+                                                        >
+                                                          {val.city}
+                                                        </div>
                                                       </div>
                                                       <div
-                                                        style={{
-                                                          whiteSpace: "nowrap",
-                                                        }}
+                                                        className={
+                                                          styles.titleDataHolder
+                                                        }
                                                       >
-                                                        email : {val.emailId}
+                                                        Message : {val.message}
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.titleDataHolder
+                                                        }
+                                                      >
+                                                        Skype : {val.skype}
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.titleDataHolder
+                                                        }
+                                                      >
+                                                        Mobile : {val.mobile}
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.titleDataHolder
+                                                        }
+                                                      >
+                                                        Email : {val.emailId}
                                                       </div>
                                                     </>
                                                   }
@@ -996,18 +1136,52 @@ class Team extends Component {
                                                   {
                                                     <>
                                                       <div
-                                                        style={{
-                                                          color: "#5dbcb3",
-                                                        }}
+                                                        className={
+                                                          styles.titleNameContainer
+                                                        }
                                                       >
-                                                        {val.name}
+                                                        <div
+                                                          style={{
+                                                            color: "#5BB5F7",
+                                                          }}
+                                                        >
+                                                          {val.name}
+                                                        </div>
+                                                        <div
+                                                          className={
+                                                            styles.titleCityHolder
+                                                          }
+                                                        >
+                                                          {val.city}
+                                                        </div>
                                                       </div>
                                                       <div
-                                                        style={{
-                                                          whiteSpace: "nowrap",
-                                                        }}
+                                                        className={
+                                                          styles.titleDataHolder
+                                                        }
                                                       >
-                                                        email : {val.emailId}
+                                                        Message : {val.message}
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.titleDataHolder
+                                                        }
+                                                      >
+                                                        Skype : {val.skype}
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.titleDataHolder
+                                                        }
+                                                      >
+                                                        Mobile : {val.mobile}
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.titleDataHolder
+                                                        }
+                                                      >
+                                                        Email : {val.emailId}
                                                       </div>
                                                     </>
                                                   }
@@ -1049,25 +1223,58 @@ class Team extends Component {
                                               <span
                                                 className={styles.seatHolder}
                                               >
-                                                {" "}
                                                 <span
                                                   className={styles.tooltiptext}
                                                 >
                                                   {
                                                     <>
                                                       <div
-                                                        style={{
-                                                          color: "#5dbcb3",
-                                                        }}
+                                                        className={
+                                                          styles.titleNameContainer
+                                                        }
                                                       >
-                                                        {val.name}
+                                                        <div
+                                                          style={{
+                                                            color: "#5BB5F7",
+                                                          }}
+                                                        >
+                                                          {val.name}
+                                                        </div>
+                                                        <div
+                                                          className={
+                                                            styles.titleCityHolder
+                                                          }
+                                                        >
+                                                          {val.city}
+                                                        </div>
                                                       </div>
                                                       <div
-                                                        style={{
-                                                          whiteSpace: "nowrap",
-                                                        }}
+                                                        className={
+                                                          styles.titleDataHolder
+                                                        }
                                                       >
-                                                        email : {val.emailId}
+                                                        Message : {val.message}
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.titleDataHolder
+                                                        }
+                                                      >
+                                                        Skype : {val.skype}
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.titleDataHolder
+                                                        }
+                                                      >
+                                                        Mobile : {val.mobile}
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.titleDataHolder
+                                                        }
+                                                      >
+                                                        Email : {val.emailId}
                                                       </div>
                                                     </>
                                                   }
@@ -1122,7 +1329,6 @@ class Team extends Component {
                                 {val.users.map((val, i) => {
                                   return (
                                     <>
-                                      {console.log(val)}
                                       <span className={styles.countrUsers}>
                                         {val.onlineStatus === "offline" && (
                                           <span className={styles.seatHolder}>
@@ -1132,18 +1338,52 @@ class Team extends Component {
                                               {
                                                 <>
                                                   <div
-                                                    style={{
-                                                      color: "#5dbcb3",
-                                                    }}
+                                                    className={
+                                                      styles.titleNameContainer
+                                                    }
                                                   >
-                                                    {val.name}
+                                                    <div
+                                                      style={{
+                                                        color: "#5BB5F7",
+                                                      }}
+                                                    >
+                                                      {val.name}
+                                                    </div>
+                                                    <div
+                                                      className={
+                                                        styles.titleCityHolder
+                                                      }
+                                                    >
+                                                      {val.city}
+                                                    </div>
                                                   </div>
                                                   <div
-                                                    style={{
-                                                      whiteSpace: "nowrap",
-                                                    }}
+                                                    className={
+                                                      styles.titleDataHolder
+                                                    }
                                                   >
-                                                    email : {val.emailId}
+                                                    Message : {val.message}
+                                                  </div>
+                                                  <div
+                                                    className={
+                                                      styles.titleDataHolder
+                                                    }
+                                                  >
+                                                    Skype : {val.skype}
+                                                  </div>
+                                                  <div
+                                                    className={
+                                                      styles.titleDataHolder
+                                                    }
+                                                  >
+                                                    Mobile : {val.mobile}
+                                                  </div>
+                                                  <div
+                                                    className={
+                                                      styles.titleDataHolder
+                                                    }
+                                                  >
+                                                    Email : {val.emailId}
                                                   </div>
                                                 </>
                                               }
@@ -1187,18 +1427,52 @@ class Team extends Component {
                                               {
                                                 <>
                                                   <div
-                                                    style={{
-                                                      color: "#5dbcb3",
-                                                    }}
+                                                    className={
+                                                      styles.titleNameContainer
+                                                    }
                                                   >
-                                                    {val.name}
+                                                    <div
+                                                      style={{
+                                                        color: "#5BB5F7",
+                                                      }}
+                                                    >
+                                                      {val.name}
+                                                    </div>
+                                                    <div
+                                                      className={
+                                                        styles.titleCityHolder
+                                                      }
+                                                    >
+                                                      {val.city}
+                                                    </div>
                                                   </div>
                                                   <div
-                                                    style={{
-                                                      whiteSpace: "nowrap",
-                                                    }}
+                                                    className={
+                                                      styles.titleDataHolder
+                                                    }
                                                   >
-                                                    email : {val.emailId}
+                                                    Message : {val.message}
+                                                  </div>
+                                                  <div
+                                                    className={
+                                                      styles.titleDataHolder
+                                                    }
+                                                  >
+                                                    Skype : {val.skype}
+                                                  </div>
+                                                  <div
+                                                    className={
+                                                      styles.titleDataHolder
+                                                    }
+                                                  >
+                                                    Mobile : {val.mobile}
+                                                  </div>
+                                                  <div
+                                                    className={
+                                                      styles.titleDataHolder
+                                                    }
+                                                  >
+                                                    Email : {val.emailId}
                                                   </div>
                                                 </>
                                               }
@@ -1240,18 +1514,52 @@ class Team extends Component {
                                               {
                                                 <>
                                                   <div
-                                                    style={{
-                                                      color: "#5dbcb3",
-                                                    }}
+                                                    className={
+                                                      styles.titleNameContainer
+                                                    }
                                                   >
-                                                    {val.name}
+                                                    <div
+                                                      style={{
+                                                        color: "#5BB5F7",
+                                                      }}
+                                                    >
+                                                      {val.name}
+                                                    </div>
+                                                    <div
+                                                      className={
+                                                        styles.titleCityHolder
+                                                      }
+                                                    >
+                                                      {val.city}
+                                                    </div>
                                                   </div>
                                                   <div
-                                                    style={{
-                                                      whiteSpace: "nowrap",
-                                                    }}
+                                                    className={
+                                                      styles.titleDataHolder
+                                                    }
                                                   >
-                                                    email : {val.emailId}
+                                                    Message : {val.message}
+                                                  </div>
+                                                  <div
+                                                    className={
+                                                      styles.titleDataHolder
+                                                    }
+                                                  >
+                                                    Skype : {val.skype}
+                                                  </div>
+                                                  <div
+                                                    className={
+                                                      styles.titleDataHolder
+                                                    }
+                                                  >
+                                                    Mobile : {val.mobile}
+                                                  </div>
+                                                  <div
+                                                    className={
+                                                      styles.titleDataHolder
+                                                    }
+                                                  >
+                                                    Email : {val.emailId}
                                                   </div>
                                                 </>
                                               }
@@ -1317,18 +1625,52 @@ class Team extends Component {
                                             {
                                               <>
                                                 <div
-                                                  style={{
-                                                    color: "#5dbcb3",
-                                                  }}
+                                                  className={
+                                                    styles.titleNameContainer
+                                                  }
                                                 >
-                                                  {val.name}
+                                                  <div
+                                                    style={{
+                                                      color: "#5BB5F7",
+                                                    }}
+                                                  >
+                                                    {val.name}
+                                                  </div>
+                                                  <div
+                                                    className={
+                                                      styles.titleCityHolder
+                                                    }
+                                                  >
+                                                    {val.city}
+                                                  </div>
                                                 </div>
                                                 <div
-                                                  style={{
-                                                    whiteSpace: "nowrap",
-                                                  }}
+                                                  className={
+                                                    styles.titleDataHolder
+                                                  }
                                                 >
-                                                  email : {val.emailId}
+                                                  Message : {val.message}
+                                                </div>
+                                                <div
+                                                  className={
+                                                    styles.titleDataHolder
+                                                  }
+                                                >
+                                                  Skype : {val.skype}
+                                                </div>
+                                                <div
+                                                  className={
+                                                    styles.titleDataHolder
+                                                  }
+                                                >
+                                                  Mobile : {val.mobile}
+                                                </div>
+                                                <div
+                                                  className={
+                                                    styles.titleDataHolder
+                                                  }
+                                                >
+                                                  Email : {val.emailId}
                                                 </div>
                                               </>
                                             }
@@ -1368,18 +1710,52 @@ class Team extends Component {
                                             {
                                               <>
                                                 <div
-                                                  style={{
-                                                    color: "#5dbcb3",
-                                                  }}
+                                                  className={
+                                                    styles.titleNameContainer
+                                                  }
                                                 >
-                                                  {val.name}
+                                                  <div
+                                                    style={{
+                                                      color: "#5BB5F7",
+                                                    }}
+                                                  >
+                                                    {val.name}
+                                                  </div>
+                                                  <div
+                                                    className={
+                                                      styles.titleCityHolder
+                                                    }
+                                                  >
+                                                    {val.city}
+                                                  </div>
                                                 </div>
                                                 <div
-                                                  style={{
-                                                    whiteSpace: "nowrap",
-                                                  }}
+                                                  className={
+                                                    styles.titleDataHolder
+                                                  }
                                                 >
-                                                  email : {val.emailId}
+                                                  Message : {val.message}
+                                                </div>
+                                                <div
+                                                  className={
+                                                    styles.titleDataHolder
+                                                  }
+                                                >
+                                                  Skype : {val.skype}
+                                                </div>
+                                                <div
+                                                  className={
+                                                    styles.titleDataHolder
+                                                  }
+                                                >
+                                                  Mobile : {val.mobile}
+                                                </div>
+                                                <div
+                                                  className={
+                                                    styles.titleDataHolder
+                                                  }
+                                                >
+                                                  Email : {val.emailId}
                                                 </div>
                                               </>
                                             }
@@ -1419,18 +1795,52 @@ class Team extends Component {
                                             {
                                               <>
                                                 <div
-                                                  style={{
-                                                    color: "#5dbcb3",
-                                                  }}
+                                                  className={
+                                                    styles.titleNameContainer
+                                                  }
                                                 >
-                                                  {val.name}
+                                                  <div
+                                                    style={{
+                                                      color: "#5BB5F7",
+                                                    }}
+                                                  >
+                                                    {val.name}
+                                                  </div>
+                                                  <div
+                                                    className={
+                                                      styles.titleCityHolder
+                                                    }
+                                                  >
+                                                    {val.city}
+                                                  </div>
                                                 </div>
                                                 <div
-                                                  style={{
-                                                    whiteSpace: "nowrap",
-                                                  }}
+                                                  className={
+                                                    styles.titleDataHolder
+                                                  }
                                                 >
-                                                  email : {val.emailId}
+                                                  Message : {val.message}
+                                                </div>
+                                                <div
+                                                  className={
+                                                    styles.titleDataHolder
+                                                  }
+                                                >
+                                                  Skype : {val.skype}
+                                                </div>
+                                                <div
+                                                  className={
+                                                    styles.titleDataHolder
+                                                  }
+                                                >
+                                                  Mobile : {val.mobile}
+                                                </div>
+                                                <div
+                                                  className={
+                                                    styles.titleDataHolder
+                                                  }
+                                                >
+                                                  Email : {val.emailId}
                                                 </div>
                                               </>
                                             }

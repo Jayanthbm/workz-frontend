@@ -84,7 +84,6 @@ export function getTeam(userId) {
       let url = `manager/${userId}`;
       const result = await get(url);
       const resultJson = await result.data;
-      console.log(resultJson);
       if (resultJson.message) {
         throw new Error(resultJson.message);
       }
@@ -112,7 +111,6 @@ export function getTeamUserSuccess(teamUserDetails) {
 }
 
 export function getTeamUserFailure(error) {
-  console.log("here");
   return {
     type: GET_TEAM_USER_FAILURE,
     status: ERROR,
