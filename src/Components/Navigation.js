@@ -69,7 +69,7 @@ class Navigation extends Component {
                                       : false
                                   }
                                 >
-                                  {team.name}
+                                  &nbsp; &nbsp; {team.name}
                                 </option>
                               );
                             })}
