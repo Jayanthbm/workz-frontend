@@ -107,9 +107,7 @@ class Team extends Component {
       window.location.reload();
     }
   }
-  handleArray = (arr) => {
-    for (var i = 0; i < arr.length; i + 5) {}
-  };
+
   chunkify = (a, n, balanced) => {
     if (n < 2) return [a];
 
@@ -188,6 +186,7 @@ class Team extends Component {
                                         <>
                                           <span className={styles.seatHolder}>
                                             <span
+                                              style={{ bottom: "75px" }}
                                               className={styles.tooltiptext}
                                             >
                                               {
@@ -444,6 +443,7 @@ class Team extends Component {
                                         <>
                                           <span className={styles.seatHolder}>
                                             <span
+                                              style={{ bottom: "75px" }}
                                               className={styles.tooltiptext}
                                             >
                                               {
@@ -700,6 +700,7 @@ class Team extends Component {
                                           <span className={styles.seatHolder}>
                                             <span
                                               className={styles.tooltiptext}
+                                              style={{ bottom: "75px" }}
                                             >
                                               {
                                                 <>
