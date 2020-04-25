@@ -146,7 +146,9 @@ class Team extends Component {
       this.props.teamDetails.length === 1 &&
       this.props.teamDetails[0] &&
       this.props.teamDetails[0].users &&
-      this.props.teamDetails[0].users.length > 6 &&
+      this.props.teamDetails[0].users.length > 10 &&
+      this.props.teamDetails[0].managers &&
+      this.props.teamDetails[0].managers.length === 0 &&
       this.chunkify(this.props.teamDetails[0].users, 3, true);
 
     const userArray1 = users1 && users1[0] && users1[0];
@@ -2166,10 +2168,351 @@ class Team extends Component {
                               )}
 
                               {val.users &&
-                                val.users.length > 0 &&
+                                val.users.length > 10 &&
                                 this.props.teamDetails.length == 1 &&
                                 val.managers &&
                                 val.managers.length > 0 && (
+                                  <div className={styles.usrContainer}>
+                                    {/* {val.users && val.users.length > 0 && (
+                            <div>Users</div>
+                          )} */}
+
+                                    {val.users.map((val, i) => {
+                                      return (
+                                        <>
+                                          <span className={styles.countrUsers}>
+                                            {val.onlineStatus === "offline" && (
+                                              <span
+                                                className={styles.seatHolder}
+                                              >
+                                                <span
+                                                  className={styles.tooltiptext}
+                                                >
+                                                  {
+                                                    <>
+                                                      <div
+                                                        className={
+                                                          styles.titleNameContainer
+                                                        }
+                                                      >
+                                                        <div
+                                                          style={{
+                                                            color: "#5BB5F7",
+                                                          }}
+                                                        >
+                                                          {val.name}
+                                                        </div>
+                                                        <div
+                                                          className={
+                                                            styles.titleCityHolder
+                                                          }
+                                                        >
+                                                          {val.city}
+                                                        </div>
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.titleDataHolder
+                                                        }
+                                                      >
+                                                        Message : {val.message}
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.titleDataHolder
+                                                        }
+                                                      >
+                                                        Skype : {val.skype}
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.titleDataHolder
+                                                        }
+                                                      >
+                                                        Mobile : {val.mobile}
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.titleDataHolder
+                                                        }
+                                                      >
+                                                        Email : {val.emailId}
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.lastActiveHolder
+                                                        }
+                                                      >
+                                                        Last Active:{" "}
+                                                        {val.onlineStatus ===
+                                                        "active"
+                                                          ? "Active Now"
+                                                          : this.activeHandler(
+                                                              val.onlineStatusTimestamp
+                                                            )}
+                                                      </div>
+                                                    </>
+                                                  }
+                                                </span>
+                                                {i % 2 > 0 && (
+                                                  <span>
+                                                    <ProfileStatus
+                                                      pic={val.profilePic}
+                                                      right={-3}
+                                                      rightSide={true}
+                                                      offline={true}
+                                                    />
+                                                    <div
+                                                      className={
+                                                        styles.offlineright
+                                                      }
+                                                    ></div>
+                                                  </span>
+                                                )}
+                                                {i % 2 < 1 && (
+                                                  <span>
+                                                    <ProfileStatus
+                                                      pic={val.profilePic}
+                                                      left={-3}
+                                                      leftSide={true}
+                                                      offline={true}
+                                                    />
+
+                                                    <div
+                                                      className={
+                                                        styles.offlineleft
+                                                      }
+                                                    ></div>
+                                                  </span>
+                                                )}
+                                              </span>
+                                            )}
+                                            {val.onlineStatus === "active" && (
+                                              <span
+                                                className={styles.seatHolder}
+                                              >
+                                                <span
+                                                  className={styles.tooltiptext}
+                                                >
+                                                  {
+                                                    <>
+                                                      <div
+                                                        className={
+                                                          styles.titleNameContainer
+                                                        }
+                                                      >
+                                                        <div
+                                                          style={{
+                                                            color: "#5BB5F7",
+                                                          }}
+                                                        >
+                                                          {val.name}
+                                                        </div>
+                                                        <div
+                                                          className={
+                                                            styles.titleCityHolder
+                                                          }
+                                                        >
+                                                          {val.city}
+                                                        </div>
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.titleDataHolder
+                                                        }
+                                                      >
+                                                        Message : {val.message}
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.titleDataHolder
+                                                        }
+                                                      >
+                                                        Skype : {val.skype}
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.titleDataHolder
+                                                        }
+                                                      >
+                                                        Mobile : {val.mobile}
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.titleDataHolder
+                                                        }
+                                                      >
+                                                        Email : {val.emailId}
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.lastActiveHolder
+                                                        }
+                                                      >
+                                                        Last Active:{" "}
+                                                        {val.onlineStatus ===
+                                                        "active"
+                                                          ? "Active Now"
+                                                          : this.activeHandler(
+                                                              val.onlineStatusTimestamp
+                                                            )}
+                                                      </div>
+                                                    </>
+                                                  }
+                                                </span>
+                                                {i % 2 > 0 && (
+                                                  <span>
+                                                    <ProfileStatus
+                                                      pic={val.profilePic}
+                                                      right={-3}
+                                                      active={true}
+                                                      rightSide={true}
+                                                    />
+                                                    <div
+                                                      className={
+                                                        styles.onlineright
+                                                      }
+                                                    ></div>
+                                                  </span>
+                                                )}
+                                                {i % 2 < 1 && (
+                                                  <span>
+                                                    <ProfileStatus
+                                                      pic={val.profilePic}
+                                                      left={-3}
+                                                      active={true}
+                                                      leftSide={true}
+                                                    />
+
+                                                    <div
+                                                      className={
+                                                        styles.onlineleft
+                                                      }
+                                                    ></div>
+                                                  </span>
+                                                )}
+                                              </span>
+                                            )}
+                                            {val.onlineStatus === "passive" && (
+                                              <span
+                                                className={styles.seatHolder}
+                                              >
+                                                <span
+                                                  className={styles.tooltiptext}
+                                                >
+                                                  {
+                                                    <>
+                                                      <div
+                                                        className={
+                                                          styles.titleNameContainer
+                                                        }
+                                                      >
+                                                        <div
+                                                          style={{
+                                                            color: "#5BB5F7",
+                                                          }}
+                                                        >
+                                                          {val.name}
+                                                        </div>
+                                                        <div
+                                                          className={
+                                                            styles.titleCityHolder
+                                                          }
+                                                        >
+                                                          {val.city}
+                                                        </div>
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.titleDataHolder
+                                                        }
+                                                      >
+                                                        Message : {val.message}
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.titleDataHolder
+                                                        }
+                                                      >
+                                                        Skype : {val.skype}
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.titleDataHolder
+                                                        }
+                                                      >
+                                                        Mobile : {val.mobile}
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.titleDataHolder
+                                                        }
+                                                      >
+                                                        Email : {val.emailId}
+                                                      </div>
+                                                      <div
+                                                        className={
+                                                          styles.lastActiveHolder
+                                                        }
+                                                      >
+                                                        Last Active:{" "}
+                                                        {val.onlineStatus ===
+                                                        "active"
+                                                          ? "Active Now"
+                                                          : this.activeHandler(
+                                                              val.onlineStatusTimestamp
+                                                            )}
+                                                      </div>
+                                                    </>
+                                                  }
+                                                </span>
+                                                {i % 2 > 0 && (
+                                                  <span>
+                                                    <ProfileStatus
+                                                      pic={val.profilePic}
+                                                      right={-3}
+                                                      passive={true}
+                                                      rightSide={true}
+                                                    />
+                                                    <div
+                                                      className={
+                                                        styles.inactiveRight
+                                                      }
+                                                    ></div>
+                                                  </span>
+                                                )}
+                                                {i % 2 < 1 && (
+                                                  <span>
+                                                    <ProfileStatus
+                                                      pic={val.profilePic}
+                                                      left={-3}
+                                                      passive={true}
+                                                      leftSide={true}
+                                                    />
+
+                                                    <div
+                                                      className={
+                                                        styles.inactiveLeft
+                                                      }
+                                                    ></div>
+                                                  </span>
+                                                )}
+                                              </span>
+                                            )}
+                                          </span>
+                                          {i % 2 > 0 && (
+                                            <div className={styles.break} />
+                                          )}
+                                        </>
+                                      );
+                                    })}
+                                  </div>
+                                )}
+
+                              {val.users &&
+                                val.users.length < 10 &&
+                                this.props.teamDetails.length == 1 &&
+                                !users1 && (
                                   <div className={styles.usrContainer}>
                                     {/* {val.users && val.users.length > 0 && (
                             <div>Users</div>

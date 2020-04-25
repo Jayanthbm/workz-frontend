@@ -23,9 +23,9 @@
   margin-right: 110px;
 }
 .countryHolder {
-  width: 75%;
+  width: auto;
   background: #fff;
-  padding: 10px 20px;
+  padding: 10px 45px;
   border-radius: 8px;
   border: 1px solid #ebecec;
 }
