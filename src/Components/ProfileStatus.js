@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import profileImage from "../images/Profile-Fill-grey2.svg";
-import styles from "./profileStatus.module.css";
-class ProfileStatus extends Component {
+import ReactTooltip from "react-tooltip";
+import styles from "./profileStatus.module.css"; class ProfileStatus extends Component {
   render() {
     return (
       <div style={{ position: "relative" }}>
         <img
+          data-tip data-for={"Hello" + this.props.data.userId}
           src={this.props.pic ? this.props.pic : profileImage}
           height={"40px"}
           alt=""
@@ -19,6 +20,24 @@ class ProfileStatus extends Component {
             borderRadius: "100%",
           }}
         />
+        <ReactTooltip
+          id={"Hello" + this.props.data.userId}
+          place="top"
+          type="light"
+          effect="solid"
+          border={true}
+          backgroundColor={'#fff'}
+          clickable={true}
+          resizeHide={true}
+        >
+          <span>{this.props.data.name}</span>
+          &nbsp;
+          <span>{this.props.data.city}</span><br />
+          <span>Message:{this.props.data.message}</span><br />
+          <span>skype:{this.props.data.message}</span><br />
+          <span>Mobile:{this.props.data.mobile}</span><br />
+          <span>Email:{this.props.data.emailId}</span><br />
+        </ReactTooltip>
         {this.props.offline && this.props.leftSide && (
           <div className={styles.offlineStatus}> </div>
         )}
