@@ -9,15 +9,18 @@
   height: 100%;
   overflow: auto;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   position: relative;
   flex-wrap: wrap;
   /* padding-top: 60px; */
 }
 .countryContainer {
   width: 100%;
-  max-width: 1200px;
+  /* max-width: 1200px; */
+  width: auto;
   padding: 20px 10px;
+  margin: auto;
+  /* overflow: auto; */
 }
 .countrUsers:last-child {
   margin-right: 110px;
@@ -28,6 +31,7 @@
   padding: 10px 45px;
   border-radius: 8px;
   border: 1px solid #ebecec;
+  /* overflow: auto; */
 }
 
 .block2 {
@@ -76,7 +80,7 @@
   margin-left: -5px;
   border-style: solid;
   border-width: 25px 20px 0 20px;
-  border-color: #fff transparent transparent transparent;
+  border-color: rgb(255, 255, 255) transparent transparent transparent;
 }
 
 .seatHolder:hover .tooltiptext {
@@ -188,9 +192,10 @@
 }
 .managerContainer {
   height: auto;
-  padding: 10px 20px;
+  width: auto;
   border-right: 2px solid #ebebeb;
-  min-width: 200px;
+
+  /* overflow: auto; */
 }
 .managerContainer:last-child {
   border-right: none;
