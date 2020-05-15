@@ -26,10 +26,18 @@ class DeepdiveDetails extends Component {
       <div className={styles.deepDiveBase}>
         {this.state.deepdiveData &&
           this.state.deepdiveData.map((val) => {
+            console.log(val[1][1][0].tday);
             return (
               <div>
-                {val.map((day) => {
-                  return <>{day[0]}</>;
+                {val[1][1][0].tday}
+                {val.map((time) => {
+                  console.log(time);
+                  return (
+                    <div>
+                      {" "}
+                      <div className={styles.timeSlots}>{time[0]}</div>
+                    </div>
+                  );
                 })}
               </div>
             );

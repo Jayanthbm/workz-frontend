@@ -1,3 +1,6 @@
 .deepDiveBase {
   width: 100%;
 }
+.timeSlots {
+  display: flex;
+}
