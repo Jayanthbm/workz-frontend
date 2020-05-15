@@ -5,6 +5,7 @@ class DeepdiveDetails extends Component {
     super(props);
     this.state = {
       deepdiveData: [],
+      day: [],
     };
   }
 
@@ -21,21 +22,40 @@ class DeepdiveDetails extends Component {
         this.state.deepdiveData.push(a);
       }
     }
-    console.log(this.state.deepdiveData);
+
     return (
       <div className={styles.deepDiveBase}>
         {this.state.deepdiveData &&
           this.state.deepdiveData.map((val) => {
-            console.log(val[1][1][0].tday);
             return (
               <div>
                 {val[1][1][0].tday}
                 {val.map((time) => {
-                  console.log(time);
                   return (
-                    <div>
-                      {" "}
+                    <div className={styles.dataContainer}>
                       <div className={styles.timeSlots}>{time[0]}</div>
+                      <div className={styles.imgContainer}>
+                        {time[1].map((day, i) => {
+                          console.log(
+                            day.time ==
+                              `${day.hour > 9 ? "" : "0"}${day.hour}:${
+                                i == 0 ? "00" : i * 10
+                              }:00`
+                          );
+                          return (
+                            <div>
+                              {day.hour == time[0] && (
+                                <img
+                                  src={day.screenshotUrl}
+                                  height="50px"
+                                  width="50px"
+                                  alt="imag"
+                                />
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
                   );
                 })}

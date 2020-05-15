@@ -4,3 +4,9 @@
 .timeSlots {
   display: flex;
 }
+.imgContainer {
+  display: flex;
+}
+.dataContainer {
+  display: flex;
+}

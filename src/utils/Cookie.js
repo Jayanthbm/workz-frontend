@@ -10,7 +10,13 @@ export function createCookie(name, value, days, domain) {
     date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000); // ) removed
     expires = "; expires=" + date.toGMTString(); // + added
   }
-  document.cookie = name + "=" + value + expires + ";path=/"; // + and " added
+  document.cookie =
+    name +
+    "=" +
+    value +
+    expires +
+    (domain ? ";domain=" + domain : "") +
+    ";path=/"; // + and " added
 }
 
 export function createCookieInMinutes(name, value, minutes) {
