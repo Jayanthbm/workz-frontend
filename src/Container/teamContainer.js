@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { getTeam, getTeamUser } from "../actions/team.action";
+import { getTeam, getTeamUser, getDeepdive } from "../actions/team.action";
 import Team from "../Components/Team";
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -10,6 +10,9 @@ const mapDispatchToProps = (dispatch) => {
     getTeamUser: (teamId) => {
       dispatch(getTeamUser(teamId));
     },
+    getDeepdive: (userDetails) => {
+      dispatch(getDeepdive(userDetails));
+    },
   };
 };
 const mapStateToProps = (state) => {
@@ -18,6 +21,7 @@ const mapStateToProps = (state) => {
     // teamUserDetails:state.team.teamUserDetails,
     teamError: state.team,
     teamUserDetails: state.team.teamUserDetails,
+    deepdiveData: state.team.deepdiveData,
   };
 };
 const teamContainer = withRouter(

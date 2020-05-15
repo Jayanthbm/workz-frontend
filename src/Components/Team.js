@@ -9,6 +9,8 @@ import styles from "./Team.module.css";
 import Header from "../Container/HeaderContainer";
 import Navigation from "./Navigation";
 import ProfileStatus from "./ProfileStatus";
+import Auth from "@aws-amplify/auth";
+
 import * as Cookie from "../utils/Cookie";
 import { USER_DETAILS, ACCESS_TOKEN } from "../utils/constant";
 const data = [
@@ -33,6 +35,7 @@ const data = [
     status: "online",
   },
 ];
+
 const userDetails = Cookie.getCookie(USER_DETAILS);
 let parsedData = userDetails && JSON.parse(userDetails);
 class Team extends Component {
@@ -59,6 +62,10 @@ class Team extends Component {
         if (parsedData.isManager === 1) {
           this.setState({ man_id: parsedData.userId });
         }
+        this.props.getDeepdive({
+          userId: "21",
+          date: "2020-04-13",
+        });
       }
     }
   }
@@ -157,7 +164,7 @@ class Team extends Component {
 
     const userDetails = Cookie.getCookie(USER_DETAILS);
     let parsedData = userDetails && JSON.parse(userDetails);
-    console.log(parsedData);
+
     return (
       <div className={styles.base}>
         <Header pic={parsedData && parsedData.profilePic} />

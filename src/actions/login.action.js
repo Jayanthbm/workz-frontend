@@ -11,7 +11,9 @@ import { get, post, postToken } from "../utils/apiRequest.js";
 export const LOGIN_USER_REQUEST = "LOGIN_USER_REQUEST";
 export const LOGIN_USER_SUCCESS = "LOGIN_USER_SUCCESS";
 export const LOGIN_USER_FAILURE = "LOGIN_USER_FAILURE";
-
+export const CloudFront_Key_Pair_id = "CloudFront-Key-Pair-Id";
+export const CloudFront_Policy = "CloudFront-Policy";
+export const CloudFront_Signature = "CloudFront-Signature";
 export const UPDATE_PASSWORD_REQUEST = "UPDATE_PASSWORD_REQUEST";
 export const UPDATE_PASSWORD_SUCCESS = "UPDATE_PASSWORD_SUCCESS";
 export const UPDATE_PASSWORD_FAILURE = "UPDATE_PASSWORD_FAILURE";
@@ -218,9 +220,27 @@ export function getLogin(userLoginDetails) {
       if (resultJson.message) {
         throw new Error(resultJson.message);
       }
-
+      console.log(resultJson["CloudFront-Key-Pair-Id"]);
       Cookie.createCookie(ACCESS_TOKEN, resultJson.token, 7);
       Cookie.createCookie(USER_DETAILS, JSON.stringify(resultJson), 7);
+      Cookie.createCookie(
+        CloudFront_Key_Pair_id,
+        resultJson[CloudFront_Key_Pair_id],
+        7,
+        resultJson["domain"]
+      );
+      Cookie.createCookie(
+        CloudFront_Policy,
+        resultJson[CloudFront_Policy],
+        7,
+        resultJson["domain"]
+      );
+      Cookie.createCookie(
+        CloudFront_Signature,
+        resultJson[CloudFront_Signature],
+        7,
+        resultJson["domain"]
+      );
       return dispatch(loginUserSuccess(resultJson));
     } catch (e) {
       return dispatch(loginUserFailure(e.message));

@@ -1,6 +1,6 @@
 import { SUCCESS, REQUESTING, ERROR } from "../utils/constant";
 import * as Cookie from "../utils/Cookie.js";
-import { get, post } from "../utils/apiRequest.js";
+import { get, post, postAws } from "../utils/apiRequest.js";
 
 export const GET_TEAM_REQUEST = "GET_TEAM_REQUEST";
 export const GET_TEAM_SUCCESS = "GET_TEAM_SUCCESS";
@@ -13,6 +13,102 @@ export const GET_TEAM_USER_FAILURE = "GET_TEAM_USER_FAILURE";
 export const POST_FORM_REQUEST = "POST_FORM_REQUEST";
 export const POST_FORM_SUCCESS = "POST_FORM_SUCCESS";
 export const POST_FORM_FAILURE = "POST_FORM_FAILURE";
+
+export const GET_DEEPDIVE_REQUEST = "GET_DEEPDIVE_REQUEST";
+export const GET_DEEPDIVE_SUCCESS = "GET_DEEPDIVE_SUCCESS";
+export const GET_DEEPDIVE_FAILURE = "GET_DEEPDIVE_FAILURE";
+
+export const GET_DEEPDIVE_DROPDOWN_REQUEST = "GET_DEEPDIVE_DROPDOWN_REQUEST";
+export const GET_DEEPDIVE_DROPDOWN_SUCCESS = "GET_DEEPDIVE_DROPDOWN_SUCCESS";
+export const GET_DEEPDIVE_DROPDOWN_FAILURE = "GET_DEEPDIVE_DROPDOWN_FAILURE";
+
+export function getDeepdiveDropdownRequest() {
+  return {
+    type: GET_DEEPDIVE_DROPDOWN_REQUEST,
+    status: REQUESTING,
+  };
+}
+
+export function getDeepdiveDropdownSuccess(deepdiveDropdownData) {
+  console.log(deepdiveDropdownData);
+  return {
+    type: GET_DEEPDIVE_DROPDOWN_SUCCESS,
+    status: SUCCESS,
+    deepdiveDropdownData: deepdiveDropdownData,
+  };
+}
+
+export function getDeepdiveDropdownFailure(error) {
+  console.log(error);
+  return {
+    type: GET_DEEPDIVE_DROPDOWN_FAILURE,
+    status: ERROR,
+    error,
+  };
+}
+
+export function getDeepdiveDropdown(userDetails) {
+  return async (dispatch) => {
+    dispatch(getDeepdiveRequest());
+    try {
+      let url = `deepdivedropdown`;
+      const result = await post(url, userDetails);
+      const resultJson = await result.data;
+      console.log(resultJson);
+      if (resultJson.message) {
+        throw new Error(resultJson.message);
+      }
+
+      return dispatch(getDeepdiveDropdownSuccess(resultJson));
+    } catch (e) {
+      return dispatch(getDeepdiveDropdownFailure(e.message));
+    }
+  };
+}
+
+export function getDeepdiveRequest() {
+  return {
+    type: GET_DEEPDIVE_REQUEST,
+    status: REQUESTING,
+  };
+}
+
+export function getDeepdiveSuccess(deepdiveData) {
+  console.log(deepdiveData);
+  return {
+    type: GET_DEEPDIVE_SUCCESS,
+    status: SUCCESS,
+    deepdiveData: deepdiveData,
+  };
+}
+
+export function getDeepdiveFailure(error) {
+  console.log(error);
+  return {
+    type: GET_DEEPDIVE_FAILURE,
+    status: ERROR,
+    error,
+  };
+}
+
+export function getDeepdive(userDetails) {
+  return async (dispatch) => {
+    dispatch(getDeepdiveRequest());
+    try {
+      let url = `deepdive`;
+      const result = await post(url, userDetails);
+      const resultJson = await result.data;
+      console.log(resultJson);
+      if (resultJson.message) {
+        throw new Error(resultJson.message);
+      }
+
+      return dispatch(getDeepdiveSuccess(resultJson));
+    } catch (e) {
+      return dispatch(getDeepdiveFailure(e.message));
+    }
+  };
+}
 
 export function postFormRequest() {
   return {

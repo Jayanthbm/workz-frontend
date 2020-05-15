@@ -11,6 +11,7 @@ import Reset from "./Container/resetContainer";
 import Form from "./Container/formContainer";
 import forgotContainer from "./Container/forgotContainer";
 import forgotPassContainer from "./Container/forgotPassContainer";
+import deepdive from "./Container/deepdiveContainer";
 class App extends Component {
   render() {
     const isUserLogedIn = Cookie.getCookie(ACCESS_TOKEN) ? true : false;
@@ -24,6 +25,7 @@ class App extends Component {
           {isUserLogedIn && password_updated ? (
             <React.Fragment>
               <Route exact path="/" component={Team} />
+              <Route exact path="/deepdive" component={deepdive} />
               <Route exact path="/reset" component={Reset} />
             </React.Fragment>
           ) : (

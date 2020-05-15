@@ -10,6 +10,43 @@ const team = (
   action
 ) => {
   switch (action.type) {
+    case teamAction.GET_DEEPDIVE_DROPDOWN_SUCCESS:
+      return Object.assign({}, state, {
+        status: action.status,
+        loading: false,
+        deepdiveDropdownData: action.deepdiveDropdownData,
+      });
+    case teamAction.GET_DEEPDIVE_DROPDOWN_FAILURE:
+      return Object.assign({}, state, {
+        status: action.status,
+        loading: false,
+        error: action.error,
+      });
+    case teamAction.GET_DEEPDIVE_DROPDOWN_REQUEST:
+      return Object.assign({}, state, {
+        status: action.status,
+        teamError: null,
+        loading: true,
+      });
+    case teamAction.GET_DEEPDIVE_SUCCESS:
+      return Object.assign({}, state, {
+        status: action.status,
+        loading: false,
+        deepdiveData: action.deepdiveData,
+      });
+    case teamAction.GET_DEEPDIVE_FAILURE:
+      return Object.assign({}, state, {
+        status: action.status,
+        loading: false,
+        error: action.error,
+      });
+    case teamAction.GET_DEEPDIVE_REQUEST:
+      return Object.assign({}, state, {
+        status: action.status,
+        teamError: null,
+        loading: true,
+      });
+
     case teamAction.POST_FORM_REQUEST:
       return Object.assign({}, state, {
         status: action.status,
