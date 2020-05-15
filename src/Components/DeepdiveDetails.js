@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import styles from "./DeepdiveDetails.module.css";
 class DeepdiveDetails extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +22,20 @@ class DeepdiveDetails extends Component {
       }
     }
     console.log(this.state.deepdiveData);
-    return <div></div>;
+    return (
+      <div className={styles.deepDiveBase}>
+        {this.state.deepdiveData &&
+          this.state.deepdiveData.map((val) => {
+            return (
+              <div>
+                {val.map((day) => {
+                  return <>{day[0]}</>;
+                })}
+              </div>
+            );
+          })}
+      </div>
+    );
   }
 }
 

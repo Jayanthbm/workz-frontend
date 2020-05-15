@@ -5,9 +5,10 @@
   background-color: #bcbcbc;
 }
 .deepdiveContainer {
-  float: left;
+  /* float: left; */
   display: flex;
   padding: 15px;
+  width: 100%;
   padding-left: 40px;
 }
 .dropdownText {

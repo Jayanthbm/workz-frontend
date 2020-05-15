@@ -9,7 +9,6 @@ import styles from "./Team.module.css";
 import Header from "../Container/HeaderContainer";
 import Navigation from "./Navigation";
 import ProfileStatus from "./ProfileStatus";
-import Auth from "@aws-amplify/auth";
 
 import * as Cookie from "../utils/Cookie";
 import { USER_DETAILS, ACCESS_TOKEN } from "../utils/constant";
