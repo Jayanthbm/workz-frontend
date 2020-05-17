@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styles from "./DeepdiveDetails.module.css";
+import DeepdiveDay from "./DeepdiveDay";
 class DeepdiveDetails extends Component {
   constructor(props) {
     super(props);
@@ -35,26 +36,17 @@ class DeepdiveDetails extends Component {
                     <div className={styles.dataContainer}>
                       <div className={styles.timeSlots}>{time[0]}</div>
                       <div className={styles.imgContainer}>
-                        {time[1].map((day, i) => {
+                        <DeepdiveDay time={time[1]} />
+
+                        {/* {time[1].map((day, i) => {
                           console.log(
                             day.time ==
                               `${day.hour > 9 ? "" : "0"}${day.hour}:${
                                 i == 0 ? "00" : i * 10
                               }:00`
                           );
-                          return (
-                            <div>
-                              {day.hour == time[0] && (
-                                <img
-                                  src={day.screenshotUrl}
-                                  height="50px"
-                                  width="50px"
-                                  alt="imag"
-                                />
-                              )}
-                            </div>
-                          );
-                        })}
+                          return <DeepdiveDay time={day} />;
+                        })} */}
                       </div>
                     </div>
                   );

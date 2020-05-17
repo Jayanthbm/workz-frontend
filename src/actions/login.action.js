@@ -226,20 +226,13 @@ export function getLogin(userLoginDetails) {
       Cookie.createCookie(
         CloudFront_Key_Pair_id,
         resultJson[CloudFront_Key_Pair_id],
-        7,
-        resultJson["domain"]
+        7
       );
-      Cookie.createCookie(
-        CloudFront_Policy,
-        resultJson[CloudFront_Policy],
-        7,
-        resultJson["domain"]
-      );
+      Cookie.createCookie(CloudFront_Policy, resultJson[CloudFront_Policy], 7);
       Cookie.createCookie(
         CloudFront_Signature,
         resultJson[CloudFront_Signature],
-        7,
-        resultJson["domain"]
+        7
       );
       return dispatch(loginUserSuccess(resultJson));
     } catch (e) {
