@@ -38,7 +38,7 @@ const team = (
       return Object.assign({}, state, {
         status: action.status,
         loading: false,
-        error: action.error,
+        deepDiveError: action.error,
       });
     case teamAction.GET_DEEPDIVE_REQUEST:
       return Object.assign({}, state, {

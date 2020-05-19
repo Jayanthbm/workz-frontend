@@ -32,6 +32,9 @@ class deepdive extends Component {
   };
   handleDeepdive = (val) => {
     console.log(val);
+    this.props.getDeepdive({
+      userId: val,
+    });
   };
   componentDidMount = () => {
     this.props.getDeepdive({
@@ -63,8 +66,12 @@ class deepdive extends Component {
         />
         <SecondaryHeader
           deepdiveDropdownData={this.props && this.props.deepdiveDropdownData}
+          handleDeepdive={this.handleDeepdive}
         />
-        <DeepdiveDetails deepdiveData={this.props.deepdiveData} />
+        <DeepdiveDetails
+          deepdiveData={this.props.deepdiveData}
+          deepDiveError={this.props.deepDiveError}
+        />
       </div>
     );
   }

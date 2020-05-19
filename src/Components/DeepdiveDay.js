@@ -33,12 +33,14 @@ class DeepdiveDay extends Component {
     return (
       <div>
         {this.state.slots[0].map((val) => {
-          console.log(val);
           return (
             <img
+              onClick={() => {
+                console.log(val);
+              }}
               src={val == "defaultimageurl" ? defaultIcon : val}
-              height="50px"
-              width="50px"
+              height="100px"
+              width="150px"
             />
           );
         })}

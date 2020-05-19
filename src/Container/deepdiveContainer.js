@@ -16,6 +16,7 @@ const mapStateToProps = (state) => {
   return {
     deepdiveData: state.team.deepdiveData,
     deepdiveDropdownData: state.team.deepdiveDropdownData,
+    deepDiveError: state.team.deepDiveError,
   };
 };
 const deepdiveContainer = withRouter(

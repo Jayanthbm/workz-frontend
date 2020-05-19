@@ -11,11 +11,13 @@ class DeepdiveDetails extends Component {
   }
 
   render() {
+    console.log(this.props.deepdiveData);
     if (this.props.deepdiveData) {
       for (let i = 0; i < this.props.deepdiveData.results.length; i++) {
         const a = Object.entries(
           this.props &&
             this.props.deepdiveData &&
+            !this.props.deepDiveError &&
             this.props.deepdiveData.results &&
             this.props.deepdiveData.results[i] &&
             this.props.deepdiveData.results[i]
@@ -26,19 +28,19 @@ class DeepdiveDetails extends Component {
 
     return (
       <div className={styles.deepDiveBase}>
-        {this.state.deepdiveData &&
-          this.state.deepdiveData.map((val) => {
-            return (
-              <div>
-                {val[1][1][0].tday}
-                {val.map((time) => {
-                  return (
-                    <div className={styles.dataContainer}>
-                      <div className={styles.timeSlots}>{time[0]}</div>
-                      <div className={styles.imgContainer}>
-                        <DeepdiveDay time={time[1]} />
+        {!this.props.deepDiveError && this.state.deepdiveData
+          ? this.state.deepdiveData.map((val) => {
+              return (
+                <div>
+                  {val && val[1] && val[1][1][0].tday}
+                  {val.map((time) => {
+                    return (
+                      <div className={styles.dataContainer}>
+                        <div className={styles.timeSlots}>{time[0]}</div>
+                        <div className={styles.imgContainer}>
+                          <DeepdiveDay time={time[1]} />
 
-                        {/* {time[1].map((day, i) => {
+                          {/* {time[1].map((day, i) => {
                           console.log(
                             day.time ==
                               `${day.hour > 9 ? "" : "0"}${day.hour}:${
@@ -47,13 +49,14 @@ class DeepdiveDetails extends Component {
                           );
                           return <DeepdiveDay time={day} />;
                         })} */}
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          })}
+                    );
+                  })}
+                </div>
+              );
+            })
+          : "No data Found"}
       </div>
     );
   }

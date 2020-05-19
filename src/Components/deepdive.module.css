@@ -8,11 +8,17 @@
   /* float: left; */
   display: flex;
   padding: 15px;
-  width: 100%;
+  /* width: 100%; */
   padding-left: 40px;
 }
 .dropdownText {
   font-size: 14px;
+}
+.dropdownContainer {
+  display: flex;
+}
+.timecardContainer {
+  margin-left: 300px;
 }
 .dropdownSelectHolder {
   /* padding: 10px; */
