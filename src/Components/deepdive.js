@@ -6,7 +6,7 @@ import * as Cookie from "../utils/Cookie";
 import { USER_DETAILS, ACCESS_TOKEN } from "../utils/constant";
 import SecondaryHeader from "./SecondaryHeader";
 import DeepdiveDetails from "./DeepdiveDetails";
-
+import moment from "moment";
 const userDetails = Cookie.getCookie(USER_DETAILS);
 let parsedData = userDetails && JSON.parse(userDetails);
 
@@ -16,8 +16,20 @@ class deepdive extends Component {
     this.state = {
       team_id: "",
       man_id: "",
+      selectedDate: new Date(),
+      userId: "",
     };
   }
+  handleChange = (date) => {
+    console.log(moment(date).format("YYYY-MM-DD"));
+    this.setState({
+      selectedDate: date,
+    });
+    this.props.getDeepdive({
+      userId: this.state.userId,
+      date: moment(date).format("YYYY-MM-DD"),
+    });
+  };
   selectHandler = (val) => {
     let data = JSON.parse(val);
     if (data.type === "manager") {
@@ -34,7 +46,9 @@ class deepdive extends Component {
     console.log(val);
     this.props.getDeepdive({
       userId: val,
+      date: moment(this.state.selectedDate).format("YYYY-MM-DD"),
     });
+    this.setState({ userId: val });
   };
   componentDidMount = () => {
     this.props.getDeepdive({
@@ -42,12 +56,12 @@ class deepdive extends Component {
       date: "2020-04-13",
     });
     if (parsedData.isManager === 1) {
-      this.setState({ man_id: parsedData.userId });
+      this.setState({ man_id: parsedData.userId, userId: parsedData.userId });
       this.props.getDeepdiveDropdown({
         managerId: parsedData.userId,
       });
     } else {
-      this.setState({ team_id: parsedData.userId });
+      this.setState({ team_id: parsedData.userId, userId: parsedData.userId });
       this.props.getDeepdiveDropdown({
         teamId: parsedData.userId,
       });
@@ -67,6 +81,8 @@ class deepdive extends Component {
         <SecondaryHeader
           deepdiveDropdownData={this.props && this.props.deepdiveDropdownData}
           handleDeepdive={this.handleDeepdive}
+          selectedDate={this.state.selectedDate}
+          handleChange={this.handleChange}
         />
         <DeepdiveDetails
           deepdiveData={this.props.deepdiveData}

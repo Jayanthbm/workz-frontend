@@ -33,6 +33,7 @@ const team = (
         status: action.status,
         loading: false,
         deepdiveData: action.deepdiveData,
+        deepDiveError: "",
       });
     case teamAction.GET_DEEPDIVE_FAILURE:
       return Object.assign({}, state, {

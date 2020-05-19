@@ -1,6 +1,20 @@
 import React, { Component } from "react";
 import styles from "./deepdive.module.css";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 class SecondaryHeader extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      startDate: new Date(),
+    };
+  }
+  handleChange = (date) => {
+    this.setState({
+      startDate: date,
+    });
+  };
   render() {
     return (
       <div className={styles.deepdiveContainer}>
@@ -27,6 +41,13 @@ class SecondaryHeader extends Component {
           </div>
         </div>
         <div className={styles.timecardContainer}>Timecard | Details</div>
+        <div className={styles.dateContainer}>
+          <DatePicker
+            selected={this.props.selectedDate}
+            onChange={(date) => this.props.handleChange(date)}
+            maxDate={new Date()}
+          />
+        </div>
       </div>
     );
   }
