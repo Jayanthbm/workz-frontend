@@ -15,7 +15,7 @@ export function createCookie(name, value, days, domain) {
     "=" +
     value +
     expires +
-    (domain ? ";domain=" + domain : "") +
+    (domain ? ";domain=.workforcez.net" : "") +
     ";path=/"; // + and " added
 }
 
