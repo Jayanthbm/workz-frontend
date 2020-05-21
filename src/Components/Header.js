@@ -31,7 +31,10 @@ class Header extends Component {
   logoutHandler = () => {
     Cookie.deleteCookie(USER_DETAILS);
     Cookie.deleteCookie(ACCESS_TOKEN);
-    window.location.reload();
+    Cookie.deleteCookie("CloudFront-Key-Pair-Id");
+    Cookie.deleteCookie("CloudFront-Policy");
+    Cookie.deleteCookie("CloudFront-Signature");
+    this.props.history.push("/");
   };
   render() {
     const isLoggedin = Cookie.getCookie(USER_DETAILS) ? true : false;

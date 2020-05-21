@@ -15,6 +15,16 @@ class SecondaryHeader extends Component {
       startDate: date,
     });
   };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.deepdiveDropdownData !== this.props.deepdiveDropdownData) {
+      this.props.handleDeepdive(
+        nextProps &&
+          nextProps.deepdiveDropdownData &&
+          nextProps.deepdiveDropdownData[0] &&
+          nextProps.deepdiveDropdownData[0].userId
+      );
+    }
+  }
   render() {
     return (
       <div className={styles.deepdiveContainer}>
@@ -41,6 +51,8 @@ class SecondaryHeader extends Component {
           </div>
         </div>
         <div className={styles.timecardContainer}>Timecard | Details</div>
+        <div className={styles.timecardContainer}>Last Week | This Week </div>
+
         <div className={styles.dateContainer}>
           <DatePicker
             selected={this.props.selectedDate}

@@ -12,7 +12,7 @@ class DeepdiveDetails extends Component {
 
   render() {
     console.log(this.props.deepdiveData);
-    if (this.props.deepdiveData) {
+    if (this.props.deepdiveData && this.state.deepdiveData.length === 0) {
       for (let i = 0; i < this.props.deepdiveData.results.length; i++) {
         const a = Object.entries(
           this.props &&
@@ -22,17 +22,21 @@ class DeepdiveDetails extends Component {
             this.props.deepdiveData.results[i] &&
             this.props.deepdiveData.results[i]
         );
+
         this.state.deepdiveData.push(a);
       }
     }
-
+    console.log(this.state.deepdiveData);
     return (
       <div className={styles.deepDiveBase}>
         {!this.props.deepDiveError && this.state.deepdiveData
           ? this.state.deepdiveData.map((val) => {
               return (
                 <div>
-                  {val && val[1] && val[1][1][0].tday}
+                  <div className={styles.dayHolder}>
+                    {" "}
+                    {val && val[1] && val[1][1][0].tday}
+                  </div>
                   {val.map((time) => {
                     return (
                       <div className={styles.dataContainer}>

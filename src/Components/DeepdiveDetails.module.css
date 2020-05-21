@@ -9,4 +9,9 @@
 }
 .dataContainer {
   display: flex;
+  padding: 10px 100px;
+}
+.dayHolder {
+  width: 60px;
+  padding: 10px 100px;
 }

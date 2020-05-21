@@ -51,22 +51,30 @@ class deepdive extends Component {
     this.setState({ userId: val });
   };
   componentDidMount = () => {
-    this.props.getDeepdive({
-      userId: "21",
-      date: "2020-04-13",
-    });
     if (parsedData.isManager === 1) {
       this.setState({ man_id: parsedData.userId, userId: parsedData.userId });
       this.props.getDeepdiveDropdown({
         managerId: parsedData.userId,
       });
+      // this.props.getDeepdive({
+      //   userId:
+      //     this.props.deepdiveDropdownData &&
+      //     this.props.deepdiveDropdownData[0] &&
+      //     this.props.deepdiveDropdownData[0].userId,
+      //   date: moment(new Date()).format("YYYY-MM-DD"),
+      // });
     } else {
       this.setState({ team_id: parsedData.userId, userId: parsedData.userId });
       this.props.getDeepdiveDropdown({
         teamId: parsedData.userId,
       });
+      // this.props.getDeepdive({
+      //   userId: parsedData.userId,
+      //   date: moment(new Date()).format("YYYY-MM-DD"),
+      // });
     }
   };
+
   render() {
     console.log(this.props);
     return (

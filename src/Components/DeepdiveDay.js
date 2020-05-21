@@ -5,6 +5,7 @@ class DeepdiveDay extends Component {
     super(props);
     this.state = {
       slots: [],
+      timeframes: [],
     };
   }
 
@@ -28,11 +29,12 @@ class DeepdiveDay extends Component {
         }
       }
       this.state.slots.push(slots);
+      this.state.timeframes.push(timeframes);
     }
 
     return (
       <div>
-        {this.state.slots[0].map((val) => {
+        {this.state.slots[0].map((val, i) => {
           return (
             <img
               onClick={() => {

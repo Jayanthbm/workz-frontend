@@ -77,7 +77,7 @@ export function getDeepdiveSuccess(deepdiveData) {
   return {
     type: GET_DEEPDIVE_SUCCESS,
     status: SUCCESS,
-    deepdiveData: deepdiveData,
+    deepdiveData,
   };
 }
 

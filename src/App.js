@@ -35,6 +35,9 @@ class App extends Component {
               <Route exact path="/reset" component={Reset} />
               <Route exact path="/" component={Login} />
               <Route exact path="/form" component={Form} />
+              <Route>
+                <Redirect to="/"></Redirect>
+              </Route>
             </React.Fragment>
           )}
         </Switch>
