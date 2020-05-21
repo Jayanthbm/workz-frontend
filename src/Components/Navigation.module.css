@@ -13,7 +13,7 @@
   margin-left: 50px;
 }
 .selectContainer {
-  width: 200px;
+  width: 100%;
 }
 .textHolder {
   padding-left: 20px;
@@ -27,4 +27,11 @@
 }
 select {
   background-color: #fff;
+}
+.menuItem {
+  cursor: pointer;
+}
+.menuHolder {
+  display: flex;
+  margin-left: 850px;
 }

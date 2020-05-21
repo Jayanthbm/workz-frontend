@@ -171,6 +171,7 @@ class Team extends Component {
           team={parsedData && parsedData.dropdown}
           selectHandler={this.selectHandler}
           team_id={this.state.team_id}
+          history={this.props.history}
           man_id={this.state.man_id}
         />
         <div className={styles.detailsHolder}>
