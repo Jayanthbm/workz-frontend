@@ -7,6 +7,7 @@ export async function post(path, postData) {
     headers: {
       Authorization: "Bearer " + Cookie.getCookie(ACCESS_TOKEN),
     },
+    withCredentials: true,
   };
   const url = `${API_URL_ROOT}/${path}`;
   return await axios.post(url, postData, config);
@@ -16,6 +17,7 @@ export async function postToken(path, token, postData) {
     headers: {
       Authorization: "Bearer " + token,
     },
+    withCredentials: true,
   };
   const url = `${API_URL_ROOT}/${path}`;
   return await axios.post(url, postData, config);

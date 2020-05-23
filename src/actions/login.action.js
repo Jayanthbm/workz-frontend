@@ -223,17 +223,17 @@ export function getLogin(userLoginDetails) {
       console.log(resultJson["domain"]);
       Cookie.createCookie(ACCESS_TOKEN, resultJson.token, 7);
       Cookie.createCookie(USER_DETAILS, JSON.stringify(resultJson), 7);
-      Cookie.createCookie(
-        CloudFront_Key_Pair_id,
-        resultJson[CloudFront_Key_Pair_id],
-        7
-      );
-      Cookie.createCookie(CloudFront_Policy, resultJson[CloudFront_Policy], 7);
-      Cookie.createCookie(
-        CloudFront_Signature,
-        resultJson[CloudFront_Signature],
-        7
-      );
+      // Cookie.createCookie(
+      //   CloudFront_Key_Pair_id,
+      //   resultJson[CloudFront_Key_Pair_id],
+      //   7
+      // );
+      // Cookie.createCookie(CloudFront_Policy, resultJson[CloudFront_Policy], 7);
+      // Cookie.createCookie(
+      //   CloudFront_Signature,
+      //   resultJson[CloudFront_Signature],
+      //   7
+      // );
       return dispatch(loginUserSuccess(resultJson));
     } catch (e) {
       return dispatch(loginUserFailure(e.message));
