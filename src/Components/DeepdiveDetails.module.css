@@ -13,8 +13,8 @@
   padding: 10px 100px;
 }
 .dayHolder {
-  width: 60px;
-  padding: 10px 100px;
+  width: 100%;
+  padding: 10px 0px;
 }
 .dayContainer {
   display: flex;
@@ -24,4 +24,13 @@
 }
 .minuteContainer {
   padding: 10px;
+}
+.weekContainer {
+  display: flex;
+  padding: 10px 120px;
+}
+.dayText {
+}
+.hourText {
+  padding: 0 10px;
 }

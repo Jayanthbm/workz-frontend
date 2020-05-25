@@ -11,6 +11,7 @@ class SecondaryHeader extends Component {
     };
   }
   handleChange = (date) => {
+    console.log(date);
     this.setState({
       startDate: date,
     });
@@ -25,7 +26,17 @@ class SecondaryHeader extends Component {
       );
     }
   }
+  handleWeeks = (type) => {
+    let d = new Date();
+    if (type === "last") {
+      d.setDate(d.getDate() - 7);
+      this.props.handleChange(d);
+    } else {
+      this.props.handleChange(new Date());
+    }
+  };
   render() {
+    console.log(this.props.selectedDate);
     return (
       <div className={styles.deepdiveContainer}>
         <div className={styles.dropdownContainer}>
@@ -51,13 +62,28 @@ class SecondaryHeader extends Component {
           </div>
         </div>
         <div className={styles.timecardContainer}>Timecard | Details</div>
-        <div className={styles.timecardContainer}>Last Week | This Week </div>
+        <div className={styles.timecardContainer}>
+          <div
+            className={styles.lastWeek}
+            onClick={() => this.handleWeeks("last")}
+          >
+            Last Week
+          </div>
+          |{" "}
+          <div
+            className={styles.thisWeek}
+            onClick={() => this.handleWeeks("this")}
+          >
+            This Week
+          </div>
+        </div>
 
         <div className={styles.dateContainer}>
           <DatePicker
             selected={this.props.selectedDate}
             onChange={(date) => this.props.handleChange(date)}
             maxDate={new Date()}
+            placeholder={"asa"}
           />
         </div>
       </div>

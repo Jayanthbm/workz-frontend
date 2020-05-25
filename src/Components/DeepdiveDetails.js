@@ -72,14 +72,20 @@ class DeepdiveDetails extends Component {
               return (
                 <div>
                   <div className={styles.dayHolder}>
-                    {" "}
-                    {val && val[1] && val[1][1][0].tday}
-                    {totalhours(val)}
+                    <div className={styles.weekContainer}>
+                      <div className={styles.dayText}>
+                        {val && val[1] && val[1][1][0].tday}
+                      </div>
+                      <div className={styles.hourText}> {totalhours(val)}</div>
+                    </div>
                   </div>
                   {val.map((time) => {
                     return (
                       <div className={styles.dataContainer}>
-                        <div className={styles.timeSlots}>{time[0]}</div>
+                        <div className={styles.timeSlots}>
+                          {time[0] < 10 ? 0 : ""}
+                          {time[0]}:00
+                        </div>
                         <div className={styles.imgContainer}>
                           <DeepdiveDay time={time[1]} />
 

@@ -17,14 +17,22 @@
 .dropdownContainer {
   display: flex;
   padding: 15px;
+  margin-left: 30px;
 }
 .timecardContainer {
   margin-left: auto;
   padding: 15px;
+  display: flex;
 }
 .dateContainer {
   margin: auto;
 }
 .dropdownSelectHolder {
   /* padding: 10px; */
+}
+.lastWeek {
+  padding: 0 10px;
+}
+.thisWeek {
+  padding: 0 10px;
 }
