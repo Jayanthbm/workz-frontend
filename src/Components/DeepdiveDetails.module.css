@@ -3,6 +3,7 @@
 }
 .timeSlots {
   display: flex;
+  align-items: center;
 }
 .imgContainer {
   display: flex;
@@ -14,4 +15,13 @@
 .dayHolder {
   width: 60px;
   padding: 10px 100px;
+}
+.dayContainer {
+  display: flex;
+}
+.minuteHolder {
+  display: flex;
+}
+.minuteContainer {
+  padding: 10px;
 }

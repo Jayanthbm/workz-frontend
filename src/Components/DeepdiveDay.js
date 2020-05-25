@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import styles from "./DeepdiveDetails.module.css";
 import defaultIcon from "../images/download.png";
 class DeepdiveDay extends Component {
   constructor(props) {
@@ -8,7 +9,6 @@ class DeepdiveDay extends Component {
       timeframes: [],
     };
   }
-
   render() {
     if (this.props.time) {
       let timeframes = ["00:00", "10:00", "20:00", "30:00", "40:00", "50:00"];
@@ -33,17 +33,20 @@ class DeepdiveDay extends Component {
     }
 
     return (
-      <div>
+      <div className={styles.dayContainer}>
         {this.state.slots[0].map((val, i) => {
           return (
-            <img
-              onClick={() => {
-                console.log(val);
-              }}
-              src={val == "defaultimageurl" ? defaultIcon : val}
-              height="100px"
-              width="150px"
-            />
+            <div className={styles.minuteContainer}>
+              <div> {this.state.timeframes[0][i]} </div>
+              <img
+                onClick={() => {
+                  console.log(val);
+                }}
+                src={val == "defaultimageurl" ? defaultIcon : val}
+                height="100px"
+                width="150px"
+              />
+            </div>
           );
         })}
       </div>

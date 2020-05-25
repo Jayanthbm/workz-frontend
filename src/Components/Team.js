@@ -12,6 +12,7 @@ import ProfileStatus from "./ProfileStatus";
 
 import * as Cookie from "../utils/Cookie";
 import { USER_DETAILS, ACCESS_TOKEN } from "../utils/constant";
+
 const data = [
   {
     name: "abc",
@@ -146,7 +147,6 @@ class Team extends Component {
   };
 
   render() {
-    console.log(this.props);
     const users1 =
       this.props.teamDetails &&
       this.props.teamDetails.length === 1 &&
@@ -163,7 +163,7 @@ class Team extends Component {
 
     const userDetails = Cookie.getCookie(USER_DETAILS);
     let parsedData = userDetails && JSON.parse(userDetails);
-
+    console.log(parsedData && parsedData);
     return (
       <div className={styles.base}>
         <Header pic={parsedData && parsedData.profilePic} />

@@ -11,6 +11,44 @@ class DeepdiveDetails extends Component {
   }
 
   render() {
+    function timeConvert(n) {
+      var num = n;
+      var hours = num / 60;
+      var rhours = Math.floor(hours);
+      var minutes = (hours - rhours) * 60;
+      var rminutes = Math.round(minutes);
+      if (rhours > 1 && rminutes > 1) {
+        return rhours + " hours and " + rminutes + " minutes";
+      }
+      if (rhours > 1 && rminutes === 1) {
+        return rhours + " hours and " + rminutes + " minute";
+      }
+      if (rhours > 1 && rminutes === 0) {
+        return rhours + " hours";
+      }
+      if (rhours === 1 && rminutes > 0) {
+        return rhours + " hour and " + rminutes + " minutes";
+      }
+      if (rhours === 1 && rminutes === 0) {
+        return rhours + " hour";
+      }
+      if (rhours === 1 && rminutes === 1) {
+        return rhours + " hour and " + rminutes + " minute";
+      }
+      if (rhours === 0 && rminutes === 1) {
+        return rminutes + " minute";
+      }
+      if (rhours === 0 && rminutes > 0) {
+        return rminutes + " minutes";
+      }
+    }
+    function totalhours(data) {
+      let totalminutes = 0;
+      for (let y = 0; y < data.length; y++) {
+        totalminutes = totalminutes + Object.keys(data[y][1]).length;
+      }
+      return timeConvert(totalminutes * 10);
+    }
     console.log(this.props.deepdiveData);
     if (this.props.deepdiveData && this.state.deepdiveData.length === 0) {
       for (let i = 0; i < this.props.deepdiveData.results.length; i++) {
@@ -36,6 +74,7 @@ class DeepdiveDetails extends Component {
                   <div className={styles.dayHolder}>
                     {" "}
                     {val && val[1] && val[1][1][0].tday}
+                    {totalhours(val)}
                   </div>
                   {val.map((time) => {
                     return (
