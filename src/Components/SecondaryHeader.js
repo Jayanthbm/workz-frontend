@@ -35,6 +35,16 @@ class SecondaryHeader extends Component {
       this.props.handleChange(new Date());
     }
   };
+  handleCalender = (type) => {
+    let d = new Date(this.props.selectedDate);
+    if (type === "prev") {
+      d.setDate(d.getDate() - 7);
+      this.props.handleChange(d);
+    } else {
+      d.setDate(d.getDate() + 7);
+      this.props.handleChange(d);
+    }
+  };
   render() {
     console.log(this.props.selectedDate);
     return (
@@ -61,7 +71,10 @@ class SecondaryHeader extends Component {
             </select>
           </div>
         </div>
-        <div className={styles.timecardContainer}>Timecard | Details</div>
+        <div className={styles.timecardContainer}>
+          <div className={styles.timeCard}> Timecard</div>|
+          <div className={styles.details}> Details</div>{" "}
+        </div>
         <div className={styles.timecardContainer}>
           <div
             className={styles.lastWeek}
@@ -79,12 +92,25 @@ class SecondaryHeader extends Component {
         </div>
 
         <div className={styles.dateContainer}>
+          <div
+            className={styles.prev}
+            onClick={() => this.handleCalender("prev")}
+          >
+            {"<"}
+          </div>
           <DatePicker
             selected={this.props.selectedDate}
             onChange={(date) => this.props.handleChange(date)}
             maxDate={new Date()}
             placeholder={"asa"}
           />
+          <div
+            className={styles.next}
+            onClick={() => this.handleCalender("next")}
+          >
+            {" "}
+            {">"}{" "}
+          </div>
         </div>
       </div>
     );

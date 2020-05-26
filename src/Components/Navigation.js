@@ -80,14 +80,6 @@ class Navigation extends Component {
               </div>
             </div>
           )}
-          <div className={styles.menuHolder}>
-            <div
-              className={styles.menuItem}
-              onClick={() => this.props.history.push("/deepdive")}
-            >
-              Deepdive
-            </div>
-          </div>
         </div>
       </div>
     );

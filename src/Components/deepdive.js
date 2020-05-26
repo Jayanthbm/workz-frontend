@@ -26,6 +26,7 @@ class deepdive extends Component {
       selectedDate: date,
     });
     this.props.getDeepdive({
+      companyId: parsedData.companyId,
       userId: this.state.userId,
       date: moment(date).format("YYYY-MM-DD"),
     });
@@ -45,6 +46,7 @@ class deepdive extends Component {
   handleDeepdive = (val) => {
     console.log(val);
     this.props.getDeepdive({
+      companyId: parsedData.companyId,
       userId: val,
       date: moment(this.state.selectedDate).format("YYYY-MM-DD"),
     });
@@ -77,7 +79,7 @@ class deepdive extends Component {
   };
 
   render() {
-    console.log(this.props);
+    console.log(parsedData.companyId);
     return (
       <div className={styles.base}>
         <Header pic={parsedData && parsedData.profilePic} />

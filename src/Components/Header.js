@@ -17,10 +17,12 @@ const links = [
   {
     text: "Virtual Office",
     image: virtualOffice,
+    redirect: "/",
   },
   {
     text: "My Team",
     image: teamIcon,
+    redirect: "/deepdive",
   },
   {
     text: "Help",
@@ -54,11 +56,14 @@ class Header extends Component {
               {links &&
                 links.map((val) => {
                   return (
-                    <div className={styles.links}>
+                    <div
+                      className={styles.links}
+                      onClick={() => this.props.history.push(val.redirect)}
+                    >
                       <div className={styles.icon}>
                         <img src={val.image} height="25px" width="35px" />
                       </div>
-                      <div> {val.text}</div>
+                      <div>{val.text}</div>
                     </div>
                   );
                 })}
