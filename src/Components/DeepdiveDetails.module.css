@@ -34,3 +34,9 @@
 .hourText {
   padding: 0 10px;
 }
+.popup-content {
+  width: 100%;
+}
+.popup-wrapper > * {
+  width: 50%;
+}

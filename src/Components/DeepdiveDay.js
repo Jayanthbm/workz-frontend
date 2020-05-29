@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./DeepdiveDetails.module.css";
 import defaultIcon from "../images/download.png";
 import Popup from "reactjs-popup";
+import Modal from "./Modal";
 class DeepdiveDay extends Component {
   constructor(props) {
     super(props);
@@ -11,8 +12,20 @@ class DeepdiveDay extends Component {
       webcam: [],
       ssImage: [],
       webcamImage: [],
+      show: false,
+      image: null,
+      type: null,
     };
   }
+  showModal = (val, type) => {
+    console.log(val);
+
+    this.setState({ show: true, image: val, type: type });
+  };
+
+  hideModal = () => {
+    this.setState({ show: false });
+  };
   render() {
     if (this.props.time) {
       let timeframes = ["00:00", "10:00", "20:00", "30:00", "40:00", "50:00"];
@@ -72,39 +85,47 @@ class DeepdiveDay extends Component {
           return (
             <div className={styles.minuteContainer}>
               <div> {this.state.timeframes[0][i]} </div>
-              {val === "defaultimageurl" && (
-                <img
-                  onClick={() => {
-                    console.log(val);
-                  }}
-                  src={val == "defaultimageurl" ? defaultIcon : val}
-                  height="100px"
-                  width="150px"
-                />
-              )}
-              {val !== "defaultimageurl" && (
-                <Popup
-                  trigger={
+              <img
+                onClick={() => this.showModal(val, "screen")}
+                src={val == "defaultimageurl" ? defaultIcon : val}
+                height="100px"
+                width="150px"
+              />
+              {this.state.type &&
+                this.state.type === "screen" &&
+                val !== "defaultimageurl" && (
+                  <Modal show={this.state.show} handleClose={this.hideModal}>
                     <img
                       onClick={() => {
                         console.log(val);
                       }}
-                      src={val == "defaultimageurl" ? defaultIcon : val}
-                      height="100px"
-                      width="150px"
+                      src={this.state.image ? this.state.image : defaultIcon}
+                      height="100%"
+                      width="100%"
                     />
-                  }
-                  modal
-                >
-                  <div>
-                    <img
-                      src={this.state.ssImage[0][i]}
-                      height="100px"
-                      width="150px"
-                    />{" "}
-                  </div>
-                </Popup>
-              )}
+                  </Modal>
+                  // <Popup
+                  //   trigger={
+                  //     <img
+                  //       onClick={() => {
+                  //         console.log(val);
+                  //       }}
+                  //       src={val == "defaultimageurl" ? defaultIcon : val}
+                  //       height="100px"
+                  //       width="150px"
+                  //     />
+                  //   }
+                  //   modal
+                  // >
+                  //   <div>
+                  //     <img
+                  //       src={this.state.ssImage[0][i]}
+                  //       height="100px"
+                  //       width="150px"
+                  //     />{" "}
+                  //   </div>
+                  // </Popup>
+                )}
               {/* <img
                 onClick={() => {
                   console.log(val);
@@ -113,42 +134,32 @@ class DeepdiveDay extends Component {
                 height="100px"
                 width="150px"
               /> */}
-              {this.state.webcam[0][i] === "defaultimageurl" && (
-                <img
-                  onClick={() => {
-                    console.log(this.state.webcam[0][i]);
-                  }}
-                  src={
-                    this.state.webcam[0][i] == "defaultimageurl"
-                      ? defaultIcon
-                      : this.state.webcam[0][i]
-                  }
-                  height="100px"
-                  width="150px"
-                />
-              )}
-              {this.state.webcam[0][i] !== "defaultimageurl" && (
-                <Popup
-                  trigger={
+
+              <img
+                onClick={() => this.showModal(this.state.webcam[0][i], "web")}
+                src={
+                  this.state.webcam[0][i] == "defaultimageurl"
+                    ? defaultIcon
+                    : this.state.webcam[0][i]
+                }
+                height="100px"
+                width="150px"
+              />
+
+              {this.state.type &&
+                this.state.type === "web" &&
+                this.state.webcam[0][i] !== "defaultimageurl" && (
+                  <Modal show={this.state.show} handleClose={this.hideModal}>
                     <img
                       onClick={() => {
                         console.log(this.state.webcam[0][i]);
                       }}
-                      src={
-                        this.state.webcam[0][i] == "defaultimageurl"
-                          ? defaultIcon
-                          : this.state.webcam[0][i]
-                      }
-                      height="100px"
-                      width="150px"
+                      src={this.state.image ? this.state.image : defaultIcon}
+                      height="100%"
+                      width="100%"
                     />
-                  }
-                  modal
-                  closeOnDocumentClick
-                >
-                  <div> {this.state.webcam[0][i]} </div>
-                </Popup>
-              )}
+                  </Modal>
+                )}
               {/* <img
                 onClick={() => {
                   console.log(this.state.webcam[0][i]);
