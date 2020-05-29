@@ -150,16 +150,44 @@ class DeepdiveDay extends Component {
                 this.state.type === "web" &&
                 this.state.webcam[0][i] !== "defaultimageurl" && (
                   <Modal show={this.state.show} handleClose={this.hideModal}>
-                    <img
-                      onClick={() => {
-                        console.log(this.state.webcam[0][i]);
-                      }}
-                      src={this.state.image ? this.state.image : defaultIcon}
-                      height="100%"
-                      width="100%"
-                    />
+                    <div className={styles.webContainer}>
+                      <div className={styles.webImage}>
+                        {" "}
+                        <img
+                          onClick={() => {
+                            console.log(this.state.webcam[0][i]);
+                          }}
+                          src={
+                            this.state.image ? this.state.image : defaultIcon
+                          }
+                          height="100%"
+                          width="100%"
+                        />
+                      </div>
+                      <div className={styles.panel}>
+                        <div className={styles.details}>Show Details</div>
+                        <div className={styles.details}>Focus</div>
+                        <div className={styles.details}>Intensity</div>
+
+                        <textarea rows="10" className={styles.commentBox} />
+                        <div className={styles.toggleContainer}>
+                          {this.props.empname && (
+                            <div>Share with {this.props.empname}</div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
                   </Modal>
                 )}
+              <div className={styles.completedBar}>
+                <div
+                  className={styles.completedLevel}
+                  style={{
+                    width: Math.random() * 100,
+                    background: "#8bc646",
+                  }}
+                ></div>
+              </div>
               {/* <img
                 onClick={() => {
                   console.log(this.state.webcam[0][i]);

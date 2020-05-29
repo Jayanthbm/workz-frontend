@@ -17,12 +17,26 @@ class SecondaryHeader extends Component {
     });
   };
   componentWillReceiveProps(nextProps) {
+    console.log(
+      nextProps &&
+        nextProps.deepdiveDropdownData &&
+        nextProps.deepdiveDropdownData[0] &&
+        nextProps.deepdiveDropdownData[0]
+    );
     if (nextProps.deepdiveDropdownData !== this.props.deepdiveDropdownData) {
       this.props.handleDeepdive(
-        nextProps &&
-          nextProps.deepdiveDropdownData &&
-          nextProps.deepdiveDropdownData[0] &&
-          nextProps.deepdiveDropdownData[0].userId
+        JSON.stringify({
+          name:
+            nextProps &&
+            nextProps.deepdiveDropdownData &&
+            nextProps.deepdiveDropdownData[0] &&
+            nextProps.deepdiveDropdownData[0].name,
+          id:
+            nextProps &&
+            nextProps.deepdiveDropdownData &&
+            nextProps.deepdiveDropdownData[0] &&
+            nextProps.deepdiveDropdownData[0].userId,
+        })
       );
     }
   }
@@ -64,7 +78,15 @@ class SecondaryHeader extends Component {
                 this.props.deepdiveDropdownData.map((val) => {
                   return (
                     <>
-                      <option value={val.userId}>{val.name}</option>;
+                      <option
+                        value={JSON.stringify({
+                          name: val.name,
+                          id: val.userId,
+                        })}
+                      >
+                        {val.name}
+                      </option>
+                      ;
                     </>
                   );
                 })}

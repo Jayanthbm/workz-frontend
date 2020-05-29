@@ -7,7 +7,6 @@ import { USER_DETAILS, ACCESS_TOKEN } from "../utils/constant";
 import SecondaryHeader from "./SecondaryHeader";
 import DeepdiveDetails from "./DeepdiveDetails";
 import moment from "moment";
-import Modal from "./Modal";
 const userDetails = Cookie.getCookie(USER_DETAILS);
 let parsedData = userDetails && JSON.parse(userDetails);
 
@@ -53,13 +52,15 @@ class deepdive extends Component {
     this.setState({ show: false });
   };
   handleDeepdive = (val) => {
-    console.log(val);
+    let data = JSON.parse(val);
+    console.log(data.id);
+
     this.props.getDeepdive({
       companyId: parsedData.companyId,
-      userId: val,
+      userId: data.id,
       date: moment(this.state.selectedDate).format("YYYY-MM-DD"),
     });
-    this.setState({ userId: val });
+    this.setState({ userId: data.id, empname: data.name });
   };
   componentDidMount = () => {
     if (parsedData.isManager === 1) {
@@ -103,16 +104,10 @@ class deepdive extends Component {
           selectedDate={this.state.selectedDate}
           handleChange={this.handleChange}
         />
-        <button type="button" onClick={this.showModal}>
-          open
-        </button>
-        <Modal show={this.state.show} handleClose={this.hideModal}>
-          <p>Modal</p>
-          <p>Data</p>
-        </Modal>
         <DeepdiveDetails
           deepdiveData={this.props.deepdiveData}
           deepDiveError={this.props.deepDiveError}
+          empname={this.state.empname}
         />
       </div>
     );

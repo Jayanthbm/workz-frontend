@@ -87,7 +87,10 @@ class DeepdiveDetails extends Component {
                           {time[0]}:00
                         </div>
                         <div className={styles.imgContainer}>
-                          <DeepdiveDay time={time[1]} />
+                          <DeepdiveDay
+                            time={time[1]}
+                            empname={this.props.empname}
+                          />
 
                           {/* {time[1].map((day, i) => {
                           console.log(
