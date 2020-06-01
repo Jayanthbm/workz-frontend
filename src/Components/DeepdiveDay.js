@@ -86,7 +86,9 @@ class DeepdiveDay extends Component {
             <div className={styles.minuteContainer}>
               <div> {this.state.timeframes[0][i]} </div>
               <img
-                onClick={() => this.showModal(val, "screen")}
+                onClick={() =>
+                  this.showModal(this.state.ssImage[0][i], "screen")
+                }
                 src={val == "defaultimageurl" ? defaultIcon : val}
                 height="100px"
                 width="150px"
@@ -95,14 +97,33 @@ class DeepdiveDay extends Component {
                 this.state.type === "screen" &&
                 val !== "defaultimageurl" && (
                   <Modal show={this.state.show} handleClose={this.hideModal}>
-                    <img
-                      onClick={() => {
-                        console.log(val);
-                      }}
-                      src={this.state.image ? this.state.image : defaultIcon}
-                      height="100%"
-                      width="100%"
-                    />
+                    <div className={styles.webContainer}>
+                      <div className={styles.webImage}>
+                        {" "}
+                        <img
+                          onClick={() => {
+                            console.log(this.state.webcam[0][i]);
+                          }}
+                          src={
+                            this.state.image ? this.state.image : defaultIcon
+                          }
+                          height="100%"
+                          width="100%"
+                        />
+                      </div>
+                      <div className={styles.panel}>
+                        <div className={styles.details}>Show Details</div>
+                        <div className={styles.details}>Focus</div>
+                        <div className={styles.details}>Intensity</div>
+
+                        <textarea rows="10" className={styles.commentBox} />
+                        <div className={styles.toggleContainer}>
+                          {this.props.empname && (
+                            <div>Share with {this.props.empname}</div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
                   </Modal>
                   // <Popup
                   //   trigger={
@@ -136,7 +157,9 @@ class DeepdiveDay extends Component {
               /> */}
 
               <img
-                onClick={() => this.showModal(this.state.webcam[0][i], "web")}
+                onClick={() =>
+                  this.showModal(this.state.webcamImage[0][i], "web")
+                }
                 src={
                   this.state.webcam[0][i] == "defaultimageurl"
                     ? defaultIcon
