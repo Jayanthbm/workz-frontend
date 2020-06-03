@@ -15,16 +15,33 @@ class DeepdiveDay extends Component {
       show: false,
       image: null,
       type: null,
+      alltime: [],
+      position: 0,
     };
   }
   showModal = (val, type) => {
-    console.log(val);
-
-    this.setState({ show: true, image: val, type: type });
+    this.setState({ show: !this.state.show, image: val, type: type });
   };
-
+  componentDidMount() {
+    if (this.props.time) {
+      let arr = [];
+      arr.push(this.props.time);
+    }
+  }
   hideModal = () => {
     this.setState({ show: false });
+  };
+  goBack = () => {
+    if (this.state.position > 0) {
+      this.setState({
+        position: this.state.position - 1,
+      });
+    }
+  };
+  goForward = () => {
+    this.setState({
+      position: this.state.position + 1,
+    });
   };
   render() {
     if (this.props.time) {
@@ -78,10 +95,20 @@ class DeepdiveDay extends Component {
       this.state.webcamImage.push(webcamImage);
       this.state.timeframes.push(timeframes);
     }
-    console.log(this.state.webcamImage[0]);
+    console.log(this.props);
+    const images = [];
+    if (images.length === 0) {
+      this.props.allTime.map((iterator) => {
+        iterator.map((val) => {
+          images.push({ screenshot: val.screenshotUrl, webcam: val.webcamUrl });
+        });
+      });
+    }
+    console.log(images);
     return (
       <div className={styles.dayContainer}>
         {this.state.slots[0].map((val, i) => {
+          console.log(i);
           return (
             <div className={styles.minuteContainer}>
               <div> {this.state.timeframes[0][i]} </div>
@@ -99,13 +126,30 @@ class DeepdiveDay extends Component {
                   <Modal show={this.state.show} handleClose={this.hideModal}>
                     <div className={styles.webContainer}>
                       <div className={styles.webImage}>
-                        {" "}
+                        {images && images.length > 1 && !this.state.image && (
+                          <>
+                            <div
+                              className={styles.leftArrow}
+                              onClick={() => this.goBack()}
+                            >
+                              {">"}
+                            </div>
+                            <div
+                              className={styles.rightArrow}
+                              onClick={() => this.goForward()}
+                            >
+                              {"<"}
+                            </div>
+                          </>
+                        )}
                         <img
                           onClick={() => {
                             console.log(this.state.webcam[0][i]);
                           }}
                           src={
-                            this.state.image ? this.state.image : defaultIcon
+                            this.state.image
+                              ? this.state.image
+                              : images[this.state.position].screenshot
                           }
                           height="100%"
                           width="100%"
@@ -121,6 +165,25 @@ class DeepdiveDay extends Component {
                           {this.props.empname && (
                             <div>Share with {this.props.empname}</div>
                           )}
+                        </div>
+                        <div className={styles.imageContainer}>
+                          {images.length > 0 &&
+                            images.map((val, i) => {
+                              return (
+                                <img
+                                  src={val.screenshot}
+                                  height="50px"
+                                  width="50px"
+                                  onClick={() =>
+                                    this.setState({
+                                      position: i,
+                                      type: "screen",
+                                      image: null,
+                                    })
+                                  }
+                                />
+                              );
+                            })}
                         </div>
                       </div>
                     </div>
@@ -175,7 +238,6 @@ class DeepdiveDay extends Component {
                   <Modal show={this.state.show} handleClose={this.hideModal}>
                     <div className={styles.webContainer}>
                       <div className={styles.webImage}>
-                        {" "}
                         <img
                           onClick={() => {
                             console.log(this.state.webcam[0][i]);
@@ -198,10 +260,29 @@ class DeepdiveDay extends Component {
                             <div>Share with {this.props.empname}</div>
                           )}
                         </div>
+                        <div className={styles.imageContainer}>
+                          {this.props.allTime &&
+                            this.props.allTime.map((iterator, i) => {
+                              console.log(iterator);
+                              return iterator.map((all, a) => {
+                                return (
+                                  <img
+                                    src={all.webcamUrl}
+                                    height="50px"
+                                    width="50px"
+                                    onClick={() =>
+                                      this.showModal(all.webcamUrl, "web")
+                                    }
+                                  />
+                                );
+                              });
+                            })}
+                        </div>
                       </div>
                     </div>
                   </Modal>
                 )}
+
               <div className={styles.completedBar}>
                 <div
                   className={styles.completedLevel}

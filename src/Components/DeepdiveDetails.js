@@ -7,6 +7,7 @@ class DeepdiveDetails extends Component {
     this.state = {
       deepdiveData: [],
       day: [],
+      allTime: [],
     };
   }
 
@@ -80,6 +81,7 @@ class DeepdiveDetails extends Component {
                     </div>
                   </div>
                   {val.map((time) => {
+                    this.state.allTime.push(time[1]);
                     return (
                       <div className={styles.dataContainer}>
                         <div className={styles.timeSlots}>
@@ -89,6 +91,7 @@ class DeepdiveDetails extends Component {
                         <div className={styles.imgContainer}>
                           <DeepdiveDay
                             time={time[1]}
+                            allTime={this.state.allTime}
                             empname={this.props.empname}
                           />
 
