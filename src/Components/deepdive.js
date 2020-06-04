@@ -19,12 +19,14 @@ class deepdive extends Component {
       selectedDate: new Date(),
       userId: "",
       show: false,
+      allChecker: false,
     };
   }
   handleChange = (date) => {
     console.log(moment(date).format("YYYY-MM-DD"));
     this.setState({
       selectedDate: date,
+      allChecker: true,
     });
     this.props.getDeepdive({
       companyId: parsedData.companyId,
@@ -52,6 +54,9 @@ class deepdive extends Component {
     this.setState({ show: false });
   };
   handleDeepdive = (val) => {
+    this.setState({
+      allChecker: true,
+    });
     let data = JSON.parse(val);
     console.log(data.id);
 
@@ -108,6 +113,7 @@ class deepdive extends Component {
           deepdiveData={this.props.deepdiveData}
           deepDiveError={this.props.deepDiveError}
           empname={this.state.empname}
+          allChecker={this.state.allChecker}
         />
       </div>
     );

@@ -10,7 +10,12 @@ class DeepdiveDetails extends Component {
       allTime: [],
     };
   }
-
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+    if (nextProps.allChecker === true) {
+      this.setState({ allTime: [] });
+    }
+  }
   render() {
     function timeConvert(n) {
       var num = n;
@@ -69,7 +74,7 @@ class DeepdiveDetails extends Component {
     return (
       <div className={styles.deepDiveBase}>
         {!this.props.deepDiveError && this.state.deepdiveData
-          ? this.state.deepdiveData.map((val) => {
+          ? this.state.deepdiveData.map((val, i) => {
               return (
                 <div>
                   <div className={styles.dayHolder}>
@@ -81,7 +86,9 @@ class DeepdiveDetails extends Component {
                     </div>
                   </div>
                   {val.map((time) => {
+                    console.log(i);
                     this.state.allTime.push(time[1]);
+
                     return (
                       <div className={styles.dataContainer}>
                         <div className={styles.timeSlots}>

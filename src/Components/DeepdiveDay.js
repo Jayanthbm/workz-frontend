@@ -12,6 +12,7 @@ class DeepdiveDay extends Component {
       webcam: [],
       ssImage: [],
       webcamImage: [],
+      intensityScore: [],
       show: false,
       image: null,
       type: null,
@@ -20,7 +21,7 @@ class DeepdiveDay extends Component {
     };
   }
   showModal = (val, type) => {
-    this.setState({ show: !this.state.show, image: val, type: type });
+    this.setState({ show: true, image: val, type: type });
   };
   componentDidMount() {
     if (this.props.time) {
@@ -78,6 +79,14 @@ class DeepdiveDay extends Component {
         "defaultimageurl",
         "defaultimageurl",
       ];
+      let intensityScore = [
+        "defaultimageurl",
+        "defaultimageurl",
+        "defaultimageurl",
+        "defaultimageurl",
+        "defaultimageurl",
+        "defaultimageurl",
+      ];
       for (let i = 0; i < 6; i++) {
         for (let j = 0; j < this.props.time.length; j++) {
           let time = this.props.time[j].time.substring(3);
@@ -86,6 +95,7 @@ class DeepdiveDay extends Component {
             webcam[i] = this.props.time[j].webcamUrl_thumb;
             ssImage[i] = this.props.time[j].screenshotUrl;
             webcamImage[i] = this.props.time[j].webcamUrl;
+            intensityScore[i] = this.props.time[j].intensityScore;
           }
         }
       }
@@ -94,13 +104,17 @@ class DeepdiveDay extends Component {
       this.state.ssImage.push(ssImage);
       this.state.webcamImage.push(webcamImage);
       this.state.timeframes.push(timeframes);
+      this.state.intensityScore.push(intensityScore);
     }
-    console.log(this.props);
+    console.log(this.props.allTime.length);
     const images = [];
     if (images.length === 0) {
       this.props.allTime.map((iterator) => {
         iterator.map((val) => {
-          images.push({ screenshot: val.screenshotUrl, webcam: val.webcamUrl });
+          images.push({
+            screenshot: val.screenshotUrl,
+            webcam: val.webcamUrl,
+          });
         });
       });
     }
@@ -114,7 +128,9 @@ class DeepdiveDay extends Component {
               <div> {this.state.timeframes[0][i]} </div>
               <img
                 onClick={() =>
-                  this.showModal(this.state.ssImage[0][i], "screen")
+                  val === "defaultimageurl"
+                    ? ""
+                    : this.showModal(this.state.ssImage[0][i], "screen")
                 }
                 src={val == "defaultimageurl" ? defaultIcon : val}
                 height="100px"
@@ -153,6 +169,17 @@ class DeepdiveDay extends Component {
                           }
                           height="100%"
                           width="100%"
+                        />
+                        <img
+                          onClick={() => {
+                            this.showModal(
+                              images[this.state.position].webcam,
+                              "web"
+                            );
+                          }}
+                          src={images[this.state.position].webcam}
+                          height="100px"
+                          width="100px"
                         />
                       </div>
                       <div className={styles.panel}>
@@ -238,15 +265,44 @@ class DeepdiveDay extends Component {
                   <Modal show={this.state.show} handleClose={this.hideModal}>
                     <div className={styles.webContainer}>
                       <div className={styles.webImage}>
+                        {images && images.length > 1 && !this.state.image && (
+                          <>
+                            <div
+                              className={styles.leftArrow}
+                              onClick={() => this.goBack()}
+                            >
+                              {">"}
+                            </div>
+                            <div
+                              className={styles.rightArrow}
+                              onClick={() => this.goForward()}
+                            >
+                              {"<"}
+                            </div>
+                          </>
+                        )}
                         <img
                           onClick={() => {
                             console.log(this.state.webcam[0][i]);
                           }}
                           src={
-                            this.state.image ? this.state.image : defaultIcon
+                            this.state.image
+                              ? this.state.image
+                              : images[this.state.position].webcam
                           }
                           height="100%"
                           width="100%"
+                        />
+                        <img
+                          onClick={() => {
+                            this.showModal(
+                              images[this.state.position].screenshot,
+                              "screen"
+                            );
+                          }}
+                          src={images[this.state.position].screenshot}
+                          height="100px"
+                          width="100px"
                         />
                       </div>
                       <div className={styles.panel}>
@@ -261,21 +317,22 @@ class DeepdiveDay extends Component {
                           )}
                         </div>
                         <div className={styles.imageContainer}>
-                          {this.props.allTime &&
-                            this.props.allTime.map((iterator, i) => {
-                              console.log(iterator);
-                              return iterator.map((all, a) => {
-                                return (
-                                  <img
-                                    src={all.webcamUrl}
-                                    height="50px"
-                                    width="50px"
-                                    onClick={() =>
-                                      this.showModal(all.webcamUrl, "web")
-                                    }
-                                  />
-                                );
-                              });
+                          {images.length > 0 &&
+                            images.map((val, i) => {
+                              return (
+                                <img
+                                  src={val.webcam}
+                                  height="50px"
+                                  width="50px"
+                                  onClick={() =>
+                                    this.setState({
+                                      position: i,
+                                      type: "web",
+                                      image: null,
+                                    })
+                                  }
+                                />
+                              );
                             })}
                         </div>
                       </div>
@@ -283,15 +340,26 @@ class DeepdiveDay extends Component {
                   </Modal>
                 )}
 
-              <div className={styles.completedBar}>
-                <div
-                  className={styles.completedLevel}
-                  style={{
-                    width: Math.random() * 100,
-                    background: "#8bc646",
-                  }}
-                ></div>
-              </div>
+              {this.state.intensityScore[0][i] !== "defaultimageurl" && (
+                <div className={styles.completedBar}>
+                  <div
+                    className={styles.completedLevel}
+                    style={{
+                      width:
+                        this.state.intensityScore[0][i] === "defaultimageurl"
+                          ? 0
+                          : this.state.intensityScore[0][i],
+                      background:
+                        this.state.intensityScore[0][i] < 20
+                          ? "red"
+                          : this.state.intensityScore[0][i] > 20 &&
+                            this.state.intensityScore[0][i] < 60
+                          ? "yellow"
+                          : "green",
+                    }}
+                  ></div>
+                </div>
+              )}
               {/* <img
                 onClick={() => {
                   console.log(this.state.webcam[0][i]);
