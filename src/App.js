@@ -25,7 +25,11 @@ class App extends Component {
           {isUserLogedIn && password_updated ? (
             <React.Fragment>
               <Route exact path="/" component={Team} />
-              <Route exact path="/deepdive" component={deepdive} />
+              <Route
+                exact
+                path="/deepdive/:userId/:date"
+                component={deepdive}
+              />
               <Route exact path="/reset" component={Reset} />
             </React.Fragment>
           ) : (

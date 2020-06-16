@@ -81,6 +81,12 @@ class Navigation extends Component {
             </div>
           )}
         </div>
+        <div className={styles.menuContainer}>
+          <div className={styles.link}>Team Summary</div>
+          <div className={styles.link}>Activity</div>
+          <div className={styles.link}>Metrics</div>
+          <div className={styles.link}>Deepdive</div>
+        </div>
       </div>
     );
   }

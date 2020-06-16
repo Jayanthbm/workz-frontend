@@ -3,6 +3,7 @@
   height: auto;
   min-height: 100vh;
   background-color: #bcbcbc;
+  display: inline-block;
 }
 .deepdiveContainer {
   /* float: left; */

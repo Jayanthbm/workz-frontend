@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./DeepdiveDetails.module.css";
 import defaultIcon from "../images/download.png";
-import Popup from "reactjs-popup";
+import moment from "moment";
 import Modal from "./Modal";
 class DeepdiveDay extends Component {
   constructor(props) {
@@ -30,7 +30,7 @@ class DeepdiveDay extends Component {
     }
   }
   hideModal = () => {
-    this.setState({ show: false });
+    this.setState({ show: false, type: null });
   };
   goBack = () => {
     if (this.state.position > 0) {
@@ -114,6 +114,9 @@ class DeepdiveDay extends Component {
           images.push({
             screenshot: val.screenshotUrl,
             webcam: val.webcamUrl,
+            intensity: val.intensityScore,
+            day: val.tday,
+            date: moment(val.timecard).format("DD,MMMM"),
           });
         });
       });
@@ -125,7 +128,7 @@ class DeepdiveDay extends Component {
           console.log(i);
           return (
             <div className={styles.minuteContainer}>
-              <div> {this.state.timeframes[0][i]} </div>
+              <div> :{this.state.timeframes[0][i].substring(0, 2)} </div>
               <img
                 onClick={() =>
                   val === "defaultimageurl"
@@ -183,9 +186,16 @@ class DeepdiveDay extends Component {
                         />
                       </div>
                       <div className={styles.panel}>
+                        <div>
+                          {images[this.state.position].day}{" "}
+                          {images[this.state.position].date}
+                        </div>
                         <div className={styles.details}>Show Details</div>
                         <div className={styles.details}>Focus</div>
-                        <div className={styles.details}>Intensity</div>
+                        <div className={styles.details}>
+                          <div> Intensity</div>{" "}
+                          <div>{images[this.state.position].intensity}</div>
+                        </div>
 
                         <textarea rows="10" className={styles.commentBox} />
                         <div className={styles.toggleContainer}>
@@ -247,8 +257,10 @@ class DeepdiveDay extends Component {
               /> */}
 
               <img
-                onClick={() =>
-                  this.showModal(this.state.webcamImage[0][i], "web")
+                onClick={
+                  val === "defaultimageurl"
+                    ? ""
+                    : () => this.showModal(this.state.webcamImage[0][i], "web")
                 }
                 src={
                   this.state.webcam[0][i] == "defaultimageurl"
@@ -354,8 +366,18 @@ class DeepdiveDay extends Component {
                           ? "red"
                           : this.state.intensityScore[0][i] > 20 &&
                             this.state.intensityScore[0][i] < 60
-                          ? "yellow"
-                          : "green",
+                          ? "#efc165"
+                          : "#8bc646",
+                    }}
+                  ></div>
+                </div>
+              )}
+              {this.state.intensityScore[0][i] === "defaultimageurl" && (
+                <div className={styles.completedBar}>
+                  <div
+                    className={styles.completedLevel}
+                    style={{
+                      width: "0",
                     }}
                   ></div>
                 </div>

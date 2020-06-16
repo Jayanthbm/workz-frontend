@@ -2,6 +2,8 @@
   width: 100%;
   height: 45px;
   background-color: #5dbcb3;
+  display: flex;
+  justify-content: space-between;
 }
 .container {
   display: flex;
@@ -34,4 +36,18 @@ select {
 .menuHolder {
   display: flex;
   margin-left: 850px;
+}
+.menuContainer {
+  display: flex;
+}
+.link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-right: 2px solid black;
+  margin: 10px 0;
+}
+.link:last-child {
+  border-right: none;
 }

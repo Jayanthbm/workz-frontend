@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styles from "./DeepdiveDetails.module.css";
 import DeepdiveDay from "./DeepdiveDay";
+import moment from "moment";
 class DeepdiveDetails extends Component {
   constructor(props) {
     super(props);
@@ -80,7 +81,12 @@ class DeepdiveDetails extends Component {
                   <div className={styles.dayHolder}>
                     <div className={styles.weekContainer}>
                       <div className={styles.dayText}>
-                        {val && val[1] && val[1][1][0].tday}
+                        {val && val[1] && val[1][1][0].tday}{" "}
+                      </div>
+                      <div className={styles.dayText}>
+                        {moment(val && val[1] && val[1][1][0].timecard).format(
+                          "DD,MMMM"
+                        )}
                       </div>
                       <div className={styles.hourText}> {totalhours(val)}</div>
                     </div>
@@ -92,8 +98,8 @@ class DeepdiveDetails extends Component {
                     return (
                       <div className={styles.dataContainer}>
                         <div className={styles.timeSlots}>
-                          {time[0] < 10 ? 0 : ""}
-                          {time[0]}:00
+                          {time[0] < 13 ? time[0] : time[0] - 12}
+                          {time[0] < 12 ? "AM" : "PM"}
                         </div>
                         <div className={styles.imgContainer}>
                           <DeepdiveDay
@@ -118,7 +124,7 @@ class DeepdiveDetails extends Component {
                 </div>
               );
             })
-          : "No data Found"}
+          : "No timecards available"}
       </div>
     );
   }

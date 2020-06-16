@@ -10,25 +10,11 @@ import help from "../images/Icon_Help.png";
 import wf from "../images/wf.png";
 import virtualOffice from "../images/Icon_Virtual-Office.png";
 import teamIcon from "../images/Icon_Team.png";
-
+import moment from "moment";
 import { USER_DETAILS, ACCESS_TOKEN } from "../utils/constant";
+const userDetails = Cookie.getCookie(USER_DETAILS);
+let parsedData = userDetails && JSON.parse(userDetails);
 
-const links = [
-  {
-    text: "Virtual Office",
-    image: virtualOffice,
-    redirect: "/",
-  },
-  {
-    text: "My Team",
-    image: teamIcon,
-    redirect: "/deepdive",
-  },
-  {
-    text: "Help",
-    image: help,
-  },
-];
 class Header extends Component {
   logoutHandler = () => {
     Cookie.deleteCookie(USER_DETAILS);
@@ -39,7 +25,26 @@ class Header extends Component {
     this.props.history.push("/");
   };
   render() {
+    console.log(this.props);
     const isLoggedin = Cookie.getCookie(USER_DETAILS) ? true : false;
+    const links = [
+      {
+        text: "Virtual Office",
+        image: virtualOffice,
+        redirect: "/",
+      },
+      {
+        text: "My Team",
+        image: teamIcon,
+        redirect: `/deepdive/${this.props.userId}/${moment(new Date()).format(
+          "YYYY-MM-DD"
+        )}`,
+      },
+      {
+        text: "Help",
+        image: help,
+      },
+    ];
     return (
       <div className={styles.headerBase}>
         <div className={styles.container}>

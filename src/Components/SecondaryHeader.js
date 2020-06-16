@@ -17,29 +17,25 @@ class SecondaryHeader extends Component {
     });
   };
   componentWillReceiveProps(nextProps) {
-    console.log(
-      nextProps &&
-        nextProps.deepdiveDropdownData &&
-        nextProps.deepdiveDropdownData[0] &&
-        nextProps.deepdiveDropdownData[0]
-    );
     if (nextProps.deepdiveDropdownData !== this.props.deepdiveDropdownData) {
+      console.log(this.props.match.params.userId, "whwihweihwei");
       this.props.handleDeepdive(
         JSON.stringify({
-          name:
-            nextProps &&
-            nextProps.deepdiveDropdownData &&
-            nextProps.deepdiveDropdownData[0] &&
-            nextProps.deepdiveDropdownData[0].name,
           id:
-            nextProps &&
-            nextProps.deepdiveDropdownData &&
-            nextProps.deepdiveDropdownData[0] &&
-            nextProps.deepdiveDropdownData[0].userId,
-        })
+            this.props.match.params.userId &&
+            this.props.match.params.userId != undefined &&
+            this.props.match.params.userId != "undefined" &&
+            !this.props.change
+              ? this.props.match.params.userId
+              : nextProps.deepdiveDropdownData &&
+                nextProps.deepdiveDropdownData[0] &&
+                nextProps.deepdiveDropdownData[0].userId,
+        }),
+        false
       );
     }
   }
+
   handleWeeks = (type) => {
     let d = new Date();
     if (type === "last") {
@@ -60,7 +56,7 @@ class SecondaryHeader extends Component {
     }
   };
   render() {
-    console.log(this.props.selectedDate);
+    console.log(this.props);
     return (
       <div className={styles.deepdiveContainer}>
         <div className={styles.dropdownContainer}>
@@ -71,7 +67,9 @@ class SecondaryHeader extends Component {
                 width: " 250px",
                 height: "22px",
               }}
-              onChange={(val) => this.props.handleDeepdive(val.target.value)}
+              onChange={(val) =>
+                this.props.handleDeepdive(val.target.value, true)
+              }
             >
               {this.props &&
                 this.props.deepdiveDropdownData &&
@@ -83,6 +81,11 @@ class SecondaryHeader extends Component {
                           name: val.name,
                           id: val.userId,
                         })}
+                        selected={
+                          val.userId == this.props.match.params.userId
+                            ? true
+                            : false
+                        }
                       >
                         {val.name}
                       </option>

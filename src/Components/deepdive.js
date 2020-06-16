@@ -18,6 +18,7 @@ class deepdive extends Component {
       man_id: "",
       selectedDate: new Date(),
       userId: "",
+      change: false,
       show: false,
       allChecker: false,
     };
@@ -30,11 +31,15 @@ class deepdive extends Component {
     });
     this.props.getDeepdive({
       companyId: parsedData.companyId,
-      userId: this.state.userId,
+      userId: this.props.match.params.userId,
       date: moment(date).format("YYYY-MM-DD"),
     });
+    this.props.history.push(
+      `/deepdive/${this.state.userId}/${moment(date).format("YYYY-MM-DD")}`
+    );
   };
   selectHandler = (val) => {
+    this.setState({ change: true });
     let data = JSON.parse(val);
     if (data.type === "manager") {
       this.props.getDeepdiveDropdown({
@@ -53,19 +58,24 @@ class deepdive extends Component {
   hideModal = () => {
     this.setState({ show: false });
   };
-  handleDeepdive = (val) => {
+  handleDeepdive = (val, flag) => {
+    console.log(flag);
     this.setState({
       allChecker: true,
     });
     let data = JSON.parse(val);
-    console.log(data.id);
-
     this.props.getDeepdive({
       companyId: parsedData.companyId,
       userId: data.id,
-      date: moment(this.state.selectedDate).format("YYYY-MM-DD"),
+      date: this.props.match.params.date,
     });
     this.setState({ userId: data.id, empname: data.name });
+    this.props.history.push(
+      `/deepdive/${data.id}/${this.props.match.params.date}`
+    );
+    if (flag) {
+      window.location.reload();
+    }
   };
   componentDidMount = () => {
     if (parsedData.isManager === 1) {
@@ -94,9 +104,13 @@ class deepdive extends Component {
   };
 
   render() {
+    console.log(this.state);
     return (
       <div className={styles.base}>
-        <Header pic={parsedData && parsedData.profilePic} />
+        <Header
+          pic={parsedData && parsedData.profilePic}
+          userId={this.state.userId}
+        />
         <Navigation
           team={parsedData && parsedData.dropdown}
           selectHandler={this.selectHandler}
@@ -108,6 +122,8 @@ class deepdive extends Component {
           handleDeepdive={this.handleDeepdive}
           selectedDate={this.state.selectedDate}
           handleChange={this.handleChange}
+          change={this.state.change}
+          {...this.props}
         />
         <DeepdiveDetails
           deepdiveData={this.props.deepdiveData}
