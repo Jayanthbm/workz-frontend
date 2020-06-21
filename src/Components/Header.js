@@ -25,7 +25,6 @@ class Header extends Component {
     this.props.history.push("/");
   };
   render() {
-    console.log(this.props);
     const isLoggedin = Cookie.getCookie(USER_DETAILS) ? true : false;
     const links = [
       {

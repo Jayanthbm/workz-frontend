@@ -84,7 +84,7 @@ class DeepdiveDetails extends Component {
   }
 
   render() {
-    console.log(this.props);
+    console.log(new Date(this.props.match.params.date));
     // function timeConvert(n) {
     //   var num = n;
     //   var hours = num / 60;
@@ -123,7 +123,6 @@ class DeepdiveDetails extends Component {
     //   }
     //   return timeConvert(totalminutes * 10);
     // }
-
     return (
       <div className={styles.deepDiveBase}>
         {!this.props.deepDiveError && this.props.deepdiveData && (

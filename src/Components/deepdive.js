@@ -24,7 +24,6 @@ class deepdive extends Component {
     };
   }
   handleChange = (date) => {
-    console.log(moment(date).format("YYYY-MM-DD"));
     this.setState({
       selectedDate: date,
       allChecker: true,
@@ -79,7 +78,11 @@ class deepdive extends Component {
   };
   componentDidMount = () => {
     if (parsedData.isManager === 1) {
-      this.setState({ man_id: parsedData.userId, userId: parsedData.userId });
+      this.setState({
+        man_id: parsedData.userId,
+        userId: parsedData.userId,
+        selectedDate: new Date(this.props.match.params.date),
+      });
       this.props.getDeepdiveDropdown({
         managerId: parsedData.userId,
       });
@@ -92,7 +95,11 @@ class deepdive extends Component {
       //   date: moment(new Date()).format("YYYY-MM-DD"),
       // });
     } else {
-      this.setState({ team_id: parsedData.userId, userId: parsedData.userId });
+      this.setState({
+        team_id: parsedData.userId,
+        userId: parsedData.userId,
+        selectedDate: new Date(this.props.match.params.date),
+      });
       this.props.getDeepdiveDropdown({
         teamId: parsedData.userId,
       });
@@ -129,6 +136,7 @@ class deepdive extends Component {
           deepDiveError={this.props.deepDiveError}
           empname={this.state.empname}
           allChecker={this.state.allChecker}
+          {...this.props}
         />
       </div>
     );

@@ -17,6 +17,7 @@ class DeepdiveDay extends Component {
       image: null,
       type: null,
       alltime: [],
+      status: [],
       position: 0,
       render: false,
     };
@@ -89,6 +90,14 @@ class DeepdiveDay extends Component {
         "defaultimageurl",
         "defaultimageurl",
       ];
+      let status = [
+        "defaultimageurl",
+        "defaultimageurl",
+        "defaultimageurl",
+        "defaultimageurl",
+        "defaultimageurl",
+        "defaultimageurl",
+      ];
       for (let i = 0; i < 6; i++) {
         for (let j = 0; j < this.props.time.length; j++) {
           let time = this.props.time[j].time.substring(3);
@@ -98,6 +107,7 @@ class DeepdiveDay extends Component {
             ssImage[i] = this.props.time[j].screenshotUrl;
             webcamImage[i] = this.props.time[j].webcamUrl;
             intensityScore[i] = this.props.time[j].intensityScore;
+            status[i] = this.props.time[j].status;
           }
         }
       }
@@ -107,6 +117,7 @@ class DeepdiveDay extends Component {
       this.state.webcamImage.push(webcamImage);
       this.state.timeframes.push(timeframes);
       this.state.intensityScore.push(intensityScore);
+      this.state.status.push(status);
     }
 
     const images = [];
@@ -123,13 +134,27 @@ class DeepdiveDay extends Component {
         });
       });
     }
-
+    console.log(this.state.status);
     return (
       <div className={styles.dayContainer}>
         {this.state.slots[0].map((val, i) => {
           return (
             <div className={styles.minuteContainer}>
-              <div> :{this.state.timeframes[0][i].substring(0, 2)} </div>
+              <div
+                style={{
+                  backgroundColor:
+                    this.state.status[0][i] == "defaultimageurl"
+                      ? "grey"
+                      : this.state.status[0][i] == "approved"
+                      ? "#8bc646"
+                      : this.state.status[0][i] == "rejected"
+                      ? "#d2bd94"
+                      : this.state.status[0][i] == "flagged" && "red",
+                }}
+              >
+                {" "}
+                :{this.state.timeframes[0][i].substring(0, 2)}{" "}
+              </div>
               {/* {val !== "defaultimageurl" && (
                 <div>Intensity: {this.state.intensityScore[0][i]}</div>
               )} */}
