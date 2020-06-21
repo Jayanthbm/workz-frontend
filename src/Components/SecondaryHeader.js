@@ -18,7 +18,6 @@ class SecondaryHeader extends Component {
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.deepdiveDropdownData !== this.props.deepdiveDropdownData) {
-      console.log(this.props.match.params.userId, "whwihweihwei");
       this.props.handleDeepdive(
         JSON.stringify({
           id:
@@ -28,8 +27,12 @@ class SecondaryHeader extends Component {
             !this.props.change
               ? this.props.match.params.userId
               : nextProps.deepdiveDropdownData &&
+                nextProps.deepdiveDropdownData.length
+              ? nextProps.deepdiveDropdownData &&
                 nextProps.deepdiveDropdownData[0] &&
-                nextProps.deepdiveDropdownData[0].userId,
+                nextProps.deepdiveDropdownData[0].userId
+              : nextProps.deepdiveDropdownData &&
+                nextProps.deepdiveDropdownData.userId,
         }),
         false
       );
@@ -72,7 +75,8 @@ class SecondaryHeader extends Component {
               }
             >
               {this.props &&
-                this.props.deepdiveDropdownData &&
+              this.props.deepdiveDropdownData &&
+              this.props.deepdiveDropdownData.length ? (
                 this.props.deepdiveDropdownData.map((val) => {
                   return (
                     <>
@@ -92,7 +96,22 @@ class SecondaryHeader extends Component {
                       ;
                     </>
                   );
-                })}
+                })
+              ) : (
+                <option
+                  value={JSON.stringify({
+                    name:
+                      this.props.deepdiveDropdownData &&
+                      this.props.deepdiveDropdownData.name,
+                    id:
+                      this.props.deepdiveDropdownData &&
+                      this.props.deepdiveDropdownData.userId,
+                  })}
+                >
+                  {this.props.deepdiveDropdownData &&
+                    this.props.deepdiveDropdownData.name}
+                </option>
+              )}
             </select>
           </div>
         </div>

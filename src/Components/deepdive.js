@@ -104,7 +104,6 @@ class deepdive extends Component {
   };
 
   render() {
-    console.log(this.state);
     return (
       <div className={styles.base}>
         <Header

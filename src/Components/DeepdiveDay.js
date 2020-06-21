@@ -18,6 +18,7 @@ class DeepdiveDay extends Component {
       type: null,
       alltime: [],
       position: 0,
+      render: false,
     };
   }
   showModal = (val, type) => {
@@ -27,6 +28,7 @@ class DeepdiveDay extends Component {
     if (this.props.time) {
       let arr = [];
       arr.push(this.props.time);
+      this.setState({ render: true });
     }
   }
   hideModal = () => {
@@ -106,7 +108,7 @@ class DeepdiveDay extends Component {
       this.state.timeframes.push(timeframes);
       this.state.intensityScore.push(intensityScore);
     }
-    console.log(this.props.allTime.length);
+
     const images = [];
     if (images.length === 0) {
       this.props.allTime.map((iterator) => {
@@ -121,14 +123,16 @@ class DeepdiveDay extends Component {
         });
       });
     }
-    console.log(images);
+
     return (
       <div className={styles.dayContainer}>
         {this.state.slots[0].map((val, i) => {
-          console.log(i);
           return (
             <div className={styles.minuteContainer}>
               <div> :{this.state.timeframes[0][i].substring(0, 2)} </div>
+              {/* {val !== "defaultimageurl" && (
+                <div>Intensity: {this.state.intensityScore[0][i]}</div>
+              )} */}
               <img
                 onClick={() =>
                   val === "defaultimageurl"
