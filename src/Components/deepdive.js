@@ -33,9 +33,10 @@ class deepdive extends Component {
       userId: this.props.match.params.userId,
       date: moment(date).format("YYYY-MM-DD"),
     });
-    this.props.history.push(
-      `/deepdive/${this.state.userId}/${moment(date).format("YYYY-MM-DD")}`
-    );
+    if (this.state.userId != undefined)
+      this.props.history.push(
+        `/deepdive/${this.state.userId}/${moment(date).format("YYYY-MM-DD")}`
+      );
   };
   selectHandler = (val) => {
     this.setState({ change: true });

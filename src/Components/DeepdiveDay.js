@@ -382,14 +382,17 @@ class DeepdiveDay extends Component {
                 )}
 
               {this.state.intensityScore[0][i] !== "defaultimageurl" && (
-                <div className={styles.completedBar}>
+                <div
+                  className={styles.completedBar}
+                  title={"Intensity : " + this.state.intensityScore[0][i]}
+                >
                   <div
                     className={styles.completedLevel}
                     style={{
                       width:
                         this.state.intensityScore[0][i] === "defaultimageurl"
                           ? 0
-                          : this.state.intensityScore[0][i],
+                          : `${this.state.intensityScore[0][i]}%`,
                       background:
                         this.state.intensityScore[0][i] < 20
                           ? "red"
