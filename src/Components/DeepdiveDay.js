@@ -26,10 +26,25 @@ class DeepdiveDay extends Component {
   }
   showModal = (val, type, time) => {
     if (type == "screen") {
-      this.setState({ show: true, image: val, type: type, timeDetails: time });
+      this.setState({
+        show: true,
+        image: val,
+        type: type,
+        timeDetails: time,
+        position: 0,
+        timecardPosition: 0,
+      });
       this.props.handleBreakup(time);
     } else if (type == "web") {
-      this.setState({ show: true, image: val, type: type, timeDetails: time });
+      this.setState({
+        show: true,
+        image: val,
+        type: type,
+        timeDetails: time,
+        position: 0,
+        timecardPosition: 0,
+      });
+      this.props.handleBreakup(time);
     }
   };
   componentDidMount() {
@@ -287,17 +302,22 @@ class DeepdiveDay extends Component {
                           height="100%"
                           width="100%"
                         />
-                        {/* <img
+                        <img
                           onClick={() => {
                             this.showModal(
                               images[this.state.position].webcam,
-                              "web"
+                              "web",
+                              this.state.timecard[0][i]
                             );
                           }}
-                          src={images[this.state.position].webcam}
+                          src={
+                            images &&
+                            images[this.state.position] &&
+                            images[this.state.position].webcam
+                          }
                           height="100px"
                           width="100px"
-                        /> */}
+                        />
                       </div>
                       <div className={styles.panel}>
                         <div>
@@ -334,7 +354,7 @@ class DeepdiveDay extends Component {
                             images.map((val, i) => {
                               return (
                                 <img
-                                  src={val.screenshot}
+                                  src={images}
                                   height="50px"
                                   width="50px"
                                   onClick={() =>
@@ -385,7 +405,12 @@ class DeepdiveDay extends Component {
                 onClick={
                   val === "defaultimageurl"
                     ? ""
-                    : () => this.showModal(this.state.webcamImage[0][i], "web")
+                    : () =>
+                        this.showModal(
+                          this.state.webcamImage[0][i],
+                          "web",
+                          this.state.timecard[0][i]
+                        )
                 }
                 src={
                   this.state.webcam[0][i] == "defaultimageurl"
@@ -402,20 +427,56 @@ class DeepdiveDay extends Component {
                   <Modal show={this.state.show} handleClose={this.hideModal}>
                     <div className={styles.webContainer}>
                       <div className={styles.webImage}>
-                        {images && images.length > 1 && !this.state.image && (
+                        {images && images.length > 1 && (
                           <>
-                            <div
-                              className={styles.leftArrow}
-                              onClick={() => this.goBack()}
-                            >
-                              {">"}
-                            </div>
-                            <div
-                              className={styles.rightArrow}
-                              onClick={() => this.goForward()}
-                            >
-                              {"<"}
-                            </div>
+                            {this.state.position > 0 && (
+                              <div
+                                className={styles.leftArrow}
+                                onClick={() => this.goBack()}
+                              >
+                                {">"}
+                              </div>
+                            )}
+                            {this.state.timecardPosition > 0 &&
+                              this.state.position == 0 && (
+                                <div
+                                  className={styles.leftArrow}
+                                  onClick={() =>
+                                    this.goBack(
+                                      time &&
+                                        time[this.state.timecardPosition - 1]
+                                          .timecard,
+                                      images.length
+                                    )
+                                  }
+                                >
+                                  {">>"}
+                                </div>
+                              )}
+                            {images &&
+                              images.length !== this.state.position + 1 && (
+                                <div
+                                  className={styles.rightArrow}
+                                  onClick={() => this.goForward()}
+                                >
+                                  {"<"}
+                                </div>
+                              )}
+                            {images &&
+                              images.length === this.state.position + 1 && (
+                                <div
+                                  className={styles.rightArrow}
+                                  onClick={() =>
+                                    this.goForward(
+                                      time &&
+                                        time[this.state.timecardPosition + 1]
+                                          .timecard
+                                    )
+                                  }
+                                >
+                                  {"<<"}
+                                </div>
+                              )}
                           </>
                         )}
                         <img
@@ -423,9 +484,9 @@ class DeepdiveDay extends Component {
                             console.log(this.state.webcam[0][i]);
                           }}
                           src={
-                            this.state.image
-                              ? this.state.image
-                              : images[this.state.position].webcam
+                            images &&
+                            images[this.state.position] &&
+                            images[this.state.position].webcam
                           }
                           height="100%"
                           width="100%"
@@ -434,10 +495,15 @@ class DeepdiveDay extends Component {
                           onClick={() => {
                             this.showModal(
                               images[this.state.position].screenshot,
-                              "screen"
+                              "screen",
+                              this.state.timecard[0][i]
                             );
                           }}
-                          src={images[this.state.position].screenshot}
+                          src={
+                            images &&
+                            images[this.state.position] &&
+                            images[this.state.position].screenshot
+                          }
                           height="100px"
                           width="100px"
                         />
