@@ -178,6 +178,9 @@ class DeepdiveDetails extends Component {
                               time={time[1]}
                               allTime={this.state.allTime}
                               empname={this.props.empname}
+                              handleFlag={this.props.flag}
+                              handleBreakup={this.props.breakup}
+                              {...this.props}
                             />
 
                             {/* {time[1].map((day, i) => {

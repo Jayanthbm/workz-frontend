@@ -7,6 +7,7 @@ import { USER_DETAILS, ACCESS_TOKEN } from "../utils/constant";
 import SecondaryHeader from "./SecondaryHeader";
 import DeepdiveDetails from "./DeepdiveDetails";
 import moment from "moment";
+import { postFlag } from "../actions/team.action";
 const userDetails = Cookie.getCookie(USER_DETAILS);
 let parsedData = userDetails && JSON.parse(userDetails);
 
@@ -77,6 +78,12 @@ class deepdive extends Component {
       window.location.reload();
     }
   };
+  handleFlag = (timecardId) => {
+    this.props.postFlag(timecardId);
+  };
+  handleBreakup = (timecardId) => {
+    this.props.getBreakup(timecardId);
+  };
   componentDidMount = () => {
     if (parsedData.isManager === 1) {
       this.setState({
@@ -110,7 +117,16 @@ class deepdive extends Component {
       // });
     }
   };
-
+  componentWillReceiveProps = (nextProps) => {
+    if (this.props.flagDetails !== nextProps.flagDetails) {
+      this.props.getDeepdive({
+        companyId: parsedData.companyId,
+        userId: this.props.match.params.userId,
+        date: this.props.match.params.date,
+      });
+      // window.location.reload();
+    }
+  };
   render() {
     console.log(this.props);
     return (
@@ -138,6 +154,8 @@ class deepdive extends Component {
           deepDiveError={this.props.deepDiveError}
           empname={this.state.empname}
           allChecker={this.state.allChecker}
+          flag={this.handleFlag}
+          breakup={this.handleBreakup}
           {...this.props}
         />
       </div>

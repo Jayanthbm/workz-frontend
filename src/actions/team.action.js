@@ -22,6 +22,96 @@ export const GET_DEEPDIVE_DROPDOWN_REQUEST = "GET_DEEPDIVE_DROPDOWN_REQUEST";
 export const GET_DEEPDIVE_DROPDOWN_SUCCESS = "GET_DEEPDIVE_DROPDOWN_SUCCESS";
 export const GET_DEEPDIVE_DROPDOWN_FAILURE = "GET_DEEPDIVE_DROPDOWN_FAILURE";
 
+export const POST_FLAG_REQUEST = "POST_FLAG_REQUEST";
+export const POST_FLAG_SUCCESS = "POST_FLAG_SUCCESS";
+export const POST_FLAG_FAILURE = "POST_FLAG_FAILURE";
+
+export const GET_BREAKUP_REQUEST = "GET_BREAKUP_REQUEST";
+export const GET_BREAKUP_SUCCESS = "GET_BREAKUP_SUCCESS";
+export const GET_BREAKUP_FAILURE = "GET_BREAKUP_FAILURE";
+
+export function getBreakupRequest() {
+  return {
+    type: GET_BREAKUP_REQUEST,
+    status: REQUESTING,
+  };
+}
+
+export function getBreakupSuccess(breakupDetails) {
+  return {
+    type: GET_BREAKUP_SUCCESS,
+    status: SUCCESS,
+    breakupDetails,
+  };
+}
+
+export function getBreakupFailure(error) {
+  return {
+    type: GET_BREAKUP_FAILURE,
+    status: ERROR,
+    error,
+  };
+}
+
+export function getBreakup(timeId) {
+  return async (dispatch) => {
+    dispatch(getBreakupRequest());
+    try {
+      let url = `breakup/${timeId}`;
+      const result = await post(url, timeId);
+      const resultJson = await result.data;
+      console.log(resultJson);
+      if (resultJson.message) {
+        throw new Error(resultJson.message);
+      }
+      return dispatch(getBreakupSuccess(resultJson));
+    } catch (e) {
+      return dispatch(getBreakupFailure(e.message));
+    }
+  };
+}
+
+export function postFlagRequest() {
+  return {
+    type: POST_FLAG_REQUEST,
+    status: REQUESTING,
+  };
+}
+
+export function postFlagSuccess(flagDetails) {
+  return {
+    type: POST_FLAG_SUCCESS,
+    status: SUCCESS,
+    flagDetails,
+  };
+}
+
+export function postFlagFailure(error) {
+  return {
+    type: POST_FLAG_FAILURE,
+    status: ERROR,
+    error,
+  };
+}
+
+export function postFlag(timeId) {
+  return async (dispatch) => {
+    dispatch(postFlagRequest());
+    try {
+      let url = `flag/${timeId}`;
+      const result = await post(url, timeId);
+      const resultJson = await result.data;
+      console.log(resultJson);
+      if (resultJson.message != "Successfully Flagged") {
+        throw new Error(resultJson.message);
+      }
+      return dispatch(postFlagSuccess(resultJson));
+    } catch (e) {
+      return dispatch(postFlagFailure(e.message));
+    }
+  };
+}
+
 export function getDeepdiveDropdownRequest() {
   return {
     type: GET_DEEPDIVE_DROPDOWN_REQUEST,

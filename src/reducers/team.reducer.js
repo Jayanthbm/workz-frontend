@@ -67,6 +67,45 @@ const team = (
         loading: false,
         error: action.error,
       });
+    case teamAction.POST_FLAG_REQUEST:
+      return Object.assign({}, state, {
+        status: action.status,
+        error: null,
+        loading: true,
+      });
+
+    case teamAction.POST_FLAG_SUCCESS:
+      return Object.assign({}, state, {
+        status: action.status,
+        loading: false,
+        flagDetails: action.flagDetails,
+      });
+    case teamAction.POST_FLAG_FAILURE:
+      return Object.assign({}, state, {
+        status: action.status,
+        loading: false,
+        error: action.error,
+      });
+
+    case teamAction.GET_BREAKUP_REQUEST:
+      return Object.assign({}, state, {
+        status: action.status,
+        error: null,
+        loading: true,
+      });
+
+    case teamAction.GET_BREAKUP_SUCCESS:
+      return Object.assign({}, state, {
+        status: action.status,
+        loading: false,
+        breakupDetails: action.breakupDetails,
+      });
+    case teamAction.GET_BREAKUP_FAILURE:
+      return Object.assign({}, state, {
+        status: action.status,
+        loading: false,
+        error: action.error,
+      });
 
     case teamAction.GET_TEAM_REQUEST:
       return Object.assign({}, state, {
