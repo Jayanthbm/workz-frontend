@@ -48,8 +48,11 @@
 }
 .webContainer {
   width: 100%;
-  height: 500px;
+  height: auto;
   display: flex;
+}
+.intenseHeader {
+  padding-right: 10px;
 }
 .webImage {
   position: relative;
@@ -62,6 +65,34 @@
 .panel {
   width: 25%;
   height: 50%;
+}
+.dateHolder {
+  display: flex;
+  padding-top: 10px;
+}
+.messageConatiner {
+  height: 200px;
+  border: 1px solid;
+  margin: 10px;
+}
+.buttonHolder {
+  width: 60px;
+  height: 30px;
+  border: 1px solid;
+  margin: 10px;
+  border-radius: 5px;
+}
+.button {
+  padding: 5px;
+}
+.detailsDate {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.showdetails {
+  border: 1px solid;
+  padding: 10px 18px;
+  margin: 10px;
 }
 .details {
   border: 1px solid;
@@ -113,7 +144,7 @@
   z-index: 1;
   border-radius: 50%;
   box-shadow: 2px 2px 10px -3px;
-  transform: rotate(180deg);
+
   position: absolute;
   left: 0;
   bottom: 50%;
@@ -130,7 +161,7 @@
   z-index: 1;
   border-radius: 50%;
   box-shadow: 2px 2px 10px -3px;
-  transform: rotate(180deg);
+
   position: absolute;
   right: 0;
   bottom: 50%;

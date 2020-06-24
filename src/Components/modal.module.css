@@ -42,3 +42,11 @@
 .displayNone {
   display: none;
 }
+.closeButton {
+  float: right;
+  padding: 10px;
+  font-weight: 900;
+  background: brown;
+  color: white;
+  cursor: pointer;
+}

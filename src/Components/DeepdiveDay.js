@@ -2,6 +2,13 @@ import React, { Component } from "react";
 import styles from "./DeepdiveDetails.module.css";
 import defaultIcon from "../images/download.png";
 import moment from "moment";
+import next from "../images/next.png";
+import previous from "../images/previous.jpg";
+import nextTo from "../images/Next-2-2-icon.png";
+import previousTo from "../images/Previous-icon.png";
+import zoom from "../images/zoom.png";
+import intensity from "../images/intensity.jpg";
+import flag from "../images/flag.png";
 import Modal from "./Modal";
 class DeepdiveDay extends Component {
   constructor(props) {
@@ -78,6 +85,7 @@ class DeepdiveDay extends Component {
       this.setState({
         position: 0,
         timecardPosition: this.state.timecardPosition + 1,
+        timeDetails: time,
       });
     } else {
       this.setState({
@@ -177,9 +185,10 @@ class DeepdiveDay extends Component {
           images.push({
             screenshot: val.screenshotUrl,
             webcam: val.webcamUrl,
-            intensity: val.intensityScore,
+            intensity: this.props.breakupDetails.intensityScore,
+            focus: this.props.breakupDetails.focus,
             day: val.tday,
-            date: moment(val.timecard).format("DD,MMMM"),
+            date: moment(val.timeCardBreakup).format("DD,MMMM,HH:MM:SS:MS"),
           });
         });
     }
@@ -245,7 +254,11 @@ class DeepdiveDay extends Component {
                                 className={styles.leftArrow}
                                 onClick={() => this.goBack()}
                               >
-                                {">"}
+                                <img
+                                  src={previous}
+                                  height="50px"
+                                  width="50px"
+                                />
                               </div>
                             )}
                             {this.state.timecardPosition > 0 &&
@@ -261,7 +274,11 @@ class DeepdiveDay extends Component {
                                     )
                                   }
                                 >
-                                  {">>"}
+                                  <img
+                                    src={previousTo}
+                                    height="50px"
+                                    width="50px"
+                                  />
                                 </div>
                               )}
                             {images &&
@@ -270,7 +287,7 @@ class DeepdiveDay extends Component {
                                   className={styles.rightArrow}
                                   onClick={() => this.goForward()}
                                 >
-                                  {"<"}
+                                  <img src={next} height="50px" width="50px" />
                                 </div>
                               )}
                             {images &&
@@ -285,7 +302,11 @@ class DeepdiveDay extends Component {
                                     )
                                   }
                                 >
-                                  {"<<"}
+                                  <img
+                                    src={nextTo}
+                                    height="50px"
+                                    width="50px"
+                                  />
                                 </div>
                               )}
                           </>
@@ -320,30 +341,70 @@ class DeepdiveDay extends Component {
                         />
                       </div>
                       <div className={styles.panel}>
-                        <div>
-                          {/* {images[this.state.position].day}{" "}
-                          {images[this.state.position].date} */}
-                          {
-                            this.state.image ? (
-                              <div
-                                onClick={() =>
-                                  this.props.handleFlag(this.state.timeDetails)
-                                }
-                              >
-                                {this.state.timeDetails}flag
-                              </div>
-                            ) : null
-                            // <div>{images[this.state.position].timecard}</div>
-                          }
+                        <div className={styles.dateHolder}>
+                          <div className={styles.detailsDate}>
+                            {images &&
+                              images[this.state.position] &&
+                              images[this.state.position].date}
+                          </div>
+                          <div>
+                            {
+                              this.state.image ? (
+                                <div
+                                  onClick={() =>
+                                    this.props.handleFlag(
+                                      this.state.timeDetails
+                                    )
+                                  }
+                                >
+                                  {/* {this.state.timeDetails} */}
+                                  <img src={flag} height="20px" width="20px" />
+                                </div>
+                              ) : null
+                              // <div>{images[this.state.position].timecard}</div>
+                            }
+                          </div>
                         </div>
-                        <div className={styles.details}>Show Details</div>
-                        <div className={styles.details}>Focus</div>
+                        <div className={styles.showdetails}>Show Details</div>
                         <div className={styles.details}>
-                          <div> Intensity</div>{" "}
-                          {/* <div>{images[this.state.position].intensity}</div> */}
+                          <div>
+                            {" "}
+                            <img src={zoom} height="20px" width="20px" />
+                            <span style={{ paddingLeft: "5px" }}>Focus</span>
+                          </div>
+                          <div>
+                            {images &&
+                            images[this.state.position] &&
+                            images[this.state.position].focus === null
+                              ? "0 min"
+                              : `${
+                                  images &&
+                                  images[this.state.position] &&
+                                  images[this.state.position].focus
+                                } min`}
+                          </div>
                         </div>
-
-                        <textarea rows="10" className={styles.commentBox} />
+                        <div className={styles.details}>
+                          <div>
+                            {" "}
+                            <img src={intensity} height="20px" width="20px" />
+                            <span style={{ paddingLeft: "5px" }}>
+                              Intensity
+                            </span>
+                          </div>{" "}
+                          <div>
+                            {images &&
+                              images[this.state.position] &&
+                              images[this.state.position].intensity}
+                            %
+                          </div>
+                        </div>
+                        <div className={styles.messageConatiner}>
+                          <input type="text" />
+                        </div>
+                        <div className={styles.buttonHolder}>
+                          <div className={styles.button}>Share</div>
+                        </div>
                         <div className={styles.toggleContainer}>
                           {this.props.empname && (
                             <div>Share with {this.props.empname}</div>
@@ -354,13 +415,14 @@ class DeepdiveDay extends Component {
                             images.map((val, i) => {
                               return (
                                 <img
-                                  src={images}
+                                  src={val.screenshot}
                                   height="50px"
                                   width="50px"
                                   onClick={() =>
                                     this.setState({
                                       position: i,
                                       type: "screen",
+                                      timeDetails: val.timeCardBreakup,
                                     })
                                   }
                                 />
@@ -434,7 +496,11 @@ class DeepdiveDay extends Component {
                                 className={styles.leftArrow}
                                 onClick={() => this.goBack()}
                               >
-                                {">"}
+                                <img
+                                  src={previous}
+                                  height="50px"
+                                  width="50px"
+                                />
                               </div>
                             )}
                             {this.state.timecardPosition > 0 &&
@@ -450,7 +516,11 @@ class DeepdiveDay extends Component {
                                     )
                                   }
                                 >
-                                  {">>"}
+                                  <img
+                                    src={previousTo}
+                                    height="50px"
+                                    width="50px"
+                                  />
                                 </div>
                               )}
                             {images &&
@@ -459,7 +529,7 @@ class DeepdiveDay extends Component {
                                   className={styles.rightArrow}
                                   onClick={() => this.goForward()}
                                 >
-                                  {"<"}
+                                  <img src={next} height="50px" width="50px" />
                                 </div>
                               )}
                             {images &&
@@ -474,7 +544,11 @@ class DeepdiveDay extends Component {
                                     )
                                   }
                                 >
-                                  {"<<"}
+                                  <img
+                                    src={nextTo}
+                                    height="50px"
+                                    width="50px"
+                                  />
                                 </div>
                               )}
                           </>
@@ -509,9 +583,57 @@ class DeepdiveDay extends Component {
                         />
                       </div>
                       <div className={styles.panel}>
-                        <div className={styles.details}>Show Details</div>
-                        <div className={styles.details}>Focus</div>
-                        <div className={styles.details}>Intensity</div>
+                        <div className={styles.dateHolder}>
+                          <div className={styles.detailsDate}>
+                            {images &&
+                              images[this.state.position] &&
+                              images[this.state.position].date}
+                          </div>
+                          <div>
+                            <div
+                              onClick={() =>
+                                this.props.handleFlag(this.state.timeDetails)
+                              }
+                            >
+                              {/* {this.state.timeDetails} */}
+                              <img src={flag} height="20px" width="20px" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className={styles.showdetails}>Show Details</div>
+                        <div className={styles.details}>
+                          <div>
+                            {" "}
+                            <img src={zoom} height="20px" width="20px" />
+                            <span style={{ paddingLeft: "5px" }}>Focus</span>
+                          </div>
+                          <div>
+                            {images &&
+                            images[this.state.position] &&
+                            images[this.state.position].focus === null
+                              ? "0 min"
+                              : `${
+                                  images &&
+                                  images[this.state.position] &&
+                                  images[this.state.position].focus
+                                } min`}
+                          </div>
+                        </div>
+                        <div className={styles.details}>
+                          <div>
+                            {" "}
+                            <img src={intensity} height="20px" width="20px" />
+                            <span style={{ paddingLeft: "5px" }}>
+                              Intensity
+                            </span>
+                          </div>{" "}
+                          <div>
+                            {images &&
+                              images[this.state.position] &&
+                              images[this.state.position].intensity}
+                            %
+                          </div>
+                        </div>
 
                         <textarea rows="10" className={styles.commentBox} />
                         <div className={styles.toggleContainer}>

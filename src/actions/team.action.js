@@ -30,6 +30,52 @@ export const GET_BREAKUP_REQUEST = "GET_BREAKUP_REQUEST";
 export const GET_BREAKUP_SUCCESS = "GET_BREAKUP_SUCCESS";
 export const GET_BREAKUP_FAILURE = "GET_BREAKUP_FAILURE";
 
+export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+export const LOGOUT_FAILURE = "LOGOUT_FAILURE";
+
+export function logoutRequest() {
+  return {
+    type: LOGOUT_REQUEST,
+    status: REQUESTING,
+  };
+}
+
+export function logoutSuccess(logoutDetails) {
+  return {
+    type: LOGOUT_SUCCESS,
+    status: SUCCESS,
+    logoutDetails,
+  };
+}
+
+export function logoutFailure(error) {
+  return {
+    type: LOGOUT_FAILURE,
+    status: ERROR,
+    error,
+  };
+}
+
+export function logout() {
+  return async (dispatch) => {
+    dispatch(logoutRequest());
+    try {
+      let url = `logout`;
+      const result = await post(url);
+      const resultJson = await result.data;
+      window.location.reload();
+      if (resultJson.message) {
+        throw new Error(resultJson.message);
+      }
+
+      return dispatch(logoutSuccess(resultJson));
+    } catch (e) {
+      return dispatch(logoutFailure(e.message));
+    }
+  };
+}
+
 export function getBreakupRequest() {
   return {
     type: GET_BREAKUP_REQUEST,

@@ -48,6 +48,26 @@ const team = (
         loading: true,
       });
 
+    case teamAction.LOGOUT_REQUEST:
+      return Object.assign({}, state, {
+        status: action.status,
+        error: null,
+        loading: true,
+      });
+
+    case teamAction.LOGOUT_SUCCESS:
+      return Object.assign({}, state, {
+        status: action.status,
+        loading: false,
+        logoutDetails: action.logoutDetails,
+      });
+    case teamAction.LOGOUT_FAILURE:
+      return Object.assign({}, state, {
+        status: action.status,
+        loading: false,
+        error: action.error,
+      });
+
     case teamAction.POST_FORM_REQUEST:
       return Object.assign({}, state, {
         status: action.status,

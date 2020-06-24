@@ -7,8 +7,10 @@ class Modal extends Component {
         className={this.props.show ? styles.displayBlock : styles.displayNone}
       >
         <section className={styles.modal}>
+          <div onClick={this.props.handleClose} className={styles.closeButton}>
+            X
+          </div>
           {this.props.children}
-          <button onClick={this.props.handleClose}>Close</button>
         </section>
       </div>
     );

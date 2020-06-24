@@ -123,6 +123,7 @@ class DeepdiveDetails extends Component {
     //   }
     //   return timeConvert(totalminutes * 10);
     // }
+    console.log(this.props);
     return (
       <div className={styles.deepDiveBase}>
         {!this.props.deepDiveError && this.props.deepdiveData && (
@@ -134,12 +135,25 @@ class DeepdiveDetails extends Component {
                   (this.props.deepdiveData.totalMinutes / 60) * 100
               ) / 100}
             </div>
-            <div>
+            <div className={styles.intenseHeader}>
               Intensity:{" "}
-              {Math.floor(
-                this.props.deepdiveData &&
-                  this.props.deepdiveData.AverageIntensity * 100
-              ) / 100}
+              <span style={{ color: "red" }}>
+                {" "}
+                {Math.floor(
+                  this.props.deepdiveData &&
+                    this.props.deepdiveData.AverageIntensity * 100
+                ) / 100}
+                %{" "}
+              </span>
+            </div>
+            <div>
+              Focus:{" "}
+              <span style={{ color: "green" }}>
+                {" "}
+                {this.props.deepdiveData &&
+                  this.props.deepdiveData.AverageFocus}{" "}
+                min
+              </span>
             </div>
           </div>
         )}

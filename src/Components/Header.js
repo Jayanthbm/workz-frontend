@@ -16,12 +16,13 @@ const userDetails = Cookie.getCookie(USER_DETAILS);
 let parsedData = userDetails && JSON.parse(userDetails);
 
 class Header extends Component {
-  logoutHandler = () => {
+  logoutHandler = async () => {
     Cookie.deleteCookie(USER_DETAILS);
     Cookie.deleteCookie(ACCESS_TOKEN);
     Cookie.deleteCookie("CloudFront-Key-Pair-Id");
     Cookie.deleteCookie("CloudFront-Policy");
     Cookie.deleteCookie("CloudFront-Signature");
+    this.props.logout();
     this.props.history.push("/");
   };
   render() {
