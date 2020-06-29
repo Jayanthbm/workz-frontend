@@ -81,6 +81,14 @@ class deepdive extends Component {
   handleFlag = (timecardId) => {
     this.props.postFlag(timecardId);
   };
+  handleMessage = (formData, timecardId) => {
+    this.props.postMessage(formData, timecardId);
+    this.props.gettMessage(timecardId);
+  };
+  handleGetMessage = (timecardId) => {
+    console.log("abasaas", timecardId);
+    this.props.gettMessage(timecardId);
+  };
   handleBreakup = (timecardId) => {
     this.props.getBreakup(timecardId);
   };
@@ -118,6 +126,7 @@ class deepdive extends Component {
     }
   };
   componentWillReceiveProps = (nextProps) => {
+    console.log(nextProps);
     if (this.props.flagDetails !== nextProps.flagDetails) {
       this.props.getDeepdive({
         companyId: parsedData.companyId,
@@ -155,7 +164,9 @@ class deepdive extends Component {
           empname={this.state.empname}
           allChecker={this.state.allChecker}
           flag={this.handleFlag}
+          message={this.handleMessage}
           breakup={this.handleBreakup}
+          handleGetMessage={this.handleGetMessage}
           {...this.props}
         />
       </div>

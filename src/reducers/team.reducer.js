@@ -10,6 +10,25 @@ const team = (
   action
 ) => {
   switch (action.type) {
+    case teamAction.GET_MESSAGE_REQUEST:
+      return Object.assign({}, state, {
+        status: action.status,
+        error: null,
+        loading: true,
+      });
+
+    case teamAction.GET_MESSAGE_SUCCESS:
+      return Object.assign({}, state, {
+        status: action.status,
+        loading: false,
+        getMessageData: action.getMessageData,
+      });
+    case teamAction.GET_MESSAGE_FAILURE:
+      return Object.assign({}, state, {
+        status: action.status,
+        loading: false,
+        error: action.error,
+      });
     case teamAction.GET_DEEPDIVE_DROPDOWN_SUCCESS:
       return Object.assign({}, state, {
         status: action.status,
@@ -67,7 +86,25 @@ const team = (
         loading: false,
         error: action.error,
       });
+    case teamAction.POST_MESSAGE_REQUEST:
+      return Object.assign({}, state, {
+        status: action.status,
+        error: null,
+        loading: true,
+      });
 
+    case teamAction.POST_MESSAGE_SUCCESS:
+      return Object.assign({}, state, {
+        status: action.status,
+        loading: false,
+        messageData: action.messageData,
+      });
+    case teamAction.POST_MESSAGE_FAILURE:
+      return Object.assign({}, state, {
+        status: action.status,
+        loading: false,
+        error: action.error,
+      });
     case teamAction.POST_FORM_REQUEST:
       return Object.assign({}, state, {
         status: action.status,

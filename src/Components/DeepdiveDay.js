@@ -28,6 +28,7 @@ class DeepdiveDay extends Component {
       status: [],
       position: 0,
       timecardPosition: 0,
+      breakup: 0,
       render: false,
     };
   }
@@ -49,6 +50,8 @@ class DeepdiveDay extends Component {
         type: type,
         timeDetails: time,
         position: 0,
+        breakup: 0,
+        comment: null,
         timecardPosition: 0,
       });
       this.props.handleBreakup(time);
@@ -63,7 +66,7 @@ class DeepdiveDay extends Component {
   }
 
   hideModal = () => {
-    this.setState({ show: false, type: null });
+    this.setState({ show: false, type: null, breakup: 0 });
   };
   goBack = (time, pos) => {
     if (time) {
@@ -187,6 +190,7 @@ class DeepdiveDay extends Component {
             webcam: val.webcamUrl,
             intensity: this.props.breakupDetails.intensityScore,
             focus: this.props.breakupDetails.focus,
+            timeCardBreakup: val.timecardBreakupId,
             day: val.tday,
             date: moment(val.timeCardBreakup).format("DD,MMMM,HH:MM:SS:MS"),
           });
@@ -203,7 +207,7 @@ class DeepdiveDay extends Component {
           });
         });
     }
-    console.log(images);
+    console.log(this.state);
     return (
       <div className={styles.dayContainer}>
         {this.state.slots[0].map((val, i) => {
@@ -246,7 +250,17 @@ class DeepdiveDay extends Component {
                 val !== "defaultimageurl" && (
                   <Modal show={this.state.show} handleClose={this.hideModal}>
                     <div className={styles.webContainer}>
-                      <div className={styles.webImage}>
+                      <div
+                        className={styles.webImage}
+                        onLoad={() => {
+                          this.props.handleGetMessage(
+                            images &&
+                              images[this.state.position] &&
+                              images[this.state.position].timeCardBreakup
+                          );
+                          this.setState({ breakup: this.state.breakup + 1 });
+                        }}
+                      >
                         {images && images.length > 1 && (
                           <>
                             {this.state.position > 0 && (
@@ -400,10 +414,28 @@ class DeepdiveDay extends Component {
                           </div>
                         </div>
                         <div className={styles.messageConatiner}>
-                          <input type="text" />
+                          <input
+                            type="text"
+                            onChange={(val) => {
+                              this.setState({ comment: val.target.value });
+                            }}
+                            value={this.state.comment}
+                          />
                         </div>
                         <div className={styles.buttonHolder}>
-                          <div className={styles.button}>Share</div>
+                          <div
+                            className={styles.button}
+                            onClick={() =>
+                              this.props.handleMessage(
+                                { comment: this.state.comment },
+                                images &&
+                                  images[this.state.position] &&
+                                  images[this.state.position].timeCardBreakup
+                              )
+                            }
+                          >
+                            Share
+                          </div>
                         </div>
                         <div className={styles.toggleContainer}>
                           {this.props.empname && (

@@ -193,6 +193,8 @@ class DeepdiveDetails extends Component {
                               allTime={this.state.allTime}
                               empname={this.props.empname}
                               handleFlag={this.props.flag}
+                              handleMessage={this.props.message}
+                              handleGetMessage={this.props.handleGetMessage}
                               handleBreakup={this.props.breakup}
                               {...this.props}
                             />

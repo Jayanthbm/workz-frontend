@@ -34,6 +34,95 @@ export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const LOGOUT_FAILURE = "LOGOUT_FAILURE";
 
+export const POST_MESSAGE_REQUEST = "POST_MESSAGE_REQUEST";
+export const POST_MESSAGE_SUCCESS = "POST_MESSAGE_SUCCESS";
+export const POST_MESSAGE_FAILURE = "POST_MESSAGE_FAILURE";
+
+export const GET_MESSAGE_REQUEST = "GET_MESSAGE_REQUEST";
+export const GET_MESSAGE_SUCCESS = "GET_MESSAGE_SUCCESS";
+export const GET_MESSAGE_FAILURE = "GET_MESSAGE_FAILURE";
+
+export function getMessageRequest() {
+  return {
+    type: GET_MESSAGE_REQUEST,
+    status: REQUESTING,
+  };
+}
+
+export function getMessageSuccess(getMessageData) {
+  return {
+    type: GET_MESSAGE_SUCCESS,
+    status: SUCCESS,
+    getMessageData,
+  };
+}
+
+export function getMessageFailure(error) {
+  return {
+    type: GET_MESSAGE_FAILURE,
+    status: ERROR,
+    error,
+  };
+}
+
+export function gettMessage(timeId) {
+  return async (dispatch) => {
+    dispatch(getMessageRequest());
+    try {
+      let url = `comment/${timeId}`;
+      const result = await get(url);
+      const resultJson = await result.data;
+      console.log(resultJson);
+      if (typeof resultJson.message != "object") {
+        throw new Error(resultJson.message);
+      }
+      return dispatch(getMessageSuccess(resultJson));
+    } catch (e) {
+      return dispatch(getMessageFailure(e.message));
+    }
+  };
+}
+
+export function postMessageRequest() {
+  return {
+    type: POST_MESSAGE_REQUEST,
+    status: REQUESTING,
+  };
+}
+
+export function postMessageSuccess(messageData) {
+  return {
+    type: POST_MESSAGE_SUCCESS,
+    status: SUCCESS,
+    messageData,
+  };
+}
+
+export function postMessageFailure(error) {
+  return {
+    type: POST_MESSAGE_FAILURE,
+    status: ERROR,
+    error,
+  };
+}
+
+export function postMessage(formData, timeId) {
+  return async (dispatch) => {
+    dispatch(postMessageRequest());
+    try {
+      let url = `comment/${timeId}`;
+      const result = await post(url, formData);
+      const resultJson = await result.data;
+      if (resultJson.message !== "Comment Sent") {
+        throw new Error(resultJson.message);
+      }
+      return dispatch(postMessageSuccess(resultJson));
+    } catch (e) {
+      return dispatch(postMessageFailure(e.message));
+    }
+  };
+}
+
 export function logoutRequest() {
   return {
     type: LOGOUT_REQUEST,
