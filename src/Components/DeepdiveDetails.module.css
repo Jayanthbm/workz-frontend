@@ -70,10 +70,47 @@
   display: flex;
   padding-top: 10px;
 }
+.textContainer {
+  position: fixed;
+  width: 22%;
+  height: 30px;
+  margin-right: 10px;
+}
+.textBox {
+  width: 100%;
+  height: 100%;
+  border-color: transparent;
+  border-radius: 15px;
+  margin-top: 3px;
+  box-shadow: 0 3px 11px 0 rgba(0, 0, 0, 0.4);
+}
+.messageList {
+  margin-top: 55px;
+}
 .messageConatiner {
   height: 200px;
   border: 1px solid;
   margin: 10px;
+  overflow: auto;
+}
+.messageHolder {
+  padding: 10px;
+  border-radius: 15px;
+  margin-top: 10px;
+  /* box-shadow: 0 3px 11px 0 rgba(0, 0, 0, 0.1); */
+  box-shadow: 0 3px 11px 0 rgba(0, 0, 0, 0.4);
+  width: 85%;
+  margin: 10px auto;
+}
+.from {
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 22px;
+  margin-right: 60%;
+}
+.message {
+  width: 100%;
+  word-break: break-word;
 }
 .buttonHolder {
   width: 60px;
