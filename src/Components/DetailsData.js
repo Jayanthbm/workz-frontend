@@ -46,33 +46,33 @@ class DetailsData extends Component {
   render() {
     return (
       <div className={styles.deepDiveBase}>
-        {this.state.detailsData &&
-          this.state.detailsData.map((val) => {
-            return (
-              <div>
-                {val.map((data) => {
-                  return (
-                    <div className={styles.imageCont}>
-                      {data &&
-                        data[1] &&
-                        data[1].map((dataCard) => {
-                          console.log(dataCard);
-                          return (
-                            <React.Fragment>
-                              <img
-                                src={dataCard.screenshotUrl}
-                                height="100px"
-                                width="150px"
-                              />
-                            </React.Fragment>
-                          );
-                        })}
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          })}
+        {this.state.detailsData && this.state.detailsData.length > 0
+          ? this.state.detailsData.map((val) => {
+              return (
+                <div>
+                  {val.map((data) => {
+                    return (
+                      <div className={styles.imageCont}>
+                        {data &&
+                          data[1] &&
+                          data[1].map((dataCard) => {
+                            return (
+                              <React.Fragment>
+                                <img
+                                  src={dataCard.screenshotUrl}
+                                  height="100px"
+                                  width="150px"
+                                />
+                              </React.Fragment>
+                            );
+                          })}
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })
+          : "No details available"}
       </div>
     );
   }
