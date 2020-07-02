@@ -706,7 +706,49 @@ class DeepdiveDay extends Component {
                           </div>
                         </div>
 
-                        <textarea rows="10" className={styles.commentBox} />
+                        <div className={styles.messageConatiner}>
+                          <div className={styles.textContainer}>
+                            <input
+                              type="text"
+                              placeholder="Enter Message"
+                              onChange={(val) => {
+                                this.setState({ comment: val.target.value });
+                              }}
+                              value={this.state.comment}
+                              className={styles.textBox}
+                            />
+                          </div>
+                          <div className={styles.messageList}>
+                            {this.props.getMessageData &&
+                              this.props.getMessageData.map((val) => {
+                                return (
+                                  <div className={styles.messageHolder}>
+                                    <div className={styles.from}>
+                                      {val.from}
+                                    </div>
+                                    <div className={styles.message}>
+                                      {val.message}
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                          </div>
+                        </div>
+                        <div className={styles.buttonHolder}>
+                          <div
+                            className={styles.button}
+                            onClick={() => {
+                              this.props.handleMessage(
+                                { comment: this.state.comment },
+                                images &&
+                                  images[this.state.position] &&
+                                  images[this.state.position].timeCardBreakup
+                              );
+                            }}
+                          >
+                            Share
+                          </div>
+                        </div>
                         <div className={styles.toggleContainer}>
                           {this.props.empname && (
                             <div>Share with {this.props.empname}</div>

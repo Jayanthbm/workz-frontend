@@ -81,9 +81,9 @@ class deepdive extends Component {
   handleFlag = (timecardId) => {
     this.props.postFlag(timecardId);
   };
-  handleMessage = (formData, timecardId) => {
-    this.props.postMessage(formData, timecardId);
-    this.props.gettMessage(timecardId);
+  handleMessage = async (formData, timecardId) => {
+    await this.props.postMessage(formData, timecardId);
+    await this.props.gettMessage(timecardId);
   };
   handleGetMessage = (timecardId) => {
     console.log("abasaas", timecardId);
