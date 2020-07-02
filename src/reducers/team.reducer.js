@@ -66,7 +66,25 @@ const team = (
         teamError: null,
         loading: true,
       });
-
+    case teamAction.GET_DETAILS_REQUEST:
+      return Object.assign({}, state, {
+        status: action.status,
+        teamError: null,
+        loading: true,
+      });
+    case teamAction.GET_DETAILS_SUCCESS:
+      return Object.assign({}, state, {
+        status: action.status,
+        loading: false,
+        detailsData: action.detailsData,
+        detailsError: "",
+      });
+    case teamAction.GET_DETAILS_FAILURE:
+      return Object.assign({}, state, {
+        status: action.status,
+        loading: false,
+        detailsError: action.error,
+      });
     case teamAction.LOGOUT_REQUEST:
       return Object.assign({}, state, {
         status: action.status,

@@ -1,0 +1,173 @@
+.deepDiveBase {
+  width: auto;
+  background: #fff;
+  padding: 10px 45px;
+  border-radius: 8px;
+  border: 1px solid #ebecec;
+  margin: 10px 40px;
+}
+.timeSlots {
+  display: flex;
+  align-items: center;
+}
+.imgContainer {
+  display: flex;
+}
+.dataContainer {
+  display: flex;
+  padding: 10px 100px;
+}
+.dayHolder {
+  width: 100%;
+  padding: 10px 0px;
+}
+.dayContainer {
+  display: flex;
+}
+.minuteHolder {
+  display: flex;
+}
+.minuteContainer {
+  padding: 10px;
+}
+.weekContainer {
+  display: flex;
+  padding: 10px 120px;
+}
+.dayText {
+  padding-right: 10px;
+}
+.hourText {
+  padding: 0 10px;
+}
+.popup-content {
+  width: 100%;
+}
+.popup-wrapper > * {
+  width: 50%;
+}
+.webContainer {
+  width: 100%;
+  height: auto;
+  display: flex;
+}
+.intenseHeader {
+  padding-right: 10px;
+}
+.webImage {
+  position: relative;
+  width: 75%;
+  height: 75%;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.panel {
+  width: 25%;
+  height: 50%;
+}
+.dateHolder {
+  display: flex;
+  padding-top: 10px;
+}
+.messageConatiner {
+  height: 200px;
+  border: 1px solid;
+  margin: 10px;
+}
+.buttonHolder {
+  width: 60px;
+  height: 30px;
+  border: 1px solid;
+  margin: 10px;
+  border-radius: 5px;
+}
+.button {
+  padding: 5px;
+}
+.detailsDate {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.showdetails {
+  border: 1px solid;
+  padding: 10px 18px;
+  margin: 10px;
+}
+.details {
+  border: 1px solid;
+  padding: 10px 18px;
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.commentBox {
+  resize: none;
+  width: 92%;
+  border-radius: 5px;
+}
+.completedBar {
+  width: 84%;
+  background: #cececf;
+  height: 5px;
+  border-radius: 15px;
+  /* border: 1px solid black; */
+  /* margin-top: 10px; */
+  margin: 3px 15px;
+}
+.completedLevel {
+  background: #e0deed;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+}
+.imageContainer {
+  white-space: nowrap;
+  width: 100%;
+  overflow: auto;
+}
+.headerContainer {
+  display: flex;
+}
+.hoursHeader {
+  padding-right: 10px;
+}
+.leftArrow {
+  background-color: #222;
+
+  width: 50px;
+  height: 50px;
+  background-size: auto 18px;
+  background-position: center;
+  opacity: 1.6;
+  cursor: pointer;
+  z-index: 1;
+  border-radius: 50%;
+  box-shadow: 2px 2px 10px -3px;
+
+  position: absolute;
+  left: 0;
+  bottom: 50%;
+}
+.imageCont {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 30px;
+}
+.rightArrow {
+  background-color: #222;
+
+  width: 50px;
+  height: 50px;
+  background-size: auto 18px;
+  background-position: center;
+  opacity: 1.6;
+  cursor: pointer;
+  z-index: 1;
+  border-radius: 50%;
+  box-shadow: 2px 2px 10px -3px;
+
+  position: absolute;
+  right: 0;
+  bottom: 50%;
+}

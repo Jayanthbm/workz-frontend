@@ -28,7 +28,6 @@ class DeepdiveDay extends Component {
       status: [],
       position: 0,
       timecardPosition: 0,
-      breakup: 0,
       render: false,
     };
   }
@@ -50,7 +49,6 @@ class DeepdiveDay extends Component {
         type: type,
         timeDetails: time,
         position: 0,
-        breakup: 0,
         comment: null,
         timecardPosition: 0,
       });
@@ -66,10 +64,10 @@ class DeepdiveDay extends Component {
   }
 
   hideModal = () => {
-    this.setState({ show: false, type: null, breakup: 0 });
+    this.setState({ show: false, type: null });
   };
-  goBack = (time, pos) => {
-    if (time) {
+  goBack = (breakup, time, pos) => {
+    if (time !== null) {
       this.props.handleBreakup(time);
       this.setState({
         position: pos - 1,
@@ -79,10 +77,11 @@ class DeepdiveDay extends Component {
       this.setState({
         position: this.state.position - 1,
       });
+      this.props.handleGetMessage(breakup);
     }
   };
-  goForward = (time) => {
-    if (time) {
+  goForward = (breakup, time) => {
+    if (time !== null) {
       console.log(time);
       this.props.handleBreakup(time);
       this.setState({
@@ -90,10 +89,12 @@ class DeepdiveDay extends Component {
         timecardPosition: this.state.timecardPosition + 1,
         timeDetails: time,
       });
+      this.props.handleGetMessage(breakup);
     } else {
       this.setState({
         position: this.state.position + 1,
       });
+      this.props.handleGetMessage(breakup);
     }
   };
   render() {
@@ -207,7 +208,7 @@ class DeepdiveDay extends Component {
           });
         });
     }
-    console.log(this.state);
+    console.log(this.props);
     return (
       <div className={styles.dayContainer}>
         {this.state.slots[0].map((val, i) => {
@@ -250,23 +251,22 @@ class DeepdiveDay extends Component {
                 val !== "defaultimageurl" && (
                   <Modal show={this.state.show} handleClose={this.hideModal}>
                     <div className={styles.webContainer}>
-                      <div
-                        className={styles.webImage}
-                        onLoad={() => {
-                          this.props.handleGetMessage(
-                            images &&
-                              images[this.state.position] &&
-                              images[this.state.position].timeCardBreakup
-                          );
-                          this.setState({ breakup: this.state.breakup + 1 });
-                        }}
-                      >
+                      <div className={styles.webImage}>
                         {images && images.length > 1 && (
                           <>
                             {this.state.position > 0 && (
                               <div
                                 className={styles.leftArrow}
-                                onClick={() => this.goBack()}
+                                onClick={() =>
+                                  this.goBack(
+                                    images &&
+                                      images[this.state.position - 1] &&
+                                      images[this.state.position - 1]
+                                        .timeCardBreakup,
+                                    null,
+                                    null
+                                  )
+                                }
                               >
                                 <img
                                   src={previous}
@@ -281,6 +281,7 @@ class DeepdiveDay extends Component {
                                   className={styles.leftArrow}
                                   onClick={() =>
                                     this.goBack(
+                                      null,
                                       time &&
                                         time[this.state.timecardPosition - 1]
                                           .timecard,
@@ -299,7 +300,15 @@ class DeepdiveDay extends Component {
                               images.length !== this.state.position + 1 && (
                                 <div
                                   className={styles.rightArrow}
-                                  onClick={() => this.goForward()}
+                                  onClick={() =>
+                                    this.goForward(
+                                      images &&
+                                        images[this.state.position + 1] &&
+                                        images[this.state.position + 1]
+                                          .timeCardBreakup,
+                                      null
+                                    )
+                                  }
                                 >
                                   <img src={next} height="50px" width="50px" />
                                 </div>
@@ -310,6 +319,10 @@ class DeepdiveDay extends Component {
                                   className={styles.rightArrow}
                                   onClick={() =>
                                     this.goForward(
+                                      images &&
+                                        images[this.state.position] &&
+                                        images[this.state.position]
+                                          .timeCardBreakup,
                                       time &&
                                         time[this.state.timecardPosition + 1]
                                           .timecard
@@ -328,6 +341,13 @@ class DeepdiveDay extends Component {
                         <img
                           onClick={() => {
                             console.log(this.state.webcam[0][i]);
+                          }}
+                          onLoad={() => {
+                            this.props.handleGetMessage(
+                              images &&
+                                images[this.state.position] &&
+                                images[this.state.position].timeCardBreakup
+                            );
                           }}
                           src={
                             images &&
@@ -421,6 +441,10 @@ class DeepdiveDay extends Component {
                             }}
                             value={this.state.comment}
                           />
+                          {this.props.getMessageData &&
+                            this.props.getMessageData.map((val) => {
+                              return <div>{val.message}</div>;
+                            })}
                         </div>
                         <div className={styles.buttonHolder}>
                           <div

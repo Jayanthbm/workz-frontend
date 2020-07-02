@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import styles from "./deepdive.module.css";
 import DatePicker from "react-datepicker";
-
+import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
 class SecondaryHeader extends Component {
   constructor(props) {
     super(props);
     this.state = {
       startDate: new Date(),
+      details: false,
     };
   }
   handleChange = (date) => {
@@ -116,8 +117,41 @@ class SecondaryHeader extends Component {
           </div>
         </div>
         <div className={styles.timecardContainer}>
-          <div className={styles.timeCard}> Timecard</div>|
-          <div className={styles.details}> Details</div>{" "}
+          <div
+            onClick={() => {
+              this.props.history.push(
+                `/deepdive/${this.props.match.params.userId}/${moment(
+                  new Date(this.props.match.params.date)
+                ).format("YYYY-MM-DD")}`
+              );
+            }}
+            className={
+              this.props.match.path == "/deepdive/:userId/:date"
+                ? styles.timeCard
+                : styles.details
+            }
+          >
+            {" "}
+            Timecard
+          </div>
+          |
+          <div
+            className={
+              this.props.match.path == "/details/:userId/:date"
+                ? styles.timeCard
+                : styles.details
+            }
+            onClick={() => {
+              this.props.history.push(
+                `/details/${this.props.match.params.userId}/${moment(
+                  new Date(this.props.match.params.date)
+                ).format("YYYY-MM-DD")}`
+              );
+            }}
+          >
+            {" "}
+            Details
+          </div>{" "}
         </div>
         <div className={styles.timecardContainer}>
           <div

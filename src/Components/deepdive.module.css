@@ -42,11 +42,11 @@
 }
 .timeCard {
   font-weight: bold;
-  margin-right: 10px;
+  margin: 0 10px;
   cursor: pointer;
 }
 .details {
-  margin-left: 10px;
+  margin: 0 10px;
   cursor: pointer;
 }
 .prev {

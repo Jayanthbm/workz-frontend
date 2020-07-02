@@ -1,0 +1,7 @@
+.base {
+  width: 100%;
+  height: auto;
+  min-height: 100vh;
+  background-color: #bcbcbc;
+  display: inline-block;
+}

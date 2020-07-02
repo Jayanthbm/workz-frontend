@@ -42,6 +42,53 @@ export const GET_MESSAGE_REQUEST = "GET_MESSAGE_REQUEST";
 export const GET_MESSAGE_SUCCESS = "GET_MESSAGE_SUCCESS";
 export const GET_MESSAGE_FAILURE = "GET_MESSAGE_FAILURE";
 
+export const GET_DETAILS_REQUEST = "GET_DETAILS_REQUEST";
+export const GET_DETAILS_SUCCESS = "GET_DETAILS_SUCCESS";
+export const GET_DETAILS_FAILURE = "GET_DETAILS_FAILURE";
+
+export function getDetailsRequest() {
+  return {
+    type: GET_DETAILS_REQUEST,
+    status: REQUESTING,
+  };
+}
+
+export function getDetailsSuccess(detailsData) {
+  return {
+    type: GET_DETAILS_SUCCESS,
+    status: SUCCESS,
+    detailsData,
+  };
+}
+
+export function getDetailsFailure(error) {
+  console.log(error);
+  return {
+    type: GET_DETAILS_FAILURE,
+    status: ERROR,
+    error,
+  };
+}
+
+export function getDetails(userDetails) {
+  return async (dispatch) => {
+    dispatch(getDeepdiveRequest());
+    try {
+      let url = `details`;
+      const result = await post(url, userDetails);
+      const resultJson = await result.data;
+      console.log(resultJson);
+      if (resultJson.message) {
+        throw new Error(resultJson.message);
+      }
+
+      return dispatch(getDetailsSuccess(resultJson));
+    } catch (e) {
+      return dispatch(getDetailsFailure(e.message));
+    }
+  };
+}
+
 export function getMessageRequest() {
   return {
     type: GET_MESSAGE_REQUEST,
