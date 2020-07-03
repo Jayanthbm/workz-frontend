@@ -46,6 +46,9 @@
 .popup-wrapper > * {
   width: 50%;
 }
+.error {
+  color: red;
+}
 .webContainer {
   width: 100%;
   height: auto;

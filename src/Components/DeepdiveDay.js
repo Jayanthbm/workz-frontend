@@ -27,6 +27,7 @@ class DeepdiveDay extends Component {
       alltime: [],
       status: [],
       position: 0,
+      flagMessage: null,
       timecardPosition: 0,
       render: false,
     };
@@ -62,9 +63,15 @@ class DeepdiveDay extends Component {
       this.setState({ render: true });
     }
   }
-
+  componentWillReceiveProps = (nextProps) => {
+    if (this.props.flagDetails !== nextProps.flagDetails) {
+      this.setState({
+        flagMessage: nextProps.flagDetails && nextProps.flagDetails.message,
+      });
+    }
+  };
   hideModal = () => {
-    this.setState({ show: false, type: null });
+    this.setState({ show: false, type: null, flagMessage: null });
   };
   goBack = (breakup, time, pos) => {
     if (time !== null) {
@@ -208,7 +215,7 @@ class DeepdiveDay extends Component {
           });
         });
     }
-    console.log(this.props);
+    console.log(this.state.flagMessage);
     return (
       <div className={styles.dayContainer}>
         {this.state.slots[0].map((val, i) => {
@@ -375,6 +382,11 @@ class DeepdiveDay extends Component {
                         />
                       </div>
                       <div className={styles.panel}>
+                        {this.state.flagMessage && (
+                          <div className={styles.error}>
+                            {this.state.flagMessage}
+                          </div>
+                        )}
                         <div className={styles.dateHolder}>
                           <div className={styles.detailsDate}>
                             {images &&
@@ -654,6 +666,11 @@ class DeepdiveDay extends Component {
                         />
                       </div>
                       <div className={styles.panel}>
+                        {this.state.flagMessage && (
+                          <div className={styles.error}>
+                            {this.state.flagMessage}
+                          </div>
+                        )}
                         <div className={styles.dateHolder}>
                           <div className={styles.detailsDate}>
                             {images &&

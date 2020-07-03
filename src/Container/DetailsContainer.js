@@ -25,7 +25,7 @@ const mapStateToProps = (state) => {
     deepdiveData: state.team.deepdiveData,
     detailsData: state.team.detailsData,
     deepdiveDropdownData: state.team.deepdiveDropdownData,
-    deepDiveError: state.team.deepDiveError,
+    detailsError: state.team.detailsError,
     flagDetails: state.team.flagDetails,
     breakupDetails: state.team.breakupDetails,
     // getMessageData:

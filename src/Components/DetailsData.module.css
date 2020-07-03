@@ -17,6 +17,14 @@
   display: flex;
   padding: 10px 100px;
 }
+.dataHeader {
+  background-color: grey;
+  font-weight: bolder;
+  line-height: 2;
+}
+.dataCont {
+  padding: 10px;
+}
 .dayHolder {
   width: 100%;
   padding: 10px 0px;

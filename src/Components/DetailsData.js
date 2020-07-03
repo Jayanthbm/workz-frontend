@@ -46,7 +46,9 @@ class DetailsData extends Component {
   render() {
     return (
       <div className={styles.deepDiveBase}>
-        {this.state.detailsData && this.state.detailsData.length > 0
+        {!this.props.detailsError &&
+        this.state.detailsData &&
+        this.state.detailsData.length > 0
           ? this.state.detailsData.map((val) => {
               return (
                 <div>
@@ -57,13 +59,22 @@ class DetailsData extends Component {
                           data[1] &&
                           data[1].map((dataCard) => {
                             return (
-                              <React.Fragment>
+                              <div className={styles.dataCont}>
+                                <div className={styles.dataHeader}>
+                                  {parseInt(dataCard.time.substring(0, 5)) > 12
+                                    ? parseInt(dataCard.time.substring(0, 5)) -
+                                      12
+                                    : dataCard.time.substring(0, 5)}{" "}
+                                  {dataCard.time.substring(0, 2) >= "12"
+                                    ? "PM"
+                                    : "AM"}
+                                </div>
                                 <img
                                   src={dataCard.screenshotUrl}
                                   height="100px"
                                   width="150px"
                                 />
-                              </React.Fragment>
+                              </div>
                             );
                           })}
                       </div>

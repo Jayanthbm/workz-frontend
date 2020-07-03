@@ -80,6 +80,11 @@ class deepdive extends Component {
   };
   handleFlag = (timecardId) => {
     this.props.postFlag(timecardId);
+    this.props.getDeepdive({
+      companyId: parsedData.companyId,
+      userId: this.props.match.params.userId,
+      date: this.props.match.params.date,
+    });
   };
   handleMessage = async (formData, timecardId) => {
     await this.props.postMessage(formData, timecardId);
