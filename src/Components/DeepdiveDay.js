@@ -577,7 +577,16 @@ class DeepdiveDay extends Component {
                             {this.state.position > 0 && (
                               <div
                                 className={styles.leftArrow}
-                                onClick={() => this.goBack()}
+                                onClick={() =>
+                                  this.goBack(
+                                    images &&
+                                      images[this.state.position - 1] &&
+                                      images[this.state.position - 1]
+                                        .timeCardBreakup,
+                                    null,
+                                    null
+                                  )
+                                }
                               >
                                 <img
                                   src={previous}
@@ -592,6 +601,7 @@ class DeepdiveDay extends Component {
                                   className={styles.leftArrow}
                                   onClick={() =>
                                     this.goBack(
+                                      null,
                                       time &&
                                         time[this.state.timecardPosition - 1]
                                           .timecard,
@@ -610,7 +620,15 @@ class DeepdiveDay extends Component {
                               images.length !== this.state.position + 1 && (
                                 <div
                                   className={styles.rightArrow}
-                                  onClick={() => this.goForward()}
+                                  onClick={() =>
+                                    this.goForward(
+                                      images &&
+                                        images[this.state.position + 1] &&
+                                        images[this.state.position + 1]
+                                          .timeCardBreakup,
+                                      null
+                                    )
+                                  }
                                 >
                                   <img src={next} height="50px" width="50px" />
                                 </div>
@@ -621,6 +639,10 @@ class DeepdiveDay extends Component {
                                   className={styles.rightArrow}
                                   onClick={() =>
                                     this.goForward(
+                                      images &&
+                                        images[this.state.position] &&
+                                        images[this.state.position]
+                                          .timeCardBreakup,
                                       time &&
                                         time[this.state.timecardPosition + 1]
                                           .timecard
