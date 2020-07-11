@@ -21,6 +21,7 @@ class deepdive extends Component {
       userId: "",
       change: false,
       show: false,
+      messageTimeCard: null,
       allChecker: false,
     };
   }
@@ -60,7 +61,6 @@ class deepdive extends Component {
     this.setState({ show: false });
   };
   handleDeepdive = (val, flag) => {
-    console.log(flag);
     this.setState({
       allChecker: true,
     });
@@ -80,22 +80,31 @@ class deepdive extends Component {
   };
   handleFlag = (timecardId) => {
     this.props.postFlag(timecardId);
-    this.props.getDeepdive({
-      companyId: parsedData.companyId,
-      userId: this.props.match.params.userId,
-      date: this.props.match.params.date,
-    });
   };
   handleMessage = async (formData, timecardId) => {
     await this.props.postMessage(formData, timecardId);
+    this.setState({
+      messageTimeCard: timecardId,
+    });
     await this.props.gettMessage(timecardId);
   };
   handleGetMessage = (timecardId) => {
-    console.log("abasaas", timecardId);
     this.props.gettMessage(timecardId);
+    this.setState({
+      messageTimeCard: timecardId,
+    });
   };
   handleBreakup = (timecardId) => {
-    this.props.getBreakup(timecardId);
+    console.log(timecardId);
+    this.props.getBreakup({
+      timecardId: timecardId,
+      startDate: this.props.deepdiveData && this.props.deepdiveData.startDate,
+      endDate: this.props.deepdiveData && this.props.deepdiveData.endDate,
+    });
+    this.setState({
+      messageTimeCard: timecardId,
+    });
+    this.props.gettMessage(timecardId);
   };
   componentDidMount = () => {
     if (parsedData.isManager === 1) {
@@ -131,14 +140,22 @@ class deepdive extends Component {
     }
   };
   componentWillReceiveProps = (nextProps) => {
-    console.log(nextProps);
+    if (
+      this.props &&
+      this.props.getMessageData !== nextProps &&
+      nextProps.getMessageData &&
+      this.state.messageTimeCard !== null
+    ) {
+      this.props.gettMessage(this.state.messageTimeCard);
+      this.setState({ messageTimeCard: null });
+    }
     if (this.props.flagDetails !== nextProps.flagDetails) {
-      this.props.getDeepdive({
+      console.log("here");
+      nextProps.getDeepdive({
         companyId: parsedData.companyId,
         userId: this.props.match.params.userId,
         date: this.props.match.params.date,
       });
-      // window.location.reload();
     }
   };
   render() {

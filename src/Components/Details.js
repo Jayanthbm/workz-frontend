@@ -91,7 +91,6 @@ class Details extends Component {
     this.setState({ show: false });
   };
   handleDeepdive = (val, flag) => {
-    console.log(flag);
     this.setState({
       allChecker: true,
     });
@@ -110,7 +109,6 @@ class Details extends Component {
     }
   };
   componentWillReceiveProps = (nextProps) => {
-    console.log(nextProps);
     if (this.props.flagDetails !== nextProps.flagDetails) {
       this.props.getDetails({
         companyId: parsedData.companyId,
@@ -121,7 +119,6 @@ class Details extends Component {
     }
   };
   render() {
-    console.log(this.props);
     return (
       <div className={styles.base}>
         <Header pic={parsedData && parsedData.profilePic} />

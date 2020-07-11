@@ -62,7 +62,6 @@ export function getDetailsSuccess(detailsData) {
 }
 
 export function getDetailsFailure(error) {
-  console.log(error);
   return {
     type: GET_DETAILS_FAILURE,
     status: ERROR,
@@ -77,7 +76,7 @@ export function getDetails(userDetails) {
       let url = `details`;
       const result = await post(url, userDetails);
       const resultJson = await result.data;
-      console.log(resultJson);
+
       if (resultJson.message) {
         throw new Error(resultJson.message);
       }
@@ -119,7 +118,7 @@ export function gettMessage(timeId) {
       let url = `comment/${timeId}`;
       const result = await get(url);
       const resultJson = await result.data;
-      console.log(resultJson);
+
       if (typeof resultJson.message != "object") {
         throw new Error(resultJson.message);
       }
@@ -239,10 +238,10 @@ export function getBreakup(timeId) {
   return async (dispatch) => {
     dispatch(getBreakupRequest());
     try {
-      let url = `breakup/${timeId}`;
+      let url = `zoom`;
       const result = await post(url, timeId);
       const resultJson = await result.data;
-      console.log(resultJson);
+
       if (resultJson.message) {
         throw new Error(resultJson.message);
       }
@@ -283,7 +282,7 @@ export function postFlag(timeId) {
       let url = `flag/${timeId}`;
       const result = await post(url, timeId);
       const resultJson = await result.data;
-      console.log(resultJson);
+
       if (resultJson.message != "Successfully Flagged") {
         throw new Error(resultJson.message);
       }
@@ -302,7 +301,6 @@ export function getDeepdiveDropdownRequest() {
 }
 
 export function getDeepdiveDropdownSuccess(deepdiveDropdownData) {
-  console.log(deepdiveDropdownData);
   return {
     type: GET_DEEPDIVE_DROPDOWN_SUCCESS,
     status: SUCCESS,
@@ -311,7 +309,6 @@ export function getDeepdiveDropdownSuccess(deepdiveDropdownData) {
 }
 
 export function getDeepdiveDropdownFailure(error) {
-  console.log(error);
   return {
     type: GET_DEEPDIVE_DROPDOWN_FAILURE,
     status: ERROR,
@@ -326,7 +323,6 @@ export function getDeepdiveDropdown(userDetails) {
       let url = `deepdivedropdown`;
       const result = await post(url, userDetails);
       const resultJson = await result.data;
-      console.log(resultJson);
       if (resultJson.message) {
         throw new Error(resultJson.message);
       }
@@ -354,7 +350,6 @@ export function getDeepdiveSuccess(deepdiveData) {
 }
 
 export function getDeepdiveFailure(error) {
-  console.log(error);
   return {
     type: GET_DEEPDIVE_FAILURE,
     status: ERROR,
@@ -369,7 +364,6 @@ export function getDeepdive(userDetails) {
       let url = `deepdive`;
       const result = await post(url, userDetails);
       const resultJson = await result.data;
-      console.log(resultJson);
       if (resultJson.message) {
         throw new Error(resultJson.message);
       }

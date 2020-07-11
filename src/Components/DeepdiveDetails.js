@@ -84,7 +84,6 @@ class DeepdiveDetails extends Component {
   }
 
   render() {
-    console.log(new Date(this.props.match.params.date));
     // function timeConvert(n) {
     //   var num = n;
     //   var hours = num / 60;
@@ -130,19 +129,14 @@ class DeepdiveDetails extends Component {
           <div className={styles.headerContainer}>
             <div className={styles.hoursHeader}>
               Hours Logged:{" "}
-              {Math.floor(
-                this.props.deepdiveData &&
-                  (this.props.deepdiveData.totalMinutes / 60) * 100
-              ) / 100}
+              {this.props.deepdiveData && this.props.deepdiveData.hoursLogged}
             </div>
             <div className={styles.intenseHeader}>
               Intensity:{" "}
               <span style={{ color: "red" }}>
                 {" "}
-                {Math.floor(
-                  this.props.deepdiveData &&
-                    this.props.deepdiveData.AverageIntensity * 100
-                ) / 100}
+                {this.props.deepdiveData &&
+                  this.props.deepdiveData.intensityScore}
                 %{" "}
               </span>
             </div>
@@ -151,8 +145,8 @@ class DeepdiveDetails extends Component {
               <span style={{ color: "green" }}>
                 {" "}
                 {this.props.deepdiveData &&
-                  this.props.deepdiveData.AverageFocus}{" "}
-                min
+                  this.props.deepdiveData.focusScore}{" "}
+                %
               </span>
             </div>
           </div>
@@ -174,7 +168,59 @@ class DeepdiveDetails extends Component {
                         </div>
                         <div className={styles.hourText}>
                           {" "}
-                          {this.state.totalhours(val)}
+                          {this.props.deepdiveData &&
+                            this.props.deepdiveData &&
+                            this.props.deepdiveData.dailysummary &&
+                            this.props.deepdiveData.dailysummary[i]
+                              .hoursLogged &&
+                            Math.floor(
+                              this.props.deepdiveData &&
+                                this.props.deepdiveData &&
+                                this.props.deepdiveData.dailysummary &&
+                                this.props.deepdiveData.dailysummary[i]
+                                  .hoursLogged
+                            ) + " Hours "}
+                          {this.props.deepdiveData &&
+                            this.props.deepdiveData &&
+                            this.props.deepdiveData.dailysummary &&
+                            this.props.deepdiveData.dailysummary[i]
+                              .hoursLogged &&
+                            (Math.floor(
+                              (this.props.deepdiveData &&
+                                this.props.deepdiveData &&
+                                this.props.deepdiveData.dailysummary &&
+                                this.props.deepdiveData.dailysummary[i]
+                                  .hoursLogged * 60) -
+                                Math.floor(
+                                  this.props.deepdiveData &&
+                                    this.props.deepdiveData &&
+                                    this.props.deepdiveData.dailysummary &&
+                                    this.props.deepdiveData.dailysummary[i]
+                                      .hoursLogged
+                                ) *
+                                  60
+                            ) *
+                              100) /
+                              100 +
+                              " Minutes"}{" "}
+                          {/* {this.state.totalhours(val)} */}
+                        </div>
+                        <div className={styles.hourText}>
+                          Intensity:{" "}
+                          {this.props.deepdiveData &&
+                            this.props.deepdiveData &&
+                            this.props.deepdiveData.dailysummary &&
+                            this.props.deepdiveData.dailysummary[i]
+                              .intensityScore}
+                          {"%"}
+                        </div>
+                        <div className={styles.hourText}>
+                          Focus:{" "}
+                          {this.props.deepdiveData &&
+                            this.props.deepdiveData &&
+                            this.props.deepdiveData.dailysummary &&
+                            this.props.deepdiveData.dailysummary[i].focusScore}
+                          {"%"}
                         </div>
                       </div>
                     </div>

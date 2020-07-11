@@ -220,7 +220,6 @@ export function getLogin(userLoginDetails) {
       if (resultJson.message) {
         throw new Error(resultJson.message);
       }
-      console.log(resultJson["domain"]);
       Cookie.createCookie(ACCESS_TOKEN, resultJson.token, 7);
       Cookie.createCookie(USER_DETAILS, JSON.stringify(resultJson), 7);
       // Cookie.createCookie(

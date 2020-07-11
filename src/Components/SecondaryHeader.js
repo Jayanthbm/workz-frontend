@@ -12,7 +12,6 @@ class SecondaryHeader extends Component {
     };
   }
   handleChange = (date) => {
-    console.log(date);
     this.setState({
       startDate: date,
     });
@@ -60,7 +59,6 @@ class SecondaryHeader extends Component {
     }
   };
   render() {
-    console.log(this.props);
     return (
       <div className={styles.deepdiveContainer}>
         <div className={styles.dropdownContainer}>

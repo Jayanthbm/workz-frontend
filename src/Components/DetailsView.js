@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import styles from "./DetailsData.module.css";
 class DetailsView extends Component {
   componentWillReceiveProps = (nextprops) => {
-    console.log(nextprops);
     if (this.props !== nextprops) {
-      console.log(nextprops);
     }
   };
   render() {
