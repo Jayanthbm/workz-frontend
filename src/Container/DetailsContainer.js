@@ -18,6 +18,9 @@ const mapDispatchToProps = (dispatch) => {
     getDeepdiveDropdown: (userDetails) => {
       dispatch(getDeepdiveDropdown(userDetails));
     },
+    getBreakup: (timecardId) => {
+      dispatch(getBreakup(timecardId));
+    },
   };
 };
 const mapStateToProps = (state) => {

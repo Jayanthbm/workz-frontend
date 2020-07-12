@@ -55,6 +55,14 @@ class Details extends Component {
       // });
     }
   };
+  handleBreakup = (timecardId) => {
+    console.log(timecardId);
+    this.props.getBreakup({
+      timecardBreakupId: timecardId,
+      startDate: this.props.detailsData && this.props.detailsData.startDate,
+      endDate: this.props.detailsData && this.props.detailsData.endDate,
+    });
+  };
   handleChange = (date) => {
     this.setState({
       selectedDate: date,
@@ -136,7 +144,11 @@ class Details extends Component {
           change={this.state.change}
           {...this.props}
         />
-        <DetailsData detailsData={this.props.detailsData} {...this.props} />
+        <DetailsData
+          detailsData={this.props.detailsData}
+          {...this.props}
+          handleBreakup={this.handleBreakup}
+        />
       </div>
     );
   }

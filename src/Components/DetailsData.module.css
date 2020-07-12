@@ -179,3 +179,227 @@
   right: 0;
   bottom: 50%;
 }
+.deepDiveBase {
+  width: auto;
+  background: #fff;
+  padding: 10px 45px;
+  border-radius: 8px;
+  border: 1px solid #ebecec;
+  margin: 10px 40px;
+}
+.timeSlots {
+  display: flex;
+  align-items: center;
+}
+.imgContainer {
+  display: flex;
+}
+.dataContainer {
+  display: flex;
+  padding: 10px 100px;
+}
+.dayHolder {
+  width: 100%;
+  padding: 10px 0px;
+}
+.dayContainer {
+  display: flex;
+}
+.minuteHolder {
+  display: flex;
+}
+.minuteContainer {
+  padding: 10px;
+}
+.weekContainer {
+  display: flex;
+  padding: 10px 120px;
+}
+.secondaryImage {
+  position: absolute;
+  right: 0;
+  bottom: 0px;
+  cursor: pointer;
+}
+.dayText {
+  padding-right: 10px;
+}
+.hourText {
+  padding: 0 10px;
+}
+.popup-content {
+  width: 100%;
+}
+.popup-wrapper > * {
+  width: 50%;
+}
+.error {
+  color: red;
+}
+.webContainer {
+  width: 100%;
+  height: auto;
+  display: flex;
+}
+.intenseHeader {
+  padding-right: 10px;
+}
+.webImage {
+  position: relative;
+  width: 75%;
+  height: 75%;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.panel {
+  width: 25%;
+  height: 50%;
+}
+.dateHolder {
+  display: flex;
+  padding-top: 10px;
+}
+.textContainer {
+  position: fixed;
+  width: 22%;
+  height: 30px;
+  margin-right: 10px;
+}
+.focusImage {
+  border: 3px solid #49adf6;
+  width: 50px;
+  height: 50px;
+}
+.textBox {
+  width: 100%;
+  height: 100%;
+  border-color: transparent;
+  border-radius: 15px;
+  margin-top: 3px;
+  box-shadow: 0 3px 11px 0 rgba(0, 0, 0, 0.4);
+  outline: none;
+}
+.messageList {
+  margin-top: 55px;
+}
+.messageConatiner {
+  height: 200px;
+  border: 1px solid;
+  margin: 10px;
+  overflow: auto;
+}
+.messageHolder {
+  padding: 10px;
+  border-radius: 15px;
+  margin-top: 10px;
+  /* box-shadow: 0 3px 11px 0 rgba(0, 0, 0, 0.1); */
+  box-shadow: 0 3px 11px 0 rgba(0, 0, 0, 0.4);
+  width: 85%;
+  margin: 10px auto;
+}
+.from {
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 22px;
+  margin-right: 60%;
+}
+.message {
+  width: 100%;
+  word-break: break-word;
+}
+.buttonHolder {
+  width: 60px;
+  height: 30px;
+  border: 1px solid;
+  margin: 10px;
+  border-radius: 5px;
+}
+.button {
+  padding: 5px;
+}
+.detailsDate {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.showdetails {
+  border: 1px solid;
+  padding: 10px 18px;
+  margin: 10px;
+}
+.details {
+  border: 1px solid;
+  padding: 10px 18px;
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.commentBox {
+  resize: none;
+  width: 92%;
+  border-radius: 5px;
+}
+.completedBar {
+  width: 84%;
+  background: #cececf;
+  height: 5px;
+  border-radius: 15px;
+  /* border: 1px solid black; */
+  /* margin-top: 10px; */
+  margin: 3px 15px;
+}
+.completedLevel {
+  background: #e0deed;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+}
+.imageContainer {
+  /* white-space: nowrap;
+  width: 100%;
+  overflow: auto; */
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px;
+}
+.headerContainer {
+  display: flex;
+}
+.hoursHeader {
+  padding-right: 10px;
+}
+.leftArrow {
+  background-color: #222;
+
+  width: 50px;
+  height: 50px;
+  background-size: auto 18px;
+  background-position: center;
+  opacity: 1.6;
+  cursor: pointer;
+  z-index: 1;
+  border-radius: 50%;
+  box-shadow: 2px 2px 10px -3px;
+
+  position: absolute;
+  left: 0;
+  bottom: 50%;
+}
+.rightArrow {
+  background-color: #222;
+
+  width: 50px;
+  height: 50px;
+  background-size: auto 18px;
+  background-position: center;
+  opacity: 1.6;
+  cursor: pointer;
+  z-index: 1;
+  border-radius: 50%;
+  box-shadow: 2px 2px 10px -3px;
+
+  position: absolute;
+  right: 0;
+  bottom: 50%;
+}
