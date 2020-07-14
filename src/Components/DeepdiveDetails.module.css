@@ -78,6 +78,7 @@
 .dateHolder {
   display: flex;
   padding-top: 10px;
+  justify-content: space-around;
 }
 .textContainer {
   position: fixed;
@@ -189,7 +190,7 @@
   padding-right: 10px;
 }
 .leftArrow {
-  background-color: #222;
+  /* background-color: #222; */
 
   width: 50px;
   height: 50px;
@@ -198,15 +199,15 @@
   opacity: 1.6;
   cursor: pointer;
   z-index: 1;
-  border-radius: 50%;
-  box-shadow: 2px 2px 10px -3px;
+  /* border-radius: 50%;
+  box-shadow: 2px 2px 10px -3px; */
 
   position: absolute;
   left: 0;
   bottom: 50%;
 }
 .rightArrow {
-  background-color: #222;
+  /* background-color: #222; */
 
   width: 50px;
   height: 50px;
@@ -215,8 +216,8 @@
   opacity: 1.6;
   cursor: pointer;
   z-index: 1;
-  border-radius: 50%;
-  box-shadow: 2px 2px 10px -3px;
+  /* border-radius: 50%;
+  box-shadow: 2px 2px 10px -3px; */
 
   position: absolute;
   right: 0;

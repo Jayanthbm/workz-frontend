@@ -18,8 +18,17 @@ const mapDispatchToProps = (dispatch) => {
     getDeepdiveDropdown: (userDetails) => {
       dispatch(getDeepdiveDropdown(userDetails));
     },
+    postFlag: (timecardId) => {
+      dispatch(postFlag(timecardId));
+    },
     getBreakup: (timecardId) => {
       dispatch(getBreakup(timecardId));
+    },
+    postMessage: (formData, timecardId) => {
+      dispatch(postMessage(formData, timecardId));
+    },
+    gettMessage: (timecardId) => {
+      dispatch(gettMessage(timecardId));
     },
   };
 };
@@ -31,9 +40,9 @@ const mapStateToProps = (state) => {
     detailsError: state.team.detailsError,
     flagDetails: state.team.flagDetails,
     breakupDetails: state.team.breakupDetails,
-    // getMessageData:
-    //   state.team.getMessageData && state.team.getMessageData.message,
-    // messageData: state.team.messageData,
+    getMessageData:
+      state.team.getMessageData && state.team.getMessageData.message,
+    messageData: state.team.messageData,
   };
 };
 const DetailsContainer = withRouter(

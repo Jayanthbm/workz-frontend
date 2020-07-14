@@ -55,13 +55,24 @@ class Details extends Component {
       // });
     }
   };
-  handleBreakup = (timecardId) => {
+  handleFlag = (timecardId) => {
+    this.props.postFlag(timecardId);
+  };
+  handleBreakup = (timecardId, type) => {
     console.log(timecardId);
-    this.props.getBreakup({
-      timecardBreakupId: timecardId,
-      startDate: this.props.detailsData && this.props.detailsData.startDate,
-      endDate: this.props.detailsData && this.props.detailsData.endDate,
-    });
+    if (type === "breakup") {
+      this.props.getBreakup({
+        timecardBreakupId: timecardId,
+        startDate: this.props.detailsData && this.props.detailsData.startDate,
+        endDate: this.props.detailsData && this.props.detailsData.endDate,
+      });
+    } else {
+      this.props.getBreakup({
+        timecardId: timecardId,
+        startDate: this.props.detailsData && this.props.detailsData.startDate,
+        endDate: this.props.detailsData && this.props.detailsData.endDate,
+      });
+    }
   };
   handleChange = (date) => {
     this.setState({
@@ -77,6 +88,19 @@ class Details extends Component {
       this.props.history.push(
         `/details/${this.state.userId}/${moment(date).format("YYYY-MM-DD")}`
       );
+  };
+  handleMessage = async (formData, timecardId) => {
+    await this.props.postMessage(formData, timecardId);
+    this.setState({
+      messageTimeCard: timecardId,
+    });
+    await this.props.gettMessage(timecardId);
+  };
+  handleGetMessage = (timecardId) => {
+    this.props.gettMessage(timecardId);
+    this.setState({
+      messageTimeCard: timecardId,
+    });
   };
   selectHandler = (val) => {
     this.setState({ change: true });
@@ -147,6 +171,9 @@ class Details extends Component {
         <DetailsData
           detailsData={this.props.detailsData}
           {...this.props}
+          handleFlag={this.handleFlag}
+          handleMessage={this.handleMessage}
+          handleGetMessage={this.handleGetMessage}
           handleBreakup={this.handleBreakup}
         />
       </div>

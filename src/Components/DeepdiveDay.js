@@ -7,6 +7,18 @@ import previous from "../images/previous.jpg";
 import nextTo from "../images/Next-2-2-icon.png";
 import previousTo from "../images/Previous-icon.png";
 import zoom from "../images/zoom.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faThumbsUp,
+  faThumbsDown,
+  faFlag,
+  faCrosshairs,
+  faBolt,
+  faChevronCircleLeft,
+  faArrowAltCircleLeft,
+  faChevronCircleRight,
+  faArrowAltCircleRight,
+} from "@fortawesome/free-solid-svg-icons";
 import intensity from "../images/intensity.jpg";
 import flag from "../images/flag.png";
 import Modal from "./Modal";
@@ -205,6 +217,7 @@ class DeepdiveDay extends Component {
             previousTime: this.props.breakupDetails.PreviousTimecard,
             nextTime: this.props.breakupDetails.NextTimeCard,
             day: val.tday,
+            status: this.props.breakupDetails.status,
             date: val.Datetime,
           });
         });
@@ -220,7 +233,7 @@ class DeepdiveDay extends Component {
           });
         });
     }
-    console.log(images, this.state.position);
+    console.log(images);
     return (
       <div className={styles.dayContainer}>
         {this.state.slots[0].map((val, i) => {
@@ -280,10 +293,15 @@ class DeepdiveDay extends Component {
                                   )
                                 }
                               >
-                                <img
+                                {/* <img
                                   src={previous}
                                   height="50px"
                                   width="50px"
+                                /> */}
+                                <FontAwesomeIcon
+                                  icon={faChevronCircleLeft}
+                                  size="3x"
+                                  color="grey"
                                 />
                               </div>
                             )}
@@ -303,10 +321,15 @@ class DeepdiveDay extends Component {
                                   )
                                 }
                               >
-                                <img
+                                {/* <img
                                   src={previousTo}
                                   height="50px"
                                   width="50px"
+                                /> */}
+                                <FontAwesomeIcon
+                                  icon={faArrowAltCircleLeft}
+                                  size="3x"
+                                  color="grey"
                                 />
                               </div>
                             )}
@@ -324,7 +347,12 @@ class DeepdiveDay extends Component {
                                     )
                                   }
                                 >
-                                  <img src={next} height="50px" width="50px" />
+                                  <FontAwesomeIcon
+                                    icon={faChevronCircleRight}
+                                    size="3x"
+                                    color="grey"
+                                  />
+                                  {/* <img src={next} height="50px" width="50px" /> */}
                                 </div>
                               )}
                             {images &&
@@ -343,11 +371,16 @@ class DeepdiveDay extends Component {
                                     )
                                   }
                                 >
-                                  <img
+                                  <FontAwesomeIcon
+                                    icon={faArrowAltCircleRight}
+                                    size="3x"
+                                    color="grey"
+                                  />
+                                  {/* <img
                                     src={nextTo}
                                     height="50px"
                                     width="50px"
-                                  />
+                                  /> */}
                                 </div>
                               )}
                           </>
@@ -420,7 +453,22 @@ class DeepdiveDay extends Component {
                                   }
                                 >
                                   {/* {this.state.timeDetails} */}
-                                  <img src={flag} height="20px" width="20px" />
+                                  {images &&
+                                  images[this.state.position] &&
+                                  images[this.state.position].status !==
+                                    "flagged" &&
+                                  !this.state.flagMessage ? (
+                                    <img
+                                      src={flag}
+                                      height="20px"
+                                      width="20px"
+                                    />
+                                  ) : (
+                                    <FontAwesomeIcon
+                                      icon={faFlag}
+                                      color="red"
+                                    />
+                                  )}
                                 </div>
                               ) : null
                               // <div>{images[this.state.position].timecard}</div>
@@ -431,25 +479,36 @@ class DeepdiveDay extends Component {
                         <div className={styles.details}>
                           <div>
                             {" "}
-                            <img src={zoom} height="20px" width="20px" />
+                            {/* <img src={zoom} height="20px" width="20px" /> */}
+                            <FontAwesomeIcon
+                              icon={faCrosshairs}
+                              color="green"
+                            />
                             <span style={{ paddingLeft: "5px" }}>Focus</span>
                           </div>
                           <div>
-                            {images &&
-                            images[this.state.position] &&
-                            images[this.state.position].focus === null
-                              ? "0 min"
-                              : `${
-                                  images &&
-                                  images[this.state.position] &&
-                                  images[this.state.position].focus
-                                } min`}
+                            {(images &&
+                              images[this.state.position] &&
+                              images[this.state.position].focus === null) ||
+                            (images &&
+                              images[this.state.position] &&
+                              images[this.state.position].focus === 0) ? (
+                              <FontAwesomeIcon
+                                icon={faThumbsDown}
+                                color="red"
+                              />
+                            ) : (
+                              <FontAwesomeIcon
+                                icon={faThumbsUp}
+                                color="green"
+                              />
+                            )}
                           </div>
                         </div>
                         <div className={styles.details}>
                           <div>
                             {" "}
-                            <img src={intensity} height="20px" width="20px" />
+                            <FontAwesomeIcon icon={faBolt} color="orange" />
                             <span style={{ paddingLeft: "5px" }}>
                               Intensity
                             </span>
@@ -626,11 +685,16 @@ class DeepdiveDay extends Component {
                                   )
                                 }
                               >
-                                <img
+                                <FontAwesomeIcon
+                                  icon={faChevronCircleLeft}
+                                  size="3x"
+                                  color="grey"
+                                />
+                                {/* <img
                                   src={previous}
                                   height="50px"
                                   width="50px"
-                                />
+                                /> */}
                               </div>
                             )}
                             {this.state.position == 0 && (
@@ -649,10 +713,15 @@ class DeepdiveDay extends Component {
                                   )
                                 }
                               >
-                                <img
+                                {/* <img
                                   src={previousTo}
                                   height="50px"
                                   width="50px"
+                                /> */}
+                                <FontAwesomeIcon
+                                  icon={faArrowAltCircleLeft}
+                                  size="3x"
+                                  color="grey"
                                 />
                               </div>
                             )}
@@ -670,7 +739,12 @@ class DeepdiveDay extends Component {
                                     )
                                   }
                                 >
-                                  <img src={next} height="50px" width="50px" />
+                                  <FontAwesomeIcon
+                                    icon={faChevronCircleRight}
+                                    size="3x"
+                                    color="grey"
+                                  />
+                                  {/* <img src={next} height="50px" width="50px" /> */}
                                 </div>
                               )}
                             {images &&
@@ -689,11 +763,16 @@ class DeepdiveDay extends Component {
                                     )
                                   }
                                 >
-                                  <img
+                                  <FontAwesomeIcon
+                                    icon={faArrowAltCircleRight}
+                                    size="3x"
+                                    color="grey"
+                                  />
+                                  {/* <img
                                     src={nextTo}
                                     height="50px"
                                     width="50px"
-                                  />
+                                  /> */}
                                 </div>
                               )}
                           </>
@@ -762,7 +841,16 @@ class DeepdiveDay extends Component {
                               }
                             >
                               {/* {this.state.timeDetails} */}
-                              <img src={flag} height="20px" width="20px" />
+                              {/* <img src={flag} height="20px" width="20px" /> */}
+                              {images &&
+                              images[this.state.position] &&
+                              images[this.state.position].status !==
+                                "flagged" &&
+                              !this.state.flagMessage ? (
+                                <img src={flag} height="20px" width="20px" />
+                              ) : (
+                                <FontAwesomeIcon icon={faFlag} color="red" />
+                              )}
                             </div>
                           </div>
                         </div>
@@ -770,25 +858,37 @@ class DeepdiveDay extends Component {
                         <div className={styles.details}>
                           <div>
                             {" "}
-                            <img src={zoom} height="20px" width="20px" />
+                            {/* <img src={zoom} height="20px" width="20px" /> */}
+                            <FontAwesomeIcon
+                              icon={faCrosshairs}
+                              color="green"
+                            />
                             <span style={{ paddingLeft: "5px" }}>Focus</span>
                           </div>
                           <div>
-                            {images &&
-                            images[this.state.position] &&
-                            images[this.state.position].focus === null
-                              ? "0 min"
-                              : `${
-                                  images &&
-                                  images[this.state.position] &&
-                                  images[this.state.position].focus
-                                } min`}
+                            {(images &&
+                              images[this.state.position] &&
+                              images[this.state.position].focus === null) ||
+                            (images &&
+                              images[this.state.position] &&
+                              images[this.state.position].focus === 0) ? (
+                              <FontAwesomeIcon
+                                icon={faThumbsDown}
+                                color="red"
+                              />
+                            ) : (
+                              <FontAwesomeIcon
+                                icon={faThumbsUp}
+                                color="green"
+                              />
+                            )}
                           </div>
                         </div>
                         <div className={styles.details}>
                           <div>
                             {" "}
-                            <img src={intensity} height="20px" width="20px" />
+                            {/* <img src={intensity} height="20px" width="20px" /> */}
+                            <FontAwesomeIcon icon={faBolt} color="orange" />
                             <span style={{ paddingLeft: "5px" }}>
                               Intensity
                             </span>
