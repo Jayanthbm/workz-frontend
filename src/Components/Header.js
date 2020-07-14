@@ -22,6 +22,9 @@ class Header extends Component {
     Cookie.deleteCookie("CloudFront-Key-Pair-Id");
     Cookie.deleteCookie("CloudFront-Policy");
     Cookie.deleteCookie("CloudFront-Signature");
+    Cookie.deleteCookie("userId");
+    Cookie.deleteCookie("*");
+    Cookie.deleteCookie("userDate");
     this.props.logout();
     this.props.history.push("/");
   };

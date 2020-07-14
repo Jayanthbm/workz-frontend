@@ -68,12 +68,20 @@ class deepdive extends Component {
     this.props.getDeepdive({
       companyId: parsedData.companyId,
       userId: data.id,
-      date: this.props.match.params.date,
+      date: Cookie.getCookie("userDate")
+        ? Cookie.getCookie("userDate")
+        : this.props.match.params.date,
     });
     this.setState({ userId: data.id, empname: data.name });
     this.props.history.push(
-      `/deepdive/${data.id}/${this.props.match.params.date}`
+      `/deepdive/${data.id}/${
+        Cookie.getCookie("userDate")
+          ? Cookie.getCookie("userDate")
+          : this.props.match.params.date
+      }`
     );
+    document.cookie = "userId=" + `${data.id}` + ";";
+    document.cookie = "userDate=" + `${this.props.match.params.date}` + ";";
     if (flag) {
       window.location.reload();
     }
