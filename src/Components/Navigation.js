@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import styles from "./Navigation.module.css";
+import moment from "moment";
 class Navigation extends Component {
   selectHandler = (val) => {};
   render() {
+    console.log(this.props);
     return (
       <div className={styles.base}>
         <div className={styles.container}>
@@ -81,12 +83,30 @@ class Navigation extends Component {
             </div>
           )}
         </div>
-        <div className={styles.menuContainer}>
-          <div className={styles.link}>Team Summary</div>
-          <div className={styles.link}>Activity</div>
-          <div className={styles.link}>Metrics</div>
-          <div className={styles.link}>Deepdive</div>
-        </div>
+        {(this.props.match.path === "/deepdive/:userId/:date" ||
+          this.props.match.path === "/details/:userId/:date") && (
+          <div className={styles.menuContainer}>
+            {/* <div className={styles.link}>Team Summary</div>
+            <div className={styles.link}>Activity</div>
+            <div className={styles.link}>Metrics</div> */}
+            <div
+              className={
+                this.props.match.path === "/deepdive/:userId/:date"
+                  ? styles.linkActive
+                  : styles.link
+              }
+              onClick={() =>
+                this.props.history.push(
+                  `/deepdive/${this.props.match.params.userId}/${moment(
+                    new Date(this.props.match.params.date)
+                  ).format("YYYY-MM-DD")}`
+                )
+              }
+            >
+              Deepdive
+            </div>
+          </div>
+        )}
       </div>
     );
   }

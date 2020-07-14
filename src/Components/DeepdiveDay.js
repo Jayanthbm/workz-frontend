@@ -103,7 +103,6 @@ class DeepdiveDay extends Component {
   };
   goForward = (breakup, time) => {
     if (time !== null) {
-      console.log(time);
       this.props.handleBreakup(time);
       this.setState({
         position: 0,
@@ -233,7 +232,7 @@ class DeepdiveDay extends Component {
           });
         });
     }
-    console.log(images);
+
     return (
       <div className={styles.dayContainer}>
         {this.state.slots[0].map((val, i) => {

@@ -172,6 +172,7 @@ class Team extends Component {
           selectHandler={this.selectHandler}
           team_id={this.state.team_id}
           history={this.props.history}
+          {...this.props}
           man_id={this.state.man_id}
         />
         <div className={styles.detailsHolder}>

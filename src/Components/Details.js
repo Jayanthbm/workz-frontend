@@ -159,6 +159,7 @@ class Details extends Component {
           selectHandler={this.selectHandler}
           team_id={this.state.team_id}
           man_id={this.state.man_id}
+          {...this.props}
         />
         <SecondaryHeader
           deepdiveDropdownData={this.props && this.props.deepdiveDropdownData}

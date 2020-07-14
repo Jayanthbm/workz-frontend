@@ -32,6 +32,7 @@ class Header extends Component {
         text: "Virtual Office",
         image: virtualOffice,
         redirect: "/",
+        active: this.props.match.path === "/" ? true : false,
       },
       {
         text: "My Team",
@@ -39,6 +40,11 @@ class Header extends Component {
         redirect: `/deepdive/${this.props.userId}/${moment(new Date()).format(
           "YYYY-MM-DD"
         )}`,
+        active:
+          this.props.match.path === "/deepdive/:userId/:date" ||
+          this.props.match.path === "/details/:userId/:date"
+            ? true
+            : false,
       },
       {
         text: "Help",
@@ -62,7 +68,7 @@ class Header extends Component {
                 links.map((val) => {
                   return (
                     <div
-                      className={styles.links}
+                      className={val.active ? styles.linksActive : styles.links}
                       onClick={() => this.props.history.push(val.redirect)}
                     >
                       <div className={styles.icon}>
