@@ -37,6 +37,9 @@
 .dateContainer {
   margin: auto;
   display: flex;
+  background: white;
+  padding: 0 10px;
+  border-radius: 5px;
 }
 .dropdownSelectHolder {
   /* padding: 10px; */

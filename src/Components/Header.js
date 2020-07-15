@@ -40,9 +40,20 @@ class Header extends Component {
       {
         text: "My Team",
         image: teamIcon,
-        redirect: `/deepdive/${this.props.userId}/${moment(new Date()).format(
-          "YYYY-MM-DD"
-        )}`,
+        redirect:
+          Cookie.getCookie("userDate") &&
+          Cookie.getCookie("userDate") !== "Invalid date" &&
+          Cookie.getCookie("userId")
+            ? `/deepdive/${Cookie.getCookie("userId")}/${moment(
+                new Date(
+                  Cookie.getCookie("userDate") &&
+                    Cookie.getCookie("userDate") !== "Invalid date" &&
+                    Cookie.getCookie("userDate")
+                )
+              ).format("YYYY-MM-DD")}`
+            : `/deepdive/${this.props.userId}/${moment(new Date()).format(
+                "YYYY-MM-DD"
+              )}`,
         active:
           this.props.match.path === "/deepdive/:userId/:date" ||
           this.props.match.path === "/details/:userId/:date"
@@ -54,6 +65,7 @@ class Header extends Component {
         image: help,
       },
     ];
+    console.log(new Date());
     return (
       <div className={styles.headerBase}>
         <div className={styles.container}>
@@ -77,7 +89,9 @@ class Header extends Component {
                       <div className={styles.icon}>
                         <img src={val.image} height="25px" width="35px" />
                       </div>
-                      <div>{val.text}</div>
+                      <div className={val.active && styles.linkText}>
+                        {val.text}
+                      </div>
                     </div>
                   );
                 })}

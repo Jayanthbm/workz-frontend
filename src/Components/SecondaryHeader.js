@@ -10,9 +10,7 @@ class SecondaryHeader extends Component {
     this.state = {
       startDate: new Date(),
       details: false,
-      startingDate: Cookie.getCookie("userDate")
-        ? Cookie.getCookie("userDate")
-        : null,
+      startingDate: null,
       endingDate: null,
     };
   }
@@ -25,20 +23,19 @@ class SecondaryHeader extends Component {
     if (nextProps.deepdiveDropdownData !== this.props.deepdiveDropdownData) {
       this.props.handleDeepdive(
         JSON.stringify({
-          id: Cookie.getCookie("userId")
-            ? Cookie.getCookie("userId")
-            : this.props.match.params.userId &&
-              this.props.match.params.userId != undefined &&
-              this.props.match.params.userId != "undefined" &&
-              !this.props.change
-            ? this.props.match.params.userId
-            : nextProps.deepdiveDropdownData &&
-              nextProps.deepdiveDropdownData.length
-            ? nextProps.deepdiveDropdownData &&
-              nextProps.deepdiveDropdownData[0] &&
-              nextProps.deepdiveDropdownData[0].userId
-            : nextProps.deepdiveDropdownData &&
-              nextProps.deepdiveDropdownData.userId,
+          id:
+            this.props.match.params.userId &&
+            this.props.match.params.userId != undefined &&
+            this.props.match.params.userId != "undefined" &&
+            !this.props.change
+              ? this.props.match.params.userId
+              : nextProps.deepdiveDropdownData &&
+                nextProps.deepdiveDropdownData.length
+              ? nextProps.deepdiveDropdownData &&
+                nextProps.deepdiveDropdownData[0] &&
+                nextProps.deepdiveDropdownData[0].userId
+              : nextProps.deepdiveDropdownData &&
+                nextProps.deepdiveDropdownData.userId,
         }),
         false
       );
@@ -55,6 +52,7 @@ class SecondaryHeader extends Component {
       let newEndDate = this.toISOLocal(this.endOfWeek(newDate)).split("T")[0];
       this.setState({ startingDate: newStarDate });
       this.setState({ endingDate: newEndDate });
+
       this.props.handleChange(newStarDate);
     } else {
       let newStarDate = this.toISOLocal(this.startOfWeek(new Date())).split(
@@ -65,6 +63,7 @@ class SecondaryHeader extends Component {
       )[0];
       this.setState({ startingDate: newStarDate });
       this.setState({ endingDate: newEndDate });
+
       this.props.handleChange(new Date());
     }
   };
@@ -89,6 +88,8 @@ class SecondaryHeader extends Component {
     let newEndDate = this.toISOLocal(this.endOfWeek(newDate)).split("T")[0];
     this.setState({ startingDate: newStarDate });
     this.setState({ endingDate: newEndDate });
+    Cookie.deleteCookie("userDate");
+    document.cookie = "userDate=" + `${newStarDate}` + ";";
     this.props.handleChange(newStarDate);
   };
 
@@ -104,6 +105,8 @@ class SecondaryHeader extends Component {
       let newEndDate = this.toISOLocal(this.endOfWeek(newDate)).split("T")[0];
       this.setState({ startingDate: newStarDate });
       this.setState({ endingDate: newEndDate });
+      Cookie.deleteCookie("userDate");
+      document.cookie = "userDate=" + `${newStarDate}` + ";";
       this.props.handleChange(newStarDate);
     } else {
       console.log("No Action");
@@ -134,26 +137,15 @@ class SecondaryHeader extends Component {
   componentDidMount = () => {
     this.setState({
       startingDate: this.toISOLocal(
-        this.startOfWeek(
-          new Date(
-            Cookie.getCookie("userDate")
-              ? Cookie.getCookie("userDate")
-              : this.props.match.params.date
-          )
-        )
+        this.startOfWeek(new Date(this.props.match.params.date))
       ).split("T")[0],
       endingDate: this.toISOLocal(
-        this.endOfWeek(
-          new Date(
-            Cookie.getCookie("userDate")
-              ? Cookie.getCookie("userDate")
-              : this.props.match.params.date
-          )
-        )
+        this.endOfWeek(new Date(this.props.match.params.date))
       ).split("T")[0],
     });
   };
   render() {
+    console.log(this.state.startingDate);
     return (
       <div className={styles.deepdiveContainer}>
         <div className={styles.dropdownContainer}>
@@ -268,7 +260,7 @@ class SecondaryHeader extends Component {
           </div>
           <div className={styles.datePicker}>
             {moment(new Date(this.state.startingDate)).format("DD MMMM")} -{" "}
-            {moment(new Date(this.state.endingDate)).format("DD MMMM YYYY")}
+            {moment(new Date(this.state.endingDate)).format("DD MMMM, YYYY")}
           </div>
           {/* <DatePicker
             selected={this.props.selectedDate}

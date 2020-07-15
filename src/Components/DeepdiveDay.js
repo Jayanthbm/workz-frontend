@@ -46,14 +46,20 @@ class DeepdiveDay extends Component {
       render: false,
     };
   }
-  showModal = (val, type, time) => {
+  handlekeydown = (e, timecard) => {
+    if (e.keyCode === 13) {
+      this.props.handleMessage({ comment: this.state.comment }, timecard);
+      this.setState({ comment: "" });
+    }
+  };
+  showModal = (val, type, time, position) => {
     if (type == "screen") {
       this.setState({
         show: true,
         image: val,
         type: type,
         timeDetails: time,
-        position: 0,
+        position: position ? position : 0,
         timecardPosition: 0,
       });
       this.props.handleBreakup(time);
@@ -63,7 +69,7 @@ class DeepdiveDay extends Component {
         image: val,
         type: type,
         timeDetails: time,
-        position: 0,
+        position: position ? position : 0,
         comment: null,
         timecardPosition: 0,
       });
@@ -416,7 +422,8 @@ class DeepdiveDay extends Component {
                               this.showModal(
                                 images[this.state.position].webcam,
                                 "web",
-                                this.state.timecard[0][i]
+                                null,
+                                this.state.position
                               );
                             }}
                             src={
@@ -450,6 +457,7 @@ class DeepdiveDay extends Component {
                                       this.state.timeDetails
                                     )
                                   }
+                                  className={styles.flagButton}
                                 >
                                   {/* {this.state.timeDetails} */}
                                   {images &&
@@ -524,6 +532,14 @@ class DeepdiveDay extends Component {
                             <input
                               type="text"
                               placeholder="Enter Message"
+                              onKeyDown={(e) =>
+                                this.handlekeydown(
+                                  e,
+                                  images &&
+                                    images[this.state.position] &&
+                                    images[this.state.position].timeCardBreakup
+                                )
+                              }
                               onChange={(val) => {
                                 this.setState({ comment: val.target.value });
                               }}
@@ -808,7 +824,8 @@ class DeepdiveDay extends Component {
                               this.showModal(
                                 images[this.state.position].screenshot,
                                 "screen",
-                                this.state.timecard[0][i]
+                                null,
+                                this.state.position
                               );
                             }}
                             src={
@@ -838,6 +855,7 @@ class DeepdiveDay extends Component {
                               onClick={() =>
                                 this.props.handleFlag(this.state.timeDetails)
                               }
+                              className={styles.flagButton}
                             >
                               {/* {this.state.timeDetails} */}
                               {/* <img src={flag} height="20px" width="20px" /> */}
@@ -908,6 +926,14 @@ class DeepdiveDay extends Component {
                               onChange={(val) => {
                                 this.setState({ comment: val.target.value });
                               }}
+                              onKeyDown={(e) =>
+                                this.handlekeydown(
+                                  e,
+                                  images &&
+                                    images[this.state.position] &&
+                                    images[this.state.position].timeCardBreakup
+                                )
+                              }
                               value={this.state.comment}
                               className={styles.textBox}
                             />
@@ -989,7 +1015,7 @@ class DeepdiveDay extends Component {
               {this.state.intensityScore[0][i] !== "defaultimageurl" && (
                 <div
                   className={styles.completedBar}
-                  title={"Intensity : " + this.state.intensityScore[0][i]}
+                  title={"Intensity: " + this.state.intensityScore[0][i]}
                 >
                   <div
                     className={styles.completedLevel}

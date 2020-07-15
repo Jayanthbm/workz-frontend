@@ -136,7 +136,7 @@ class DeepdiveDetails extends Component {
               <span style={{ color: "red" }}>
                 {" "}
                 {this.props.deepdiveData &&
-                  this.props.deepdiveData.intensityScore}
+                  this.props.deepdiveData.intensityScore}{" "}
                 %{" "}
               </span>
             </div>

@@ -24,6 +24,9 @@
 .icon {
   padding-right: 10px;
 }
+.linkText {
+  border-bottom: 2px solid white;
+}
 .links {
   padding: 15px 10px 0px 10px;
   border-left: 1px solid;

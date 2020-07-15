@@ -68,18 +68,14 @@ class deepdive extends Component {
     this.props.getDeepdive({
       companyId: parsedData.companyId,
       userId: data.id,
-      date: Cookie.getCookie("userDate")
-        ? Cookie.getCookie("userDate")
-        : this.props.match.params.date,
+      date: this.props.match.params.date,
     });
     this.setState({ userId: data.id, empname: data.name });
     this.props.history.push(
-      `/deepdive/${data.id}/${
-        Cookie.getCookie("userDate")
-          ? Cookie.getCookie("userDate")
-          : this.props.match.params.date
-      }`
+      `/deepdive/${data.id}/${this.props.match.params.date}`
     );
+    Cookie.deleteCookie("userId");
+    Cookie.deleteCookie("userDate");
     document.cookie = "userId=" + `${data.id}` + ";";
     document.cookie = "userDate=" + `${this.props.match.params.date}` + ";";
     if (flag) {
@@ -162,7 +158,12 @@ class deepdive extends Component {
       nextProps.getDeepdive({
         companyId: parsedData.companyId,
         userId: this.props.match.params.userId,
-        date: this.props.match.params.date,
+        date:
+          Cookie.getCookie("userId") &&
+          Cookie.getCookie("userId") &&
+          Cookie.getCookie("userId") != "Invalid date"
+            ? Cookie.getCookie("userId")
+            : this.props.match.params.date,
       });
     }
   };

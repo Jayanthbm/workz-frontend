@@ -126,6 +126,12 @@ class DetailsData extends Component {
       }
     }
   }
+  handlekeydown = (e, timecard) => {
+    if (e.keyCode === 13) {
+      this.props.handleMessage({ comment: this.state.comment }, timecard);
+      this.setState({ comment: "" });
+    }
+  };
   goBack = (breakup, time, pos) => {
     if (time !== null) {
       this.props.handleBreakup(time);
@@ -418,6 +424,7 @@ class DetailsData extends Component {
                                           images[this.state.position].timecardId
                                       )
                                     }
+                                    className={styles.flagButton}
                                   >
                                     {/* {this.state.timeDetails} */}
                                     {images &&
@@ -496,6 +503,15 @@ class DetailsData extends Component {
                                 onChange={(val) => {
                                   this.setState({ comment: val.target.value });
                                 }}
+                                onKeyDown={(e) =>
+                                  this.handlekeydown(
+                                    e,
+                                    images &&
+                                      images[this.state.position] &&
+                                      images[this.state.position]
+                                        .timeCardBreakup
+                                  )
+                                }
                                 value={this.state.comment}
                                 className={styles.textBox}
                               />
@@ -661,11 +677,16 @@ class DetailsData extends Component {
                                     )
                                   }
                                 >
-                                  <img
+                                  <FontAwesomeIcon
+                                    icon={faArrowAltCircleLeft}
+                                    size="3x"
+                                    color="grey"
+                                  />
+                                  {/* <img
                                     src={previousTo}
                                     height="50px"
                                     width="50px"
-                                  />
+                                  /> */}
                                 </div>
                               )}
                               {images &&
@@ -710,10 +731,15 @@ class DetailsData extends Component {
                                       )
                                     }
                                   >
-                                    <img
+                                    {/* <img
                                       src={nextTo}
                                       height="50px"
                                       width="50px"
+                                    /> */}
+                                    <FontAwesomeIcon
+                                      icon={faArrowAltCircleRight}
+                                      size="3x"
+                                      color="grey"
                                     />
                                   </div>
                                 )}
@@ -785,6 +811,7 @@ class DetailsData extends Component {
                                           images[this.state.position].timecardId
                                       )
                                     }
+                                    className={styles.flagButton}
                                   >
                                     {/* {this.state.timeDetails} */}
                                     {/* <img
@@ -868,6 +895,15 @@ class DetailsData extends Component {
                                 onChange={(val) => {
                                   this.setState({ comment: val.target.value });
                                 }}
+                                onKeyDown={(e) =>
+                                  this.handlekeydown(
+                                    e,
+                                    images &&
+                                      images[this.state.position] &&
+                                      images[this.state.position]
+                                        .timeCardBreakup
+                                  )
+                                }
                                 value={this.state.comment}
                                 className={styles.textBox}
                               />

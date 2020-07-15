@@ -128,12 +128,25 @@
   width: 100%;
   word-break: break-word;
 }
+.flagButton {
+  cursor: pointer;
+}
 .buttonHolder {
-  width: 60px;
+  /* width: 60px;
   height: 30px;
   border: 1px solid;
   margin: 10px;
-  border-radius: 5px;
+  border-radius: 5px; */
+  margin: 10px;
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 4px 13px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
 }
 .button {
   padding: 5px;
