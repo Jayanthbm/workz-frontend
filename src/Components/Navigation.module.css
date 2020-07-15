@@ -47,6 +47,7 @@ select {
   padding: 10px;
   border-right: 2px solid black;
   margin: 10px 80px;
+  cursor: pointer;
 }
 .linkActive {
   composes: link;

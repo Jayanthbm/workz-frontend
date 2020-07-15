@@ -45,7 +45,7 @@ class SecondaryHeader extends Component {
   handleWeeks = (type) => {
     let d = new Date();
     if (type === "last") {
-      let newDate = this.addDays(this.state.startingDate, -3);
+      let newDate = this.addDays(new Date(), -3);
       let newStarDate = this.toISOLocal(this.startOfWeek(newDate)).split(
         "T"
       )[0];
