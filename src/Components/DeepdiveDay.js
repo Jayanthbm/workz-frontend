@@ -449,37 +449,23 @@ class DeepdiveDay extends Component {
                               images[this.state.position].date}
                           </div>
                           <div>
-                            {
-                              this.state.image ? (
-                                <div
-                                  onClick={() =>
-                                    this.props.handleFlag(
-                                      this.state.timeDetails
-                                    )
-                                  }
-                                  className={styles.flagButton}
-                                >
-                                  {/* {this.state.timeDetails} */}
-                                  {images &&
-                                  images[this.state.position] &&
-                                  images[this.state.position].status !==
-                                    "flagged" &&
-                                  !this.state.flagMessage ? (
-                                    <img
-                                      src={flag}
-                                      height="20px"
-                                      width="20px"
-                                    />
-                                  ) : (
-                                    <FontAwesomeIcon
-                                      icon={faFlag}
-                                      color="red"
-                                    />
-                                  )}
-                                </div>
-                              ) : null
-                              // <div>{images[this.state.position].timecard}</div>
-                            }
+                            <div
+                              onClick={() =>
+                                this.props.handleFlag(this.state.timeDetails)
+                              }
+                              className={styles.flagButton}
+                            >
+                              {/* {this.state.timeDetails} */}
+                              {images &&
+                              images[this.state.position] &&
+                              images[this.state.position].status !==
+                                "flagged" &&
+                              !this.state.flagMessage ? (
+                                <img src={flag} height="20px" width="20px" />
+                              ) : (
+                                <FontAwesomeIcon icon={faFlag} color="red" />
+                              )}
+                            </div>
                           </div>
                         </div>
                         <div className={styles.showdetails}>Show Details</div>

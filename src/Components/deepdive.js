@@ -158,12 +158,7 @@ class deepdive extends Component {
       nextProps.getDeepdive({
         companyId: parsedData.companyId,
         userId: this.props.match.params.userId,
-        date:
-          Cookie.getCookie("userId") &&
-          Cookie.getCookie("userId") &&
-          Cookie.getCookie("userId") != "Invalid date"
-            ? Cookie.getCookie("userId")
-            : this.props.match.params.date,
+        date: this.props.match.params.date,
       });
     }
   };

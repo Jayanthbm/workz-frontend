@@ -163,7 +163,11 @@ class DeepdiveDetails extends Component {
                         </div>
                         <div className={styles.dayText}>
                           {moment(
-                            val && val[1] && val[1][1][0].timecard
+                            val &&
+                              val[1] &&
+                              val[1][1] &&
+                              val[1][1][0] &&
+                              val[1][1][0].timecard
                           ).format("DD,MMMM")}
                         </div>
                         <div className={styles.hourText}>
@@ -171,18 +175,21 @@ class DeepdiveDetails extends Component {
                           {this.props.deepdiveData &&
                             this.props.deepdiveData &&
                             this.props.deepdiveData.dailysummary &&
+                            this.props.deepdiveData.dailysummary[i] &&
                             this.props.deepdiveData.dailysummary[i]
                               .hoursLogged &&
                             Math.floor(
                               this.props.deepdiveData &&
                                 this.props.deepdiveData &&
                                 this.props.deepdiveData.dailysummary &&
+                                this.props.deepdiveData.dailysummary[i] &&
                                 this.props.deepdiveData.dailysummary[i]
                                   .hoursLogged
                             ) + " Hours "}
                           {this.props.deepdiveData &&
                             this.props.deepdiveData &&
                             this.props.deepdiveData.dailysummary &&
+                            this.props.deepdiveData.dailysummary[i] &&
                             this.props.deepdiveData.dailysummary[i]
                               .hoursLogged &&
                             (Math.floor(
@@ -210,6 +217,7 @@ class DeepdiveDetails extends Component {
                           {this.props.deepdiveData &&
                             this.props.deepdiveData &&
                             this.props.deepdiveData.dailysummary &&
+                            this.props.deepdiveData.dailysummary[i] &&
                             this.props.deepdiveData.dailysummary[i]
                               .intensityScore}
                           {"%"}
@@ -219,6 +227,7 @@ class DeepdiveDetails extends Component {
                           {this.props.deepdiveData &&
                             this.props.deepdiveData &&
                             this.props.deepdiveData.dailysummary &&
+                            this.props.deepdiveData.dailysummary[i] &&
                             this.props.deepdiveData.dailysummary[i].focusScore}
                           {"%"}
                         </div>
