@@ -103,6 +103,7 @@ class deepdive extends Component {
     });
   };
   handleBreakup = (timecardId) => {
+    console.log(timecardId);
     this.props.getBreakup({
       timecardId: timecardId,
       startDate: this.props.deepdiveData && this.props.deepdiveData.startDate,
@@ -111,7 +112,7 @@ class deepdive extends Component {
     this.setState({
       messageTimeCard: timecardId,
     });
-    this.props.gettMessage(timecardId);
+    // this.props.gettMessage(timecardId);
   };
   componentDidMount = () => {
     if (parsedData.isManager === 1) {
@@ -123,7 +124,14 @@ class deepdive extends Component {
       this.props.getDeepdiveDropdown({
         managerId: parsedData.userId,
       });
-
+      // if (!Cookie.getCookie("dropdown"))
+      //   Cookie.createCookie(
+      //     "dropdown",
+      //     JSON.stringify({
+      //       id: parsedData.userId,
+      //       type: "manager",
+      //     })
+      //   );
       // this.props.getDeepdive({
       //   userId:
       //     this.props.deepdiveDropdownData &&
@@ -140,6 +148,9 @@ class deepdive extends Component {
       this.props.getDeepdiveDropdown({
         teamId: parsedData.userId,
       });
+      this.props.history.push({
+        state: { dropdownId: parsedData.userId, type: "team" },
+      });
       // this.props.getDeepdive({
       //   userId: parsedData.userId,
       //   date: moment(new Date()).format("YYYY-MM-DD"),
@@ -155,15 +166,7 @@ class deepdive extends Component {
       });
       this.setState({ render: true });
     }
-    if (
-      this.props &&
-      this.props.getMessageData !== nextProps &&
-      nextProps.getMessageData &&
-      this.state.messageTimeCard !== null
-    ) {
-      this.props.gettMessage(this.state.messageTimeCard);
-      this.setState({ messageTimeCard: null });
-    }
+
     if (this.props.flagDetails !== nextProps.flagDetails) {
       nextProps.getDeepdive({
         companyId: parsedData.companyId,
@@ -174,6 +177,7 @@ class deepdive extends Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <div className={styles.base}>
         <Header

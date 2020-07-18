@@ -241,7 +241,6 @@ class DeepdiveDay extends Component {
           });
         });
     }
-    console.log(this.props);
     return (
       <div className={styles.dayContainer}>
         {this.state.slots[0].map((val, i) => {
