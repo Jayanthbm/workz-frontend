@@ -19,10 +19,12 @@ class deepdive extends Component {
       man_id: "",
       selectedDate: new Date(),
       userId: "",
+      count: 0,
       change: false,
       show: false,
       messageTimeCard: null,
       allChecker: false,
+      render: false,
     };
   }
   handleChange = (date) => {
@@ -74,16 +76,18 @@ class deepdive extends Component {
     this.props.history.push(
       `/deepdive/${data.id}/${this.props.match.params.date}`
     );
-    Cookie.deleteCookie("userId");
-    Cookie.deleteCookie("userDate");
-    document.cookie = "userId=" + `${data.id}` + ";";
-    document.cookie = "userDate=" + `${this.props.match.params.date}` + ";";
-    if (flag) {
-      window.location.reload();
-    }
+    // if (flag) {
+    //   window.location.reload();
+    // }
+
+    // Cookie.deleteCookie("userId");
+    // Cookie.deleteCookie("userDate");
+    // document.cookie = "userId=" + `${data.id}` + ";";
+    // document.cookie = "userDate=" + `${this.props.match.params.date}` + ";";
   };
   handleFlag = (timecardId) => {
     this.props.postFlag(timecardId);
+    this.handleBreakup(timecardId);
   };
   handleMessage = async (formData, timecardId) => {
     await this.props.postMessage(formData, timecardId);
@@ -99,7 +103,6 @@ class deepdive extends Component {
     });
   };
   handleBreakup = (timecardId) => {
-    console.log(timecardId);
     this.props.getBreakup({
       timecardId: timecardId,
       startDate: this.props.deepdiveData && this.props.deepdiveData.startDate,
@@ -144,6 +147,14 @@ class deepdive extends Component {
     }
   };
   componentWillReceiveProps = (nextProps) => {
+    if (this.props.match !== nextProps.match) {
+      nextProps.getDeepdive({
+        companyId: parsedData.companyId,
+        userId: nextProps.match.params.userId,
+        date: nextProps.match.params.date,
+      });
+      this.setState({ render: true });
+    }
     if (
       this.props &&
       this.props.getMessageData !== nextProps &&
@@ -154,16 +165,15 @@ class deepdive extends Component {
       this.setState({ messageTimeCard: null });
     }
     if (this.props.flagDetails !== nextProps.flagDetails) {
-      console.log("here");
       nextProps.getDeepdive({
         companyId: parsedData.companyId,
-        userId: this.props.match.params.userId,
-        date: this.props.match.params.date,
+        userId: nextProps.match.params.userId,
+        date: nextProps.match.params.date,
       });
     }
   };
+
   render() {
-    console.log(this.props);
     return (
       <div className={styles.base}>
         <Header

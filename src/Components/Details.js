@@ -141,6 +141,13 @@ class Details extends Component {
     }
   };
   componentWillReceiveProps = (nextProps) => {
+    if (this.props.match !== nextProps.match) {
+      this.props.getDetails({
+        companyId: parsedData.companyId,
+        userId: nextProps.match.params.userId,
+        date: nextProps.match.params.date,
+      });
+    }
     if (this.props.flagDetails !== nextProps.flagDetails) {
       this.props.getDetails({
         companyId: parsedData.companyId,

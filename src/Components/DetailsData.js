@@ -10,8 +10,7 @@ import intensity from "../images/intensity.jpg";
 import flag from "../images/flag.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faThumbsUp,
-  faThumbsDown,
+  faDotCircle,
   faFlag,
   faCrosshairs,
   faBolt,
@@ -80,13 +79,12 @@ class DetailsData extends Component {
       if (nextProps.allChecker === true) {
         this.setState({ allTime: [] });
       }
-
+      if (this.props.match !== nextProps.match) {
+        this.setState({ detailsData: [] });
+      }
       if (
-        (nextProps.detailsData && this.state.detailsData.length === 0) ||
-        (nextProps.detailsData &&
-          this.state.detailsData &&
-          this.state.detailsData[0] &&
-          this.state.detailsData[0].length === 0)
+        nextProps.detailsData !== this.props.detailsData &&
+        this.state.detailsData.length === 0
       ) {
         for (let i = 0; i < nextProps.detailsData.results.length; i++) {
           const a = Object.entries(
@@ -138,6 +136,7 @@ class DetailsData extends Component {
       this.setState({
         position: pos - 1,
         timecardPosition: this.state.timecardPosition - 1,
+        flagMessage: null,
       });
     } else if (this.state.position > 0) {
       this.setState({
@@ -152,6 +151,7 @@ class DetailsData extends Component {
       this.props.handleBreakup(time);
       this.setState({
         position: 0,
+        flagMessage: null,
         // timecardPosition: this.state.timecardPosition + 1,
         // timeDetails: time,
       });
@@ -409,9 +409,11 @@ class DetailsData extends Component {
                           )}
                           <div className={styles.dateHolder}>
                             <div className={styles.detailsDate}>
-                              {images &&
-                                images[this.state.position] &&
-                                images[this.state.position].date}
+                              {moment(
+                                images &&
+                                  images[this.state.position] &&
+                                  images[this.state.position].date
+                              ).format("dddd, MMM DD HH:MM A ")}
                             </div>
                             <div>
                               {
@@ -431,17 +433,35 @@ class DetailsData extends Component {
                                     images[this.state.position] &&
                                     images[this.state.position].status !==
                                       "flagged" &&
-                                    !this.state.flagMessage ? (
+                                    this.state.flagMessage === null ? (
                                       <img
                                         src={flag}
                                         height="20px"
                                         width="20px"
                                       />
-                                    ) : (
+                                    ) : this.state.flagMessage ===
+                                      "Successfully Unflagged" ? (
+                                      <img
+                                        src={flag}
+                                        height="20px"
+                                        width="20px"
+                                      />
+                                    ) : this.state.flagMessage ===
+                                      "Successfully Flagged" ? (
                                       <FontAwesomeIcon
                                         icon={faFlag}
                                         color="red"
                                       />
+                                    ) : (
+                                      images &&
+                                      images[this.state.position] &&
+                                      images[this.state.position].status ===
+                                        "flagged" && (
+                                        <FontAwesomeIcon
+                                          icon={faFlag}
+                                          color="red"
+                                        />
+                                      )
                                     )}
                                   </div>
                                 ) : null
@@ -468,13 +488,13 @@ class DetailsData extends Component {
                                 images[this.state.position] &&
                                 images[this.state.position].focus === 0) ? (
                                 <FontAwesomeIcon
-                                  icon={faThumbsDown}
+                                  icon={faDotCircle}
                                   color="red"
                                 />
                               ) : (
                                 <FontAwesomeIcon
-                                  icon={faThumbsUp}
-                                  color="green"
+                                  icon={faDotCircle}
+                                  color="#8bc646"
                                 />
                               )}
                             </div>
@@ -796,9 +816,11 @@ class DetailsData extends Component {
                           )}
                           <div className={styles.dateHolder}>
                             <div className={styles.detailsDate}>
-                              {images &&
-                                images[this.state.position] &&
-                                images[this.state.position].date}
+                              {moment(
+                                images &&
+                                  images[this.state.position] &&
+                                  images[this.state.position].date
+                              ).format("dddd, MMM DD HH:MM A ")}
                             </div>
                             <div>
                               {
@@ -823,17 +845,35 @@ class DetailsData extends Component {
                                     images[this.state.position] &&
                                     images[this.state.position].status !==
                                       "flagged" &&
-                                    !this.state.flagMessage ? (
+                                    this.state.flagMessage === null ? (
                                       <img
                                         src={flag}
                                         height="20px"
                                         width="20px"
                                       />
-                                    ) : (
+                                    ) : this.state.flagMessage ===
+                                      "Successfully Unflagged" ? (
+                                      <img
+                                        src={flag}
+                                        height="20px"
+                                        width="20px"
+                                      />
+                                    ) : this.state.flagMessage ===
+                                      "Successfully Flagged" ? (
                                       <FontAwesomeIcon
                                         icon={faFlag}
                                         color="red"
                                       />
+                                    ) : (
+                                      images &&
+                                      images[this.state.position] &&
+                                      images[this.state.position].status ===
+                                        "flagged" && (
+                                        <FontAwesomeIcon
+                                          icon={faFlag}
+                                          color="red"
+                                        />
+                                      )
                                     )}
                                   </div>
                                 ) : null
@@ -860,13 +900,13 @@ class DetailsData extends Component {
                                 images[this.state.position] &&
                                 images[this.state.position].focus === 0) ? (
                                 <FontAwesomeIcon
-                                  icon={faThumbsDown}
+                                  icon={faDotCircle}
                                   color="red"
                                 />
                               ) : (
                                 <FontAwesomeIcon
-                                  icon={faThumbsUp}
-                                  color="green"
+                                  icon={faDotCircle}
+                                  color="##8bc646"
                                 />
                               )}
                             </div>
@@ -1023,7 +1063,7 @@ class DetailsData extends Component {
                 </div>
               );
             })
-          : "No details available"}
+          : this.props.detailsError}
       </div>
     );
   }

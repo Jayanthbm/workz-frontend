@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import styles from "./deepdive.module.css";
 import DatePicker from "react-datepicker";
 import moment from "moment";
-import * as Cookie from "../utils/Cookie";
 import "react-datepicker/dist/react-datepicker.css";
 class SecondaryHeader extends Component {
   constructor(props) {
@@ -40,12 +39,22 @@ class SecondaryHeader extends Component {
         false
       );
     }
+    if (this.props.match !== nextProps.match) {
+      this.setState({
+        startingDate: this.toISOLocal(
+          this.startOfWeek(new Date(nextProps.match.params.date))
+        ).split("T")[0],
+        endingDate: this.toISOLocal(
+          this.endOfWeek(new Date(nextProps.match.params.date))
+        ).split("T")[0],
+      });
+    }
   }
 
   handleWeeks = (type) => {
     let d = new Date();
     if (type === "last") {
-      let newDate = this.addDays(new Date(), -3);
+      let newDate = this.addDays(this.state.startingDate, -3);
       let newStarDate = this.toISOLocal(this.startOfWeek(newDate)).split(
         "T"
       )[0];
@@ -88,8 +97,6 @@ class SecondaryHeader extends Component {
     let newEndDate = this.toISOLocal(this.endOfWeek(newDate)).split("T")[0];
     this.setState({ startingDate: newStarDate });
     this.setState({ endingDate: newEndDate });
-    Cookie.deleteCookie("userDate");
-    document.cookie = "userDate=" + `${newStarDate}` + ";";
     this.props.handleChange(newStarDate);
   };
 
@@ -105,8 +112,6 @@ class SecondaryHeader extends Component {
       let newEndDate = this.toISOLocal(this.endOfWeek(newDate)).split("T")[0];
       this.setState({ startingDate: newStarDate });
       this.setState({ endingDate: newEndDate });
-      Cookie.deleteCookie("userDate");
-      document.cookie = "userDate=" + `${newStarDate}` + ";";
       this.props.handleChange(newStarDate);
     } else {
       console.log("No Action");
@@ -145,7 +150,6 @@ class SecondaryHeader extends Component {
     });
   };
   render() {
-    console.log(this.state.startingDate);
     return (
       <div className={styles.deepdiveContainer}>
         <div className={styles.dropdownContainer}>

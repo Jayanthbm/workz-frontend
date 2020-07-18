@@ -1,16 +1,15 @@
 import React, { Component } from "react";
 import styles from "./DeepdiveDetails.module.css";
 import defaultIcon from "../images/download.png";
-import moment from "moment";
-import next from "../images/next.png";
-import previous from "../images/previous.jpg";
-import nextTo from "../images/Next-2-2-icon.png";
-import previousTo from "../images/Previous-icon.png";
-import zoom from "../images/zoom.png";
+// import moment from "moment";
+// import next from "../images/next.png";
+// import previous from "../images/previous.jpg";
+// import nextTo from "../images/Next-2-2-icon.png";
+// import previousTo from "../images/Previous-icon.png";
+// import zoom from "../images/zoom.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faThumbsUp,
-  faThumbsDown,
+  faDotCircle,
   faFlag,
   faCrosshairs,
   faBolt,
@@ -22,7 +21,7 @@ import {
 import intensity from "../images/intensity.jpg";
 import flag from "../images/flag.png";
 import Modal from "./Modal";
-
+import moment from "moment";
 class DeepdiveDay extends Component {
   constructor(props) {
     super(props);
@@ -92,6 +91,7 @@ class DeepdiveDay extends Component {
   };
   hideModal = () => {
     this.setState({ show: false, type: null, flagMessage: null });
+    window.location.reload();
   };
   goBack = (breakup, time, pos) => {
     if (time !== null) {
@@ -99,6 +99,7 @@ class DeepdiveDay extends Component {
       this.setState({
         position: pos - 1,
         timecardPosition: this.state.timecardPosition - 1,
+        flagMessage: null,
       });
     } else if (this.state.position > 0) {
       this.setState({
@@ -114,6 +115,7 @@ class DeepdiveDay extends Component {
         position: 0,
         timecardPosition: this.state.timecardPosition + 1,
         timeDetails: time,
+        flagMessage: null,
       });
       // this.props.handleGetMessage(breakup);
     } else {
@@ -219,6 +221,7 @@ class DeepdiveDay extends Component {
             intensity: this.props.breakupDetails.intensityScore,
             focus: this.props.breakupDetails.focus,
             timeCardBreakup: val.timecardBreakupId,
+            timecardId: val.timecardId,
             previousTime: this.props.breakupDetails.PreviousTimecard,
             nextTime: this.props.breakupDetails.NextTimeCard,
             day: val.tday,
@@ -238,7 +241,7 @@ class DeepdiveDay extends Component {
           });
         });
     }
-
+    console.log(this.props);
     return (
       <div className={styles.dayContainer}>
         {this.state.slots[0].map((val, i) => {
@@ -249,7 +252,8 @@ class DeepdiveDay extends Component {
                   backgroundColor:
                     this.state.status[0][i] == "defaultimageurl"
                       ? "grey"
-                      : this.state.status[0][i] == "approved"
+                      : this.state.status[0][i] == "approved" ||
+                        this.state.status[0][i] == null
                       ? "#8bc646"
                       : this.state.status[0][i] == "rejected"
                       ? "#d2bd94"
@@ -444,14 +448,20 @@ class DeepdiveDay extends Component {
                         )}
                         <div className={styles.dateHolder}>
                           <div className={styles.detailsDate}>
-                            {images &&
-                              images[this.state.position] &&
-                              images[this.state.position].date}
+                            {moment(
+                              images &&
+                                images[this.state.position] &&
+                                images[this.state.position].date
+                            ).format("dddd, MMM DD HH:MM A ")}
                           </div>
                           <div>
                             <div
                               onClick={() =>
-                                this.props.handleFlag(this.state.timeDetails)
+                                this.props.handleFlag(
+                                  images &&
+                                    images[this.state.position] &&
+                                    images[this.state.position].timecardId
+                                )
                               }
                               className={styles.flagButton}
                             >
@@ -460,10 +470,21 @@ class DeepdiveDay extends Component {
                               images[this.state.position] &&
                               images[this.state.position].status !==
                                 "flagged" &&
-                              !this.state.flagMessage ? (
+                              this.state.flagMessage === null ? (
                                 <img src={flag} height="20px" width="20px" />
-                              ) : (
+                              ) : this.state.flagMessage ===
+                                "Successfully Unflagged" ? (
+                                <img src={flag} height="20px" width="20px" />
+                              ) : this.state.flagMessage ===
+                                "Successfully Flagged" ? (
                                 <FontAwesomeIcon icon={faFlag} color="red" />
+                              ) : (
+                                images &&
+                                images[this.state.position] &&
+                                images[this.state.position].status ===
+                                  "flagged" && (
+                                  <FontAwesomeIcon icon={faFlag} color="red" />
+                                )
                               )}
                             </div>
                           </div>
@@ -486,14 +507,11 @@ class DeepdiveDay extends Component {
                             (images &&
                               images[this.state.position] &&
                               images[this.state.position].focus === 0) ? (
-                              <FontAwesomeIcon
-                                icon={faThumbsDown}
-                                color="red"
-                              />
+                              <FontAwesomeIcon icon={faDotCircle} color="red" />
                             ) : (
                               <FontAwesomeIcon
-                                icon={faThumbsUp}
-                                color="green"
+                                icon={faDotCircle}
+                                color="#8bc646"
                               />
                             )}
                           </div>
@@ -539,7 +557,7 @@ class DeepdiveDay extends Component {
                                 return (
                                   <div className={styles.messageHolder}>
                                     <div className={styles.from}>
-                                      {val.from}
+                                      {val.from}:{" "}
                                     </div>
                                     <div className={styles.message}>
                                       {val.message}
@@ -779,9 +797,6 @@ class DeepdiveDay extends Component {
                           </>
                         )}
                         <img
-                          onClick={() => {
-                            console.log(this.state.webcam[0][i]);
-                          }}
                           onLoad={() => {
                             this.props.handleGetMessage(
                               images &&
@@ -789,7 +804,7 @@ class DeepdiveDay extends Component {
                                 images[this.state.position].timeCardBreakup
                             );
                           }}
-                          onError={() => {
+                          onError={(e) => {
                             this.props.handleGetMessage(
                               images &&
                                 images[this.state.position] &&
@@ -832,14 +847,20 @@ class DeepdiveDay extends Component {
                         )}
                         <div className={styles.dateHolder}>
                           <div className={styles.detailsDate}>
-                            {images &&
-                              images[this.state.position] &&
-                              images[this.state.position].date}
+                            {moment(
+                              images &&
+                                images[this.state.position] &&
+                                images[this.state.position].date
+                            ).format("dddd, MMM DD HH:MM A ")}
                           </div>
                           <div>
                             <div
                               onClick={() =>
-                                this.props.handleFlag(this.state.timeDetails)
+                                this.props.handleFlag(
+                                  images &&
+                                    images[this.state.position] &&
+                                    images[this.state.position].timecardId
+                                )
                               }
                               className={styles.flagButton}
                             >
@@ -849,10 +870,21 @@ class DeepdiveDay extends Component {
                               images[this.state.position] &&
                               images[this.state.position].status !==
                                 "flagged" &&
-                              !this.state.flagMessage ? (
+                              this.state.flagMessage === null ? (
                                 <img src={flag} height="20px" width="20px" />
-                              ) : (
+                              ) : this.state.flagMessage ===
+                                "Successfully Unflagged" ? (
+                                <img src={flag} height="20px" width="20px" />
+                              ) : this.state.flagMessage ===
+                                "Successfully Flagged" ? (
                                 <FontAwesomeIcon icon={faFlag} color="red" />
+                              ) : (
+                                images &&
+                                images[this.state.position] &&
+                                images[this.state.position].status ===
+                                  "flagged" && (
+                                  <FontAwesomeIcon icon={faFlag} color="red" />
+                                )
                               )}
                             </div>
                           </div>
@@ -875,14 +907,11 @@ class DeepdiveDay extends Component {
                             (images &&
                               images[this.state.position] &&
                               images[this.state.position].focus === 0) ? (
-                              <FontAwesomeIcon
-                                icon={faThumbsDown}
-                                color="red"
-                              />
+                              <FontAwesomeIcon icon={faDotCircle} color="red" />
                             ) : (
                               <FontAwesomeIcon
-                                icon={faThumbsUp}
-                                color="green"
+                                icon={faDotCircle}
+                                color="#8bc646"
                               />
                             )}
                           </div>
@@ -956,11 +985,11 @@ class DeepdiveDay extends Component {
                             Share
                           </div>
                         </div>
-                        <div className={styles.toggleContainer}>
+                        {/* <div className={styles.toggleContainer}>
                           {this.props.empname && (
                             <div>Share with {this.props.empname}</div>
                           )}
-                        </div>
+                        </div> */}
                         <div className={styles.imageContainer}>
                           {images.length > 0 &&
                             images.map((val, i) => {

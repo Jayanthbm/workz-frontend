@@ -40,20 +40,22 @@ class Header extends Component {
       {
         text: "My Team",
         image: teamIcon,
-        redirect:
-          Cookie.getCookie("userDate") &&
-          Cookie.getCookie("userDate") !== "Invalid date" &&
-          Cookie.getCookie("userId")
-            ? `/deepdive/${Cookie.getCookie("userId")}/${moment(
-                new Date(
-                  Cookie.getCookie("userDate") &&
-                    Cookie.getCookie("userDate") !== "Invalid date" &&
-                    Cookie.getCookie("userDate")
-                )
-              ).format("YYYY-MM-DD")}`
-            : `/deepdive/${this.props.userId}/${moment(new Date()).format(
-                "YYYY-MM-DD"
-              )}`,
+        redirect: `/deepdive/${this.props.userId}/${moment(new Date()).format(
+          "YYYY-MM-DD"
+        )}`,
+        // Cookie.getCookie("userDate") &&
+        // Cookie.getCookie("userDate") !== "Invalid date" &&
+        // Cookie.getCookie("userId")
+        //   ? `/deepdive/${Cookie.getCookie("userId")}/${moment(
+        //       new Date(
+        //         Cookie.getCookie("userDate") &&
+        //           Cookie.getCookie("userDate") !== "Invalid date" &&
+        //           Cookie.getCookie("userDate")
+        //       )
+        //     ).format("YYYY-MM-DD")}`
+        // : `/deepdive/${this.props.userId}/${moment(new Date()).format(
+        //     "YYYY-MM-DD"
+        //   )}`,
         active:
           this.props.match.path === "/deepdive/:userId/:date" ||
           this.props.match.path === "/details/:userId/:date"
@@ -65,7 +67,7 @@ class Header extends Component {
         image: help,
       },
     ];
-    console.log(new Date());
+
     return (
       <div className={styles.headerBase}>
         <div className={styles.container}>

@@ -283,7 +283,10 @@ export function postFlag(timeId) {
       const result = await post(url, timeId);
       const resultJson = await result.data;
 
-      if (resultJson.message != "Successfully Flagged") {
+      if (
+        resultJson.message !== "Successfully Flagged" &&
+        resultJson.message !== "Successfully Unflagged"
+      ) {
         throw new Error(resultJson.message);
       }
       return dispatch(postFlagSuccess(resultJson));

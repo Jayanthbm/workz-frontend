@@ -63,14 +63,6 @@
 .intenseHeader {
   padding-right: 10px;
 }
-.webImage {
-  position: relative;
-  width: 75%;
-  height: 75%;
-  margin-right: 10px;
-  margin-top: 10px;
-  margin-left: 10px;
-}
 .panel {
   width: 25%;
   height: 50%;
@@ -142,9 +134,14 @@
   border-radius: 15px;
 }
 .imageContainer {
-  white-space: nowrap;
+  /* white-space: nowrap;
   width: 100%;
-  overflow: auto;
+  overflow: auto; */
+  width: 100%;
+  min-height: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px;
 }
 .headerContainer {
   display: flex;
@@ -174,7 +171,6 @@
 }
 .imageCont {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
   padding: 30px;
 }
@@ -258,7 +254,7 @@
 .webImage {
   position: relative;
   width: 75%;
-  height: 75%;
+  height: 530px;
   margin-right: 10px;
   margin-top: 10px;
   margin-left: 10px;
@@ -301,23 +297,24 @@
   overflow: auto;
 }
 .messageHolder {
-  padding: 10px;
+  display: flex;
+  padding-left: 15px;
+  /* padding: 10px;
   border-radius: 15px;
   margin-top: 10px;
-  /* box-shadow: 0 3px 11px 0 rgba(0, 0, 0, 0.1); */
+ 
   box-shadow: 0 3px 11px 0 rgba(0, 0, 0, 0.4);
   width: 85%;
-  margin: 10px auto;
+  margin: 10px auto; */
 }
 .from {
+  white-space: nowrap;
   font-size: 13px;
   font-weight: bold;
-  line-height: 22px;
-  margin-right: 60%;
 }
 .message {
-  width: 100%;
-  word-break: break-word;
+  font-size: 13px;
+  padding-left: 10px;
 }
 
 .button {
@@ -359,15 +356,7 @@
   height: 100%;
   border-radius: 15px;
 }
-.imageContainer {
-  /* white-space: nowrap;
-  width: 100%;
-  overflow: auto; */
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  margin: 10px;
-}
+
 .headerContainer {
   display: flex;
 }

@@ -192,7 +192,8 @@ class Team extends Component {
                                 return (
                                   <div>
                                     <div className={styles.countryUsers}>
-                                      {man[0].onlineStatus === "offline" && (
+                                      {(man[0].onlineStatus === "offline" ||
+                                        man[0].onlineStatus === "inactive") && (
                                         <>
                                           <span className={styles.seatHolder}>
                                             <span
@@ -1134,8 +1135,10 @@ class Team extends Component {
                                             <span
                                               className={styles.countrUsers}
                                             >
-                                              {val.onlineStatus ===
-                                                "offline" && (
+                                              {(val.onlineStatus ===
+                                                "offline" ||
+                                                val.onlineStatus ===
+                                                  "inactive") && (
                                                 <span
                                                   className={styles.seatHolder}
                                                 >
@@ -1484,8 +1487,10 @@ class Team extends Component {
                                             <span
                                               className={styles.countrUsers}
                                             >
-                                              {val.onlineStatus ===
-                                                "offline" && (
+                                              {(val.onlineStatus ===
+                                                "offline" ||
+                                                val.onlineStatus ===
+                                                  "inactive") && (
                                                 <span
                                                   className={styles.seatHolder}
                                                 >
@@ -1834,8 +1839,10 @@ class Team extends Component {
                                             <span
                                               className={styles.countrUsers}
                                             >
-                                              {val.onlineStatus ===
-                                                "offline" && (
+                                              {(val.onlineStatus ===
+                                                "offline" ||
+                                                val.onlineStatus ===
+                                                  "inactive") && (
                                                 <span
                                                   className={styles.seatHolder}
                                                 >
@@ -2181,15 +2188,13 @@ class Team extends Component {
                                 val.managers &&
                                 val.managers.length > 0 && (
                                   <div className={styles.usrContainer}>
-                                    {/* {val.users && val.users.length > 0 && (
-                            <div>Users</div>
-                          )} */}
-
                                     {val.users.map((val, i) => {
                                       return (
                                         <>
                                           <span className={styles.countrUsers}>
-                                            {val.onlineStatus === "offline" && (
+                                            {(val.onlineStatus === "offline" ||
+                                              val.onlineStatus ===
+                                                "inactive") && (
                                               <span
                                                 className={styles.seatHolder}
                                               >
@@ -2522,15 +2527,13 @@ class Team extends Component {
                                 this.props.teamDetails.length == 1 &&
                                 !users1 && (
                                   <div className={styles.usrContainer}>
-                                    {/* {val.users && val.users.length > 0 && (
-                            <div>Users</div>
-                          )} */}
-
                                     {val.users.map((val, i) => {
                                       return (
                                         <>
                                           <span className={styles.countrUsers}>
-                                            {val.onlineStatus === "offline" && (
+                                            {(val.onlineStatus === "offline" ||
+                                              val.onlineStatus ===
+                                                "inactive") && (
                                               <span
                                                 className={styles.seatHolder}
                                               >
@@ -2864,14 +2867,12 @@ class Team extends Component {
                           val.users.length > 0 &&
                           this.props.teamDetails.length > 1 && (
                             <div className={styles.usrContainer}>
-                              {/* {val.users && val.users.length > 0 && (
-                            <div>Users</div>
-                          )} */}
                               {val.users.map((val, i) => {
                                 return (
                                   <>
                                     <span className={styles.countrUsers}>
-                                      {val.onlineStatus === "offline" && (
+                                      {(val.onlineStatus === "inactive" ||
+                                        val.onlineStatus === "offline") && (
                                         <span className={styles.seatHolder}>
                                           <span className={styles.tooltiptext}>
                                             {
@@ -2939,6 +2940,7 @@ class Team extends Component {
                                               </>
                                             }
                                           </span>
+
                                           {i % 2 > 0 && (
                                             <span>
                                               <ProfileStatus

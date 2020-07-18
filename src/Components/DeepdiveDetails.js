@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import styles from "./DeepdiveDetails.module.css";
 import DeepdiveDay from "./DeepdiveDay";
 import moment from "moment";
+import * as Cookie from "../utils/Cookie";
+import { USER_DETAILS, ACCESS_TOKEN } from "../utils/constant";
+const userDetails = Cookie.getCookie(USER_DETAILS);
+let parsedData = userDetails && JSON.parse(userDetails);
 class DeepdiveDetails extends Component {
   constructor(props) {
     super(props);
@@ -60,12 +64,12 @@ class DeepdiveDetails extends Component {
           return timeConvert(totalminutes * 10);
         },
       });
+      if (this.props.match !== nextProps.match) {
+        this.setState({ deepdiveData: [] });
+      }
       if (
-        (nextProps.deepdiveData && this.state.deepdiveData.length === 0) ||
-        (nextProps.deepdiveData &&
-          this.state.deepdiveData &&
-          this.state.deepdiveData[0] &&
-          this.state.deepdiveData[0].length === 0)
+        nextProps.deepdiveData !== this.props.deepdiveData &&
+        this.state.deepdiveData.length === 0
       ) {
         for (let i = 0; i < nextProps.deepdiveData.results.length; i++) {
           const a = Object.entries(
@@ -122,7 +126,7 @@ class DeepdiveDetails extends Component {
     //   }
     //   return timeConvert(totalminutes * 10);
     // }
-    console.log(this.props);
+
     return (
       <div className={styles.deepDiveBase}>
         {!this.props.deepDiveError && this.props.deepdiveData && (
@@ -151,7 +155,9 @@ class DeepdiveDetails extends Component {
             </div>
           </div>
         )}
-        {!this.props.deepDiveError && this.state.deepdiveData
+        {!this.props.deepDiveError &&
+        this.state.deepdiveData.length > 0 &&
+        this.state.deepdiveData
           ? this.state.deepdiveData.map((val, i) => {
               return (
                 val.length > 0 && (
@@ -159,7 +165,8 @@ class DeepdiveDetails extends Component {
                     <div className={styles.dayHolder}>
                       <div className={styles.weekContainer}>
                         <div className={styles.dayText}>
-                          {val && val[1] && val[1][1][0].tday}{" "}
+                          {val && val[1] && val[1][1][0].tday}
+                          {","}
                         </div>
                         <div className={styles.dayText}>
                           {moment(
@@ -168,7 +175,7 @@ class DeepdiveDetails extends Component {
                               val[1][1] &&
                               val[1][1][0] &&
                               val[1][1][0].timecard
-                          ).format("DD,MMMM")}
+                          ).format("DD MMMM YYYY")}
                         </div>
                         <div className={styles.hourText}>
                           {" "}
@@ -271,7 +278,7 @@ class DeepdiveDetails extends Component {
                 )
               );
             })
-          : "No timecards available"}
+          : this.props.deepDiveError}
       </div>
     );
   }

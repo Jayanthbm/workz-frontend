@@ -4,7 +4,6 @@ import moment from "moment";
 class Navigation extends Component {
   selectHandler = (val) => {};
   render() {
-    console.log(this.props);
     return (
       <div className={styles.base}>
         <div className={styles.container}>
