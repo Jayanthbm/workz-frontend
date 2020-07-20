@@ -10,6 +10,8 @@ import moment from "moment";
 import { postFlag } from "../actions/team.action";
 const userDetails = Cookie.getCookie(USER_DETAILS);
 let parsedData = userDetails && JSON.parse(userDetails);
+const dropData = JSON.parse(localStorage.getItem("dropdown"));
+const secondData = JSON.parse(localStorage.getItem("secondaryDrop"));
 
 class deepdive extends Component {
   constructor(props) {
@@ -37,6 +39,7 @@ class deepdive extends Component {
       userId: this.props.match.params.userId,
       date: moment(date).format("YYYY-MM-DD"),
     });
+
     if (this.state.userId != undefined)
       this.props.history.push(
         `/deepdive/${this.state.userId}/${moment(date).format("YYYY-MM-DD")}`
@@ -49,10 +52,25 @@ class deepdive extends Component {
       this.props.getDeepdiveDropdown({
         managerId: data.id,
       });
+
+      localStorage.setItem(
+        "dropdown",
+        JSON.stringify({
+          id: data.id,
+          type: "manager",
+        })
+      );
     } else {
       this.props.getDeepdiveDropdown({
         teamId: data.id,
       });
+      localStorage.setItem(
+        "dropdown",
+        JSON.stringify({
+          id: data.id,
+          type: "team",
+        })
+      );
     }
   };
   showModal = () => {
@@ -73,9 +91,22 @@ class deepdive extends Component {
       date: this.props.match.params.date,
     });
     this.setState({ userId: data.id, empname: data.name });
-    this.props.history.push(
-      `/deepdive/${data.id}/${this.props.match.params.date}`
-    );
+    if (secondData) {
+      this.props.history.push(
+        `/deepdive/${secondData.id}/${this.props.match.params.date}`
+      );
+    } else {
+      this.props.history.push(
+        `/deepdive/${data.id}/${this.props.match.params.date}`
+      );
+    }
+    // localStorage.setItem(
+    //   "secondaryDrop",
+    //   JSON.stringify({
+    //     id: data.id,
+    //     date: this.props.match.params.date,
+    //   })
+    // );
     // if (flag) {
     //   window.location.reload();
     // }
@@ -115,23 +146,47 @@ class deepdive extends Component {
     // this.props.gettMessage(timecardId);
   };
   componentDidMount = () => {
+    console.log(dropData && dropData.id);
     if (parsedData.isManager === 1) {
       this.setState({
-        man_id: parsedData.userId,
+        man_id: dropData ? dropData.id : parsedData.userId,
         userId: parsedData.userId,
         selectedDate: new Date(this.props.match.params.date),
       });
-      this.props.getDeepdiveDropdown({
-        managerId: parsedData.userId,
-      });
-      // if (!Cookie.getCookie("dropdown"))
-      //   Cookie.createCookie(
-      //     "dropdown",
-      //     JSON.stringify({
-      //       id: parsedData.userId,
-      //       type: "manager",
-      //     })
-      //   );
+      if (dropData && dropData.type === "manager") {
+        this.setState({
+          man_id: dropData ? dropData.id : parsedData.userId,
+          userId: parsedData.userId,
+          team_id: null,
+          selectedDate: new Date(this.props.match.params.date),
+        });
+        this.props.getDeepdiveDropdown({
+          managerId: dropData ? dropData.id : parsedData.userId,
+        });
+      }
+      if (dropData && dropData.type === "team") {
+        this.setState({
+          team_id: dropData ? dropData.id : parsedData.userId,
+          userId: parsedData.userId,
+          man_id: null,
+          selectedDate: new Date(this.props.match.params.date),
+        });
+        this.props.getDeepdiveDropdown({
+          teamId: dropData ? dropData.id : parsedData.userId,
+        });
+      }
+      if (!dropData) {
+        this.props.getDeepdiveDropdown({
+          managerId: dropData ? dropData.id : parsedData.userId,
+        });
+        localStorage.setItem(
+          "dropdown",
+          JSON.stringify({
+            id: parsedData.userId,
+            type: "manager",
+          })
+        );
+      }
       // this.props.getDeepdive({
       //   userId:
       //     this.props.deepdiveDropdownData &&
@@ -141,16 +196,21 @@ class deepdive extends Component {
       // });
     } else {
       this.setState({
-        team_id: parsedData.userId,
+        team_id: dropData ? dropData.id : parsedData.userId,
         userId: parsedData.userId,
         selectedDate: new Date(this.props.match.params.date),
       });
       this.props.getDeepdiveDropdown({
         teamId: parsedData.userId,
       });
-      this.props.history.push({
-        state: { dropdownId: parsedData.userId, type: "team" },
-      });
+      if (!dropData)
+        localStorage.setItem(
+          "dropdown",
+          JSON.stringify({
+            id: parsedData.userId,
+            type: "manager",
+          })
+        );
       // this.props.getDeepdive({
       //   userId: parsedData.userId,
       //   date: moment(new Date()).format("YYYY-MM-DD"),
@@ -164,6 +224,7 @@ class deepdive extends Component {
         userId: nextProps.match.params.userId,
         date: nextProps.match.params.date,
       });
+
       this.setState({ render: true });
     }
 
@@ -177,7 +238,6 @@ class deepdive extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <div className={styles.base}>
         <Header

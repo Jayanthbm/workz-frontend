@@ -3,6 +3,7 @@ import styles from "./deepdive.module.css";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
+const secondData = JSON.parse(localStorage.getItem("secondaryDrop"));
 class SecondaryHeader extends Component {
   constructor(props) {
     super(props);
@@ -63,6 +64,14 @@ class SecondaryHeader extends Component {
       this.setState({ endingDate: newEndDate });
 
       this.props.handleChange(newStarDate);
+      this.props.handleChange(new Date());
+      localStorage.setItem(
+        "secondaryDrop",
+        JSON.stringify({
+          id: this.props.match.params.userId,
+          date: newStarDate,
+        })
+      );
     } else {
       let newStarDate = this.toISOLocal(this.startOfWeek(new Date())).split(
         "T"
@@ -74,6 +83,13 @@ class SecondaryHeader extends Component {
       this.setState({ endingDate: newEndDate });
 
       this.props.handleChange(new Date());
+      localStorage.setItem(
+        "secondaryDrop",
+        JSON.stringify({
+          id: this.props.match.params.userId,
+          date: moment(new Date()).format("YYYY-MM-DD"),
+        })
+      );
     }
   };
   // handleCalender = (type) => {
@@ -98,6 +114,13 @@ class SecondaryHeader extends Component {
     this.setState({ startingDate: newStarDate });
     this.setState({ endingDate: newEndDate });
     this.props.handleChange(newStarDate);
+    localStorage.setItem(
+      "secondaryDrop",
+      JSON.stringify({
+        id: this.props.match.params.userId,
+        date: newStarDate,
+      })
+    );
   };
 
   next = () => {
@@ -113,6 +136,13 @@ class SecondaryHeader extends Component {
       this.setState({ startingDate: newStarDate });
       this.setState({ endingDate: newEndDate });
       this.props.handleChange(newStarDate);
+      localStorage.setItem(
+        "secondaryDrop",
+        JSON.stringify({
+          id: this.props.match.params.userId,
+          date: newStarDate,
+        })
+      );
     } else {
       console.log("No Action");
     }
@@ -149,6 +179,17 @@ class SecondaryHeader extends Component {
       ).split("T")[0],
     });
   };
+  selectHandler = (val) => {
+    const data = JSON.parse(val);
+    this.props.handleDeepdive(val, true);
+    localStorage.setItem(
+      "secondaryDrop",
+      JSON.stringify({
+        id: data.id,
+        date: this.props.match.params.date,
+      })
+    );
+  };
   render() {
     return (
       <div className={styles.deepdiveContainer}>
@@ -160,9 +201,7 @@ class SecondaryHeader extends Component {
                 width: " 250px",
                 height: "22px",
               }}
-              onChange={(val) =>
-                this.props.handleDeepdive(val.target.value, true)
-              }
+              onChange={(val) => this.selectHandler(val.target.value, true)}
             >
               {this.props &&
               this.props.deepdiveDropdownData &&
@@ -176,7 +215,10 @@ class SecondaryHeader extends Component {
                           id: val.userId,
                         })}
                         selected={
-                          val.userId == this.props.match.params.userId
+                          val.userId ==
+                          (secondData && secondData.id
+                            ? secondData.id
+                            : this.props.match.params.userId)
                             ? true
                             : false
                         }

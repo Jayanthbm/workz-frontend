@@ -14,7 +14,7 @@ import moment from "moment";
 import { USER_DETAILS, ACCESS_TOKEN } from "../utils/constant";
 const userDetails = Cookie.getCookie(USER_DETAILS);
 let parsedData = userDetails && JSON.parse(userDetails);
-
+const secondData = JSON.parse(localStorage.getItem("secondaryDrop"));
 class Header extends Component {
   logoutHandler = async () => {
     Cookie.deleteCookie(USER_DETAILS);
@@ -30,6 +30,7 @@ class Header extends Component {
   };
   render() {
     const isLoggedin = Cookie.getCookie(USER_DETAILS) ? true : false;
+    const secondData = JSON.parse(localStorage.getItem("secondaryDrop"));
     const links = [
       {
         text: "Virtual Office",
@@ -40,9 +41,13 @@ class Header extends Component {
       {
         text: "My Team",
         image: teamIcon,
-        redirect: `/deepdive/${this.props.userId}/${moment(new Date()).format(
-          "YYYY-MM-DD"
-        )}`,
+        redirect: `/deepdive/${
+          secondData && secondData.id ? secondData.id : this.props.userId
+        }/${
+          secondData && secondData.date
+            ? moment(new Date(secondData.date)).format("YYYY-MM-DD")
+            : moment(new Date()).format("YYYY-MM-DD")
+        }`,
         // Cookie.getCookie("userDate") &&
         // Cookie.getCookie("userDate") !== "Invalid date" &&
         // Cookie.getCookie("userId")
@@ -67,7 +72,6 @@ class Header extends Component {
         image: help,
       },
     ];
-
     return (
       <div className={styles.headerBase}>
         <div className={styles.container}>

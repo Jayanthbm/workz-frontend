@@ -367,6 +367,7 @@ export function getDeepdive(userDetails) {
       let url = `deepdive`;
       const result = await post(url, userDetails);
       const resultJson = await result.data;
+      console.log(resultJson);
       if (resultJson.message) {
         throw new Error(resultJson.message);
       }
