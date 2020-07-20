@@ -3,6 +3,8 @@ import styles from "./deepdive.module.css";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 const secondData = JSON.parse(localStorage.getItem("secondaryDrop"));
 class SecondaryHeader extends Component {
   constructor(props) {
@@ -302,11 +304,11 @@ class SecondaryHeader extends Component {
 
         <div className={styles.dateContainer}>
           <div className={styles.prev} onClick={() => this.prev()}>
-            {"<"}
+            <FontAwesomeIcon icon={faAngleLeft} />
           </div>
           <div className={styles.datePicker}>
-            {moment(new Date(this.state.startingDate)).format("DD MMMM")} -{" "}
-            {moment(new Date(this.state.endingDate)).format("DD MMMM, YYYY")}
+            {moment(new Date(this.state.startingDate)).format("DD MMM")} -{" "}
+            {moment(new Date(this.state.endingDate)).format("DD MMM YYYY")}
           </div>
           {/* <DatePicker
             selected={this.props.selectedDate}
@@ -315,8 +317,7 @@ class SecondaryHeader extends Component {
             placeholder={"asa"}
           /> */}
           <div className={styles.next} onClick={() => this.next()}>
-            {" "}
-            {">"}{" "}
+            <FontAwesomeIcon icon={faAngleRight} />
           </div>
         </div>
       </div>
