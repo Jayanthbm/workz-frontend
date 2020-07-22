@@ -91,15 +91,18 @@ class deepdive extends Component {
       date: this.props.match.params.date,
     });
     this.setState({ userId: data.id, empname: data.name });
-    if (secondData) {
-      this.props.history.push(
-        `/deepdive/${secondData.id}/${this.props.match.params.date}`
-      );
-    } else {
-      this.props.history.push(
-        `/deepdive/${data.id}/${this.props.match.params.date}`
-      );
-    }
+    this.props.history.push(
+      `/deepdive/${data.id}/${this.props.match.params.date}`
+    );
+    // if (secondData) {
+    //   this.props.history.push(
+    //     `/deepdive/${secondData.id}/${this.props.match.params.date}`
+    //   );
+    // } else {
+    //   this.props.history.push(
+    //     `/deepdive/${data.id}/${this.props.match.params.date}`
+    //   );
+    // }
     // localStorage.setItem(
     //   "secondaryDrop",
     //   JSON.stringify({

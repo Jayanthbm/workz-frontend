@@ -66,7 +66,7 @@ class SecondaryHeader extends Component {
       this.setState({ endingDate: newEndDate });
 
       this.props.handleChange(newStarDate);
-      this.props.handleChange(new Date());
+
       localStorage.setItem(
         "secondaryDrop",
         JSON.stringify({
@@ -217,10 +217,7 @@ class SecondaryHeader extends Component {
                           id: val.userId,
                         })}
                         selected={
-                          val.userId ==
-                          (secondData && secondData.id
-                            ? secondData.id
-                            : this.props.match.params.userId)
+                          val.userId == this.props.match.params.userId
                             ? true
                             : false
                         }
