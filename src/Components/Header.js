@@ -29,6 +29,8 @@ class Header extends Component {
     this.props.history.push("/");
   };
   render() {
+    const userDetails = Cookie.getCookie(USER_DETAILS);
+    let parsedData = userDetails && JSON.parse(userDetails);
     const isLoggedin = Cookie.getCookie(USER_DETAILS) ? true : false;
     const secondData = JSON.parse(localStorage.getItem("secondaryDrop"));
     const links = [
@@ -42,7 +44,9 @@ class Header extends Component {
         text: "My Team",
         image: teamIcon,
         redirect: `/deepdive/${
-          secondData && secondData.id ? secondData.id : this.props.userId
+          parsedData && parsedData.isManager == 1 && secondData && secondData.id
+            ? secondData.id
+            : this.props.userId
         }/${
           secondData && secondData.date
             ? moment(new Date(secondData.date)).format("YYYY-MM-DD")
