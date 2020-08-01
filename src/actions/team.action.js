@@ -46,6 +46,51 @@ export const GET_DETAILS_REQUEST = "GET_DETAILS_REQUEST";
 export const GET_DETAILS_SUCCESS = "GET_DETAILS_SUCCESS";
 export const GET_DETAILS_FAILURE = "GET_DETAILS_FAILURE";
 
+export const POST_TIMECARD_REQUEST = "POST_TIMECARD_REQUEST";
+export const POST_TIMECARD_SUCCESS = "POST_TIMECARD_SUCCESS";
+export const POST_TIMECARD_FAILURE = "POST_TIMECARD_FAILURE";
+
+export function postTimecardRequest() {
+  return {
+    type: POST_TIMECARD_REQUEST,
+    status: REQUESTING,
+  };
+}
+
+export function postTimecardSuccess(postTimecardData) {
+  return {
+    type: POST_TIMECARD_SUCCESS,
+    status: SUCCESS,
+    postTimecardData,
+  };
+}
+
+export function postTimecardFailure(error) {
+  return {
+    type: POST_TIMECARD_FAILURE,
+    status: ERROR,
+    error,
+  };
+}
+
+export function postTimecard(details) {
+  return async (dispatch) => {
+    dispatch(postTimecardRequest());
+    try {
+      let url = `timecard`;
+      const result = await post(url, details);
+      const resultJson = await result.data;
+      console.log(resultJson.message);
+      if (resultJson.message !== "Dispute Raised Successfully") {
+        throw new Error(resultJson.message);
+      }
+      return dispatch(postTimecardSuccess(resultJson));
+    } catch (e) {
+      return dispatch(postTimecardFailure(e.message));
+    }
+  };
+}
+
 export function getDetailsRequest() {
   return {
     type: GET_DETAILS_REQUEST,

@@ -22,6 +22,7 @@ import intensity from "../images/intensity.jpg";
 import flag from "../images/flag.png";
 import Modal from "./Modal";
 import moment from "moment";
+const a = [];
 class DeepdiveDay extends Component {
   constructor(props) {
     super(props);
@@ -43,7 +44,10 @@ class DeepdiveDay extends Component {
       flagMessage: null,
       timecardPosition: 0,
       render: false,
+      colorChange: false,
+      approveArray: [],
     };
+    this.Observer = React.createRef();
   }
   handlekeydown = (e, timecard) => {
     if (e.keyCode === 13) {
@@ -125,7 +129,33 @@ class DeepdiveDay extends Component {
       this.props.handleGetMessage(breakup);
     }
   };
-
+  approveHandler = (event, timecardId, i) => {
+    if (
+      this.state.status[0][i] == "flagged" &&
+      event.target.style.background != "blue"
+    ) {
+      a.push(timecardId);
+      event.target.style.background = "blue";
+      event.target.style.color = "white";
+      this.setState({ colorChange: true });
+      console.log(a);
+      this.props.approver(a);
+    } else if (event.target.style.background === "blue") {
+      if (this.state.status[0][i] == "defaultimageurl") {
+        event.target.style.background = "grey";
+      } else if (
+        this.state.status[0][i] == "flagged" ||
+        this.state.status[0][i] == null
+      ) {
+        a.splice(a.indexOf(timecardId, 1));
+        event.target.style.background = "red";
+        event.target.style.color = "black";
+        console.log(a);
+        this.props.approver(a);
+      }
+      this.setState({ colorChange: false });
+    }
+  };
   render() {
     if (this.props.time) {
       let timeframes = ["00:00", "10:00", "20:00", "30:00", "40:00", "50:00"];
@@ -247,6 +277,9 @@ class DeepdiveDay extends Component {
           return (
             <div className={styles.minuteContainer} key={i}>
               <div
+                onClick={(event) =>
+                  this.approveHandler(event, this.state.timecard[0][i], i)
+                }
                 style={{
                   backgroundColor:
                     this.state.status[0][i] == "defaultimageurl"
@@ -652,7 +685,6 @@ class DeepdiveDay extends Component {
                 height="100px"
                 width="150px"
               /> */}
-
               <img
                 onClick={() =>
                   val === "defaultimageurl"
@@ -680,7 +712,6 @@ class DeepdiveDay extends Component {
                 height="100px"
                 width="150px"
               />
-
               {this.state.type &&
                 this.state.type === "web" &&
                 this.state.webcam[0][i] !== "defaultimageurl" && (
@@ -1025,7 +1056,6 @@ class DeepdiveDay extends Component {
                     </div>
                   </Modal>
                 )}
-
               {this.state.intensityScore[0][i] !== "defaultimageurl" && (
                 <div
                   className={styles.completedBar}

@@ -109,6 +109,23 @@
   margin: 10px;
   overflow: auto;
 }
+.approveContainer {
+  position: fixed;
+  top: 350px;
+}
+.disputeComment {
+  margin: 10px;
+  width: 350px;
+  height: 70px;
+  border-radius: 5px;
+  resize: none;
+}
+.disputeButton {
+  margin: 10px;
+}
+.disputeMessage {
+  margin: 75px;
+}
 .messageHolder {
   display: flex;
   padding-left: 15px;

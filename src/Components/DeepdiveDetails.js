@@ -3,9 +3,11 @@ import styles from "./DeepdiveDetails.module.css";
 import DeepdiveDay from "./DeepdiveDay";
 import moment from "moment";
 import * as Cookie from "../utils/Cookie";
+import Modal from "./Modal";
 import { USER_DETAILS, ACCESS_TOKEN } from "../utils/constant";
 const userDetails = Cookie.getCookie(USER_DETAILS);
 let parsedData = userDetails && JSON.parse(userDetails);
+
 class DeepdiveDetails extends Component {
   constructor(props) {
     super(props);
@@ -86,7 +88,24 @@ class DeepdiveDetails extends Component {
       }
     }
   }
-
+  showModal = () => {
+    this.setState({ show: true });
+  };
+  hideModal = () => {
+    this.setState({ show: false });
+  };
+  handleTimecard = () => {
+    this.props.postTimecard({
+      method: "request",
+      timecardIds: this.props.approveData,
+      comments: this.state.requestMessage,
+    });
+    this.setState({ requestMessage: "", show: false, messageShow: true });
+  };
+  messageShowHandler = () => {
+    this.setState({ messageShow: false });
+    window.location.reload();
+  };
   render() {
     console.log(this.props);
     // function timeConvert(n) {
@@ -130,6 +149,43 @@ class DeepdiveDetails extends Component {
 
     return (
       <div className={styles.deepDiveBase}>
+        {this.props.approveData && this.props.approveData.length > 0 && (
+          <div className={styles.approveContainer}>
+            <div>{this.props.approveData.length} Selected</div>
+            <button onClick={() => this.showModal()}>Approve</button>
+          </div>
+        )}
+        <Modal show={this.state.show} handleClose={this.hideModal} width="auto">
+          <div>
+            <textarea
+              placeholder="Enter comments"
+              row="3"
+              className={styles.disputeComment}
+              value={this.state.requestMessage}
+              onChange={(e) => {
+                this.setState({ requestMessage: e.target.value });
+              }}
+            ></textarea>
+            <div className={styles.disputeButton}>
+              <button onClick={() => this.handleTimecard()}>Submit</button>
+            </div>
+          </div>
+        </Modal>
+        <Modal
+          show={this.state.messageShow}
+          handleClose={this.messageShowHandler}
+          width="auto"
+        >
+          <div>
+            <div className={styles.disputeMessage}>
+              {this.props.postTimecardData &&
+                this.props.postTimecardData.message}
+            </div>
+            <div className={styles.disputeButton}>
+              <button onClick={() => this.messageShowHandler()}>Ok</button>
+            </div>
+          </div>
+        </Modal>
         {!this.props.deepDiveError && this.props.deepdiveData && (
           <div className={styles.headerContainer}>
             <div className={styles.hoursHeader}>
@@ -259,6 +315,7 @@ class DeepdiveDetails extends Component {
                               handleMessage={this.props.message}
                               handleGetMessage={this.props.handleGetMessage}
                               handleBreakup={this.props.breakup}
+                              approver={this.props.approver}
                               {...this.props}
                             />
 

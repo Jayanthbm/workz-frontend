@@ -27,6 +27,7 @@ class deepdive extends Component {
       messageTimeCard: null,
       allChecker: false,
       render: false,
+      approve: null,
     };
   }
   handleChange = (date) => {
@@ -220,6 +221,10 @@ class deepdive extends Component {
       // });
     }
   };
+  approver = (data) => {
+    this.setState({ approve: data });
+    console.log(data);
+  };
   componentWillReceiveProps = (nextProps) => {
     if (this.props.match !== nextProps.match) {
       nextProps.getDeepdive({
@@ -241,6 +246,7 @@ class deepdive extends Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <div className={styles.base}>
         <Header
@@ -270,6 +276,9 @@ class deepdive extends Component {
           flag={this.handleFlag}
           message={this.handleMessage}
           breakup={this.handleBreakup}
+          approver={this.approver}
+          approveData={this.state.approve}
+          postTimecard={this.props.postTimecard}
           handleGetMessage={this.handleGetMessage}
           {...this.props}
         />

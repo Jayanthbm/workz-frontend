@@ -10,6 +10,26 @@ const team = (
   action
 ) => {
   switch (action.type) {
+    case teamAction.POST_TIMECARD_REQUEST:
+      return Object.assign({}, state, {
+        status: action.status,
+        error: null,
+        loading: true,
+      });
+
+    case teamAction.POST_TIMECARD_SUCCESS:
+      return Object.assign({}, state, {
+        status: action.status,
+        loading: false,
+        postTimecardData: action.postTimecardData,
+      });
+    case teamAction.POST_TIMECARD_FAILURE:
+      return Object.assign({}, state, {
+        status: action.status,
+        loading: false,
+        error: action.error,
+      });
+
     case teamAction.GET_MESSAGE_REQUEST:
       return Object.assign({}, state, {
         status: action.status,
