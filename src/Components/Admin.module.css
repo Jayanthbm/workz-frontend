@@ -1,0 +1,15 @@
+.base {
+  width: 100%;
+  height: auto;
+  min-height: 100vh;
+  background-color: #bcbcbc;
+  display: inline-block;
+}
+.adminBase {
+  width: auto;
+  background: #fff;
+  padding: 10px 45px;
+  border-radius: 8px;
+  border: 1px solid #ebecec;
+  margin: 10px 40px;
+}

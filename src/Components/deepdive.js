@@ -73,6 +73,7 @@ class deepdive extends Component {
         })
       );
     }
+    window.location.reload();
   };
   showModal = () => {
     this.setState({ show: true });

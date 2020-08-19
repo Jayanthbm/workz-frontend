@@ -222,8 +222,7 @@ class DeepdiveDetails extends Component {
                     <div className={styles.dayHolder}>
                       <div className={styles.weekContainer}>
                         <div className={styles.dayText}>
-                          {val && val[1] && val[1][1][0].tday}
-                          {","}
+                          {val && val[1] && val[1][1][0].tday}{" "}
                         </div>
                         <div className={styles.dayText}>
                           {moment(

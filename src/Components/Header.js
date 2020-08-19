@@ -75,6 +75,10 @@ class Header extends Component {
         text: "Help",
         image: help,
       },
+      {
+        text: "Admin",
+        redirect: "/admin",
+      },
     ];
     return (
       <div className={styles.headerBase}>

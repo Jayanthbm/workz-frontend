@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import styles from "./Navigation.module.css";
 import moment from "moment";
+import * as Cookie from "../utils/Cookie";
+import { USER_DETAILS, ACCESS_TOKEN } from "../utils/constant";
+const userDetails = Cookie.getCookie(USER_DETAILS);
+let parsedData = userDetails && JSON.parse(userDetails);
 class Navigation extends Component {
   selectHandler = (val) => {};
   render() {
@@ -90,7 +94,8 @@ class Navigation extends Component {
             <div className={styles.link}>Metrics</div> */}
             <div
               className={
-                this.props.match.path === "/deepdive/:userId/:date"
+                this.props.match.path === "/deepdive/:userId/:date" &&
+                this.props.match.params.userId != parsedData.userId
                   ? styles.linkActive
                   : styles.link
               }
@@ -103,6 +108,31 @@ class Navigation extends Component {
               }
             >
               Deepdive
+            </div>
+            <div
+              className={
+                this.props.match.path === "/deepdive/:userId/:date" &&
+                this.props.match.params.userId == parsedData.userId
+                  ? styles.linkActive
+                  : styles.link
+              }
+              onClick={() => {
+                localStorage.setItem(
+                  "secondaryDrop",
+                  JSON.stringify({
+                    id: parsedData.userId,
+                    date: moment(new Date()).format("YYYY-MM-DD"),
+                  })
+                );
+                this.props.history.push(
+                  `/deepdive/${parsedData.userId}/${moment(new Date()).format(
+                    "YYYY-MM-DD"
+                  )}`
+                );
+                window.location.reload();
+              }}
+            >
+              Me
             </div>
           </div>
         )}

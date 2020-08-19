@@ -46,7 +46,7 @@ select {
   align-items: center;
   padding: 10px;
   border-right: 2px solid black;
-  margin: 10px 80px;
+  margin: 10px 10px;
   cursor: pointer;
 }
 .linkActive {

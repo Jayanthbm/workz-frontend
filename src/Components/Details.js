@@ -15,6 +15,7 @@ class Details extends Component {
     this.state = {
       team_id: "",
       man_id: "",
+
       selectedDate: new Date(),
       userId: "",
       change: false,
@@ -158,6 +159,7 @@ class Details extends Component {
     }
   };
   render() {
+    console.log(this.props);
     return (
       <div className={styles.base}>
         <Header pic={parsedData && parsedData.profilePic} />

@@ -6,6 +6,7 @@ import Header from "./Container/HeaderContainer";
 import Navigation from "./Components/Navigation";
 import * as Cookie from "./utils/Cookie";
 import { ACCESS_TOKEN, USER_DETAILS } from "./utils/constant";
+import admin from "./Components/Admin";
 import Team from "./Container/teamContainer";
 import Reset from "./Container/resetContainer";
 import Form from "./Container/formContainer";
@@ -26,6 +27,7 @@ class App extends Component {
           {isUserLogedIn && password_updated ? (
             <React.Fragment>
               <Route exact path="/" component={Team} />
+              <Route exact path="/admin" component={admin} />
               <Route
                 exact
                 path="/deepdive/:userId/:date"
