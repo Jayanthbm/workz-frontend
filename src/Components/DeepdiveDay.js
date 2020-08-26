@@ -22,6 +22,10 @@ import intensity from "../images/intensity.jpg";
 import flag from "../images/flag.png";
 import Modal from "./Modal";
 import moment from "moment";
+import * as Cookie from "../utils/Cookie";
+import { USER_DETAILS, ACCESS_TOKEN } from "../utils/constant";
+const userDetails = Cookie.getCookie(USER_DETAILS);
+let parsedData = userDetails && JSON.parse(userDetails);
 const a = [];
 class DeepdiveDay extends Component {
   constructor(props) {
@@ -132,7 +136,8 @@ class DeepdiveDay extends Component {
   approveHandler = (event, timecardId, i) => {
     if (
       this.state.status[0][i] == "flagged" &&
-      event.target.style.background != "blue"
+      event.target.style.background != "blue" &&
+      parsedData.userId == this.props.match.params.userId
     ) {
       a.push(timecardId);
       event.target.style.background = "blue";

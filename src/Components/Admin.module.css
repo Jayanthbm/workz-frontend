@@ -13,3 +13,16 @@
   border: 1px solid #ebecec;
   margin: 10px 40px;
 }
+.disputeComment {
+  margin: 10px;
+  width: 350px;
+  height: 70px;
+  border-radius: 5px;
+  resize: none;
+}
+.disputeButton {
+  margin: 10px;
+}
+.disputeMessage {
+  margin: 75px;
+}

@@ -81,7 +81,10 @@ export function postTimecard(details) {
       const result = await post(url, details);
       const resultJson = await result.data;
       console.log(resultJson.message);
-      if (resultJson.message !== "Dispute Raised Successfully") {
+      if (
+        resultJson.message &&
+        resultJson.message !== "Dispute Raised Successfully"
+      ) {
         throw new Error(resultJson.message);
       }
       return dispatch(postTimecardSuccess(resultJson));
