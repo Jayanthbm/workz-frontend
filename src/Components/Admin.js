@@ -4,6 +4,8 @@ import Header from "../Container/HeaderContainer";
 import { USER_DETAILS, ACCESS_TOKEN } from "../utils/constant";
 import Checkbox from "@material-ui/core/Checkbox";
 import * as Cookie from "../utils/Cookie";
+import { Form, Switch } from "antd";
+import "antd/dist/antd.css";
 import Modal from "./Modal";
 const userDetails = Cookie.getCookie(USER_DETAILS);
 let parsedData = userDetails && JSON.parse(userDetails);
@@ -11,7 +13,12 @@ let parsedData = userDetails && JSON.parse(userDetails);
 class Admin extends Component {
   constructor(props) {
     super(props);
-    this.state = { selected: [], labelsSelected: [], requestMessage: "" };
+    this.state = {
+      selected: [],
+      labelsSelected: [],
+      requestMessage: "",
+      hierarchy: false,
+    };
   }
   componentDidMount = () => {
     this.props.postTimecard();
@@ -63,35 +70,64 @@ class Admin extends Component {
     this.setState({ requestMessage: "", show: false, messageShow: true });
   };
   render() {
-    console.log(this.state.labelsSelected);
+    console.log(this.state.hierarchy);
     return (
       <div className={styles.base}>
         <Header pic={parsedData && parsedData.profilePic} />
         <div className={styles.adminBase}>
+          <div>
+            <Form.Item label="Hierarchy">
+              <Switch
+                checkedChildren="On"
+                unCheckedChildren="Off"
+                checked={this.state.eventDateEnable}
+                onChange={(e) => {
+                  this.setState({
+                    hierarchy: e,
+                  });
+                  if (e == true) {
+                    this.props.postTimecard({ hierarchy: "Full" });
+                  }
+                }}
+              />
+            </Form.Item>
+          </div>
+          <div className={styles.headHolder}>
+            <div className={styles.head}>Checkbox</div>
+            <div className={styles.head}>App Name</div>
+            <div className={styles.head}>Key Counter</div>
+            <div className={styles.head}>Mouse Counter</div>
+            <div className={styles.head}>Window Name</div>
+          </div>
           {this.props &&
             this.props.postTimecardData &&
             this.props.postTimecardData.map((val) => {
               return (
-                <div>
-                  <Checkbox
-                    checked={
-                      this.state.selected &&
-                      this.state.selected.length > 0 &&
-                      this.state.selected.find((categories) => {
-                        return categories.timecardId === val.timecardId;
-                      })
-                        ? true
-                        : false
-                    }
-                    color="primary"
-                    onChange={() => {
-                      this.handleCheckbox(val, this.state.selected);
-                    }}
-                  />
-                  {val.appName}
+                <div className={styles.headHolder}>
+                  <div className={styles.head}>
+                    {" "}
+                    <Checkbox
+                      checked={
+                        this.state.selected &&
+                        this.state.selected.length > 0 &&
+                        this.state.selected.find((categories) => {
+                          return categories.timecardId === val.timecardId;
+                        })
+                          ? true
+                          : false
+                      }
+                      color="primary"
+                      onChange={() => {
+                        this.handleCheckbox(val, this.state.selected);
+                      }}
+                    />
+                  </div>
+                  <div className={styles.head}>{val.appName}</div>
+                  <div className={styles.head}>{val.keyCounter}</div>
                 </div>
               );
             })}
+
           <button onClick={() => this.showModal()}>Submit</button>
         </div>
 
