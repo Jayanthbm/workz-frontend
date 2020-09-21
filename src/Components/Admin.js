@@ -60,13 +60,22 @@ class Admin extends Component {
   hideModal = () => {
     this.setState({ show: false });
   };
-  handleTimecard = () => {
-    this.props.postTimecard({
-      method: "approval",
-      timecardIds: this.state.labelsSelected,
-      comments: this.state.requestMessage,
-      status: "approved",
-    });
+  handleTimecard = (flag) => {
+    if (flag == 0) {
+      this.props.postTimecard({
+        method: "approval",
+        timecardIds: this.state.labelsSelected,
+        comments: this.state.requestMessage,
+        status: "approved",
+      });
+    } else {
+      this.props.postTimecard({
+        method: "approval",
+        timecardIds: this.state.labelsSelected,
+        comments: this.state.requestMessage,
+        status: "approved",
+      });
+    }
     this.setState({ requestMessage: "", show: false, messageShow: true });
   };
   render() {
@@ -75,7 +84,7 @@ class Admin extends Component {
       <div className={styles.base}>
         <Header pic={parsedData && parsedData.profilePic} />
         <div className={styles.adminBase}>
-          <div>
+          <div className={styles.baseHolder}>
             <Form.Item label="Hierarchy">
               <Switch
                 checkedChildren="On"
@@ -94,10 +103,15 @@ class Admin extends Component {
           </div>
           <div className={styles.headHolder}>
             <div className={styles.head}>Checkbox</div>
+            <div className={styles.head}>Employee ID</div>
+            <div className={styles.head}>Employee Name</div>
             <div className={styles.head}>App Name</div>
             <div className={styles.head}>Key Counter</div>
             <div className={styles.head}>Mouse Counter</div>
             <div className={styles.head}>Window Name</div>
+            <div className={styles.head}>Window URL</div>
+            <div className={styles.head}>Timecard</div>
+            <div className={styles.head}>Timecard Link</div>
           </div>
           {this.props &&
             this.props.postTimecardData &&
@@ -122,8 +136,22 @@ class Admin extends Component {
                       }}
                     />
                   </div>
+                  <div className={styles.head}>{val.empId}</div>
+                  <div className={styles.head}>{val.name}</div>
                   <div className={styles.head}>{val.appName}</div>
                   <div className={styles.head}>{val.keyCounter}</div>
+                  <div className={styles.head}>{val.mouseCounter}</div>
+                  <div className={styles.head}>{val.windowName}</div>
+                  <div className={styles.head}>{val.windowUrl}</div>
+                  <div className={styles.head}> {val.timecard}</div>
+                  <div
+                    className={styles.head}
+                    onClick={() =>
+                      window.open(`deepdive/${val.timecardLink}`, "_blank")
+                    }
+                  >
+                    <button>Open</button>
+                  </div>
                 </div>
               );
             })}
@@ -142,8 +170,23 @@ class Admin extends Component {
                 this.setState({ requestMessage: e.target.value });
               }}
             ></textarea>
-            <div className={styles.disputeButton}>
-              <button onClick={() => this.handleTimecard()}>Submit</button>
+            <div className={styles.buttonContainer}>
+              <div className={styles.disputeButton}>
+                <button
+                  onClick={() => this.handleTimecard(0)}
+                  className={styles.button}
+                >
+                  Approve
+                </button>
+              </div>
+              <div className={styles.disputeButton}>
+                <button
+                  onClick={() => this.handleTimecard(1)}
+                  className={styles.button}
+                >
+                  Reject
+                </button>
+              </div>
             </div>
           </div>
         </Modal>

@@ -5,10 +5,13 @@
   background-color: #bcbcbc;
   display: inline-block;
 }
+.baseHolder {
+  padding-left: 20px;
+}
 .adminBase {
   width: auto;
   background: #fff;
-  padding: 10px 45px;
+  padding: 10px 20px;
   border-radius: 8px;
   border: 1px solid #ebecec;
   margin: 10px 40px;
@@ -30,6 +33,21 @@
   display: flex;
 }
 .head {
-  padding: 15px;
-  width: 160px;
+  padding: 10px 10px;
+  width: 150px;
+  height: 75px;
+  /* overflow: hidden; */
+  /* text-overflow: ellipsis; */
+  /* overflow-wrap: normal; */
+  display: flex;
+  word-break: break-word;
+  align-items: center;
+  justify-content: center;
+}
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+}
+.button {
+  width: 100px;
 }
