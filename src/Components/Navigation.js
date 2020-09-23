@@ -3,10 +3,26 @@ import styles from "./Navigation.module.css";
 import moment from "moment";
 import * as Cookie from "../utils/Cookie";
 import { USER_DETAILS, ACCESS_TOKEN } from "../utils/constant";
+import Modal from "./Modal";
+import { DatePicker } from "antd";
 const userDetails = Cookie.getCookie(USER_DETAILS);
 let parsedData = userDetails && JSON.parse(userDetails);
 class Navigation extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: false,
+    };
+  }
   selectHandler = (val) => {};
+  handleModal = () => {
+    this.setState({ show: true });
+  };
+  hideModal = () => {
+    this.setState({
+      show: false,
+    });
+  };
   render() {
     return (
       <div className={styles.base}>
@@ -134,8 +150,28 @@ class Navigation extends Component {
             >
               Me
             </div>
+            {this.props.match.params.userId == parsedData.userId && (
+              <div
+                className={styles.link}
+                onClick={() => {
+                  this.handleModal();
+                }}
+              >
+                Manual timecard
+              </div>
+            )}
           </div>
         )}
+
+        <Modal show={this.state.show} handleClose={this.hideModal} width="80%">
+          <div>
+            <DatePicker
+              onChange={(e) => {
+                console.log(e._d);
+              }}
+            />
+          </div>
+        </Modal>
       </div>
     );
   }

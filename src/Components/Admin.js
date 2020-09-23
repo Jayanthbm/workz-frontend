@@ -83,81 +83,85 @@ class Admin extends Component {
     return (
       <div className={styles.base}>
         <Header pic={parsedData && parsedData.profilePic} />
-        <div className={styles.adminBase}>
-          <div className={styles.baseHolder}>
-            <Form.Item label="Hierarchy">
-              <Switch
-                checkedChildren="On"
-                unCheckedChildren="Off"
-                checked={this.state.eventDateEnable}
-                onChange={(e) => {
-                  this.setState({
-                    hierarchy: e,
-                  });
-                  if (e == true) {
-                    this.props.postTimecard({ hierarchy: "Full" });
-                  }
-                }}
-              />
-            </Form.Item>
-          </div>
-          <div className={styles.headHolder}>
-            <div className={styles.head}>Checkbox</div>
-            <div className={styles.head}>Employee ID</div>
-            <div className={styles.head}>Employee Name</div>
-            <div className={styles.head}>App Name</div>
-            <div className={styles.head}>Key Counter</div>
-            <div className={styles.head}>Mouse Counter</div>
-            <div className={styles.head}>Window Name</div>
-            <div className={styles.head}>Window URL</div>
-            <div className={styles.head}>Timecard</div>
-            <div className={styles.head}>Timecard Link</div>
-          </div>
-          {this.props &&
-            this.props.postTimecardData &&
-            this.props.postTimecardData.map((val) => {
-              return (
-                <div className={styles.headHolder}>
-                  <div className={styles.head}>
-                    {" "}
-                    <Checkbox
-                      checked={
-                        this.state.selected &&
-                        this.state.selected.length > 0 &&
-                        this.state.selected.find((categories) => {
-                          return categories.timecardId === val.timecardId;
-                        })
-                          ? true
-                          : false
-                      }
-                      color="primary"
-                      onChange={() => {
-                        this.handleCheckbox(val, this.state.selected);
-                      }}
-                    />
-                  </div>
-                  <div className={styles.head}>{val.empId}</div>
-                  <div className={styles.head}>{val.name}</div>
-                  <div className={styles.head}>{val.appName}</div>
-                  <div className={styles.head}>{val.keyCounter}</div>
-                  <div className={styles.head}>{val.mouseCounter}</div>
-                  <div className={styles.head}>{val.windowName}</div>
-                  <div className={styles.head}>{val.windowUrl}</div>
-                  <div className={styles.head}> {val.timecard}</div>
-                  <div
-                    className={styles.head}
-                    onClick={() =>
-                      window.open(`deepdive/${val.timecardLink}`, "_blank")
+        {this.props && this.props.postTimecardData ? (
+          <div className={styles.adminBase}>
+            <div className={styles.baseHolder}>
+              <Form.Item label="Hierarchy">
+                <Switch
+                  checkedChildren="On"
+                  unCheckedChildren="Off"
+                  checked={this.state.eventDateEnable}
+                  onChange={(e) => {
+                    this.setState({
+                      hierarchy: e,
+                    });
+                    if (e == true) {
+                      this.props.postTimecard({ hierarchy: "Full" });
                     }
-                  >
-                    <button>Open</button>
+                  }}
+                />
+              </Form.Item>
+            </div>
+            <div className={styles.headHolder}>
+              <div className={styles.head}>Checkbox</div>
+              <div className={styles.head}>Employee ID</div>
+              <div className={styles.head}>Employee Name</div>
+              <div className={styles.head}>App Name</div>
+              <div className={styles.head}>Key Counter</div>
+              <div className={styles.head}>Mouse Counter</div>
+              <div className={styles.head}>Window Name</div>
+              <div className={styles.head}>Window URL</div>
+              <div className={styles.head}>Timecard</div>
+              <div className={styles.head}>Timecard Link</div>
+            </div>
+            {this.props &&
+              this.props.postTimecardData &&
+              this.props.postTimecardData.map((val) => {
+                return (
+                  <div className={styles.headHolder}>
+                    <div className={styles.head}>
+                      {" "}
+                      <Checkbox
+                        checked={
+                          this.state.selected &&
+                          this.state.selected.length > 0 &&
+                          this.state.selected.find((categories) => {
+                            return categories.timecardId === val.timecardId;
+                          })
+                            ? true
+                            : false
+                        }
+                        color="primary"
+                        onChange={() => {
+                          this.handleCheckbox(val, this.state.selected);
+                        }}
+                      />
+                    </div>
+                    <div className={styles.head}>{val.empId}</div>
+                    <div className={styles.head}>{val.name}</div>
+                    <div className={styles.head}>{val.appName}</div>
+                    <div className={styles.head}>{val.keyCounter}</div>
+                    <div className={styles.head}>{val.mouseCounter}</div>
+                    <div className={styles.head}>{val.windowName}</div>
+                    <div className={styles.head}>{val.windowUrl}</div>
+                    <div className={styles.head}> {val.timecard}</div>
+                    <div
+                      className={styles.head}
+                      onClick={() =>
+                        window.open(`deepdive/${val.timecardLink}`, "_blank")
+                      }
+                    >
+                      <button>Open</button>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
 
-          <button onClick={() => this.showModal()}>Submit</button>
-        </div>
+            <button onClick={() => this.showModal()}>Submit</button>
+          </div>
+        ) : (
+          <div className={styles.adminBase}>No Disputes</div>
+        )}
 
         <Modal show={this.state.show} handleClose={this.hideModal} width="auto">
           <div>
