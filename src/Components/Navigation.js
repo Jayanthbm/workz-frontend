@@ -12,6 +12,10 @@ class Navigation extends Component {
     super(props);
     this.state = {
       show: false,
+      startTime: "00:00:00",
+      EndTime: "00:00:00",
+      date: new Date(),
+      requestMessage: "",
     };
   }
   selectHandler = (val) => {};
@@ -21,6 +25,29 @@ class Navigation extends Component {
   hideModal = () => {
     this.setState({
       show: false,
+    });
+  };
+  onDateChange = (date, dateString) => {
+    console.log(dateString);
+    this.setState({ date: dateString });
+  };
+  handleStartTime = (time, timeString) => {
+    this.setState({
+      startTime: timeString,
+    });
+  };
+  handleEndTime = (time, timeString) => {
+    console.log(time, timeString);
+    this.setState({
+      EndTime: timeString,
+    });
+  };
+  manualHandler = () => {
+    this.props.manualTimeCardHandler({
+      date: this.state.date,
+      startTime: this.state.startTime,
+      EndTime: this.state.EndTime,
+      reason: this.state.requestMessage,
     });
   };
   render() {
@@ -169,25 +196,28 @@ class Navigation extends Component {
               <div className={styles.dateLabel}>Date</div>
               <div className={styles.datePicker}>
                 <DatePicker
-                  onChange={(e) => {
-                    console.log(e._d);
-                  }}
+                  allowClear={false}
+                  value={moment(this.state.date, "YYYY-MM-DD")}
+                  format={"YYYY-MM-DD"}
+                  onChange={this.onDateChange}
                 />
               </div>
             </div>
             <div className={styles.dateHolder}>
               <div className={styles.dateLabel}>Start Time</div>
               <div className={styles.datePicker}>
-                <TimePicker />
+                <TimePicker
+                  onChange={this.handleStartTime}
+                  value={moment(this.state.startTime, "HH:mm:ss")}
+                />
               </div>
             </div>
             <div className={styles.dateHolder}>
               <div className={styles.dateLabel}>End Time</div>
               <div className={styles.datePicker}>
                 <TimePicker
-                  onChange={(e) => {
-                    console.log(e);
-                  }}
+                  onChange={this.handleEndTime}
+                  value={moment(this.state.EndTime, "HH:mm:ss")}
                 />
               </div>
             </div>
@@ -204,6 +234,9 @@ class Navigation extends Component {
                   }}
                 />
               </div>
+            </div>
+            <div>
+              <button onClick={this.manualHandler}> Submit</button>
             </div>
           </div>
         </Modal>

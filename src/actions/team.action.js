@@ -50,6 +50,51 @@ export const POST_TIMECARD_REQUEST = "POST_TIMECARD_REQUEST";
 export const POST_TIMECARD_SUCCESS = "POST_TIMECARD_SUCCESS";
 export const POST_TIMECARD_FAILURE = "POST_TIMECARD_FAILURE";
 
+export const POST_MANUAL_TIMECARD_REQUEST = "POST_MANUAL_TIMECARD_REQUEST";
+export const POST_MANUAL_TIMECARD_SUCCESS = "POST_MANUAL_TIMECARD_SUCCESS";
+export const POST_MANUAL_TIMECARD_FAILURE = "POST_MANUAL_TIMECARD_FAILURE";
+
+export function postManualTimecardRequest() {
+  return {
+    type: POST_MANUAL_TIMECARD_REQUEST,
+    status: REQUESTING,
+  };
+}
+
+export function postManualTimecardSuccess(postManualTimecardData) {
+  return {
+    type: POST_MANUAL_TIMECARD_SUCCESS,
+    status: SUCCESS,
+    postManualTimecardData,
+  };
+}
+
+export function postManualTimecardFailure(error) {
+  return {
+    type: POST_MANUAL_TIMECARD_FAILURE,
+    status: ERROR,
+    error,
+  };
+}
+
+export function postManualTimecard(details) {
+  return async (dispatch) => {
+    dispatch(postManualTimecardRequest());
+    try {
+      let url = `manualtimecard`;
+      const result = await post(url, details);
+      const resultJson = await result.data;
+      console.log(resultJson.message);
+      if (resultJson.message) {
+        throw new Error(resultJson.message);
+      }
+      return dispatch(postManualTimecardSuccess(resultJson));
+    } catch (e) {
+      return dispatch(postManualTimecardFailure(e.message));
+    }
+  };
+}
+
 export function postTimecardRequest() {
   return {
     type: POST_TIMECARD_REQUEST,

@@ -245,7 +245,9 @@ class deepdive extends Component {
       });
     }
   };
-
+  manualTimeCardHandler = (details) => {
+    this.props.postManualTimecard(details);
+  };
   render() {
     console.log(this.props);
     return (
@@ -257,6 +259,7 @@ class deepdive extends Component {
         <Navigation
           team={parsedData && parsedData.dropdown}
           selectHandler={this.selectHandler}
+          manualTimeCardHandler={this.manualTimeCardHandler}
           team_id={this.state.team_id}
           man_id={this.state.man_id}
           {...this.props}

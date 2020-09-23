@@ -8,6 +8,7 @@ import {
   postMessage,
   gettMessage,
   postTimecard,
+  postManualTimecard,
 } from "../actions/team.action";
 import deepdive from "../Components/deepdive";
 const mapDispatchToProps = (dispatch) => {
@@ -33,6 +34,9 @@ const mapDispatchToProps = (dispatch) => {
     postTimecard: (details) => {
       dispatch(postTimecard(details));
     },
+    postManualTimecard: (details) => {
+      dispatch(postManualTimecard(details));
+    },
   };
 };
 const mapStateToProps = (state) => {
@@ -46,6 +50,7 @@ const mapStateToProps = (state) => {
       state.team.getMessageData && state.team.getMessageData.message,
     messageData: state.team.messageData,
     postTimecardData: state.team.postTimecardData,
+    postManualTimecardData: state.team.postManualTimecardData,
   };
 };
 const deepdiveContainer = withRouter(
