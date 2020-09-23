@@ -56,3 +56,15 @@ select {
 .link:last-child {
   border-right: none;
 }
+
+.manualContainer {
+  padding: 50px;
+}
+.dateLabel {
+  margin-right: 10px;
+  width: 100px;
+}
+.dateHolder {
+  display: flex;
+  margin: 10px;
+}

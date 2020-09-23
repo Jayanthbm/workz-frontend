@@ -4,7 +4,7 @@ import moment from "moment";
 import * as Cookie from "../utils/Cookie";
 import { USER_DETAILS, ACCESS_TOKEN } from "../utils/constant";
 import Modal from "./Modal";
-import { DatePicker } from "antd";
+import { DatePicker, TimePicker } from "antd";
 const userDetails = Cookie.getCookie(USER_DETAILS);
 let parsedData = userDetails && JSON.parse(userDetails);
 class Navigation extends Component {
@@ -163,13 +163,48 @@ class Navigation extends Component {
           </div>
         )}
 
-        <Modal show={this.state.show} handleClose={this.hideModal} width="80%">
-          <div>
-            <DatePicker
-              onChange={(e) => {
-                console.log(e._d);
-              }}
-            />
+        <Modal show={this.state.show} handleClose={this.hideModal} width="auto">
+          <div className={styles.manualContainer}>
+            <div className={styles.dateHolder}>
+              <div className={styles.dateLabel}>Date</div>
+              <div className={styles.datePicker}>
+                <DatePicker
+                  onChange={(e) => {
+                    console.log(e._d);
+                  }}
+                />
+              </div>
+            </div>
+            <div className={styles.dateHolder}>
+              <div className={styles.dateLabel}>Start Time</div>
+              <div className={styles.datePicker}>
+                <TimePicker />
+              </div>
+            </div>
+            <div className={styles.dateHolder}>
+              <div className={styles.dateLabel}>End Time</div>
+              <div className={styles.datePicker}>
+                <TimePicker
+                  onChange={(e) => {
+                    console.log(e);
+                  }}
+                />
+              </div>
+            </div>
+            <div className={styles.dateHolder}>
+              <div className={styles.dateLabel}>Reason</div>
+              <div className={styles.datePicker}>
+                <textarea
+                  placeholder="Enter comments"
+                  row="3"
+                  className={styles.disputeComment}
+                  value={this.state.requestMessage}
+                  onChange={(e) => {
+                    this.setState({ requestMessage: e.target.value });
+                  }}
+                />
+              </div>
+            </div>
           </div>
         </Modal>
       </div>

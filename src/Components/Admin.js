@@ -73,7 +73,7 @@ class Admin extends Component {
         method: "approval",
         timecardIds: this.state.labelsSelected,
         comments: this.state.requestMessage,
-        status: "approved",
+        status: "rejected",
       });
     }
     this.setState({ requestMessage: "", show: false, messageShow: true });
