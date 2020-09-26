@@ -44,17 +44,23 @@ class Navigation extends Component {
   };
   manualHandler = () => {
     this.props.manualTimeCardHandler({
+      method: "request",
       date: this.state.date,
       startTime: this.state.startTime,
       EndTime: this.state.EndTime,
       reason: this.state.requestMessage,
+    });
+    this.setState({
+      show: false,
     });
   };
   render() {
     return (
       <div className={styles.base}>
         <div className={styles.container}>
-          <div className={styles.textHolder}>Virtual office</div>
+          <div className={styles.textHolder}>
+            {this.props.admin ? "Admin" : "Virtual office"}
+          </div>
           {this.props && this.props.team && (
             <div className={styles.dropdownHolder}>
               <div className={styles.label}>Team</div>
@@ -129,8 +135,10 @@ class Navigation extends Component {
             </div>
           )}
         </div>
-        {(this.props.match.path === "/deepdive/:userId/:date" ||
-          this.props.match.path === "/details/:userId/:date") && (
+        {((this.props.match &&
+          this.props.match.path === "/deepdive/:userId/:date") ||
+          (this.props.match &&
+            this.props.match.path === "/details/:userId/:date")) && (
           <div className={styles.menuContainer}>
             {/* <div className={styles.link}>Team Summary</div>
             <div className={styles.link}>Activity</div>
