@@ -24,9 +24,25 @@ class Admin extends Component {
       showManual: false,
     };
   }
+
   componentDidMount = () => {
     this.props.postTimecard();
     this.props.postManualTimecard();
+  };
+  componentWillReceiveProps = (nextprops) => {
+    if (
+      this.props &&
+      this.props.postManualTimecardData !== nextprops &&
+      nextprops.postManualTimecardData
+    ) {
+      if (
+        nextprops.postManualTimecardData &&
+        nextprops.postManualTimecardData.message ==
+          "Manual Timecard Updated Successfully"
+      ) {
+        this.props.postManualTimecard();
+      }
+    }
   };
   handleCheckbox = (val, state) => {
     let filteredCatg = { ...val };
@@ -97,7 +113,7 @@ class Admin extends Component {
     });
   };
   render() {
-    console.log(this.state.hierarchy);
+    console.log(this.props);
     return (
       <div className={styles.base}>
         <Header pic={parsedData && parsedData.profilePic} />
@@ -201,7 +217,9 @@ class Admin extends Component {
             </>
           ) : (
             this.state.showTimecard && (
-              <div className={styles.adminBase}>No Disputes</div>
+              <div className={styles.adminBase}>
+                {this.props.PostTimecardError}
+              </div>
             )
           )}
 

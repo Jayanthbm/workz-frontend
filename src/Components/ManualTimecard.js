@@ -133,6 +133,7 @@ class ManualTimecard extends Component {
             </div>
             {this.props &&
               this.props.postManualTimecardData &&
+              !this.props.postManualTimecardData.message &&
               this.props.postManualTimecardData.map((val) => {
                 return (
                   <div className={styles.headHolder}>
@@ -165,7 +166,7 @@ class ManualTimecard extends Component {
             <button onClick={() => this.showModal()}>Submit</button>
           </>
         ) : (
-          <div className={styles.adminBase}>No ManualTimecard</div>
+          <div className={styles.adminBase}>{this.props.postManualError}</div>
         )}
       </div>
     );

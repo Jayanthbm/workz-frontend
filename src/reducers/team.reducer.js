@@ -27,7 +27,7 @@ const team = (
       return Object.assign({}, state, {
         status: action.status,
         loading: false,
-        error: action.error,
+        postManualError: action.error,
       });
     case teamAction.POST_TIMECARD_REQUEST:
       return Object.assign({}, state, {
@@ -46,7 +46,7 @@ const team = (
       return Object.assign({}, state, {
         status: action.status,
         loading: false,
-        error: action.error,
+        PostTimecardError: action.error,
       });
 
     case teamAction.GET_MESSAGE_REQUEST:

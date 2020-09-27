@@ -17,6 +17,8 @@ const mapStateToProps = (state) => {
   return {
     postTimecardData: state.team.postTimecardData,
     postManualTimecardData: state.team.postManualTimecardData,
+    postManualError: state.team.postManualError,
+    PostTimecardError: state.team.PostTimecardError,
   };
 };
 const AdminContainer = withRouter(

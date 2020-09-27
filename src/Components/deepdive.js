@@ -227,6 +227,7 @@ class deepdive extends Component {
     console.log(data);
   };
   componentWillReceiveProps = (nextProps) => {
+    console.log(nextProps);
     if (this.props.match !== nextProps.match) {
       nextProps.getDeepdive({
         companyId: parsedData.companyId,

@@ -70,6 +70,7 @@ export function postManualTimecardSuccess(postManualTimecardData) {
 }
 
 export function postManualTimecardFailure(error) {
+  console.log("ssf", error);
   return {
     type: POST_MANUAL_TIMECARD_FAILURE,
     status: ERROR,
@@ -85,7 +86,12 @@ export function postManualTimecard(details) {
       const result = await post(url, details);
       const resultJson = await result.data;
       console.log(resultJson.message);
-      if (resultJson.message) {
+      if (
+        resultJson.message &&
+        resultJson.message != "Manual Timecard Requested Successfully" &&
+        resultJson.message &&
+        resultJson.message != "Manual Timecard Updated Successfully"
+      ) {
         throw new Error(resultJson.message);
       }
       return dispatch(postManualTimecardSuccess(resultJson));
@@ -111,6 +117,7 @@ export function postTimecardSuccess(postTimecardData) {
 }
 
 export function postTimecardFailure(error) {
+  console.log("ssf", error);
   return {
     type: POST_TIMECARD_FAILURE,
     status: ERROR,
