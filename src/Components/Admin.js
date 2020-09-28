@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styles from "./Admin.module.css";
 import Header from "../Container/HeaderContainer";
 import { USER_DETAILS, ACCESS_TOKEN } from "../utils/constant";
-import Checkbox from "@material-ui/core/Checkbox";
+import { Checkbox } from "@material-ui/core";
 import * as Cookie from "../utils/Cookie";
 import { Form, Switch } from "antd";
 import "antd/dist/antd.css";
