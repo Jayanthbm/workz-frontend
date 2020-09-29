@@ -204,7 +204,7 @@
 
 .usrContainer {
   padding: 30px;
-  width: 250px;
+  /* width: 250px; */
   margin: auto;
   border-right: 2px solid #ebebeb;
   margin-top: 0;

@@ -78,6 +78,7 @@ class Header extends Component {
       {
         text: "Admin",
         redirect: "/admin",
+        isManager: true,
       },
     ];
     return (
@@ -95,7 +96,9 @@ class Header extends Component {
             <div className={styles.linkHolder}>
               {links &&
                 links.map((val) => {
-                  return (
+                  return parsedData &&
+                    parsedData.isManager == 1 &&
+                    val.isManager ? (
                     <div
                       className={val.active ? styles.linksActive : styles.links}
                       onClick={() => this.props.history.push(val.redirect)}
@@ -107,6 +110,22 @@ class Header extends Component {
                         {val.text}
                       </div>
                     </div>
+                  ) : (
+                    !val.isManager && (
+                      <div
+                        className={
+                          val.active ? styles.linksActive : styles.links
+                        }
+                        onClick={() => this.props.history.push(val.redirect)}
+                      >
+                        <div className={styles.icon}>
+                          <img src={val.image} height="25px" width="35px" />
+                        </div>
+                        <div className={val.active && styles.linkText}>
+                          {val.text}
+                        </div>
+                      </div>
+                    )
                   );
                 })}
               <div className={styles.links} onClick={this.logoutHandler}>
