@@ -43,6 +43,18 @@ class Admin extends Component {
         this.props.postManualTimecard();
       }
     }
+    if (
+      this.props &&
+      this.props.postTimecardData !== nextprops &&
+      nextprops.postTimecardData
+    ) {
+      if (
+        nextprops.postTimecardData &&
+        nextprops.postTimecardData.message == "Dispute Updated Successfully"
+      ) {
+        this.props.postTimecard();
+      }
+    }
   };
   handleCheckbox = (val, state) => {
     let filteredCatg = { ...val };
@@ -126,7 +138,12 @@ class Admin extends Component {
               }
               onClick={() => this.showTimecard()}
             >
-              Timecard
+              Timecard{" "}
+              {this.props &&
+              this.props.postTimecardData &&
+              this.props.postTimecardData.length > 0
+                ? `(${this.props.postTimecardData.length})`
+                : ""}
             </div>
             <div
               className={
@@ -134,7 +151,12 @@ class Admin extends Component {
               }
               onClick={() => this.showManual()}
             >
-              Manual
+              Manual{" "}
+              {this.props &&
+              this.props.postManualTimecardData &&
+              this.props.postManualTimecardData.length > 0
+                ? `(${this.props.postManualTimecardData.length})`
+                : ""}
             </div>
           </div>
           {this.props &&

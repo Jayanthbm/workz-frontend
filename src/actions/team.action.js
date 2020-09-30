@@ -135,7 +135,9 @@ export function postTimecard(details) {
       console.log(resultJson.message);
       if (
         resultJson.message &&
-        resultJson.message !== "Dispute Raised Successfully"
+        resultJson.message !== "Dispute Raised Successfully" &&
+        resultJson.message &&
+        resultJson.message !== "Dispute Updated Successfully"
       ) {
         throw new Error(resultJson.message);
       }
