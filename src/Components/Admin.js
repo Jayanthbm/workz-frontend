@@ -161,6 +161,7 @@ class Admin extends Component {
           </div>
           {this.props &&
           this.props.postTimecardData &&
+          !this.props.postTimecardData.message &&
           this.state.showTimecard ? (
             <>
               <div className={styles.baseHolder}>
