@@ -56,7 +56,9 @@ select {
 .link:last-child {
   border-right: none;
 }
-
+.timePicker {
+  width: 30px;
+}
 .manualContainer {
   padding: 50px;
 }

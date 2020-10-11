@@ -191,7 +191,7 @@ class Admin extends Component {
                 <div className={styles.head}>Window Name</div>
                 <div className={styles.head}>Window URL</div>
                 <div className={styles.head}>Timecard</div>
-                <div className={styles.head}>Timecard Link</div>
+                {/* <div className={styles.head}>Timecard Link</div> */}
               </div>
               {this.props &&
                 this.props.postTimecardData &&
@@ -216,22 +216,33 @@ class Admin extends Component {
                           }}
                         />
                       </div>
-                      <div className={styles.head}>{val.empId}</div>
-                      <div className={styles.head}>{val.name}</div>
-                      <div className={styles.head}>{val.appName}</div>
-                      <div className={styles.head}>{val.keyCounter}</div>
-                      <div className={styles.head}>{val.mouseCounter}</div>
-                      <div className={styles.head}>{val.windowName}</div>
-                      <div className={styles.head}>{val.windowUrl}</div>
-                      <div className={styles.head}> {val.timecard}</div>
                       <div
-                        className={styles.head}
+                        style={{ display: "flex" }}
                         onClick={() =>
                           window.open(`deepdive/${val.timecardLink}`, "_blank")
                         }
                       >
-                        <button>Open</button>
+                        <div className={styles.head}>{val.empId}</div>
+                        <div className={styles.head}>{val.name}</div>
+                        <div className={styles.head}>{val.appName}</div>
+                        <div className={styles.head}>{val.keyCounter}</div>
+                        <div className={styles.head}>{val.mouseCounter}</div>
+                        <div className={styles.head}>{val.windowName}</div>
+                        <div
+                          className={styles.head}
+                          style={{ display: "block", marginTop: "5px" }}
+                          title={val.windowUrl}
+                        >
+                          {val.windowUrl}
+                        </div>
+                        <div className={styles.head}> {val.timecard}</div>
                       </div>
+                      {/* <div
+                        className={styles.head}
+                       
+                      >
+                        <button>Open</button>
+                      </div> */}
                     </div>
                   );
                 })}

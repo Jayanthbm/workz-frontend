@@ -4,7 +4,9 @@ import moment from "moment";
 import * as Cookie from "../utils/Cookie";
 import { USER_DETAILS, ACCESS_TOKEN } from "../utils/constant";
 import Modal from "./Modal";
-import { DatePicker, TimePicker } from "antd";
+import { DatePicker } from "antd";
+import "rc-time-picker/assets/index.css";
+import TimePicker from "rc-time-picker";
 const userDetails = Cookie.getCookie(USER_DETAILS);
 let parsedData = userDetails && JSON.parse(userDetails);
 class Navigation extends Component {
@@ -12,10 +14,11 @@ class Navigation extends Component {
     super(props);
     this.state = {
       show: false,
-      startTime: "00:00:00",
-      EndTime: "00:00:00",
+      startTime: "",
+      EndTime: "",
       date: new Date(),
       requestMessage: "",
+      manualError: false,
     };
   }
   selectHandler = (val) => {};
@@ -25,36 +28,57 @@ class Navigation extends Component {
   hideModal = () => {
     this.setState({
       show: false,
+      startTime: "",
+      EndTime: "",
+      date: new Date(),
+      requestMessage: "",
+      manualError: false,
     });
   };
   onDateChange = (date, dateString) => {
     console.log(dateString);
     this.setState({ date: dateString });
   };
-  handleStartTime = (time, timeString) => {
+  handleStartTime = (time) => {
     this.setState({
-      startTime: timeString,
+      startTime: time,
+      manualError: false,
     });
   };
-  handleEndTime = (time, timeString) => {
-    console.log(time, timeString);
+  handleEndTime = (time) => {
+    console.log(time);
     this.setState({
-      EndTime: timeString,
+      EndTime: time,
+      manualError: false,
     });
   };
   manualHandler = () => {
-    this.props.manualTimeCardHandler({
-      method: "request",
-      date: this.state.date,
-      startTime: this.state.startTime,
-      EndTime: this.state.EndTime,
-      reason: this.state.requestMessage,
-    });
-    this.setState({
-      show: false,
-    });
+    if (
+      this.state.startTime < this.state.EndTime &&
+      moment(new Date().getTime()) > this.state.EndTime
+    ) {
+      this.props.manualTimeCardHandler({
+        method: "request",
+        date: this.state.date,
+        startTime: this.state.startTime,
+        EndTime: this.state.EndTime,
+        reason: this.state.requestMessage,
+      });
+      this.setState({
+        show: false,
+        startTime: "",
+        EndTime: "",
+        requestMessage: "",
+      });
+    } else {
+      this.setState({
+        manualError: true,
+      });
+    }
   };
   render() {
+    console.log(moment(new Date().getTime()) > this.state.EndTime);
+    console.log(this.state.startTime < this.state.EndTime);
     return (
       <div className={styles.base}>
         <div className={styles.container}>
@@ -200,6 +224,9 @@ class Navigation extends Component {
 
         <Modal show={this.state.show} handleClose={this.hideModal} width="auto">
           <div className={styles.manualContainer}>
+            {this.state.manualError && (
+              <div style={{ color: "red" }}>Check the time and try again</div>
+            )}
             <div className={styles.dateHolder}>
               <div className={styles.dateLabel}>Date</div>
               <div className={styles.datePicker}>
@@ -216,7 +243,10 @@ class Navigation extends Component {
               <div className={styles.datePicker}>
                 <TimePicker
                   onChange={this.handleStartTime}
-                  value={moment(this.state.startTime, "HH:mm:ss")}
+                  value={this.state.startTime}
+                  showSecond={false}
+                  minuteStep={10}
+                  use12Hours={true}
                 />
               </div>
             </div>
@@ -225,7 +255,10 @@ class Navigation extends Component {
               <div className={styles.datePicker}>
                 <TimePicker
                   onChange={this.handleEndTime}
-                  value={moment(this.state.EndTime, "HH:mm:ss")}
+                  value={this.state.EndTime}
+                  showSecond={false}
+                  minuteStep={10}
+                  use12Hours={true}
                 />
               </div>
             </div>
