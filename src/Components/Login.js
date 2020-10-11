@@ -8,6 +8,7 @@ const data = [
     password: "12345",
   },
 ];
+const companyname = localStorage.getItem("companyname");
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -20,11 +21,12 @@ class Login extends Component {
   }
   handleChange = (val) => {
     this.setState({ companyname: val.target.value });
+    localStorage.setItem("companyname", val.target.value);
   };
   handleClick = () => {
     this.props.history.push({ state: { forgotMessage: "" } });
     const reqBody = {
-      companyname: this.state.companyname,
+      companyname: companyname ? companyname : this.state.companyname,
       username: this.state.uname,
       password: this.state.password,
     };
@@ -72,7 +74,7 @@ class Login extends Component {
               type="text"
               className={styles.loginInput}
               placeholder="Company Name"
-              value={this.state.companyname}
+              value={companyname ? companyname : this.state.companyname}
               onChange={(event) => this.handleChange(event)}
             ></input>
 
