@@ -4,7 +4,7 @@ import moment from "moment";
 import * as Cookie from "../utils/Cookie";
 import { USER_DETAILS, ACCESS_TOKEN } from "../utils/constant";
 import Modal from "./Modal";
-import { DatePicker } from "antd";
+import DatePicker from "react-datepicker";
 import "rc-time-picker/assets/index.css";
 import TimePicker from "rc-time-picker";
 const userDetails = Cookie.getCookie(USER_DETAILS);
@@ -35,9 +35,9 @@ class Navigation extends Component {
       manualError: false,
     });
   };
-  onDateChange = (date, dateString) => {
-    console.log(dateString);
-    this.setState({ date: dateString });
+  onDateChange = (date) => {
+    console.log(date);
+    this.setState({ date: date });
   };
   handleStartTime = (time) => {
     this.setState({
@@ -59,9 +59,9 @@ class Navigation extends Component {
     ) {
       this.props.manualTimeCardHandler({
         method: "request",
-        date: this.state.date,
-        startTime: this.state.startTime,
-        EndTime: this.state.EndTime,
+        date: moment(this.state.date).format("YYYY-MM-DD"),
+        startTime: moment(this.state.startTime).format("hh:mm a"),
+        EndTime: moment(this.state.EndTime).format("hh:mm a"),
         reason: this.state.requestMessage,
       });
       this.setState({
@@ -77,7 +77,6 @@ class Navigation extends Component {
     }
   };
   render() {
-    console.log(moment(new Date().getTime()) > this.state.EndTime);
     console.log(this.state.startTime < this.state.EndTime);
     return (
       <div className={styles.base}>
@@ -231,10 +230,11 @@ class Navigation extends Component {
               <div className={styles.dateLabel}>Date</div>
               <div className={styles.datePicker}>
                 <DatePicker
-                  allowClear={false}
-                  value={moment(this.state.date, "YYYY-MM-DD")}
-                  format={"YYYY-MM-DD"}
-                  onChange={this.onDateChange}
+                  selected={this.state.date}
+                  dateFormat={"yyyy-MM-dd"}
+                  onChange={(date) => this.onDateChange(date)}
+                  maxDate={new Date()}
+                  className={styles.dateFormat}
                 />
               </div>
             </div>
