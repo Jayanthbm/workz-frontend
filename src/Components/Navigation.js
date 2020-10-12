@@ -60,8 +60,8 @@ class Navigation extends Component {
       this.props.manualTimeCardHandler({
         method: "request",
         date: moment(this.state.date).format("YYYY-MM-DD"),
-        startTime: moment(this.state.startTime).format("hh:mm a"),
-        EndTime: moment(this.state.EndTime).format("hh:mm a"),
+        startTime: moment(this.state.startTime).format("HH:mm"),
+        EndTime: moment(this.state.EndTime).format("HH:mm"),
         reason: this.state.requestMessage,
       });
       this.setState({
@@ -246,7 +246,7 @@ class Navigation extends Component {
                   value={this.state.startTime}
                   showSecond={false}
                   minuteStep={10}
-                  use12Hours={true}
+                  // use12Hours={true}
                 />
               </div>
             </div>
@@ -258,7 +258,7 @@ class Navigation extends Component {
                   value={this.state.EndTime}
                   showSecond={false}
                   minuteStep={10}
-                  use12Hours={true}
+                  // use12Hours={true}
                 />
               </div>
             </div>
