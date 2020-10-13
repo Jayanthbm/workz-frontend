@@ -10,6 +10,26 @@ const team = (
   action
 ) => {
   switch (action.type) {
+    case teamAction.POST_NEWCOMPANY_REQUEST:
+      return Object.assign({}, state, {
+        status: action.status,
+        error: null,
+        loading: true,
+      });
+
+    case teamAction.POST_NEWCOMPANY_SUCCESS:
+      return Object.assign({}, state, {
+        status: action.status,
+        loading: false,
+        postNewCompanyData: action.postNewCompanyData,
+      });
+    case teamAction.POST_NEWCOMPANY_FAILURE:
+      return Object.assign({}, state, {
+        status: action.status,
+        loading: false,
+        postManualError: action.error,
+      });
+
     case teamAction.POST_MANUAL_TIMECARD_REQUEST:
       return Object.assign({}, state, {
         status: action.status,

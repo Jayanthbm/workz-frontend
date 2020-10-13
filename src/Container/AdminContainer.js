@@ -1,7 +1,11 @@
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Admin from "../Components/Admin";
-import { postTimecard, postManualTimecard } from "../actions/team.action";
+import {
+  postTimecard,
+  postManualTimecard,
+  postNewCompany,
+} from "../actions/team.action";
 const mapDispatchToProps = (dispatch) => {
   return {
     postTimecard: (details) => {
@@ -9,6 +13,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     postManualTimecard: (details) => {
       dispatch(postManualTimecard(details));
+    },
+    postNewCompany: (details) => {
+      dispatch(postNewCompany(details));
     },
   };
 };
@@ -19,6 +26,7 @@ const mapStateToProps = (state) => {
     postManualTimecardData: state.team.postManualTimecardData,
     postManualError: state.team.postManualError,
     PostTimecardError: state.team.PostTimecardError,
+    postNewCompanyData: state.team.postNewCompanyData,
   };
 };
 const AdminContainer = withRouter(

@@ -54,6 +54,51 @@ export const POST_MANUAL_TIMECARD_REQUEST = "POST_MANUAL_TIMECARD_REQUEST";
 export const POST_MANUAL_TIMECARD_SUCCESS = "POST_MANUAL_TIMECARD_SUCCESS";
 export const POST_MANUAL_TIMECARD_FAILURE = "POST_MANUAL_TIMECARD_FAILURE";
 
+export const POST_NEWCOMPANY_REQUEST = "POST_NEWCOMPANY_REQUEST";
+export const POST_NEWCOMPANY_SUCCESS = "POST_NEWCOMPANY_SUCCESS";
+export const POST_NEWCOMPANY_FAILURE = "POST_NEWCOMPANY_FAILURE";
+
+export function postNewCompanyRequest() {
+  return {
+    type: POST_NEWCOMPANY_REQUEST,
+    status: REQUESTING,
+  };
+}
+
+export function postNewCompanySuccess(postNewCompanyData) {
+  return {
+    type: POST_NEWCOMPANY_SUCCESS,
+    status: SUCCESS,
+    postNewCompanyData,
+  };
+}
+
+export function postNewCompanyFailure(error) {
+  return {
+    type: POST_NEWCOMPANY_FAILURE,
+    status: ERROR,
+    error,
+  };
+}
+
+export function postNewCompany(details) {
+  return async (dispatch) => {
+    dispatch(postNewCompanyRequest());
+    try {
+      let url = `newcompany`;
+      const result = await post(url, details);
+      const resultJson = await result.data;
+      console.log(resultJson.message);
+      if (resultJson.message) {
+        throw new Error(resultJson.message);
+      }
+      return dispatch(postNewCompanySuccess(resultJson));
+    } catch (e) {
+      return dispatch(postNewCompanySuccess(e.message));
+    }
+  };
+}
+
 export function postManualTimecardRequest() {
   return {
     type: POST_MANUAL_TIMECARD_REQUEST,
@@ -70,7 +115,6 @@ export function postManualTimecardSuccess(postManualTimecardData) {
 }
 
 export function postManualTimecardFailure(error) {
-  console.log("ssf", error);
   return {
     type: POST_MANUAL_TIMECARD_FAILURE,
     status: ERROR,
