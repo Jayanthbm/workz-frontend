@@ -192,7 +192,7 @@ class Admin extends Component {
                 </Form.Item>
               </div>
               <div className={styles.headHolder}>
-                <div className={styles.head}>Checkbox</div>
+                <div className={styles.head}></div>
                 <div className={styles.head}>Employee ID</div>
                 <div className={styles.head}>Employee Name</div>
                 <div className={styles.head}>App Name</div>
@@ -201,7 +201,7 @@ class Admin extends Component {
                 <div className={styles.head}>Window Name</div>
                 <div className={styles.head}>Window URL</div>
                 <div className={styles.head}>Timecard</div>
-                {/* <div className={styles.head}>Timecard Link</div> */}
+                <div className={styles.head}>Reason</div>
               </div>
               {this.props &&
                 this.props.postTimecardData &&
@@ -247,12 +247,7 @@ class Admin extends Component {
                         </div>
                         <div className={styles.head}> {val.timecard}</div>
                       </div>
-                      {/* <div
-                        className={styles.head}
-                       
-                      >
-                        <button>Open</button>
-                      </div> */}
+                      <div className={styles.head}>{val.disputeReason}</div>
                     </div>
                   );
                 })}

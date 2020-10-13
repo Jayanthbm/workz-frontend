@@ -77,7 +77,9 @@ class Navigation extends Component {
       });
     } else if (
       moment(new Date()).format("YYYY-MM-DD") >
-      moment(new Date(this.state.date)).format("YYYY-MM-DD")
+        moment(new Date(this.state.date)).format("YYYY-MM-DD") &&
+      moment(new Date(this.state.startTime)).format("HH:mm") <
+        moment(new Date(this.state.EndTime)).format("HH:mm")
     ) {
       this.props.manualTimeCardHandler({
         method: "request",
