@@ -22,6 +22,7 @@ class Admin extends Component {
       hierarchy: false,
       showTimecard: true,
       showManual: false,
+      type: null,
     };
   }
 
@@ -88,8 +89,12 @@ class Admin extends Component {
     });
   };
 
-  showModal = () => {
-    this.setState({ show: true });
+  showModal = (val) => {
+    if (val === 0) {
+      this.setState({ show: true, type: val });
+    } else if (val === 1) {
+      this.setState({ show: true, type: val });
+    }
   };
   hideModal = () => {
     this.setState({ show: false });
@@ -110,7 +115,12 @@ class Admin extends Component {
         status: "rejected",
       });
     }
-    this.setState({ requestMessage: "", show: false, messageShow: true });
+    this.setState({
+      requestMessage: "",
+      labelsSelected: [],
+      show: false,
+      messageShow: true,
+    });
   };
   showManual = () => {
     this.setState({
@@ -247,7 +257,24 @@ class Admin extends Component {
                   );
                 })}
 
-              <button onClick={() => this.showModal()}>Submit</button>
+              <div className={styles.buttonContainer}>
+                <div className={styles.disputeButton}>
+                  <button
+                    onClick={() => this.showModal(0)}
+                    className={styles.button}
+                  >
+                    Approve
+                  </button>
+                </div>
+                <div className={styles.disputeButton}>
+                  <button
+                    onClick={() => this.showModal(1)}
+                    className={styles.button}
+                  >
+                    Reject
+                  </button>
+                </div>
+              </div>
             </>
           ) : (
             this.state.showTimecard && (
@@ -274,24 +301,9 @@ class Admin extends Component {
                   this.setState({ requestMessage: e.target.value });
                 }}
               ></textarea>
-              <div className={styles.buttonContainer}>
-                <div className={styles.disputeButton}>
-                  <button
-                    onClick={() => this.handleTimecard(0)}
-                    className={styles.button}
-                  >
-                    Approve
-                  </button>
-                </div>
-                <div className={styles.disputeButton}>
-                  <button
-                    onClick={() => this.handleTimecard(1)}
-                    className={styles.button}
-                  >
-                    Reject
-                  </button>
-                </div>
-              </div>
+              <button onClick={() => this.handleTimecard(this.state.type)}>
+                Submit
+              </button>
             </div>
           </Modal>
         </div>

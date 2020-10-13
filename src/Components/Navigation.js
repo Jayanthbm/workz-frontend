@@ -54,8 +54,12 @@ class Navigation extends Component {
   };
   manualHandler = () => {
     if (
-      this.state.startTime < this.state.EndTime &&
-      moment(new Date().getTime()) > this.state.EndTime
+      moment(new Date()).format("YYYY-MM-DD") ==
+        moment(new Date(this.state.date)).format("YYYY-MM-DD") &&
+      moment(new Date()).format("HH:mm") >
+        moment(new Date(this.state.EndTime)).format("HH:mm") &&
+      moment(new Date(this.state.startTime)).format("HH:mm") <
+        moment(new Date(this.state.EndTime)).format("HH:mm")
     ) {
       this.props.manualTimeCardHandler({
         method: "request",
@@ -69,6 +73,25 @@ class Navigation extends Component {
         startTime: "",
         EndTime: "",
         requestMessage: "",
+        manualError: false,
+      });
+    } else if (
+      moment(new Date()).format("YYYY-MM-DD") >
+      moment(new Date(this.state.date)).format("YYYY-MM-DD")
+    ) {
+      this.props.manualTimeCardHandler({
+        method: "request",
+        date: moment(this.state.date).format("YYYY-MM-DD"),
+        startTime: moment(this.state.startTime).format("HH:mm"),
+        EndTime: moment(this.state.EndTime).format("HH:mm"),
+        reason: this.state.requestMessage,
+      });
+      this.setState({
+        show: false,
+        startTime: "",
+        EndTime: "",
+        requestMessage: "",
+        manualError: false,
       });
     } else {
       this.setState({
@@ -77,7 +100,6 @@ class Navigation extends Component {
     }
   };
   render() {
-    console.log(this.state.startTime < this.state.EndTime);
     return (
       <div className={styles.base}>
         <div className={styles.container}>
