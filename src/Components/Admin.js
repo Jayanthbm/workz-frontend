@@ -126,12 +126,21 @@ class Admin extends Component {
     this.setState({
       showTimecard: false,
       showManual: true,
+      showCompany: false,
+    });
+  };
+  showCompany = () => {
+    this.setState({
+      showTimecard: false,
+      showManual: false,
+      showCompany: true,
     });
   };
   showTimecard = () => {
     this.setState({
       showTimecard: true,
       showManual: false,
+      showCompany: false,
     });
   };
   render() {
@@ -167,6 +176,14 @@ class Admin extends Component {
               this.props.postManualTimecardData.length > 0
                 ? `(${this.props.postManualTimecardData.length})`
                 : ""}
+            </div>
+            <div
+              className={
+                this.state.showCompany ? styles.seletedText : styles.text
+              }
+              onClick={() => this.showCompany()}
+            >
+              Company{" "}
             </div>
           </div>
           {this.props &&
