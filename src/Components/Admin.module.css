@@ -75,6 +75,10 @@
   align-items: center;
   justify-content: center;
 }
+.manualHead {
+  composes: head;
+  width: 250px;
+}
 .buttonContainer {
   display: flex;
   justify-content: center;

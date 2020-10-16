@@ -14,10 +14,11 @@ class ManualTimecard extends Component {
       showTimecard: true,
       showManual: false,
       show: false,
+      type: null,
     };
   }
-  showModal = () => {
-    this.setState({ show: true });
+  showModal = (val) => {
+    this.setState({ show: true, type: val });
   };
   hideModal = () => {
     this.setState({ show: false });
@@ -89,24 +90,18 @@ class ManualTimecard extends Component {
             <div className={styles.buttonContainer}>
               <div className={styles.disputeButton}>
                 <button
-                  onClick={() => this.handleManualtimecard(0)}
+                  onClick={() => this.handleManualtimecard(this.state.type)}
                   className={styles.button}
                 >
-                  Approve
-                </button>
-              </div>
-              <div className={styles.disputeButton}>
-                <button
-                  onClick={() => this.handleManualtimecard(1)}
-                  className={styles.button}
-                >
-                  Reject
+                  Submit
                 </button>
               </div>
             </div>
           </div>
         </Modal>
-        {this.props && this.props.postManualTimecardData ? (
+        {this.props &&
+        this.props.postManualTimecardData &&
+        this.props.postManualTimecardData.length > 0 ? (
           <>
             <div className={styles.baseHolder}>
               <Form.Item label="Hierarchy">
@@ -125,11 +120,11 @@ class ManualTimecard extends Component {
               </Form.Item>
             </div>
             <div className={styles.headHolder}>
-              <div className={styles.head}>Checkbox</div>
-              <div className={styles.head}>Manual Timecard ID</div>
-              <div className={styles.head}>Start Time</div>
-              <div className={styles.head}>End Time</div>
-              <div className={styles.head}>Reason</div>
+              <div className={styles.manualHead}>Checkbox</div>
+              <div className={styles.manualHead}>Manual Timecard ID</div>
+              <div className={styles.manualHead}>Start Time</div>
+              <div className={styles.manualHead}>End Time</div>
+              <div className={styles.manualHead}>Reason</div>
             </div>
             {this.props &&
               this.props.postManualTimecardData &&
@@ -137,7 +132,7 @@ class ManualTimecard extends Component {
               this.props.postManualTimecardData.map((val) => {
                 return (
                   <div className={styles.headHolder}>
-                    <div className={styles.head}>
+                    <div className={styles.manualHead}>
                       {" "}
                       <Checkbox
                         checked={
@@ -155,15 +150,33 @@ class ManualTimecard extends Component {
                         }}
                       />
                     </div>
-                    <div className={styles.head}>{val.manualTimeId}</div>
-                    <div className={styles.head}>{val.startTime}</div>
-                    <div className={styles.head}>{val.endTime}</div>
-                    <div className={styles.head}>{val.manualTimeReason}</div>
+                    <div className={styles.manualHead}>{val.manualTimeId}</div>
+                    <div className={styles.manualHead}>{val.startTime}</div>
+                    <div className={styles.manualHead}>{val.endTime}</div>
+                    <div className={styles.manualHead}>
+                      {val.manualTimeReason}
+                    </div>
                   </div>
                 );
               })}
-
-            <button onClick={() => this.showModal()}>Submit</button>
+            <div className={styles.buttonContainer}>
+              <div className={styles.disputeButton}>
+                <button
+                  onClick={() => this.showModal(0)}
+                  className={styles.button}
+                >
+                  Approve
+                </button>
+              </div>
+              <div className={styles.disputeButton}>
+                <button
+                  onClick={() => this.showModal(1)}
+                  className={styles.button}
+                >
+                  Reject
+                </button>
+              </div>
+            </div>
           </>
         ) : (
           <div className={styles.adminBase}>{this.props.postManualError}</div>
