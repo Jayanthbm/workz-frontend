@@ -297,7 +297,7 @@ class Admin extends Component {
           )}
 
           {this.state.showManual && <ManualTimecard {...this.props} />}
-
+          {this.state.showCompany && <ManualTimecard {...this.props} />}
           <Modal
             show={this.state.show}
             handleClose={this.hideModal}
