@@ -9,6 +9,7 @@ import "antd/dist/antd.css";
 import Modal from "./Modal";
 import Navigation from "./Navigation";
 import ManualTimecard from "./ManualTimecard";
+import Company from "./Company";
 const userDetails = Cookie.getCookie(USER_DETAILS);
 let parsedData = userDetails && JSON.parse(userDetails);
 
@@ -297,7 +298,7 @@ class Admin extends Component {
           )}
 
           {this.state.showManual && <ManualTimecard {...this.props} />}
-          {this.state.showCompany && <ManualTimecard {...this.props} />}
+          {this.state.showCompany && <Company {...this.props} />}
           <Modal
             show={this.state.show}
             handleClose={this.hideModal}
