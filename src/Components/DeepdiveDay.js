@@ -44,6 +44,7 @@ class DeepdiveDay extends Component {
       type: null,
       alltime: [],
       status: [],
+      manualTimecard: [],
       position: 0,
       flagMessage: null,
       timecardPosition: 0,
@@ -162,6 +163,7 @@ class DeepdiveDay extends Component {
     }
   };
   render() {
+    console.log(this.state.manualTimecard);
     if (this.props.time) {
       let timeframes = ["00:00", "10:00", "20:00", "30:00", "40:00", "50:00"];
       let slots = [
@@ -220,6 +222,14 @@ class DeepdiveDay extends Component {
         "defaultimageurl",
         "defaultimageurl",
       ];
+      let manualTimecard = [
+        "defaultimageurl",
+        "defaultimageurl",
+        "defaultimageurl",
+        "defaultimageurl",
+        "defaultimageurl",
+        "defaultimageurl",
+      ];
       for (let i = 0; i < 6; i++) {
         for (let j = 0; j < this.props.time.length; j++) {
           let time = this.props.time[j].time.substring(3);
@@ -231,6 +241,7 @@ class DeepdiveDay extends Component {
             intensityScore[i] = this.props.time[j].intensityScore;
             status[i] = this.props.time[j].status;
             timecard[i] = this.props.time[j].timecardId;
+            manualTimecard[i] = this.props.time[j].manualTimecard;
           }
         }
       }
@@ -242,6 +253,7 @@ class DeepdiveDay extends Component {
       this.state.intensityScore.push(intensityScore);
       this.state.status.push(status);
       this.state.timecard.push(timecard);
+      this.state.manualTimecard.push(manualTimecard);
     }
 
     const images = [];
@@ -289,6 +301,8 @@ class DeepdiveDay extends Component {
                   backgroundColor:
                     this.state.status[0][i] == "defaultimageurl"
                       ? "grey"
+                      : this.state.manualTimecard[0][i] == true
+                      ? "blue"
                       : this.state.status[0][i] == "approved" ||
                         this.state.status[0][i] == null
                       ? "#8bc646"
@@ -305,15 +319,22 @@ class DeepdiveDay extends Component {
               )} */}
               <img
                 onClick={() =>
-                  val === "defaultimageurl"
+                  val === "defaultimageurl" &&
+                  this.state.manualTimecard[0][i] == true
                     ? ""
-                    : this.showModal(
+                    : this.state.manualTimecard[0][i] == false &&
+                      this.showModal(
                         this.state.ssImage[0][i],
                         "screen",
                         this.state.timecard[0][i]
                       )
                 }
-                src={val == "defaultimageurl" ? defaultIcon : val}
+                src={
+                  val == "defaultimageurl" ||
+                  this.state.manualTimecard[0][i] == true
+                    ? defaultIcon
+                    : val
+                }
                 height="100px"
                 width="150px"
               />
@@ -694,7 +715,8 @@ class DeepdiveDay extends Component {
                 onClick={() =>
                   val === "defaultimageurl"
                     ? ""
-                    : this.showModal(
+                    : this.state.manualTimecard[0][i] != true &&
+                      this.showModal(
                         this.state.webcamImage[0][i],
                         "web",
                         this.state.timecard[0][i]
@@ -710,7 +732,8 @@ class DeepdiveDay extends Component {
                 //       )
                 // }
                 src={
-                  this.state.webcam[0][i] == "defaultimageurl"
+                  this.state.webcam[0][i] == "defaultimageurl" ||
+                  this.state.manualTimecard[0][i] == true
                     ? defaultIcon
                     : this.state.webcam[0][i]
                 }
