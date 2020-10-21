@@ -30,6 +30,7 @@ class Admin extends Component {
   componentDidMount = () => {
     this.props.postTimecard();
     this.props.postManualTimecard();
+    this.props.postNewCompany();
   };
   componentWillReceiveProps = (nextprops) => {
     if (

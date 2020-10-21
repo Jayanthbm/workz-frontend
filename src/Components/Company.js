@@ -1,14 +1,14 @@
+import { Checkbox } from "@material-ui/core";
 import React, { Component } from "react";
 import styles from "./Company.module.css";
+import CreateCompany from "./CreateCompany";
 class Company extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      add: false,
       name: "",
       fullname: "",
-      phone: "",
-      email: "",
-      desc: "",
       error: "",
       address: "",
       city: "",
@@ -30,201 +30,164 @@ class Company extends Component {
       termsConditions: "",
     };
   }
+  handleClick = () => {
+    this.props.postNewCompany({
+      method: "add",
+      name: this.state.name,
+      fullName: this.state.fullname,
+      address: this.state.address,
+      city: this.state.city,
+      state: this.state.state,
+      pincode: this.state.pincode,
+      country: this.state.country,
+      billingPlan: this.state.billingPlan,
+      billingRate: this.state.billingRate,
+      billingCurrency: this.state.billingCurrency,
+      timecardsize: this.state.timecardsize,
+      timecardbreakupsize: this.state.timecardbreakupsize,
+      enablewebcam: this.state.enablewebcam,
+      enablescreenshot: this.state.enablescreenshot,
+      mousePerTC: this.state.mousePerTC,
+      keysPerTC: this.state.keysPerTC,
+      IntDiscard: this.state.IntDiscard,
+      intRed: this.state.intRed,
+      intYellow: this.state.intYellow,
+      termsConditions: this.state.termsConditions,
+    });
+    this.setState({
+      name: "",
+      fullname: "",
+      error: "",
+      address: "",
+      city: "",
+      state: "",
+      country: "",
+      pincode: "",
+      billingPlan: "",
+      billingRate: "",
+      billingCurrency: "",
+      timecardsize: "",
+      timecardbreakupsize: "",
+      enablewebcam: "",
+      enablescreenshot: "",
+      mousePerTC: "",
+      keysPerTC: "",
+      IntDiscard: "",
+      intRed: "",
+      intYellow: "",
+      termsConditions: "",
+    });
+  };
   render() {
+    console.log(this.props);
     return (
-      <div>
-        <div className={styles.formContainer}>
-          <div className={styles.fieldContainer}>
-            {/* <label>Name:</label> */}
-            <input
-              className={styles.formInput}
-              type="text"
-              placeholder="Name"
-              value={this.state.name}
-              onChange={(val) => {
-                this.setState({ name: val.target.value });
-              }}
-            ></input>
-            {/* <label>Company Name:</label> */}
-            <input
-              type="text"
-              placeholder="Full Name"
-              className={styles.formInput}
-              value={this.state.fullname}
-              onChange={(val) => {
-                this.setState({ fullname: val.target.value });
-              }}
-            ></input>
-            {/* <label>Phone:</label> */}
-            <textarea
-              placeholder="Address"
-              className={styles.formInput}
-              value={this.state.address}
-              onChange={(val) => {
-                this.setState({ address: val.target.value });
-              }}
-            ></textarea>
-            <input
-              type="text"
-              placeholder="Country"
-              className={styles.formInput}
-              value={this.state.country}
-              onChange={(val) => {
-                this.setState({ country: val.target.value });
-              }}
-            ></input>
-            <input
-              type="text"
-              placeholder="State"
-              className={styles.formInput}
-              value={this.state.city}
-              onChange={(val) => {
-                this.setState({ city: val.target.value });
-              }}
-            ></input>
-            <input
-              type="text"
-              placeholder="City"
-              className={styles.formInput}
-              value={this.state.city}
-              onChange={(val) => {
-                this.setState({ city: val.target.value });
-              }}
-            ></input>
-            <input
-              type="text"
-              placeholder="Pincode"
-              className={styles.formInput}
-              value={this.state.pincode}
-              onChange={(val) => {
-                this.setState({ pincode: val.target.value });
-              }}
-            ></input>
-            <input
-              type="text"
-              placeholder="Billing Plan"
-              className={styles.formInput}
-              value={this.state.billingPlan}
-              onChange={(val) => {
-                this.setState({ billingPlan: val.target.value });
-              }}
-            ></input>
-            <input
-              type="text"
-              placeholder="Billing Rate"
-              className={styles.formInput}
-              value={this.state.billingRate}
-              onChange={(val) => {
-                this.setState({ billingRate: val.target.value });
-              }}
-            ></input>
-            <input
-              type="text"
-              placeholder="Billing Currency"
-              className={styles.formInput}
-              value={this.state.billingCurrency}
-              onChange={(val) => {
-                this.setState({ billingCurrency: val.target.value });
-              }}
-            ></input>
-            <input
-              type="text"
-              placeholder="Timecard Size"
-              className={styles.formInput}
-              value={this.state.timecardsize}
-              onChange={(val) => {
-                this.setState({ timecardsize: val.target.value });
-              }}
-            ></input>
-            <input
-              type="text"
-              placeholder="Timecard Breakup Size"
-              className={styles.formInput}
-              value={this.state.timecardbreakupsize}
-              onChange={(val) => {
-                this.setState({ timecardbreakupsize: val.target.value });
-              }}
-            ></input>
-            <input
-              type="text"
-              placeholder="Timecard Breakup Size"
-              className={styles.formInput}
-              value={this.state.timecardbreakupsize}
-              onChange={(val) => {
-                this.setState({ timecardbreakupsize: val.target.value });
-              }}
-            ></input>
-            <select
-              placeholder="Enable Webcam"
-              className={styles.formInput}
-              onChange={(val) => {
-                this.setState({ enablewebcam: val.target.value });
-              }}
-            >
-              <option value="" disabled selected>
-                {" "}
-                Enable Webcam
-              </option>
-              <option value="1">Yes</option>
-              <option value="0">No</option>
-            </select>
-            {/* <label>Email:</label> */}
-            <input
-              type="email"
-              placeholder="Email"
-              className={styles.formInput}
-              value={this.state.email}
-              onChange={(val) => {
-                this.setState({ email: val.target.value });
-              }}
-            ></input>
-            {this.props.location.state &&
-              this.props.location.state.type === "Demo" && (
-                <>
-                  {/* <label>Requirement Description:</label> */}
-                  <textarea
-                    className={styles.formInput}
-                    placeholder="Requirement Description"
-                    value={this.state.desc}
-                    onChange={(val) => {
-                      this.setState({ desc: val.target.value });
-                    }}
-                  ></textarea>
-                </>
-              )}
-
-            {this.props.location.state &&
-              this.props.location.state.type === "Support" && (
-                <>
-                  {/* <label>Issue Description:</label> */}
-                  <textarea
-                    className={styles.formInput}
-                    placeholder="Issue Description"
-                    value={this.state.desc}
-                    onChange={(val) => {
-                      this.setState({ desc: val.target.value });
-                    }}
-                  ></textarea>
-                </>
-              )}
-            <button onClick={this.handleClick} className={styles.formButton}>
-              {" "}
-              Submit{" "}
-            </button>
-            <button
-              className={styles.formButton}
-              onClick={() => {
-                this.props.history.push("/");
-              }}
-            >
-              {" "}
-              Back to login{" "}
-            </button>
-            {this.state.error && (
-              <div className={styles.error}>{this.state.error}</div>
-            )}
-          </div>
-        </div>
+      <div className={styles.addHolder}>
+        {this.props &&
+        this.props.postNewCompanyData &&
+        this.props.postNewCompanyData.length > 0 ? (
+          <>
+            <div className={styles.baseHolder}></div>
+            <div className={styles.headHolder}>
+              <div className={styles.manualHead}></div>
+              <div className={styles.manualHead}>Name</div>
+              <div className={styles.manualHead}>Full Name</div>
+              <div className={styles.manualHead}>Address</div>
+              <div className={styles.manualHead}>City</div>
+              <div className={styles.manualHead}>State</div>
+              <div className={styles.manualHead}>Pincode</div>
+              <div className={styles.manualHead}>Country</div>
+              <div className={styles.manualHead}>Billing Plan</div>
+              <div className={styles.manualHead}>Billing Rate</div>
+              <div className={styles.manualHead}>Billing Currency</div>
+              <div className={styles.manualHead}>Timecard Size</div>
+              <div className={styles.manualHead}>Timecard Breakup Size</div>
+              <div className={styles.manualHead}>Enable Webcam</div>
+              <div className={styles.manualHead}>Enable Screenshot</div>
+              <div className={styles.manualHead}>mousePerTC</div>
+              <div className={styles.manualHead}>keysPerTC</div>
+              <div className={styles.manualHead}>IntDiscard</div>
+              <div className={styles.manualHead}>intRed</div>
+              <div className={styles.manualHead}>intYellow</div>
+              <div className={styles.manualHead}>Terms</div>
+            </div>
+            {this.props &&
+              this.props.postNewCompanyData &&
+              !this.props.postNewCompanyData.message &&
+              this.props.postNewCompanyData.map((val) => {
+                return (
+                  <div className={styles.headHolder}>
+                    <div className={styles.manualHead}>
+                      {" "}
+                      <Checkbox
+                        checked={
+                          this.state.selected &&
+                          this.state.selected.length > 0 &&
+                          this.state.selected.find((categories) => {
+                            return categories.manualTimeId === val.manualTimeId;
+                          })
+                            ? true
+                            : false
+                        }
+                        color="primary"
+                        onChange={() => {
+                          this.handleManualCheckbox(val, this.state.selected);
+                        }}
+                      />
+                    </div>
+                    <div className={styles.manualHead}>{val.name}</div>
+                    <div className={styles.manualHead}>{val.fullName}</div>
+                    <div className={styles.manualHead}>{val.address}</div>
+                    <div className={styles.manualHead}>{val.city}</div>
+                    <div className={styles.manualHead}>{val.state}</div>
+                    <div className={styles.manualHead}>{val.pincode}</div>
+                    <div className={styles.manualHead}>{val.country}</div>
+                    <div className={styles.manualHead}>{val.billingPlan}</div>
+                    <div className={styles.manualHead}>{val.billingRate}</div>
+                    <div className={styles.manualHead}>
+                      {val.billingCurrency}
+                    </div>
+                    <div className={styles.manualHead}>{val.timecardsize}</div>
+                    <div className={styles.manualHead}>
+                      {val.timecardbreakupsize}
+                    </div>
+                    <div className={styles.manualHead}>{val.enablewebcam}</div>
+                    <div className={styles.manualHead}>
+                      {val.enablescreenshot}
+                    </div>
+                    <div className={styles.manualHead}>{val.mousePerTC}</div>
+                    <div className={styles.manualHead}>{val.keysPerTC}</div>
+                    <div className={styles.manualHead}>{val.IntDiscard}</div>
+                    <div className={styles.manualHead}>{val.intRed}</div>
+                    <div className={styles.manualHead}>{val.intYellow}</div>
+                    <div className={styles.manualHead}>
+                      {val.termsConditions}
+                    </div>
+                  </div>
+                );
+              })}
+            <div className={styles.buttonContainer}>
+              <div className={styles.disputeButton}>
+                <button
+                  onClick={() => this.showModal(0)}
+                  className={styles.button}
+                >
+                  Approve
+                </button>
+              </div>
+              <div className={styles.disputeButton}>
+                <button
+                  onClick={() => this.showModal(1)}
+                  className={styles.button}
+                >
+                  Reject
+                </button>
+              </div>
+            </div>
+          </>
+        ) : (
+          <div className={styles.adminBase}>{this.props.postManualError}</div>
+        )}
+        {this.state.add && <CreateCompany {...this.props} />}
       </div>
     );
   }
