@@ -275,7 +275,7 @@ class CreateCompany extends Component {
             }}
           ></input>
           <textarea
-            placeholder="Address"
+            placeholder="Terms & Conditions"
             className={styles.formInput}
             value={this.state.termsConditions}
             onChange={(val) => {

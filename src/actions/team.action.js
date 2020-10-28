@@ -85,7 +85,7 @@ export function postNewCompany(details) {
   return async (dispatch) => {
     dispatch(postNewCompanyRequest());
     try {
-      let url = `newcompany`;
+      let url = `company`;
       const result = await post(url, details);
       const resultJson = await result.data;
       console.log(resultJson.message);
