@@ -20,6 +20,7 @@ class Company extends Component {
             this.setState({ add: !this.state.add });
             this.props.postNewCompany();
           }}
+          className={styles.addButton}
         >
           {this.state.add ? "List" : "Add"}
         </div>

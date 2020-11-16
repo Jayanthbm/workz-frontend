@@ -30,6 +30,15 @@
   list-style: height 20em;
   opacity: 1; /* Firefox */
 }
+.addButton {
+  width: 100px;
+  height: 40px;
+  background: #5dbcb3;
+  padding: 10px;
+  margin: 20px 0px;
+  color: white;
+  font-weight: bold;
+}
 .formContainer {
   width: 100%;
 }
