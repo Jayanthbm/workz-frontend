@@ -288,6 +288,7 @@ class DeepdiveDay extends Component {
           });
         });
     }
+
     return (
       <div className={styles.dayContainer}>
         {this.state.slots[0].map((val, i) => {
@@ -510,7 +511,7 @@ class DeepdiveDay extends Component {
                               images &&
                                 images[this.state.position] &&
                                 images[this.state.position].date
-                            ).format("dddd, MMM DD HH:MM A ")}
+                            ).format("dddd, MMM DD HH:mm A ")}
                           </div>
                           <div>
                             <div
@@ -909,7 +910,7 @@ class DeepdiveDay extends Component {
                               images &&
                                 images[this.state.position] &&
                                 images[this.state.position].date
-                            ).format("dddd, MMM DD HH:MM A ")}
+                            ).format("dddd, MMM DD HH:mm A ")}
                           </div>
                           <div>
                             <div
