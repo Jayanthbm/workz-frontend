@@ -114,7 +114,7 @@ class CompanyTable extends Component {
       data.push(filteredCatg);
       this.setState({ selected: data, firstLoader: true });
     }
-    console.log(data.map((e) => e.companyId).slice());
+
     this.setState({
       labelsSelected: data.map((e) => e.companyId).slice(),
     });
@@ -127,7 +127,6 @@ class CompanyTable extends Component {
     this.props.postNewCompany();
   };
   render() {
-    console.log(this.props);
     return (
       <div className={styles.addHolder}>
         {this.props &&

@@ -163,7 +163,7 @@ class Team extends Component {
 
     const userDetails = Cookie.getCookie(USER_DETAILS);
     let parsedData = userDetails && JSON.parse(userDetails);
-    console.log(parsedData && parsedData);
+
     return (
       <div className={styles.base}>
         <Header pic={parsedData && parsedData.profilePic} />

@@ -139,7 +139,7 @@ class deepdive extends Component {
     });
   };
   handleBreakup = (timecardId) => {
-    console.log(timecardId);
+   
     this.props.getBreakup({
       timecardId: timecardId,
       startDate: this.props.deepdiveData && this.props.deepdiveData.startDate,
@@ -151,7 +151,7 @@ class deepdive extends Component {
     // this.props.gettMessage(timecardId);
   };
   componentDidMount = () => {
-    console.log(dropData && dropData.id);
+ 
     if (parsedData.isManager === 1) {
       this.setState({
         man_id: dropData ? dropData.id : parsedData.userId,
@@ -224,10 +224,10 @@ class deepdive extends Component {
   };
   approver = (data) => {
     this.setState({ approve: data });
-    console.log(data);
+   
   };
   componentWillReceiveProps = (nextProps) => {
-    console.log(nextProps);
+
     if (this.props.match !== nextProps.match) {
       nextProps.getDeepdive({
         companyId: parsedData.companyId,
@@ -250,7 +250,6 @@ class deepdive extends Component {
     this.props.postManualTimecard(details);
   };
   render() {
-    console.log(this.props);
     return (
       <div className={styles.base}>
         <Header

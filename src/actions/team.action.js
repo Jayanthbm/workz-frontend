@@ -88,7 +88,7 @@ export function postNewCompany(details) {
       let url = `company`;
       const result = await post(url, details);
       const resultJson = await result.data;
-      console.log(resultJson.message);
+     
       if (resultJson.message) {
         throw new Error(resultJson.message);
       }
@@ -129,7 +129,7 @@ export function postManualTimecard(details) {
       let url = `manualtimecard`;
       const result = await post(url, details);
       const resultJson = await result.data;
-      console.log(resultJson.message);
+     
       if (
         resultJson.message &&
         resultJson.message != "Manual Timecard Requested Successfully" &&
@@ -161,7 +161,6 @@ export function postTimecardSuccess(postTimecardData) {
 }
 
 export function postTimecardFailure(error) {
-  console.log("ssf", error);
   return {
     type: POST_TIMECARD_FAILURE,
     status: ERROR,
@@ -176,7 +175,6 @@ export function postTimecard(details) {
       let url = `timecard`;
       const result = await post(url, details);
       const resultJson = await result.data;
-      console.log(resultJson.message);
       if (
         resultJson.message &&
         resultJson.message !== "Dispute Raised Successfully" &&
@@ -513,7 +511,6 @@ export function getDeepdive(userDetails) {
       let url = `deepdive`;
       const result = await post(url, userDetails);
       const resultJson = await result.data;
-      console.log(resultJson);
       if (resultJson.message) {
         throw new Error(resultJson.message);
       }

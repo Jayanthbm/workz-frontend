@@ -146,7 +146,7 @@ class Admin extends Component {
     });
   };
   render() {
-    console.log(this.props);
+
     return (
       <div className={styles.base}>
         <Header pic={parsedData && parsedData.profilePic} />

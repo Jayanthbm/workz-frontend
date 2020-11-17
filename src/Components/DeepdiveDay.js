@@ -144,7 +144,7 @@ class DeepdiveDay extends Component {
       event.target.style.background = "blue";
       event.target.style.color = "white";
       this.setState({ colorChange: true });
-      console.log(a);
+    
       this.props.approver(a);
     } else if (event.target.style.background === "blue") {
       if (this.state.status[0][i] == "defaultimageurl") {
@@ -156,14 +156,14 @@ class DeepdiveDay extends Component {
         a.splice(a.indexOf(timecardId, 1));
         event.target.style.background = "red";
         event.target.style.color = "black";
-        console.log(a);
+  
         this.props.approver(a);
       }
       this.setState({ colorChange: false });
     }
   };
   render() {
-    console.log(this.state.manualTimecard);
+
     if (this.props.time) {
       let timeframes = ["00:00", "10:00", "20:00", "30:00", "40:00", "50:00"];
       let slots = [

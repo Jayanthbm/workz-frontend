@@ -107,14 +107,7 @@ class DetailsData extends Component {
         nextProps.breakupDetails &&
           nextProps.breakupDetails.results &&
           nextProps.breakupDetails.results.map((val, i) => {
-            console.log(
-              val.timecardBreakupId === this.state.timeDetails &&
-                i &&
-                ((val.timecardBreakupId === this.state.timeDetails) & i) ===
-                  true &&
-                ((val.timecardBreakupId === this.state.timeDetails) & i) !==
-                  false
-            );
+           
             if (val.timecardBreakupId === this.state.timeDetails && i) {
               this.setState({
                 position: val.timecardBreakupId === this.state.timeDetails && i,
@@ -147,7 +140,7 @@ class DetailsData extends Component {
   };
   goForward = (breakup, time) => {
     if (time !== null) {
-      console.log(time);
+ 
       this.props.handleBreakup(time);
       this.setState({
         position: 0,
@@ -185,7 +178,7 @@ class DetailsData extends Component {
           });
         });
     }
-    console.log(this.props);
+
     return (
       <div className={styles.deepDiveBase}>
         {!this.props.detailsError &&

@@ -60,7 +60,7 @@ class Details extends Component {
     this.props.postFlag(timecardId);
   };
   handleBreakup = (timecardId, type) => {
-    console.log(timecardId);
+
     if (type === "breakup") {
       this.props.getBreakup({
         timecardBreakupId: timecardId,
@@ -159,7 +159,7 @@ class Details extends Component {
     }
   };
   render() {
-    console.log(this.props);
+
     return (
       <div className={styles.base}>
         <Header pic={parsedData && parsedData.profilePic} />

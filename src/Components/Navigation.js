@@ -36,7 +36,6 @@ class Navigation extends Component {
     });
   };
   onDateChange = (date) => {
-    console.log(date);
     this.setState({ date: date });
   };
   handleStartTime = (time) => {
@@ -46,7 +45,6 @@ class Navigation extends Component {
     });
   };
   handleEndTime = (time) => {
-    console.log(time);
     this.setState({
       EndTime: time,
       manualError: false,

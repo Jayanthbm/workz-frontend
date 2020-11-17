@@ -107,7 +107,7 @@ class DeepdiveDetails extends Component {
     window.location.reload();
   };
   render() {
-    console.log(this.props);
+
     // function timeConvert(n) {
     //   var num = n;
     //   var hours = num / 60;

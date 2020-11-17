@@ -67,13 +67,13 @@ class ManualTimecard extends Component {
       data.push(filteredCatg);
       this.setState({ selected: data, firstLoader: true });
     }
-    console.log(data.map((e) => e.manualTimeId).slice());
+   
     this.setState({
       labelsSelected: data.map((e) => e.manualTimeId).slice(),
     });
   };
   render() {
-    console.log(this.props);
+
     return (
       <div>
         <Modal show={this.state.show} handleClose={this.hideModal} width="auto">
