@@ -1,23 +1,23 @@
-import React, { Component } from "react";
-import styles from "./Details.module.css";
-import Header from "../Container/HeaderContainer";
-import Navigation from "./Navigation";
-import SecondaryHeader from "./SecondaryHeader";
-import moment from "moment";
-import { USER_DETAILS, ACCESS_TOKEN } from "../utils/constant";
-import * as Cookie from "../utils/Cookie";
-import DetailsData from "./DetailsData";
+import React, { Component } from 'react';
+import styles from './Details.module.css';
+import Header from '../Container/HeaderContainer';
+import Navigation from './Navigation';
+import SecondaryHeader from './SecondaryHeader';
+import moment from 'moment';
+import { USER_DETAILS, ACCESS_TOKEN } from '../utils/constant';
+import * as Cookie from '../utils/Cookie';
+import DetailsData from './DetailsData';
 const userDetails = Cookie.getCookie(USER_DETAILS);
 let parsedData = userDetails && JSON.parse(userDetails);
 class Details extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      team_id: "",
-      man_id: "",
+      team_id: '',
+      man_id: '',
 
       selectedDate: new Date(),
-      userId: "",
+      userId: '',
       change: false,
       show: false,
       allChecker: false,
@@ -60,8 +60,7 @@ class Details extends Component {
     this.props.postFlag(timecardId);
   };
   handleBreakup = (timecardId, type) => {
-
-    if (type === "breakup") {
+    if (type === 'breakup') {
       this.props.getBreakup({
         timecardBreakupId: timecardId,
         startDate: this.props.detailsData && this.props.detailsData.startDate,
@@ -83,11 +82,11 @@ class Details extends Component {
     this.props.getDetails({
       companyId: parsedData.companyId,
       userId: this.props.match.params.userId,
-      date: moment(date).format("YYYY-MM-DD"),
+      date: moment(date).format('YYYY-MM-DD'),
     });
     if (this.state.userId != undefined)
       this.props.history.push(
-        `/details/${this.state.userId}/${moment(date).format("YYYY-MM-DD")}`
+        `/details/${this.state.userId}/${moment(date).format('YYYY-MM-DD')}`
       );
   };
   handleMessage = async (formData, timecardId) => {
@@ -106,7 +105,7 @@ class Details extends Component {
   selectHandler = (val) => {
     this.setState({ change: true });
     let data = JSON.parse(val);
-    if (data.type === "manager") {
+    if (data.type === 'manager') {
       this.props.getDeepdiveDropdown({
         managerId: data.id,
       });
@@ -159,7 +158,6 @@ class Details extends Component {
     }
   };
   render() {
-
     return (
       <div className={styles.base}>
         <Header pic={parsedData && parsedData.profilePic} />
@@ -169,6 +167,7 @@ class Details extends Component {
           team_id={this.state.team_id}
           man_id={this.state.man_id}
           {...this.props}
+          headerText={'My Team'}
         />
         <SecondaryHeader
           deepdiveDropdownData={this.props && this.props.deepdiveDropdownData}

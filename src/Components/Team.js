@@ -1,38 +1,38 @@
-import React, { Component } from "react";
-import offline from "../images/offlinepc.png";
-import online from "../images/onlinepc.png";
-import onlineseat from "../images/onlineseat.png";
-import offlineseat from "../images/offlineseat.png";
-import leftoffline from "../images/left-offline-cp.png";
-import leftonline from "../images/left-online-cp.png";
-import styles from "./Team.module.css";
-import Header from "../Container/HeaderContainer";
-import Navigation from "./Navigation";
-import ProfileStatus from "./ProfileStatus";
+import React, { Component } from 'react';
+import offline from '../images/offlinepc.png';
+import online from '../images/onlinepc.png';
+import onlineseat from '../images/onlineseat.png';
+import offlineseat from '../images/offlineseat.png';
+import leftoffline from '../images/left-offline-cp.png';
+import leftonline from '../images/left-online-cp.png';
+import styles from './Team.module.css';
+import Header from '../Container/HeaderContainer';
+import Navigation from './Navigation';
+import ProfileStatus from './ProfileStatus';
 
-import * as Cookie from "../utils/Cookie";
-import { USER_DETAILS, ACCESS_TOKEN } from "../utils/constant";
+import * as Cookie from '../utils/Cookie';
+import { USER_DETAILS, ACCESS_TOKEN } from '../utils/constant';
 
 const data = [
   {
-    name: "abc",
-    status: "offline",
+    name: 'abc',
+    status: 'offline',
   },
   {
-    name: "def",
-    status: "online",
+    name: 'def',
+    status: 'online',
   },
   {
-    name: "pqr",
-    status: "online",
+    name: 'pqr',
+    status: 'online',
   },
   {
-    name: "xyz",
-    status: "offline",
+    name: 'xyz',
+    status: 'offline',
   },
   {
-    name: "asd",
-    status: "online",
+    name: 'asd',
+    status: 'online',
   },
 ];
 
@@ -46,8 +46,8 @@ class Team extends Component {
         this.props.teamDetails &&
         this.props.teamDetails.teams &&
         this.props.teamDetails.teams[0].teamId,
-      team_id: "",
-      man_id: "",
+      team_id: '',
+      man_id: '',
       a: [],
       b: [],
       c: [],
@@ -55,7 +55,7 @@ class Team extends Component {
   }
   componentDidMount() {
     if (parsedData.previousPassword === null) {
-      this.props.history.push("/reset");
+      this.props.history.push('/reset');
     } else {
       if (this.props.getTeam) {
         this.props.getTeam(parsedData.userId);
@@ -63,8 +63,8 @@ class Team extends Component {
           this.setState({ man_id: parsedData.userId });
         }
         this.props.getDeepdive({
-          userId: "21",
-          date: "2020-04-13",
+          userId: '21',
+          date: '2020-04-13',
         });
       }
     }
@@ -75,7 +75,7 @@ class Team extends Component {
   };
   selectHandler = (val) => {
     let data = JSON.parse(val);
-    if (data.type === "manager") {
+    if (data.type === 'manager') {
       this.props.getTeam(data.id);
     } else {
       this.props.getTeamUser(data.id);
@@ -94,20 +94,20 @@ class Team extends Component {
     var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
     return (
       diffDays +
-      " days, " +
+      ' days, ' +
       diffHrs +
-      " hours, " +
+      ' hours, ' +
       diffMins +
-      " minutes " +
-      "ago"
+      ' minutes ' +
+      'ago'
     );
   };
   componentWillReceiveProps(nextProps) {
     if (
       nextProps &&
       nextProps.teamError &&
-      nextProps.teamError.status === "ERROR" &&
-      nextProps.teamError.teamError === "You must be logged in."
+      nextProps.teamError.status === 'ERROR' &&
+      nextProps.teamError.teamError === 'You must be logged in.'
     ) {
       Cookie.deleteCookie(ACCESS_TOKEN);
       Cookie.deleteCookie(USER_DETAILS);
@@ -174,6 +174,7 @@ class Team extends Component {
           history={this.props.history}
           {...this.props}
           man_id={this.state.man_id}
+          headerText={'Virtual Office'}
         />
         <div className={styles.detailsHolder}>
           <div className={styles.countryContainer}>
@@ -192,12 +193,12 @@ class Team extends Component {
                                 return (
                                   <div>
                                     <div className={styles.countryUsers}>
-                                      {(man[0].onlineStatus === "offline" ||
-                                        man[0].onlineStatus === "inactive") && (
+                                      {(man[0].onlineStatus === 'offline' ||
+                                        man[0].onlineStatus === 'inactive') && (
                                         <>
                                           <span className={styles.seatHolder}>
                                             <span
-                                              style={{ bottom: "75px" }}
+                                              style={{ bottom: '75px' }}
                                               className={styles.tooltiptext}
                                             >
                                               {
@@ -209,7 +210,7 @@ class Team extends Component {
                                                   >
                                                     <div
                                                       style={{
-                                                        color: "#5BB5F7",
+                                                        color: '#5BB5F7',
                                                       }}
                                                     >
                                                       {man[0].name}
@@ -255,10 +256,10 @@ class Team extends Component {
                                                       styles.lastActiveHolder
                                                     }
                                                   >
-                                                    Last Active:{" "}
+                                                    Last Active:{' '}
                                                     {man[0].onlineStatus ===
-                                                    "active"
-                                                      ? "Active Now"
+                                                    'active'
+                                                      ? 'Active Now'
                                                       : this.activeHandler(
                                                           man[0]
                                                             .onlineStatusTimestamp
@@ -312,13 +313,13 @@ class Team extends Component {
                                                           sum.total_employees) *
                                                           100 >
                                                         80
-                                                          ? "#8BC646"
+                                                          ? '#8BC646'
                                                           : (sum.active /
                                                               sum.total_employees) *
                                                               100 >
                                                             50
-                                                          ? "#efc165"
-                                                          : "#D1BD94",
+                                                          ? '#efc165'
+                                                          : '#D1BD94',
                                                     }}
                                                   >
                                                     {sum.team}
@@ -364,9 +365,9 @@ class Team extends Component {
                                                               ? (sum.active /
                                                                   sum.total_employees) *
                                                                 100
-                                                              : "0%",
+                                                              : '0%',
                                                             background:
-                                                              "#8bc646",
+                                                              '#8bc646',
                                                           }}
                                                         ></div>
                                                       </div>
@@ -398,9 +399,9 @@ class Team extends Component {
                                                               ? (sum.inactive /
                                                                   sum.total_employees) *
                                                                 100
-                                                              : "0%",
+                                                              : '0%',
                                                             background:
-                                                              "#efc165",
+                                                              '#efc165',
                                                           }}
                                                         ></div>
                                                       </div>
@@ -432,9 +433,9 @@ class Team extends Component {
                                                               ? (sum.offline /
                                                                   sum.total_employees) *
                                                                 100
-                                                              : "0%",
+                                                              : '0%',
                                                             background:
-                                                              "#cececf",
+                                                              '#cececf',
                                                           }}
                                                         ></div>
                                                       </div>
@@ -450,11 +451,11 @@ class Team extends Component {
                                             })}
                                         </>
                                       )}
-                                      {man[0].onlineStatus === "active" && (
+                                      {man[0].onlineStatus === 'active' && (
                                         <>
                                           <span className={styles.seatHolder}>
                                             <span
-                                              style={{ bottom: "75px" }}
+                                              style={{ bottom: '75px' }}
                                               className={styles.tooltiptext}
                                             >
                                               {
@@ -466,7 +467,7 @@ class Team extends Component {
                                                   >
                                                     <div
                                                       style={{
-                                                        color: "#5BB5F7",
+                                                        color: '#5BB5F7',
                                                       }}
                                                     >
                                                       {man[0].name}
@@ -512,10 +513,10 @@ class Team extends Component {
                                                       styles.lastActiveHolder
                                                     }
                                                   >
-                                                    Last Active:{" "}
+                                                    Last Active:{' '}
                                                     {man[0].onlineStatus ===
-                                                    "active"
-                                                      ? "Active Now"
+                                                    'active'
+                                                      ? 'Active Now'
                                                       : this.activeHandler(
                                                           man[0]
                                                             .onlineStatusTimestamp
@@ -568,13 +569,13 @@ class Team extends Component {
                                                           sum.total_employees) *
                                                           100 >
                                                         80
-                                                          ? "#8BC646"
+                                                          ? '#8BC646'
                                                           : (sum.active /
                                                               sum.total_employees) *
                                                               100 >
                                                             50
-                                                          ? "#efc165"
-                                                          : "#D1BD94",
+                                                          ? '#efc165'
+                                                          : '#D1BD94',
                                                     }}
                                                   >
                                                     {sum.team}
@@ -620,9 +621,9 @@ class Team extends Component {
                                                               ? (sum.active /
                                                                   sum.total_employees) *
                                                                 100
-                                                              : "0%",
+                                                              : '0%',
                                                             background:
-                                                              "#8bc646",
+                                                              '#8bc646',
                                                           }}
                                                         ></div>
                                                       </div>
@@ -654,9 +655,9 @@ class Team extends Component {
                                                               ? (sum.inactive /
                                                                   sum.total_employees) *
                                                                 100
-                                                              : "0%",
+                                                              : '0%',
                                                             background:
-                                                              "#efc165",
+                                                              '#efc165',
                                                           }}
                                                         ></div>
                                                       </div>
@@ -688,9 +689,9 @@ class Team extends Component {
                                                               ? (sum.offline /
                                                                   sum.total_employees) *
                                                                 100
-                                                              : "0%",
+                                                              : '0%',
                                                             background:
-                                                              "#cececf",
+                                                              '#cececf',
                                                           }}
                                                         ></div>
                                                       </div>
@@ -706,12 +707,12 @@ class Team extends Component {
                                             })}
                                         </>
                                       )}
-                                      {man[0].onlineStatus === "passive" && (
+                                      {man[0].onlineStatus === 'passive' && (
                                         <div>
                                           <span className={styles.seatHolder}>
                                             <span
                                               className={styles.tooltiptext}
-                                              style={{ bottom: "75px" }}
+                                              style={{ bottom: '75px' }}
                                             >
                                               {
                                                 <>
@@ -722,7 +723,7 @@ class Team extends Component {
                                                   >
                                                     <div
                                                       style={{
-                                                        color: "#5BB5F7",
+                                                        color: '#5BB5F7',
                                                       }}
                                                     >
                                                       {man[0].name}
@@ -768,10 +769,10 @@ class Team extends Component {
                                                       styles.lastActiveHolder
                                                     }
                                                   >
-                                                    Last Active:{" "}
+                                                    Last Active:{' '}
                                                     {man[0].onlineStatus ===
-                                                    "active"
-                                                      ? "Active Now"
+                                                    'active'
+                                                      ? 'Active Now'
                                                       : this.activeHandler(
                                                           man[0]
                                                             .onlineStatusTimestamp
@@ -853,13 +854,13 @@ class Team extends Component {
                                                           sum.total_employees) *
                                                           100 >
                                                         80
-                                                          ? "#8BC646"
+                                                          ? '#8BC646'
                                                           : (sum.active /
                                                               sum.total_employees) *
                                                               100 >
                                                             50
-                                                          ? "#efc165"
-                                                          : "#D1BD94",
+                                                          ? '#efc165'
+                                                          : '#D1BD94',
                                                     }}
                                                   >
                                                     {sum.team}
@@ -905,9 +906,9 @@ class Team extends Component {
                                                               ? (sum.active /
                                                                   sum.total_employees) *
                                                                 100
-                                                              : "0%",
+                                                              : '0%',
                                                             background:
-                                                              "#8bc646",
+                                                              '#8bc646',
                                                           }}
                                                         ></div>
                                                       </div>
@@ -939,9 +940,9 @@ class Team extends Component {
                                                               ? (sum.inactive /
                                                                   sum.total_employees) *
                                                                 100
-                                                              : "0%",
+                                                              : '0%',
                                                             background:
-                                                              "#efc165",
+                                                              '#efc165',
                                                           }}
                                                         ></div>
                                                       </div>
@@ -973,9 +974,9 @@ class Team extends Component {
                                                               ? (sum.offline /
                                                                   sum.total_employees) *
                                                                 100
-                                                              : "0%",
+                                                              : '0%',
                                                             background:
-                                                              "#cececf",
+                                                              '#cececf',
                                                           }}
                                                         ></div>
                                                       </div>
@@ -1015,13 +1016,13 @@ class Team extends Component {
                                           (sum.active / sum.total_employees) *
                                             100 >
                                           80
-                                            ? "#8BC646"
+                                            ? '#8BC646'
                                             : (sum.active /
                                                 sum.total_employees) *
                                                 100 >
                                               50
-                                            ? "#efc165"
-                                            : "#D1BD94",
+                                            ? '#efc165'
+                                            : '#D1BD94',
                                       }}
                                       // style={{
                                       //   backgroundColor:
@@ -1059,8 +1060,8 @@ class Team extends Component {
                                                 ? (sum.active /
                                                     sum.total_employees) *
                                                   100
-                                                : "0%",
-                                              background: "#8bc646",
+                                                : '0%',
+                                              background: '#8bc646',
                                             }}
                                           ></div>
                                         </div>
@@ -1080,8 +1081,8 @@ class Team extends Component {
                                                 ? (sum.inactive /
                                                     sum.total_employees) *
                                                   100
-                                                : "0%",
-                                              background: "#efc165",
+                                                : '0%',
+                                              background: '#efc165',
                                             }}
                                           ></div>
                                         </div>
@@ -1101,8 +1102,8 @@ class Team extends Component {
                                                 ? (sum.offline /
                                                     sum.total_employees) *
                                                   100
-                                                : "0%",
-                                              background: "#cececf",
+                                                : '0%',
+                                              background: '#cececf',
                                             }}
                                           ></div>
                                         </div>
@@ -1136,9 +1137,9 @@ class Team extends Component {
                                               className={styles.countrUsers}
                                             >
                                               {(val.onlineStatus ===
-                                                "offline" ||
+                                                'offline' ||
                                                 val.onlineStatus ===
-                                                  "inactive") && (
+                                                  'inactive') && (
                                                 <span
                                                   className={styles.seatHolder}
                                                 >
@@ -1156,7 +1157,7 @@ class Team extends Component {
                                                         >
                                                           <div
                                                             style={{
-                                                              color: "#5BB5F7",
+                                                              color: '#5BB5F7',
                                                             }}
                                                           >
                                                             {val.name}
@@ -1174,7 +1175,7 @@ class Team extends Component {
                                                             styles.titleDataHolder
                                                           }
                                                         >
-                                                          Message :{" "}
+                                                          Message :{' '}
                                                           {val.message}
                                                         </div>
                                                         <div
@@ -1203,10 +1204,10 @@ class Team extends Component {
                                                             styles.lastActiveHolder
                                                           }
                                                         >
-                                                          Last Active:{" "}
+                                                          Last Active:{' '}
                                                           {val.onlineStatus ===
-                                                          "active"
-                                                            ? "Active Now"
+                                                          'active'
+                                                            ? 'Active Now'
                                                             : this.activeHandler(
                                                                 val.onlineStatusTimestamp
                                                               )}
@@ -1248,7 +1249,7 @@ class Team extends Component {
                                                 </span>
                                               )}
                                               {val.onlineStatus ===
-                                                "active" && (
+                                                'active' && (
                                                 <span
                                                   className={styles.seatHolder}
                                                 >
@@ -1266,7 +1267,7 @@ class Team extends Component {
                                                         >
                                                           <div
                                                             style={{
-                                                              color: "#5BB5F7",
+                                                              color: '#5BB5F7',
                                                             }}
                                                           >
                                                             {val.name}
@@ -1284,7 +1285,7 @@ class Team extends Component {
                                                             styles.titleDataHolder
                                                           }
                                                         >
-                                                          Message :{" "}
+                                                          Message :{' '}
                                                           {val.message}
                                                         </div>
                                                         <div
@@ -1313,10 +1314,10 @@ class Team extends Component {
                                                             styles.lastActiveHolder
                                                           }
                                                         >
-                                                          Last Active:{" "}
+                                                          Last Active:{' '}
                                                           {val.onlineStatus ===
-                                                          "active"
-                                                            ? "Active Now"
+                                                          'active'
+                                                            ? 'Active Now'
                                                             : this.activeHandler(
                                                                 val.onlineStatusTimestamp
                                                               )}
@@ -1358,7 +1359,7 @@ class Team extends Component {
                                                 </span>
                                               )}
                                               {val.onlineStatus ===
-                                                "passive" && (
+                                                'passive' && (
                                                 <span
                                                   className={styles.seatHolder}
                                                 >
@@ -1376,7 +1377,7 @@ class Team extends Component {
                                                         >
                                                           <div
                                                             style={{
-                                                              color: "#5BB5F7",
+                                                              color: '#5BB5F7',
                                                             }}
                                                           >
                                                             {val.name}
@@ -1394,7 +1395,7 @@ class Team extends Component {
                                                             styles.titleDataHolder
                                                           }
                                                         >
-                                                          Message :{" "}
+                                                          Message :{' '}
                                                           {val.message}
                                                         </div>
                                                         <div
@@ -1423,10 +1424,10 @@ class Team extends Component {
                                                             styles.lastActiveHolder
                                                           }
                                                         >
-                                                          Last Active:{" "}
+                                                          Last Active:{' '}
                                                           {val.onlineStatus ===
-                                                          "active"
-                                                            ? "Active Now"
+                                                          'active'
+                                                            ? 'Active Now'
                                                             : this.activeHandler(
                                                                 val.onlineStatusTimestamp
                                                               )}
@@ -1488,9 +1489,9 @@ class Team extends Component {
                                               className={styles.countrUsers}
                                             >
                                               {(val.onlineStatus ===
-                                                "offline" ||
+                                                'offline' ||
                                                 val.onlineStatus ===
-                                                  "inactive") && (
+                                                  'inactive') && (
                                                 <span
                                                   className={styles.seatHolder}
                                                 >
@@ -1508,7 +1509,7 @@ class Team extends Component {
                                                         >
                                                           <div
                                                             style={{
-                                                              color: "#5BB5F7",
+                                                              color: '#5BB5F7',
                                                             }}
                                                           >
                                                             {val.name}
@@ -1526,7 +1527,7 @@ class Team extends Component {
                                                             styles.titleDataHolder
                                                           }
                                                         >
-                                                          Message :{" "}
+                                                          Message :{' '}
                                                           {val.message}
                                                         </div>
                                                         <div
@@ -1555,10 +1556,10 @@ class Team extends Component {
                                                             styles.lastActiveHolder
                                                           }
                                                         >
-                                                          Last Active:{" "}
+                                                          Last Active:{' '}
                                                           {val.onlineStatus ===
-                                                          "active"
-                                                            ? "Active Now"
+                                                          'active'
+                                                            ? 'Active Now'
                                                             : this.activeHandler(
                                                                 val.onlineStatusTimestamp
                                                               )}
@@ -1600,7 +1601,7 @@ class Team extends Component {
                                                 </span>
                                               )}
                                               {val.onlineStatus ===
-                                                "active" && (
+                                                'active' && (
                                                 <span
                                                   className={styles.seatHolder}
                                                 >
@@ -1618,7 +1619,7 @@ class Team extends Component {
                                                         >
                                                           <div
                                                             style={{
-                                                              color: "#5BB5F7",
+                                                              color: '#5BB5F7',
                                                             }}
                                                           >
                                                             {val.name}
@@ -1636,7 +1637,7 @@ class Team extends Component {
                                                             styles.titleDataHolder
                                                           }
                                                         >
-                                                          Message :{" "}
+                                                          Message :{' '}
                                                           {val.message}
                                                         </div>
                                                         <div
@@ -1665,10 +1666,10 @@ class Team extends Component {
                                                             styles.lastActiveHolder
                                                           }
                                                         >
-                                                          Last Active:{" "}
+                                                          Last Active:{' '}
                                                           {val.onlineStatus ===
-                                                          "active"
-                                                            ? "Active Now"
+                                                          'active'
+                                                            ? 'Active Now'
                                                             : this.activeHandler(
                                                                 val.onlineStatusTimestamp
                                                               )}
@@ -1710,7 +1711,7 @@ class Team extends Component {
                                                 </span>
                                               )}
                                               {val.onlineStatus ===
-                                                "passive" && (
+                                                'passive' && (
                                                 <span
                                                   className={styles.seatHolder}
                                                 >
@@ -1728,7 +1729,7 @@ class Team extends Component {
                                                         >
                                                           <div
                                                             style={{
-                                                              color: "#5BB5F7",
+                                                              color: '#5BB5F7',
                                                             }}
                                                           >
                                                             {val.name}
@@ -1746,7 +1747,7 @@ class Team extends Component {
                                                             styles.titleDataHolder
                                                           }
                                                         >
-                                                          Message :{" "}
+                                                          Message :{' '}
                                                           {val.message}
                                                         </div>
                                                         <div
@@ -1775,10 +1776,10 @@ class Team extends Component {
                                                             styles.lastActiveHolder
                                                           }
                                                         >
-                                                          Last Active:{" "}
+                                                          Last Active:{' '}
                                                           {val.onlineStatus ===
-                                                          "active"
-                                                            ? "Active Now"
+                                                          'active'
+                                                            ? 'Active Now'
                                                             : this.activeHandler(
                                                                 val.onlineStatusTimestamp
                                                               )}
@@ -1840,9 +1841,9 @@ class Team extends Component {
                                               className={styles.countrUsers}
                                             >
                                               {(val.onlineStatus ===
-                                                "offline" ||
+                                                'offline' ||
                                                 val.onlineStatus ===
-                                                  "inactive") && (
+                                                  'inactive') && (
                                                 <span
                                                   className={styles.seatHolder}
                                                 >
@@ -1860,7 +1861,7 @@ class Team extends Component {
                                                         >
                                                           <div
                                                             style={{
-                                                              color: "#5BB5F7",
+                                                              color: '#5BB5F7',
                                                             }}
                                                           >
                                                             {val.name}
@@ -1878,7 +1879,7 @@ class Team extends Component {
                                                             styles.titleDataHolder
                                                           }
                                                         >
-                                                          Message :{" "}
+                                                          Message :{' '}
                                                           {val.message}
                                                         </div>
                                                         <div
@@ -1907,10 +1908,10 @@ class Team extends Component {
                                                             styles.lastActiveHolder
                                                           }
                                                         >
-                                                          Last Active:{" "}
+                                                          Last Active:{' '}
                                                           {val.onlineStatus ===
-                                                          "active"
-                                                            ? "Active Now"
+                                                          'active'
+                                                            ? 'Active Now'
                                                             : this.activeHandler(
                                                                 val.onlineStatusTimestamp
                                                               )}
@@ -1952,7 +1953,7 @@ class Team extends Component {
                                                 </span>
                                               )}
                                               {val.onlineStatus ===
-                                                "active" && (
+                                                'active' && (
                                                 <span
                                                   className={styles.seatHolder}
                                                 >
@@ -1970,7 +1971,7 @@ class Team extends Component {
                                                         >
                                                           <div
                                                             style={{
-                                                              color: "#5BB5F7",
+                                                              color: '#5BB5F7',
                                                             }}
                                                           >
                                                             {val.name}
@@ -1988,7 +1989,7 @@ class Team extends Component {
                                                             styles.titleDataHolder
                                                           }
                                                         >
-                                                          Message :{" "}
+                                                          Message :{' '}
                                                           {val.message}
                                                         </div>
                                                         <div
@@ -2017,10 +2018,10 @@ class Team extends Component {
                                                             styles.lastActiveHolder
                                                           }
                                                         >
-                                                          Last Active:{" "}
+                                                          Last Active:{' '}
                                                           {val.onlineStatus ===
-                                                          "active"
-                                                            ? "Active Now"
+                                                          'active'
+                                                            ? 'Active Now'
                                                             : this.activeHandler(
                                                                 val.onlineStatusTimestamp
                                                               )}
@@ -2062,7 +2063,7 @@ class Team extends Component {
                                                 </span>
                                               )}
                                               {val.onlineStatus ===
-                                                "passive" && (
+                                                'passive' && (
                                                 <span
                                                   className={styles.seatHolder}
                                                 >
@@ -2080,7 +2081,7 @@ class Team extends Component {
                                                         >
                                                           <div
                                                             style={{
-                                                              color: "#5BB5F7",
+                                                              color: '#5BB5F7',
                                                             }}
                                                           >
                                                             {val.name}
@@ -2098,7 +2099,7 @@ class Team extends Component {
                                                             styles.titleDataHolder
                                                           }
                                                         >
-                                                          Message :{" "}
+                                                          Message :{' '}
                                                           {val.message}
                                                         </div>
                                                         <div
@@ -2127,10 +2128,10 @@ class Team extends Component {
                                                             styles.lastActiveHolder
                                                           }
                                                         >
-                                                          Last Active:{" "}
+                                                          Last Active:{' '}
                                                           {val.onlineStatus ===
-                                                          "active"
-                                                            ? "Active Now"
+                                                          'active'
+                                                            ? 'Active Now'
                                                             : this.activeHandler(
                                                                 val.onlineStatusTimestamp
                                                               )}
@@ -2192,9 +2193,9 @@ class Team extends Component {
                                       return (
                                         <>
                                           <span className={styles.countrUsers}>
-                                            {(val.onlineStatus === "offline" ||
+                                            {(val.onlineStatus === 'offline' ||
                                               val.onlineStatus ===
-                                                "inactive") && (
+                                                'inactive') && (
                                               <span
                                                 className={styles.seatHolder}
                                               >
@@ -2210,7 +2211,7 @@ class Team extends Component {
                                                       >
                                                         <div
                                                           style={{
-                                                            color: "#5BB5F7",
+                                                            color: '#5BB5F7',
                                                           }}
                                                         >
                                                           {val.name}
@@ -2256,10 +2257,10 @@ class Team extends Component {
                                                           styles.lastActiveHolder
                                                         }
                                                       >
-                                                        Last Active:{" "}
+                                                        Last Active:{' '}
                                                         {val.onlineStatus ===
-                                                        "active"
-                                                          ? "Active Now"
+                                                        'active'
+                                                          ? 'Active Now'
                                                           : this.activeHandler(
                                                               val.onlineStatusTimestamp
                                                             )}
@@ -2300,7 +2301,7 @@ class Team extends Component {
                                                 )}
                                               </span>
                                             )}
-                                            {val.onlineStatus === "active" && (
+                                            {val.onlineStatus === 'active' && (
                                               <span
                                                 className={styles.seatHolder}
                                               >
@@ -2316,7 +2317,7 @@ class Team extends Component {
                                                       >
                                                         <div
                                                           style={{
-                                                            color: "#5BB5F7",
+                                                            color: '#5BB5F7',
                                                           }}
                                                         >
                                                           {val.name}
@@ -2362,10 +2363,10 @@ class Team extends Component {
                                                           styles.lastActiveHolder
                                                         }
                                                       >
-                                                        Last Active:{" "}
+                                                        Last Active:{' '}
                                                         {val.onlineStatus ===
-                                                        "active"
-                                                          ? "Active Now"
+                                                        'active'
+                                                          ? 'Active Now'
                                                           : this.activeHandler(
                                                               val.onlineStatusTimestamp
                                                             )}
@@ -2406,7 +2407,7 @@ class Team extends Component {
                                                 )}
                                               </span>
                                             )}
-                                            {val.onlineStatus === "passive" && (
+                                            {val.onlineStatus === 'passive' && (
                                               <span
                                                 className={styles.seatHolder}
                                               >
@@ -2422,7 +2423,7 @@ class Team extends Component {
                                                       >
                                                         <div
                                                           style={{
-                                                            color: "#5BB5F7",
+                                                            color: '#5BB5F7',
                                                           }}
                                                         >
                                                           {val.name}
@@ -2468,10 +2469,10 @@ class Team extends Component {
                                                           styles.lastActiveHolder
                                                         }
                                                       >
-                                                        Last Active:{" "}
+                                                        Last Active:{' '}
                                                         {val.onlineStatus ===
-                                                        "active"
-                                                          ? "Active Now"
+                                                        'active'
+                                                          ? 'Active Now'
                                                           : this.activeHandler(
                                                               val.onlineStatusTimestamp
                                                             )}
@@ -2531,9 +2532,9 @@ class Team extends Component {
                                       return (
                                         <>
                                           <span className={styles.countrUsers}>
-                                            {(val.onlineStatus === "offline" ||
+                                            {(val.onlineStatus === 'offline' ||
                                               val.onlineStatus ===
-                                                "inactive") && (
+                                                'inactive') && (
                                               <span
                                                 className={styles.seatHolder}
                                               >
@@ -2549,7 +2550,7 @@ class Team extends Component {
                                                       >
                                                         <div
                                                           style={{
-                                                            color: "#5BB5F7",
+                                                            color: '#5BB5F7',
                                                           }}
                                                         >
                                                           {val.name}
@@ -2595,10 +2596,10 @@ class Team extends Component {
                                                           styles.lastActiveHolder
                                                         }
                                                       >
-                                                        Last Active:{" "}
+                                                        Last Active:{' '}
                                                         {val.onlineStatus ===
-                                                        "active"
-                                                          ? "Active Now"
+                                                        'active'
+                                                          ? 'Active Now'
                                                           : this.activeHandler(
                                                               val.onlineStatusTimestamp
                                                             )}
@@ -2639,7 +2640,7 @@ class Team extends Component {
                                                 )}
                                               </span>
                                             )}
-                                            {val.onlineStatus === "active" && (
+                                            {val.onlineStatus === 'active' && (
                                               <span
                                                 className={styles.seatHolder}
                                               >
@@ -2655,7 +2656,7 @@ class Team extends Component {
                                                       >
                                                         <div
                                                           style={{
-                                                            color: "#5BB5F7",
+                                                            color: '#5BB5F7',
                                                           }}
                                                         >
                                                           {val.name}
@@ -2701,10 +2702,10 @@ class Team extends Component {
                                                           styles.lastActiveHolder
                                                         }
                                                       >
-                                                        Last Active:{" "}
+                                                        Last Active:{' '}
                                                         {val.onlineStatus ===
-                                                        "active"
-                                                          ? "Active Now"
+                                                        'active'
+                                                          ? 'Active Now'
                                                           : this.activeHandler(
                                                               val.onlineStatusTimestamp
                                                             )}
@@ -2745,7 +2746,7 @@ class Team extends Component {
                                                 )}
                                               </span>
                                             )}
-                                            {val.onlineStatus === "passive" && (
+                                            {val.onlineStatus === 'passive' && (
                                               <span
                                                 className={styles.seatHolder}
                                               >
@@ -2761,7 +2762,7 @@ class Team extends Component {
                                                       >
                                                         <div
                                                           style={{
-                                                            color: "#5BB5F7",
+                                                            color: '#5BB5F7',
                                                           }}
                                                         >
                                                           {val.name}
@@ -2807,10 +2808,10 @@ class Team extends Component {
                                                           styles.lastActiveHolder
                                                         }
                                                       >
-                                                        Last Active:{" "}
+                                                        Last Active:{' '}
                                                         {val.onlineStatus ===
-                                                        "active"
-                                                          ? "Active Now"
+                                                        'active'
+                                                          ? 'Active Now'
                                                           : this.activeHandler(
                                                               val.onlineStatusTimestamp
                                                             )}
@@ -2871,8 +2872,8 @@ class Team extends Component {
                                 return (
                                   <>
                                     <span className={styles.countrUsers}>
-                                      {(val.onlineStatus === "inactive" ||
-                                        val.onlineStatus === "offline") && (
+                                      {(val.onlineStatus === 'inactive' ||
+                                        val.onlineStatus === 'offline') && (
                                         <span className={styles.seatHolder}>
                                           <span className={styles.tooltiptext}>
                                             {
@@ -2884,7 +2885,7 @@ class Team extends Component {
                                                 >
                                                   <div
                                                     style={{
-                                                      color: "#5BB5F7",
+                                                      color: '#5BB5F7',
                                                     }}
                                                   >
                                                     {val.name}
@@ -2930,9 +2931,9 @@ class Team extends Component {
                                                     styles.lastActiveHolder
                                                   }
                                                 >
-                                                  Last Active:{" "}
-                                                  {val.onlineStatus === "active"
-                                                    ? "Active Now"
+                                                  Last Active:{' '}
+                                                  {val.onlineStatus === 'active'
+                                                    ? 'Active Now'
                                                     : this.activeHandler(
                                                         val.onlineStatusTimestamp
                                                       )}
@@ -2970,7 +2971,7 @@ class Team extends Component {
                                           )}
                                         </span>
                                       )}
-                                      {val.onlineStatus === "active" && (
+                                      {val.onlineStatus === 'active' && (
                                         <span className={styles.seatHolder}>
                                           <span className={styles.tooltiptext}>
                                             {
@@ -2982,7 +2983,7 @@ class Team extends Component {
                                                 >
                                                   <div
                                                     style={{
-                                                      color: "#5BB5F7",
+                                                      color: '#5BB5F7',
                                                     }}
                                                   >
                                                     {val.name}
@@ -3028,9 +3029,9 @@ class Team extends Component {
                                                     styles.lastActiveHolder
                                                   }
                                                 >
-                                                  Last Active:{" "}
-                                                  {val.onlineStatus === "active"
-                                                    ? "Active Now"
+                                                  Last Active:{' '}
+                                                  {val.onlineStatus === 'active'
+                                                    ? 'Active Now'
                                                     : this.activeHandler(
                                                         val.onlineStatusTimestamp
                                                       )}
@@ -3067,7 +3068,7 @@ class Team extends Component {
                                           )}
                                         </span>
                                       )}
-                                      {val.onlineStatus === "passive" && (
+                                      {val.onlineStatus === 'passive' && (
                                         <span className={styles.seatHolder}>
                                           <span className={styles.tooltiptext}>
                                             {
@@ -3079,7 +3080,7 @@ class Team extends Component {
                                                 >
                                                   <div
                                                     style={{
-                                                      color: "#5BB5F7",
+                                                      color: '#5BB5F7',
                                                     }}
                                                   >
                                                     {val.name}
@@ -3125,9 +3126,9 @@ class Team extends Component {
                                                     styles.lastActiveHolder
                                                   }
                                                 >
-                                                  Last Active:{" "}
-                                                  {val.onlineStatus === "active"
-                                                    ? "Active Now"
+                                                  Last Active:{' '}
+                                                  {val.onlineStatus === 'active'
+                                                    ? 'Active Now'
                                                     : this.activeHandler(
                                                         val.onlineStatusTimestamp
                                                       )}
@@ -3283,7 +3284,7 @@ class Team extends Component {
                 })}
             </div>
 
-           */}{" "}
+           */}{' '}
             {/* <div className={styles.countryHolder}>
             India
             <br />

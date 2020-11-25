@@ -1,0 +1,74 @@
+.base {
+  width: 100%;
+  height: auto;
+  min-height: 100vh;
+  background-color: #bcbcbc;
+  display: inline-block;
+}
+.manualBase {
+  width: auto;
+  background: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1px solid #ebecec;
+  margin: 10px 40px;
+}
+.addButton {
+  width: fit-content;
+  height: 40px;
+  background: #5dbcb3;
+  padding: 10px;
+  margin: 20px 0px;
+  color: white;
+  font-weight: bold;
+}
+.baseHolder {
+  padding-left: 20px;
+}
+.disputeComment {
+  margin: 10px;
+  width: 350px;
+  height: 70px;
+  border-radius: 5px;
+  resize: none;
+}
+.disputeButton {
+  margin: 10px;
+}
+.disputeMessage {
+  margin: 75px;
+}
+.headHolder {
+  display: flex;
+  height: 50px;
+  border-top: 1px solid darkgrey;
+  cursor: pointer;
+  /* border-bottom: 1px solid; */
+}
+.headHolder:hover {
+  box-shadow: 0 3px 11px 0 rgba(0, 0, 0, 0.1);
+}
+.head {
+  padding: 10px 10px;
+  width: 130px;
+  height: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: normal;
+  display: flex;
+  /* word-break: break-word; */
+  white-space: nowrap;
+  align-items: center;
+  justify-content: center;
+}
+.manualHead {
+  composes: head;
+  width: 250px;
+}
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+}
+.button {
+  width: 100px;
+}

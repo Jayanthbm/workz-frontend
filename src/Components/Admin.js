@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import styles from "./Admin.module.css";
-import Header from "../Container/HeaderContainer";
-import { USER_DETAILS, ACCESS_TOKEN } from "../utils/constant";
-import { Checkbox } from "@material-ui/core";
-import * as Cookie from "../utils/Cookie";
-import { Form, Switch } from "antd";
-import "antd/dist/antd.css";
-import Modal from "./Modal";
-import Navigation from "./Navigation";
-import ManualTimecard from "./ManualTimecard";
-import Company from "./Company";
+import React, { Component } from 'react';
+import styles from './Admin.module.css';
+import Header from '../Container/HeaderContainer';
+import { USER_DETAILS, ACCESS_TOKEN } from '../utils/constant';
+import { Checkbox } from '@material-ui/core';
+import * as Cookie from '../utils/Cookie';
+import { Form, Switch } from 'antd';
+import 'antd/dist/antd.css';
+import Modal from './Modal';
+import Navigation from './Navigation';
+import ManualTimecard from './ManualTimecard';
+import Company from './Company';
 const userDetails = Cookie.getCookie(USER_DETAILS);
 let parsedData = userDetails && JSON.parse(userDetails);
 
@@ -19,7 +19,7 @@ class Admin extends Component {
     this.state = {
       selected: [],
       labelsSelected: [],
-      requestMessage: "",
+      requestMessage: '',
       hierarchy: false,
       showTimecard: true,
       showManual: false,
@@ -41,7 +41,7 @@ class Admin extends Component {
       if (
         nextprops.postManualTimecardData &&
         nextprops.postManualTimecardData.message ==
-          "Manual Timecard Updated Successfully"
+          'Manual Timecard Updated Successfully'
       ) {
         this.props.postManualTimecard();
       }
@@ -53,7 +53,7 @@ class Admin extends Component {
     ) {
       if (
         nextprops.postTimecardData &&
-        nextprops.postTimecardData.message == "Dispute Updated Successfully"
+        nextprops.postTimecardData.message == 'Dispute Updated Successfully'
       ) {
         this.props.postTimecard();
       }
@@ -104,21 +104,21 @@ class Admin extends Component {
   handleTimecard = (flag) => {
     if (flag == 0) {
       this.props.postTimecard({
-        method: "approval",
+        method: 'approval',
         timecardIds: this.state.labelsSelected,
         comments: this.state.requestMessage,
-        status: "approved",
+        status: 'approved',
       });
     } else {
       this.props.postTimecard({
-        method: "approval",
+        method: 'approval',
         timecardIds: this.state.labelsSelected,
         comments: this.state.requestMessage,
-        status: "rejected",
+        status: 'rejected',
       });
     }
     this.setState({
-      requestMessage: "",
+      requestMessage: '',
       labelsSelected: [],
       show: false,
       messageShow: true,
@@ -146,11 +146,10 @@ class Admin extends Component {
     });
   };
   render() {
-
     return (
       <div className={styles.base}>
         <Header pic={parsedData && parsedData.profilePic} />
-        <Navigation admin={true} />
+        <Navigation headerText={'Admin'} />
         <div className={styles.adminBase}>
           <div className={styles.header}>
             <div
@@ -159,12 +158,12 @@ class Admin extends Component {
               }
               onClick={() => this.showTimecard()}
             >
-              Timecard{" "}
+              Timecard{' '}
               {this.props &&
               this.props.postTimecardData &&
               this.props.postTimecardData.length > 0
                 ? `(${this.props.postTimecardData.length})`
-                : ""}
+                : ''}
             </div>
             <div
               className={
@@ -172,12 +171,12 @@ class Admin extends Component {
               }
               onClick={() => this.showManual()}
             >
-              Manual{" "}
+              Manual{' '}
               {this.props &&
               this.props.postManualTimecardData &&
               this.props.postManualTimecardData.length > 0
                 ? `(${this.props.postManualTimecardData.length})`
-                : ""}
+                : ''}
             </div>
             <div
               className={
@@ -185,7 +184,7 @@ class Admin extends Component {
               }
               onClick={() => this.showCompany()}
             >
-              Company{" "}
+              Company{' '}
             </div>
           </div>
           {this.props &&
@@ -204,7 +203,7 @@ class Admin extends Component {
                         hierarchy: e,
                       });
                       if (e == true) {
-                        this.props.postTimecard({ hierarchy: "Full" });
+                        this.props.postTimecard({ hierarchy: 'Full' });
                       }
                     }}
                   />
@@ -228,7 +227,7 @@ class Admin extends Component {
                   return (
                     <div className={styles.headHolder}>
                       <div className={styles.head}>
-                        {" "}
+                        {' '}
                         <Checkbox
                           checked={
                             this.state.selected &&
@@ -246,9 +245,9 @@ class Admin extends Component {
                         />
                       </div>
                       <div
-                        style={{ display: "flex" }}
+                        style={{ display: 'flex' }}
                         onClick={() =>
-                          window.open(`deepdive/${val.timecardLink}`, "_blank")
+                          window.open(`deepdive/${val.timecardLink}`, '_blank')
                         }
                       >
                         <div className={styles.head}>{val.empId}</div>
@@ -259,7 +258,7 @@ class Admin extends Component {
                         <div className={styles.head}>{val.windowName}</div>
                         <div
                           className={styles.head}
-                          style={{ display: "block", marginTop: "5px" }}
+                          style={{ display: 'block', marginTop: '5px' }}
                           title={val.windowUrl}
                         >
                           {val.windowUrl}

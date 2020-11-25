@@ -1,19 +1,20 @@
-import React, { Component } from "react";
-import "./App.css";
-import { Route, Switch, Redirect } from "react-router-dom";
-import Login from "./Container/loginContainer";
-import Header from "./Container/HeaderContainer";
-import Navigation from "./Components/Navigation";
-import * as Cookie from "./utils/Cookie";
-import { ACCESS_TOKEN, USER_DETAILS } from "./utils/constant";
-import admin from "./Container/AdminContainer";
-import Team from "./Container/teamContainer";
-import Reset from "./Container/resetContainer";
-import Form from "./Container/formContainer";
-import forgotContainer from "./Container/forgotContainer";
-import forgotPassContainer from "./Container/forgotPassContainer";
-import deepdive from "./Container/deepdiveContainer";
-import details from "./Container/DetailsContainer";
+import React, { Component } from 'react';
+import './App.css';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import Login from './Container/loginContainer';
+import Header from './Container/HeaderContainer';
+import Navigation from './Components/Navigation';
+import * as Cookie from './utils/Cookie';
+import { ACCESS_TOKEN, USER_DETAILS } from './utils/constant';
+import admin from './Container/AdminContainer';
+import Team from './Container/teamContainer';
+import Reset from './Container/resetContainer';
+import Form from './Container/formContainer';
+import forgotContainer from './Container/forgotContainer';
+import forgotPassContainer from './Container/forgotPassContainer';
+import deepdive from './Container/deepdiveContainer';
+import details from './Container/DetailsContainer';
+import manualtime from './Container/ManualContainer';
 class App extends Component {
   render() {
     const isUserLogedIn = Cookie.getCookie(ACCESS_TOKEN) ? true : false;
@@ -35,6 +36,7 @@ class App extends Component {
               />
               <Route exact path="/reset" component={Reset} />
               <Route exact path="/details/:userId/:date" component={details} />
+              <Route exact path="/manualtime" component={manualtime} />
             </React.Fragment>
           ) : (
             <React.Fragment>
