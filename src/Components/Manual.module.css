@@ -21,6 +21,7 @@
   margin: 20px 0px;
   color: white;
   font-weight: bold;
+  cursor: pointer;
 }
 .baseHolder {
   padding-left: 20px;
@@ -71,4 +72,22 @@
 }
 .button {
   width: 100px;
+}
+.manualContainer {
+  padding: 50px;
+}
+.dateLabel {
+  margin-right: 10px;
+  width: 100px;
+}
+.dateHolder {
+  display: flex;
+  margin: 10px;
+}
+.dateFormat {
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+}
+.disputeComment {
+  resize: none;
 }

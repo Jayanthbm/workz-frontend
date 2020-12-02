@@ -14,7 +14,7 @@ import forgotContainer from './Container/forgotContainer';
 import forgotPassContainer from './Container/forgotPassContainer';
 import deepdive from './Container/deepdiveContainer';
 import details from './Container/DetailsContainer';
-import manualtime from './Container/ManualContainer';
+import ManualContainer from './Container/ManualContainer';
 class App extends Component {
   render() {
     const isUserLogedIn = Cookie.getCookie(ACCESS_TOKEN) ? true : false;
@@ -36,7 +36,7 @@ class App extends Component {
               />
               <Route exact path="/reset" component={Reset} />
               <Route exact path="/details/:userId/:date" component={details} />
-              <Route exact path="/manualtime" component={manualtime} />
+              <Route exact path="/manualtime" component={ManualContainer} />
             </React.Fragment>
           ) : (
             <React.Fragment>

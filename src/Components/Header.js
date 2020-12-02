@@ -29,6 +29,7 @@ class Header extends Component {
     window.location.href = '/';
   };
   render() {
+    console.log(this.props);
     const userDetails = Cookie.getCookie(USER_DETAILS);
     let parsedData = userDetails && JSON.parse(userDetails);
     const isLoggedin = Cookie.getCookie(USER_DETAILS) ? true : false;

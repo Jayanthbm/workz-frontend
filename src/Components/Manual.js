@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { USER_DETAILS } from '../utils/constant';
 import * as Cookie from '../utils/Cookie';
-import Header from './Header';
+import Header from '../Container/HeaderContainer';
 import { Form, Switch } from 'antd';
 import styles from './Manual.module.css';
 import { Checkbox } from '@material-ui/core';
@@ -9,6 +9,7 @@ import Navigation from './Navigation';
 import Modal from './Modal';
 import DatePicker from 'react-datepicker';
 import 'rc-time-picker/assets/index.css';
+import moment from 'moment';
 import TimePicker from 'rc-time-picker';
 const userDetails = Cookie.getCookie(USER_DETAILS);
 let parsedData = userDetails && JSON.parse(userDetails);
@@ -24,6 +25,12 @@ export default class Manual extends Component {
       showTimecard: true,
       showManual: false,
       type: null,
+      startTime: '',
+      EndTime: '',
+      date: new Date(),
+      requestMessage: '',
+      manualError: false,
+      manualModal: false,
     };
   }
   componentDidMount() {
@@ -87,6 +94,71 @@ export default class Manual extends Component {
       labelsSelected: data.map((e) => e.manualTimeId).slice(),
     });
   };
+  onDateChange = (date) => {
+    this.setState({ date: date });
+  };
+  handleStartTime = (time) => {
+    this.setState({
+      startTime: time,
+      manualError: false,
+    });
+  };
+  handleEndTime = (time) => {
+    this.setState({
+      EndTime: time,
+      manualError: false,
+    });
+  };
+  manualHandler = () => {
+    if (
+      moment(new Date()).format('YYYY-MM-DD') ==
+        moment(new Date(this.state.date)).format('YYYY-MM-DD') &&
+      moment(new Date()).format('HH:mm') >
+        moment(new Date(this.state.EndTime)).format('HH:mm') &&
+      moment(new Date(this.state.startTime)).format('HH:mm') <
+        moment(new Date(this.state.EndTime)).format('HH:mm')
+    ) {
+      this.props.postManualTimecard({
+        method: 'request',
+        date: moment(this.state.date).format('YYYY-MM-DD'),
+        startTime: moment(this.state.startTime).format('HH:mm'),
+        EndTime: moment(this.state.EndTime).format('HH:mm'),
+        reason: this.state.requestMessage,
+      });
+      this.setState({
+        show: false,
+        startTime: '',
+        EndTime: '',
+        requestMessage: '',
+        manualError: false,
+      });
+    } else if (
+      moment(new Date()).format('YYYY-MM-DD') >
+        moment(new Date(this.state.date)).format('YYYY-MM-DD') &&
+      moment(new Date(this.state.startTime)).format('HH:mm') <
+        moment(new Date(this.state.EndTime)).format('HH:mm')
+    ) {
+      this.props.postManualTimecard({
+        method: 'request',
+        date: moment(this.state.date).format('YYYY-MM-DD'),
+        startTime: moment(this.state.startTime).format('HH:mm'),
+        EndTime: moment(this.state.EndTime).format('HH:mm'),
+        reason: this.state.requestMessage,
+      });
+      this.setState({
+        show: false,
+        startTime: '',
+        EndTime: '',
+        requestMessage: '',
+        manualError: false,
+      });
+    } else {
+      this.setState({
+        manualError: true,
+      });
+    }
+  };
+
   render() {
     console.log(this.props);
     return (

@@ -1,7 +1,7 @@
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import Header from "../Components/Header";
-import { logout } from "../actions/team.action";
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import Header from '../Components/Header';
+import { logout } from '../actions/team.action';
 const mapDispatchToProps = (dispatch) => {
   return {
     logout: () => {
