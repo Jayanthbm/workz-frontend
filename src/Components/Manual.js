@@ -158,7 +158,22 @@ export default class Manual extends Component {
       });
     }
   };
-
+  componentWillReceiveProps(nextProps) {
+    console.log(
+      nextProps.postManualTimecardData.message ==
+        'Manual Timecard Requested Successfully',
+      'here'
+    );
+    if (
+      nextProps.postManualTimecardData &&
+      nextProps.postManualTimecardData.message ==
+        'Manual Timecard Requested Successfully'
+    ) {
+      console.log('here');
+      this.setState({ manualModal: false });
+      this.props.postManualTimecard({ myManual: true });
+    }
+  }
   render() {
     console.log(this.props);
     return (
