@@ -1,0 +1,33 @@
+.base {
+  width: 85%;
+  height: auto;
+  min-height: 70px;
+  border-radius: 35px;
+  background-color: rgba(0, 0, 0, 0.85);
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.5);
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 85px;
+  margin: auto;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+}
+.textHolder {
+  width: 100%;
+  height: auto;
+  font-size: 14px;
+  font-family: bold;
+  color: #fff;
+  line-height: 21px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  padding: 15px 40px;
+}
+@media screen and (min-width: 1025px) {
+  .base {
+    width: 30%;
+  }
+}

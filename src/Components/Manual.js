@@ -48,10 +48,11 @@ export default class Manual extends Component {
   handleManualtimecard = (flag) => {
     if (flag == 0) {
       this.props.postManualTimecard({
-        method: 'approval',
+        method: 'delete',
         manualtimecardIds: this.state.labelsSelected,
-        comments: this.state.requestMessage,
-        status: 'approved',
+        // comments: this.state.requestMessage,
+        // myManual: true,
+        // status: 'approved',
       });
     } else {
       this.props.postManualTimecard({
@@ -118,40 +119,48 @@ export default class Manual extends Component {
       moment(new Date(this.state.startTime)).format('HH:mm') <
         moment(new Date(this.state.EndTime)).format('HH:mm')
     ) {
-      this.props.postManualTimecard({
-        method: 'request',
-        date: moment(this.state.date).format('YYYY-MM-DD'),
-        startTime: moment(this.state.startTime).format('HH:mm'),
-        EndTime: moment(this.state.EndTime).format('HH:mm'),
-        reason: this.state.requestMessage,
-      });
-      this.setState({
-        show: false,
-        startTime: '',
-        EndTime: '',
-        requestMessage: '',
-        manualError: false,
-      });
+      if (this.state.requestMessage && this.state.requestMessage.length > 0) {
+        this.props.postManualTimecard({
+          method: 'request',
+          date: moment(this.state.date).format('YYYY-MM-DD'),
+          startTime: moment(this.state.startTime).format('HH:mm'),
+          EndTime: moment(this.state.EndTime).format('HH:mm'),
+          reason: this.state.requestMessage,
+        });
+        this.setState({
+          show: false,
+          startTime: '',
+          EndTime: '',
+          requestMessage: '',
+          manualError: false,
+        });
+      } else {
+        alert('Justification is Required');
+      }
     } else if (
       moment(new Date()).format('YYYY-MM-DD') >
         moment(new Date(this.state.date)).format('YYYY-MM-DD') &&
       moment(new Date(this.state.startTime)).format('HH:mm') <
         moment(new Date(this.state.EndTime)).format('HH:mm')
     ) {
-      this.props.postManualTimecard({
-        method: 'request',
-        date: moment(this.state.date).format('YYYY-MM-DD'),
-        startTime: moment(this.state.startTime).format('HH:mm'),
-        EndTime: moment(this.state.EndTime).format('HH:mm'),
-        reason: this.state.requestMessage,
-      });
-      this.setState({
-        show: false,
-        startTime: '',
-        EndTime: '',
-        requestMessage: '',
-        manualError: false,
-      });
+      if (this.state.requestMessage && this.state.requestMessage.length > 0) {
+        this.props.postManualTimecard({
+          method: 'request',
+          date: moment(this.state.date).format('YYYY-MM-DD'),
+          startTime: moment(this.state.startTime).format('HH:mm'),
+          EndTime: moment(this.state.EndTime).format('HH:mm'),
+          reason: this.state.requestMessage,
+        });
+        this.setState({
+          show: false,
+          startTime: '',
+          EndTime: '',
+          requestMessage: '',
+          manualError: false,
+        });
+      } else {
+        alert('Justification is Required');
+      }
     } else {
       this.setState({
         manualError: true,
@@ -159,23 +168,22 @@ export default class Manual extends Component {
     }
   };
   componentWillReceiveProps(nextProps) {
-    console.log(
-      nextProps.postManualTimecardData.message ==
-        'Manual Timecard Requested Successfully',
-      'here'
-    );
     if (
       nextProps.postManualTimecardData &&
       nextProps.postManualTimecardData.message ==
         'Manual Timecard Requested Successfully'
     ) {
-      console.log('here');
       this.setState({ manualModal: false });
       this.props.postManualTimecard({ myManual: true });
+      this.props.displayToast(nextProps.postManualTimecardData.message);
     }
   }
   render() {
-    console.log(this.props);
+    if (this.state.startTime && this.state.EndTime)
+      var duration = moment.duration(
+        this.state.EndTime.diff(this.state.startTime)
+      );
+    console.log(duration);
     return (
       <div className={styles.base}>
         <Modal
@@ -223,8 +231,29 @@ export default class Manual extends Component {
                 />
               </div>
             </div>
+            {this.state.startTime && this.state.EndTime && (
+              <div className={styles.dateHolder}>
+                <div className={styles.dateLabel}>Duration</div>
+                <div className={styles.datePicker}>
+                  <input
+                    type="text"
+                    value={
+                      duration._data.hours > 1
+                        ? `${duration._data.hours} hours` +
+                          +` ${duration._data.minutes} mins`
+                        : duration._data.hours > 0
+                        ? `${duration._data.hours} hour` +
+                          ` ${duration._data.minutes} mins`
+                        : '' + ` ${duration._data.minutes} mins`
+                    }
+                    readonly
+                    disabled
+                  />
+                </div>
+              </div>
+            )}
             <div className={styles.dateHolder}>
-              <div className={styles.dateLabel}>Reason</div>
+              <div className={styles.dateLabel}>Justification</div>
               <div className={styles.datePicker}>
                 <textarea
                   placeholder="Enter comments"
@@ -285,7 +314,7 @@ export default class Manual extends Component {
                 <div className={styles.manualHead}>Manual Timecard ID</div>
                 <div className={styles.manualHead}>Start Time</div>
                 <div className={styles.manualHead}>End Time</div>
-                <div className={styles.manualHead}>Reason</div>
+                <div className={styles.manualHead}>Justification</div>
               </div>
               {this.props &&
                 this.props.postManualTimecardData &&
@@ -330,15 +359,7 @@ export default class Manual extends Component {
                     onClick={() => this.showModal(0)}
                     className={styles.button}
                   >
-                    Approve
-                  </button>
-                </div>
-                <div className={styles.disputeButton}>
-                  <button
-                    onClick={() => this.showModal(1)}
-                    className={styles.button}
-                  >
-                    Reject
+                    Delete
                   </button>
                 </div>
               </div>

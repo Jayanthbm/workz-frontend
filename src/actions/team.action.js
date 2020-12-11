@@ -1,62 +1,63 @@
-import { SUCCESS, REQUESTING, ERROR } from "../utils/constant";
-import * as Cookie from "../utils/Cookie.js";
-import { get, post, postAws } from "../utils/apiRequest.js";
+import { SUCCESS, REQUESTING, ERROR } from '../utils/constant';
+import * as Cookie from '../utils/Cookie.js';
+import { get, post, postAws } from '../utils/apiRequest.js';
+import { displayToast } from './toast.action';
 
-export const GET_TEAM_REQUEST = "GET_TEAM_REQUEST";
-export const GET_TEAM_SUCCESS = "GET_TEAM_SUCCESS";
-export const GET_TEAM_FAILURE = "GET_TEAM_FAILURE";
+export const GET_TEAM_REQUEST = 'GET_TEAM_REQUEST';
+export const GET_TEAM_SUCCESS = 'GET_TEAM_SUCCESS';
+export const GET_TEAM_FAILURE = 'GET_TEAM_FAILURE';
 
-export const GET_TEAM_USER_REQUEST = "GET_TEAM_USER_REQUEST";
-export const GET_TEAM_USER_SUCCESS = "GET_TEAM_USER_SUCCESS";
-export const GET_TEAM_USER_FAILURE = "GET_TEAM_USER_FAILURE";
+export const GET_TEAM_USER_REQUEST = 'GET_TEAM_USER_REQUEST';
+export const GET_TEAM_USER_SUCCESS = 'GET_TEAM_USER_SUCCESS';
+export const GET_TEAM_USER_FAILURE = 'GET_TEAM_USER_FAILURE';
 
-export const POST_FORM_REQUEST = "POST_FORM_REQUEST";
-export const POST_FORM_SUCCESS = "POST_FORM_SUCCESS";
-export const POST_FORM_FAILURE = "POST_FORM_FAILURE";
+export const POST_FORM_REQUEST = 'POST_FORM_REQUEST';
+export const POST_FORM_SUCCESS = 'POST_FORM_SUCCESS';
+export const POST_FORM_FAILURE = 'POST_FORM_FAILURE';
 
-export const GET_DEEPDIVE_REQUEST = "GET_DEEPDIVE_REQUEST";
-export const GET_DEEPDIVE_SUCCESS = "GET_DEEPDIVE_SUCCESS";
-export const GET_DEEPDIVE_FAILURE = "GET_DEEPDIVE_FAILURE";
+export const GET_DEEPDIVE_REQUEST = 'GET_DEEPDIVE_REQUEST';
+export const GET_DEEPDIVE_SUCCESS = 'GET_DEEPDIVE_SUCCESS';
+export const GET_DEEPDIVE_FAILURE = 'GET_DEEPDIVE_FAILURE';
 
-export const GET_DEEPDIVE_DROPDOWN_REQUEST = "GET_DEEPDIVE_DROPDOWN_REQUEST";
-export const GET_DEEPDIVE_DROPDOWN_SUCCESS = "GET_DEEPDIVE_DROPDOWN_SUCCESS";
-export const GET_DEEPDIVE_DROPDOWN_FAILURE = "GET_DEEPDIVE_DROPDOWN_FAILURE";
+export const GET_DEEPDIVE_DROPDOWN_REQUEST = 'GET_DEEPDIVE_DROPDOWN_REQUEST';
+export const GET_DEEPDIVE_DROPDOWN_SUCCESS = 'GET_DEEPDIVE_DROPDOWN_SUCCESS';
+export const GET_DEEPDIVE_DROPDOWN_FAILURE = 'GET_DEEPDIVE_DROPDOWN_FAILURE';
 
-export const POST_FLAG_REQUEST = "POST_FLAG_REQUEST";
-export const POST_FLAG_SUCCESS = "POST_FLAG_SUCCESS";
-export const POST_FLAG_FAILURE = "POST_FLAG_FAILURE";
+export const POST_FLAG_REQUEST = 'POST_FLAG_REQUEST';
+export const POST_FLAG_SUCCESS = 'POST_FLAG_SUCCESS';
+export const POST_FLAG_FAILURE = 'POST_FLAG_FAILURE';
 
-export const GET_BREAKUP_REQUEST = "GET_BREAKUP_REQUEST";
-export const GET_BREAKUP_SUCCESS = "GET_BREAKUP_SUCCESS";
-export const GET_BREAKUP_FAILURE = "GET_BREAKUP_FAILURE";
+export const GET_BREAKUP_REQUEST = 'GET_BREAKUP_REQUEST';
+export const GET_BREAKUP_SUCCESS = 'GET_BREAKUP_SUCCESS';
+export const GET_BREAKUP_FAILURE = 'GET_BREAKUP_FAILURE';
 
-export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
-export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
-export const LOGOUT_FAILURE = "LOGOUT_FAILURE";
+export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
 
-export const POST_MESSAGE_REQUEST = "POST_MESSAGE_REQUEST";
-export const POST_MESSAGE_SUCCESS = "POST_MESSAGE_SUCCESS";
-export const POST_MESSAGE_FAILURE = "POST_MESSAGE_FAILURE";
+export const POST_MESSAGE_REQUEST = 'POST_MESSAGE_REQUEST';
+export const POST_MESSAGE_SUCCESS = 'POST_MESSAGE_SUCCESS';
+export const POST_MESSAGE_FAILURE = 'POST_MESSAGE_FAILURE';
 
-export const GET_MESSAGE_REQUEST = "GET_MESSAGE_REQUEST";
-export const GET_MESSAGE_SUCCESS = "GET_MESSAGE_SUCCESS";
-export const GET_MESSAGE_FAILURE = "GET_MESSAGE_FAILURE";
+export const GET_MESSAGE_REQUEST = 'GET_MESSAGE_REQUEST';
+export const GET_MESSAGE_SUCCESS = 'GET_MESSAGE_SUCCESS';
+export const GET_MESSAGE_FAILURE = 'GET_MESSAGE_FAILURE';
 
-export const GET_DETAILS_REQUEST = "GET_DETAILS_REQUEST";
-export const GET_DETAILS_SUCCESS = "GET_DETAILS_SUCCESS";
-export const GET_DETAILS_FAILURE = "GET_DETAILS_FAILURE";
+export const GET_DETAILS_REQUEST = 'GET_DETAILS_REQUEST';
+export const GET_DETAILS_SUCCESS = 'GET_DETAILS_SUCCESS';
+export const GET_DETAILS_FAILURE = 'GET_DETAILS_FAILURE';
 
-export const POST_TIMECARD_REQUEST = "POST_TIMECARD_REQUEST";
-export const POST_TIMECARD_SUCCESS = "POST_TIMECARD_SUCCESS";
-export const POST_TIMECARD_FAILURE = "POST_TIMECARD_FAILURE";
+export const POST_TIMECARD_REQUEST = 'POST_TIMECARD_REQUEST';
+export const POST_TIMECARD_SUCCESS = 'POST_TIMECARD_SUCCESS';
+export const POST_TIMECARD_FAILURE = 'POST_TIMECARD_FAILURE';
 
-export const POST_MANUAL_TIMECARD_REQUEST = "POST_MANUAL_TIMECARD_REQUEST";
-export const POST_MANUAL_TIMECARD_SUCCESS = "POST_MANUAL_TIMECARD_SUCCESS";
-export const POST_MANUAL_TIMECARD_FAILURE = "POST_MANUAL_TIMECARD_FAILURE";
+export const POST_MANUAL_TIMECARD_REQUEST = 'POST_MANUAL_TIMECARD_REQUEST';
+export const POST_MANUAL_TIMECARD_SUCCESS = 'POST_MANUAL_TIMECARD_SUCCESS';
+export const POST_MANUAL_TIMECARD_FAILURE = 'POST_MANUAL_TIMECARD_FAILURE';
 
-export const POST_NEWCOMPANY_REQUEST = "POST_NEWCOMPANY_REQUEST";
-export const POST_NEWCOMPANY_SUCCESS = "POST_NEWCOMPANY_SUCCESS";
-export const POST_NEWCOMPANY_FAILURE = "POST_NEWCOMPANY_FAILURE";
+export const POST_NEWCOMPANY_REQUEST = 'POST_NEWCOMPANY_REQUEST';
+export const POST_NEWCOMPANY_SUCCESS = 'POST_NEWCOMPANY_SUCCESS';
+export const POST_NEWCOMPANY_FAILURE = 'POST_NEWCOMPANY_FAILURE';
 
 export function postNewCompanyRequest() {
   return {
@@ -82,18 +83,23 @@ export function postNewCompanyFailure(error) {
 }
 
 export function postNewCompany(details) {
+  console.log(details && details.method);
   return async (dispatch) => {
     dispatch(postNewCompanyRequest());
     try {
       let url = `company`;
       const result = await post(url, details);
       const resultJson = await result.data;
-     
+
       if (resultJson.message) {
         throw new Error(resultJson.message);
       }
+      if (resultJson.message) {
+        dispatch(displayToast(resultJson.message));
+      }
       return dispatch(postNewCompanySuccess(resultJson));
     } catch (e) {
+      if (e) dispatch(displayToast(e.message));
       return dispatch(postNewCompanySuccess(e.message));
     }
   };
@@ -129,17 +135,21 @@ export function postManualTimecard(details) {
       let url = `manualtimecard`;
       const result = await post(url, details);
       const resultJson = await result.data;
-     
+
       if (
         resultJson.message &&
-        resultJson.message != "Manual Timecard Requested Successfully" &&
+        resultJson.message != 'Manual Timecard Requested Successfully' &&
         resultJson.message &&
-        resultJson.message != "Manual Timecard Updated Successfully"
+        resultJson.message != 'Manual Timecard Updated Successfully'
       ) {
         throw new Error(resultJson.message);
       }
+
+      if (resultJson.message) dispatch(displayToast(resultJson.message));
+
       return dispatch(postManualTimecardSuccess(resultJson));
     } catch (e) {
+      dispatch(displayToast(e.message));
       return dispatch(postManualTimecardFailure(e.message));
     }
   };
@@ -177,9 +187,9 @@ export function postTimecard(details) {
       const resultJson = await result.data;
       if (
         resultJson.message &&
-        resultJson.message !== "Dispute Raised Successfully" &&
+        resultJson.message !== 'Dispute Raised Successfully' &&
         resultJson.message &&
-        resultJson.message !== "Dispute Updated Successfully"
+        resultJson.message !== 'Dispute Updated Successfully'
       ) {
         throw new Error(resultJson.message);
       }
@@ -263,7 +273,7 @@ export function gettMessage(timeId) {
       const result = await get(url);
       const resultJson = await result.data;
 
-      if (typeof resultJson.message != "object") {
+      if (typeof resultJson.message != 'object') {
         throw new Error(resultJson.message);
       }
       return dispatch(getMessageSuccess(resultJson));
@@ -303,7 +313,7 @@ export function postMessage(formData, timeId) {
       let url = `comment/${timeId}`;
       const result = await post(url, formData);
       const resultJson = await result.data;
-      if (resultJson.message !== "Comment Sent") {
+      if (resultJson.message !== 'Comment Sent') {
         throw new Error(resultJson.message);
       }
       return dispatch(postMessageSuccess(resultJson));
@@ -428,8 +438,8 @@ export function postFlag(timeId) {
       const resultJson = await result.data;
 
       if (
-        resultJson.message !== "Successfully Flagged" &&
-        resultJson.message !== "Successfully Unflagged"
+        resultJson.message !== 'Successfully Flagged' &&
+        resultJson.message !== 'Successfully Unflagged'
       ) {
         throw new Error(resultJson.message);
       }

@@ -15,6 +15,7 @@ import forgotPassContainer from './Container/forgotPassContainer';
 import deepdive from './Container/deepdiveContainer';
 import details from './Container/DetailsContainer';
 import ManualContainer from './Container/ManualContainer';
+import ToastContainer from './Container/ToastContainer';
 class App extends Component {
   render() {
     const isUserLogedIn = Cookie.getCookie(ACCESS_TOKEN) ? true : false;
@@ -51,6 +52,7 @@ class App extends Component {
             </React.Fragment>
           )}
         </Switch>
+        <ToastContainer />
       </div>
     );
   }

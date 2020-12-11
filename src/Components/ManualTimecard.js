@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import styles from "./Admin.module.css";
-import { Form, Switch } from "antd";
-import Checkbox from "@material-ui/core/Checkbox";
-import Modal from "./Modal";
+import React, { Component } from 'react';
+import styles from './Admin.module.css';
+import { Form, Switch } from 'antd';
+import Checkbox from '@material-ui/core/Checkbox';
+import Modal from './Modal';
 class ManualTimecard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       selected: [],
       labelsSelected: [],
-      requestMessage: "",
+      requestMessage: '',
       hierarchy: false,
       showTimecard: true,
       showManual: false,
@@ -26,20 +26,20 @@ class ManualTimecard extends Component {
   handleManualtimecard = (flag) => {
     if (flag == 0) {
       this.props.postManualTimecard({
-        method: "approval",
+        method: 'approval',
         manualtimecardIds: this.state.labelsSelected,
         comments: this.state.requestMessage,
-        status: "approved",
+        status: 'approved',
       });
     } else {
       this.props.postManualTimecard({
-        method: "approval",
+        method: 'approval',
         manualtimecardIds: this.state.labelsSelected,
         comments: this.state.requestMessage,
-        status: "rejected",
+        status: 'rejected',
       });
     }
-    this.setState({ requestMessage: "", show: false, messageShow: true });
+    this.setState({ requestMessage: '', show: false, messageShow: true });
   };
   handleManualCheckbox = (val, state) => {
     let filteredCatg = { ...val };
@@ -67,13 +67,12 @@ class ManualTimecard extends Component {
       data.push(filteredCatg);
       this.setState({ selected: data, firstLoader: true });
     }
-   
+
     this.setState({
       labelsSelected: data.map((e) => e.manualTimeId).slice(),
     });
   };
   render() {
-
     return (
       <div>
         <Modal show={this.state.show} handleClose={this.hideModal} width="auto">
@@ -113,7 +112,7 @@ class ManualTimecard extends Component {
                       hierarchy: e,
                     });
                     if (e == true) {
-                      this.props.postManualTimecard({ hierarchy: "Full" });
+                      this.props.postManualTimecard({ hierarchy: 'Full' });
                     }
                   }}
                 />
@@ -124,7 +123,7 @@ class ManualTimecard extends Component {
               <div className={styles.manualHead}>Manual Timecard ID</div>
               <div className={styles.manualHead}>Start Time</div>
               <div className={styles.manualHead}>End Time</div>
-              <div className={styles.manualHead}>Reason</div>
+              <div className={styles.manualHead}>Justification</div>
             </div>
             {this.props &&
               this.props.postManualTimecardData &&
@@ -133,7 +132,7 @@ class ManualTimecard extends Component {
                 return (
                   <div className={styles.headHolder}>
                     <div className={styles.manualHead}>
-                      {" "}
+                      {' '}
                       <Checkbox
                         checked={
                           this.state.selected &&

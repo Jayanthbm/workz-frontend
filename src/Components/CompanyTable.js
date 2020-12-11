@@ -1,40 +1,40 @@
-import { Checkbox } from "@material-ui/core";
-import React, { Component } from "react";
-import styles from "./Company.module.css";
-import CreateCompany from "./CreateCompany";
+import { Checkbox } from '@material-ui/core';
+import React, { Component } from 'react';
+import styles from './Company.module.css';
+import CreateCompany from './CreateCompany';
 class CompanyTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
       add: false,
-      name: "",
-      fullname: "",
-      error: "",
-      address: "",
-      city: "",
-      state: "",
-      country: "",
-      pincode: "",
-      billingPlan: "",
-      billingRate: "",
-      billingCurrency: "",
-      timecardsize: "",
-      timecardbreakupsize: "",
-      enablewebcam: "",
-      enablescreenshot: "",
-      mousePerTC: "",
-      keysPerTC: "",
-      IntDiscard: "",
-      intRed: "",
-      intYellow: "",
-      termsConditions: "",
+      name: '',
+      fullname: '',
+      error: '',
+      address: '',
+      city: '',
+      state: '',
+      country: '',
+      pincode: '',
+      billingPlan: '',
+      billingRate: '',
+      billingCurrency: '',
+      timecardsize: '',
+      timecardbreakupsize: '',
+      enablewebcam: '',
+      enablescreenshot: '',
+      mousePerTC: '',
+      keysPerTC: '',
+      IntDiscard: '',
+      intRed: '',
+      intYellow: '',
+      termsConditions: '',
       selected: [],
       labelsSelected: [],
     };
   }
   handleClick = () => {
     this.props.postNewCompany({
-      method: "add",
+      method: 'add',
       name: this.state.name,
       fullName: this.state.fullname,
       address: this.state.address,
@@ -57,36 +57,37 @@ class CompanyTable extends Component {
       termsConditions: this.state.termsConditions,
     });
     this.setState({
-      name: "",
-      fullname: "",
-      error: "",
-      address: "",
-      city: "",
-      state: "",
-      country: "",
-      pincode: "",
-      billingPlan: "",
-      billingRate: "",
-      billingCurrency: "",
-      timecardsize: "",
-      timecardbreakupsize: "",
-      enablewebcam: "",
-      enablescreenshot: "",
-      mousePerTC: "",
-      keysPerTC: "",
-      IntDiscard: "",
-      intRed: "",
-      intYellow: "",
-      termsConditions: "",
+      name: '',
+      fullname: '',
+      error: '',
+      address: '',
+      city: '',
+      state: '',
+      country: '',
+      pincode: '',
+      billingPlan: '',
+      billingRate: '',
+      billingCurrency: '',
+      timecardsize: '',
+      timecardbreakupsize: '',
+      enablewebcam: '',
+      enablescreenshot: '',
+      mousePerTC: '',
+      keysPerTC: '',
+      IntDiscard: '',
+      intRed: '',
+      intYellow: '',
+      termsConditions: '',
     });
   };
   componentWillReceiveProps = (nextProps) => {
-    if (
-      nextProps.postNewCompanyData &&
-      nextProps.postNewCompanyData == "Company Deleted"
-    ) {
-      this.props.postNewCompany();
-    }
+    console.log(nextProps);
+    // if (
+    //   nextProps &&
+    //   nextProps.postNewCompanyData !== this.props.postNewCompanyData
+    // ) {
+    //   this.props.postNewCompany();
+    // }
   };
   handleCompanyCheckbox = (val, state) => {
     let filteredCatg = { ...val };
@@ -119,12 +120,12 @@ class CompanyTable extends Component {
       labelsSelected: data.map((e) => e.companyId).slice(),
     });
   };
-  handleDelete = () => {
-    this.props.postNewCompany({
-      method: "delete",
+  handleDelete = async () => {
+    await this.props.postNewCompany({
+      method: 'delete',
       compnayId: this.state.labelsSelected,
     });
-    this.props.postNewCompany();
+    // this.props.postNewCompany();
   };
   render() {
     return (
@@ -160,13 +161,13 @@ class CompanyTable extends Component {
             {this.props &&
               this.props.postNewCompanyData &&
               this.props.postNewCompanyData.length > 0 &&
-              typeof this.props.postNewCompanyData != "string" &&
+              typeof this.props.postNewCompanyData != 'string' &&
               !this.props.postNewCompanyData.message &&
               this.props.postNewCompanyData.map((val) => {
                 return (
                   <div className={styles.headHolder}>
                     <div className={styles.manualHead}>
-                      {" "}
+                      {' '}
                       <Checkbox
                         checked={
                           this.state.selected &&
