@@ -18,6 +18,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return {
     postManualTimecardData: state.team.postManualTimecardData,
+    postManualError: state.team.postManualError,
   };
 };
 const ManualContainer = withRouter(

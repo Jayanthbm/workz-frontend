@@ -24,6 +24,7 @@ class Admin extends Component {
       showTimecard: true,
       showManual: false,
       type: null,
+      selectAll: false,
     };
   }
 
@@ -31,6 +32,35 @@ class Admin extends Component {
     this.props.postTimecard();
     this.props.postManualTimecard();
     this.props.postNewCompany();
+    if (
+      this.props.location &&
+      this.props.location.state &&
+      this.props.location.state.tab &&
+      this.props.location.state.tab == 'manual'
+    ) {
+      this.setState({
+        showTimecard: false,
+        showManual: true,
+        showCompany: false,
+      });
+    } else if (
+      this.props.location &&
+      this.props.location.state &&
+      this.props.location.state.tab &&
+      this.props.location.state.tab == 'company'
+    ) {
+      this.setState({
+        showTimecard: false,
+        showManual: false,
+        showCompany: true,
+      });
+    } else {
+      this.setState({
+        showTimecard: true,
+        showManual: false,
+        showCompany: false,
+      });
+    }
   };
   componentWillReceiveProps = (nextprops) => {
     if (
@@ -60,6 +90,11 @@ class Admin extends Component {
     }
   };
   handleCheckbox = (val, state) => {
+    console.log(
+      this.props &&
+        this.props.postTimecardData &&
+        this.props.postTimecardData.length
+    );
     let filteredCatg = { ...val };
     let data = [];
     let dataExist =
@@ -88,6 +123,12 @@ class Admin extends Component {
 
     this.setState({
       labelsSelected: data.map((e) => e.timecardId).slice(),
+      selectAll:
+        this.props &&
+        this.props.postTimecardData &&
+        this.props.postTimecardData.length == this.state.labelsSelected.length
+          ? false
+          : true,
     });
   };
 
@@ -130,6 +171,8 @@ class Admin extends Component {
       showManual: true,
       showCompany: false,
     });
+    this.props.postManualTimecard();
+    this.props.history.push({ state: { tab: 'manual' } });
   };
   showCompany = () => {
     this.setState({
@@ -137,6 +180,8 @@ class Admin extends Component {
       showManual: false,
       showCompany: true,
     });
+    this.props.postNewCompany();
+    this.props.history.push({ state: { tab: 'company' } });
   };
   showTimecard = () => {
     this.setState({
@@ -144,14 +189,33 @@ class Admin extends Component {
       showManual: false,
       showCompany: false,
     });
+    this.props.postTimecard();
+    this.props.history.push({ state: { tab: 'timecard' } });
   };
   render() {
+    console.log(this.state.selected);
     return (
       <div className={styles.base}>
         <Header pic={parsedData && parsedData.profilePic} />
-        <Navigation headerText={'Admin'} />
+        <Navigation
+          headerText={'Admin'}
+          {...this.props}
+          showManual={this.showManual}
+          showTimecard={this.showTimecard}
+          showCompany={this.showCompany}
+          timecardCount={
+            this.props &&
+            this.props.postTimecardData &&
+            this.props.postTimecardData.length
+          }
+          manualCount={
+            this.props &&
+            this.props.postManualTimecardData &&
+            this.props.postManualTimecardData.length
+          }
+        />
         <div className={styles.adminBase}>
-          <div className={styles.header}>
+          {/* <div className={styles.header}>
             <div
               className={
                 this.state.showTimecard ? styles.seletedText : styles.text
@@ -186,7 +250,7 @@ class Admin extends Component {
             >
               Company{' '}
             </div>
-          </div>
+          </div> */}
           {this.props &&
           this.props.postTimecardData &&
           !this.props.postTimecardData.message &&
@@ -210,7 +274,22 @@ class Admin extends Component {
                 </Form.Item>
               </div>
               <div className={styles.headHolder}>
-                <div className={styles.head}></div>
+                <div
+                  className={styles.head}
+                  onClick={() => {
+                    let data = [];
+                    data.push(...this.props.postTimecardData);
+                    console.log(data.map((e) => e.timecardId).slice());
+                    this.setState({
+                      selected: this.props.postTimecardData,
+                      labelsSelected: data.map((e) => e.timecardId).slice(),
+                      selectAll: !this.state.selectAll,
+                    });
+                  }}
+                >
+                  {' '}
+                  {!this.state.selectAll ? 'Select All' : 'Unselect All'}
+                </div>
                 <div className={styles.head}>Employee ID</div>
                 <div className={styles.head}>Employee Name</div>
                 <div className={styles.head}>App Name</div>

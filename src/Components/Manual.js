@@ -183,7 +183,7 @@ export default class Manual extends Component {
       var duration = moment.duration(
         this.state.EndTime.diff(this.state.startTime)
       );
-    console.log(duration);
+    console.log(this.props);
     return (
       <div className={styles.base}>
         <Modal
@@ -365,7 +365,7 @@ export default class Manual extends Component {
               </div>
             </>
           ) : (
-            <div className={styles.base}>{this.props.postManualError}</div>
+            <div className={styles.manbase}>{this.props.postManualError}</div>
           )}
         </div>
       </div>

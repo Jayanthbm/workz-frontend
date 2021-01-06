@@ -119,7 +119,20 @@ class ManualTimecard extends Component {
               </Form.Item>
             </div>
             <div className={styles.headHolder}>
-              <div className={styles.manualHead}>Checkbox</div>
+              <div
+                className={styles.manualHead}
+                onClick={() => {
+                  let data = [];
+                  data.push(...this.props.postManualTimecardData);
+                  console.log(data.map((e) => e.manualTimeId).slice());
+                  this.setState({
+                    selected: this.props.postManualTimecardData,
+                    labelsSelected: data.map((e) => e.manualTimeId).slice(),
+                  });
+                }}
+              >
+                Checkbox
+              </div>
               <div className={styles.manualHead}>Manual Timecard ID</div>
               <div className={styles.manualHead}>Start Time</div>
               <div className={styles.manualHead}>End Time</div>

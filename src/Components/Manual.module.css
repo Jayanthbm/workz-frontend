@@ -26,6 +26,14 @@
 .baseHolder {
   padding-left: 20px;
 }
+.manbase {
+  width: auto;
+  background: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1px solid #ebecec;
+  margin: 10px 40px;
+}
 .disputeComment {
   margin: 10px;
   width: 350px;

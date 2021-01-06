@@ -100,6 +100,7 @@ class Navigation extends Component {
     }
   };
   render() {
+    console.log(this.props.manualCount);
     return (
       <div className={styles.base}>
         <div className={styles.container}>
@@ -241,66 +242,62 @@ class Navigation extends Component {
           </div>
         )}
 
-        <Modal show={this.state.show} handleClose={this.hideModal} width="auto">
-          <div className={styles.manualContainer}>
-            {this.state.manualError && (
-              <div style={{ color: 'red' }}>Check the time and try again</div>
-            )}
-            <div className={styles.dateHolder}>
-              <div className={styles.dateLabel}>Date</div>
-              <div className={styles.datePicker}>
-                <DatePicker
-                  selected={this.state.date}
-                  dateFormat={'yyyy-MM-dd'}
-                  onChange={(date) => this.onDateChange(date)}
-                  maxDate={new Date()}
-                  className={styles.dateFormat}
-                />
-              </div>
+        {this.props.match && this.props.match.path == '/admin' && (
+          <div className={styles.menuContainer}>
+            {/* <div className={styles.link}>Team Summary</div>
+            <div className={styles.link}>Activity</div>
+            <div className={styles.link}>Metrics</div> */}
+            <div
+              className={
+                this.props.match.path === '/admin' &&
+                this.props.location &&
+                this.props.location.state &&
+                this.props.location.state.tab == 'timecard'
+                  ? styles.linkActive
+                  : styles.link
+              }
+              onClick={() => this.props.showTimecard()}
+            >
+              Timecard{' '}
+              {this.props &&
+              this.props.timecardCount &&
+              this.props.timecardCount > 0
+                ? `(${this.props.timecardCount})`
+                : ''}
             </div>
-            <div className={styles.dateHolder}>
-              <div className={styles.dateLabel}>Start Time</div>
-              <div className={styles.datePicker}>
-                <TimePicker
-                  onChange={this.handleStartTime}
-                  value={this.state.startTime}
-                  showSecond={false}
-                  minuteStep={10}
-                  // use12Hours={true}
-                />
-              </div>
+            <div
+              className={
+                this.props.match.path === '/admin' &&
+                this.props.location &&
+                this.props.location.state &&
+                this.props.location.state.tab == 'manual'
+                  ? styles.linkActive
+                  : styles.link
+              }
+              onClick={() => this.props.showManual()}
+            >
+              Manual{' '}
+              {this.props &&
+              this.props.manualCount &&
+              this.props.manualCount > 0
+                ? `(${this.props.manualCount})`
+                : ''}
             </div>
-            <div className={styles.dateHolder}>
-              <div className={styles.dateLabel}>End Time</div>
-              <div className={styles.datePicker}>
-                <TimePicker
-                  onChange={this.handleEndTime}
-                  value={this.state.EndTime}
-                  showSecond={false}
-                  minuteStep={10}
-                  // use12Hours={true}
-                />
-              </div>
-            </div>
-            <div className={styles.dateHolder}>
-              <div className={styles.dateLabel}>Reason</div>
-              <div className={styles.datePicker}>
-                <textarea
-                  placeholder="Enter comments"
-                  row="3"
-                  className={styles.disputeComment}
-                  value={this.state.requestMessage}
-                  onChange={(e) => {
-                    this.setState({ requestMessage: e.target.value });
-                  }}
-                />
-              </div>
-            </div>
-            <div>
-              <button onClick={this.manualHandler}> Submit</button>
+            <div
+              className={
+                this.props.match.path === '/admin' &&
+                this.props.location &&
+                this.props.location.state &&
+                this.props.location.state.tab == 'company'
+                  ? styles.linkActive
+                  : styles.link
+              }
+              onClick={() => this.props.showCompany()}
+            >
+              Company
             </div>
           </div>
-        </Modal>
+        )}
       </div>
     );
   }

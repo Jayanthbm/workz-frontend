@@ -91,12 +91,16 @@ export function postNewCompany(details) {
       const result = await post(url, details);
       const resultJson = await result.data;
 
-      if (resultJson.message) {
+      if (resultJson.message && resultJson.message.failed > 0) {
         throw new Error(resultJson.message);
       }
-      if (resultJson.message) {
-        dispatch(displayToast(resultJson.message));
+      if (
+        resultJson.message &&
+        resultJson.message != 'You must be logged in.'
+      ) {
+        dispatch(postNewCompany([]));
       }
+      if (resultJson.message) dispatch(displayToast(resultJson.message));
       return dispatch(postNewCompanySuccess(resultJson));
     } catch (e) {
       if (e) dispatch(displayToast(e.message));
@@ -136,15 +140,18 @@ export function postManualTimecard(details) {
       const result = await post(url, details);
       const resultJson = await result.data;
 
-      if (
-        resultJson.message &&
-        resultJson.message != 'Manual Timecard Requested Successfully' &&
-        resultJson.message &&
-        resultJson.message != 'Manual Timecard Updated Successfully'
-      ) {
+      if (resultJson.message === 'No Manual Timecards') {
         throw new Error(resultJson.message);
       }
-
+      if (resultJson && resultJson.messages && resultJson.messages.length > 0) {
+        throw new Error([resultJson.messages]);
+      }
+      if (resultJson.message && resultJson.message.includes('Deleted')) {
+        dispatch(postManualTimecard({ myManual: true }));
+      }
+      if (resultJson.message && resultJson.message.includes('approved')) {
+        dispatch(postManualTimecard());
+      }
       if (resultJson.message) dispatch(displayToast(resultJson.message));
 
       return dispatch(postManualTimecardSuccess(resultJson));
@@ -187,11 +194,17 @@ export function postTimecard(details) {
       const resultJson = await result.data;
       if (
         resultJson.message &&
-        resultJson.message !== 'Dispute Raised Successfully' &&
+        resultJson.message !== 'Approval request Raised Successfully' &&
         resultJson.message &&
-        resultJson.message !== 'Dispute Updated Successfully'
+        resultJson.message !== 'Approval Request Updated Successfully'
       ) {
         throw new Error(resultJson.message);
+      }
+      if (
+        resultJson.message &&
+        resultJson.message == 'Approval Request Updated Successfully'
+      ) {
+        dispatch(postTimecard());
       }
       return dispatch(postTimecardSuccess(resultJson));
     } catch (e) {
