@@ -15,6 +15,7 @@ class ManualTimecard extends Component {
       showManual: false,
       show: false,
       type: null,
+      selectAll: false,
     };
   }
   showModal = (val) => {
@@ -70,6 +71,13 @@ class ManualTimecard extends Component {
 
     this.setState({
       labelsSelected: data.map((e) => e.manualTimeId).slice(),
+      selectAll:
+        this.props &&
+        this.props.postManualTimecardData &&
+        this.props.postManualTimecardData.length ==
+          this.state.labelsSelected.length
+          ? false
+          : true,
     });
   };
   render() {
@@ -126,12 +134,19 @@ class ManualTimecard extends Component {
                   data.push(...this.props.postManualTimecardData);
                   console.log(data.map((e) => e.manualTimeId).slice());
                   this.setState({
-                    selected: this.props.postManualTimecardData,
-                    labelsSelected: data.map((e) => e.manualTimeId).slice(),
+                    selected:
+                      this.state.selected.length > 0
+                        ? []
+                        : this.props.postManualTimecardData,
+                    labelsSelected:
+                      this.state.labelsSelected.length > 0
+                        ? []
+                        : data.map((e) => e.manualTimeId).slice(),
+                    selectAll: !this.state.selectAll,
                   });
                 }}
               >
-                Checkbox
+                {!this.state.selectAll ? 'Select All' : 'Unselect All'}
               </div>
               <div className={styles.manualHead}>Manual Timecard ID</div>
               <div className={styles.manualHead}>Start Time</div>

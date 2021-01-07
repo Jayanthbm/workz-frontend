@@ -100,7 +100,7 @@ class Navigation extends Component {
     }
   };
   render() {
-    console.log(this.props.manualCount);
+    console.log(parsedData);
     return (
       <div className={styles.base}>
         <div className={styles.container}>

@@ -281,8 +281,14 @@ class Admin extends Component {
                     data.push(...this.props.postTimecardData);
                     console.log(data.map((e) => e.timecardId).slice());
                     this.setState({
-                      selected: this.props.postTimecardData,
-                      labelsSelected: data.map((e) => e.timecardId).slice(),
+                      selected:
+                        this.state.selected.length > 0
+                          ? []
+                          : this.props.postTimecardData,
+                      labelsSelected:
+                        this.state.labelsSelected.length > 0
+                          ? []
+                          : data.map((e) => e.timecardId).slice(),
                       selectAll: !this.state.selectAll,
                     });
                   }}
